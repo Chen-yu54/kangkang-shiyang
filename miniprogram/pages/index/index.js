@@ -12,6 +12,7 @@ const dishImages = require('../../utils/dishImages');
 const format = require('../../utils/format');
 const share = require('../../utils/share');
 const kbStats = require('../../utils/kbStats');
+const cockpit = require('../../data/cockpit');
 const track = require('../../utils/track');
 const i18n = require('../../utils/i18n');
 
@@ -42,8 +43,13 @@ Page({
     showcase: [], // 节气推荐展示牌：当前节气的三道当令菜
     showcaseIndex: 0,
     dataVersion: '',
-    stats: null, // 跟着节气吃：主水球 + 三个好处小球，全部实时算
-    dashOn: false, // 水波从 0 涨起来、刻度依次点亮，进视野才播
+    stats: null, // 跟着节气吃：罗盘 + 三个数字 + 三个环，全部实时算
+    dashOn: false, // 罗盘刻度依次点亮，进视野才播
+    // 驾驶舱分区台：默认收起、默认停在 01 节气视图
+    ckOpen: false,
+    ckTab: 'term',
+    ckCap: '',
+    ck: null,
     banner: null,
     termName: '',
     termPoster: '',
@@ -84,6 +90,11 @@ Page({
         snapLine3Unit: t('snapshot.line3Unit'),
         snapLine3Sub: t('snapshot.line3Sub'),
         snapNote: t('snapshot.note'),
+        ckKpi1: t('snapshot.ckKpi1'),
+        ckKpi2: t('snapshot.ckKpi2'),
+        ckKpi3: t('snapshot.ckKpi3'),
+        ckExpand: t('snapshot.ckExpand'),
+        ckCollapse: t('snapshot.ckCollapse'),
         aiTag: t('common.aiGenerated'),
         // —— 杂志化新增
         heroKicker: t('home.heroKicker'),
@@ -132,6 +143,20 @@ Page({
     } catch (err) {
       setTimeout(start, 1200);
     }
+  },
+
+  // 驾驶舱展开 / 收起。默认收起，展开后停在当前选中分区（首次为 01 节气视图）
+  onToggleCockpit() {
+    this.setData({ ckOpen: !this.data.ckOpen });
+  },
+
+  // 切换分区：点哪一块就换哪一块的数据，标签下的说明句同步换
+  onPickCockpitTab(e) {
+    const key = e.currentTarget.dataset.key;
+    if (!key || key === this.data.ckTab) return;
+    const ck = this.data.ck;
+    const tab = ck && ck.tabs.filter((item) => item.key === key)[0];
+    this.setData({ ckTab: key, ckCap: tab ? tab.cap : '' });
   },
 
   onShow() {
@@ -194,6 +219,14 @@ Page({
           pct: p.pct,
           text: p.text,
         }));
+        // 环里只有 100% / 93% 这种整数，KPI 那一栏要一位小数（93.1%），两者口径不同
+        stats.easyPct = stats.promises[1] ? stats.promises[1].pct : 0;
+
+        // 分区台：默认停在第一个（节气视图）；下拉刷新后保留用户当前选中的分区
+        const ck = cockpit.build(current);
+        const firstTab = ck.tabs[0];
+        const keep = ck.tabs.filter((item) => item.key === this.data.ckTab)[0];
+        const activeTab = keep || firstTab;
 
         this.setData({
           status: list.length > 0 ? 'ready' : 'empty',
@@ -208,6 +241,9 @@ Page({
           dataVersion: (dataSource.getDataVersionLabel().split('·').pop() || '').trim(),
           // 跟着节气吃：全部按当前知识库实时算，扩容后自动更新，不写死任何数字
           stats,
+          ck,
+          ckCap: activeTab ? activeTab.cap : '',
+          ckTab: activeTab ? activeTab.key : 'term',
           banner: this.buildBanner(),
         });
       })

@@ -47,6 +47,11 @@ const zhCN = {
   'snapshot.miniCareLabel': '人群提示',
   'snapshot.miniCareSub': '{done}/{total} 道有标注',
   'snapshot.note': '数字按当前知识库实时统计，库里的内容变了，这里就跟着变。',
+  'snapshot.ckKpi1': '3 菜系 × 4 道，换季有得挑',
+  'snapshot.ckKpi2': '按节令自动换菜单',
+  'snapshot.ckKpi3': '≤ 两星难度，日常能上手',
+  'snapshot.ckExpand': '展开全部数据',
+  'snapshot.ckCollapse': '收起数据',
 
   // —— 首页
   'home.searchPlaceholder': '搜菜名 / 食材',

@@ -582,303 +582,729 @@
 .section-more-text { font-size: var(--font-btn); color: var(--color-ink-2); }
 .section-more-arrow { width: 28rpx; height: 28rpx; margin-left: 4rpx; }
 
-/* ==================== 6. 跟着节气吃：圆形水波仪表盘 ====================
- * 全页第二块深色（与封面呼应）。不堆「我们有多少道菜」，说「你能得到什么」。
- * 主球：24 段外环＝24 个节气，水位＝今天走到一年里的哪一段，水波一直慢慢晃。
- * 三个小水球：不空档 / 不费事 / 顾得上，水位＝做到的程度。
- * 水波做法：球内 overflow hidden，水面上叠两片旋转的圆角块（与球底同色），
- *   弧边扫过水面就成了波浪；不用 SVG、不用 canvas，纯 CSS 动画，真机稳。
- * 进视野后（index.js watchDash）水位才从 0 涨上去，用户不会错过。 */
-.dash {
-  padding: 32rpx 32rpx 28rpx;
+/* ==================== 6. 跟着节气吃：节气驾驶舱 ====================
+ * 深色卡，与封面呼应。左罗盘（24 刻度 / 四季弧 / 当前节气），右三组数字，
+ * 下排三个环；点「展开全部数据」在卡内切五个分区。
+ * 颜色纪律：整块只用三种色 —— 墨底、青瓷（数据）、赤金（刻度与选中）。
+ * 环的进度用 conic-gradient 画，百分比同时有数字，颜色识别不了也读得懂。 */
+.ck {
+  padding: 30rpx 28rpx 22rpx;
   border-radius: 28rpx;
-  background-image: linear-gradient(150deg, #241a12 0%, #1a120c 100%);
+  background-image: linear-gradient(150deg, #241d15 0%, #14100b 100%);
   box-shadow: 0 14rpx 36rpx rgba(34, 23, 18, 0.22);
   overflow: hidden;
 }
 
-.dash-top {
+.ck-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.dash-live {
+.ck-live {
   display: flex;
   align-items: center;
 }
 
-.dash-live-dot {
-  width: 12rpx;
-  height: 12rpx;
-  margin-right: 12rpx;
+.ck-dot {
+  width: 10rpx;
+  height: 10rpx;
+  margin-right: 10rpx;
   border-radius: 50%;
-  background-color: #7fb08a;
-  box-shadow: 0 0 12rpx rgba(127, 176, 138, 0.6);
-  animation: dash-breathe 2.4s ease-in-out infinite;
+  background-color: #7fc9ba;
+  box-shadow: 0 0 10rpx rgba(127, 201, 186, 0.7);
+  animation: ck-breathe 2.4s ease-in-out infinite;
 }
 
-.dash-live-text {
+.ck-live-t {
   font-size: 22rpx;
   letter-spacing: 0.14em;
-  color: rgba(226, 207, 172, 0.95);
+  color: rgba(232, 220, 196, 0.9);
 }
 
-.dash-ver {
+.ck-asof {
   font-size: 20rpx;
-  letter-spacing: 0.06em;
-  color: rgba(211, 191, 156, 0.55);
+  color: rgba(232, 220, 196, 0.45);
 }
 
-/* —— 主球 + 右侧三句话 —— */
-.dash-main {
+/* —— 罗盘 —— */
+.ck-hero {
   display: flex;
   align-items: center;
-  margin-top: 18rpx;
+  margin-top: 20rpx;
 }
 
-.gauge-main {
+.ck-compass {
   position: relative;
   flex: none;
-  width: 380rpx;
-  height: 380rpx;
+  width: 264rpx;
+  height: 264rpx;
 }
 
-.gauge-ring {
+/* 四季弧：四段 87° 的金弧，段间留 3° 缝；中间挖空成细环。
+   用 conic-gradient 而不是四个只露上边框的圆——后者四段会连成一个整圆，看不出「季」。 */
+.ck-arcs {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 380rpx;
-  height: 380rpx;
+  left: 14rpx;
+  top: 14rpx;
+  width: 236rpx;
+  height: 236rpx;
+  border-radius: 50%;
+  background-image: conic-gradient(
+    from -90deg,
+    rgba(201, 162, 39, 0.34) 0deg 87deg,
+    transparent 87deg 90deg,
+    rgba(201, 162, 39, 0.34) 90deg 177deg,
+    transparent 177deg 180deg,
+    rgba(201, 162, 39, 0.34) 180deg 267deg,
+    transparent 267deg 270deg,
+    rgba(201, 162, 39, 0.62) 270deg 357deg,
+    transparent 357deg 360deg
+  );
 }
 
-/* 24 根刻度：left/top 由 kbStats 按圆心坐标算好，这里只负责把中心对齐 */
-.gauge-tick {
+.ck-arcs::after {
+  content: '';
   position: absolute;
-  width: 4rpx;
-  height: 18rpx;
-  margin-left: -2rpx;
-  margin-top: -9rpx;
+  left: 8rpx;
+  top: 8rpx;
+  right: 8rpx;
+  bottom: 8rpx;
+  border-radius: 50%;
+  background-color: #1c1811;
+}
+
+/* 24 根刻度：left/top 由 cockpit.buildTicks 按圆心算好，这里只对齐中心 */
+.ck-tick {
+  position: absolute;
+  width: 3rpx;
+  height: 16rpx;
+  margin-left: -1.5rpx;
+  margin-top: -8rpx;
   border-radius: 2rpx;
-  background-color: rgba(217, 164, 65, 0.32);
+  background-color: rgba(201, 162, 39, 0.34);
   opacity: 0;
 }
 
-.on .gauge-tick {
-  animation: tick-in 0.4s ease-out both;
+.ck-compass.on .ck-tick {
+  animation: ck-tick-in 0.4s ease-out both;
 }
 
-.tick-on {
-  background-color: rgba(230, 186, 98, 0.9);
+.ck-tick.on {
+  background-color: rgba(230, 186, 98, 0.85);
 }
 
-.tick-now {
-  height: 24rpx;
-  margin-top: -12rpx;
+.ck-tick.now {
+  height: 22rpx;
+  margin-top: -11rpx;
   background-color: #f4dda9;
-  box-shadow: 0 0 12rpx rgba(244, 221, 169, 0.85);
+  box-shadow: 0 0 10rpx rgba(244, 221, 169, 0.85);
 }
 
-.gauge-ball {
+.ck-season {
   position: absolute;
-  left: 40rpx;
-  top: 40rpx;
-  width: 300rpx;
-  height: 300rpx;
-  border: 2rpx solid rgba(217, 164, 65, 0.28);
+  font-family: var(--font-serif);
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+  color: rgba(201, 162, 39, 0.66);
+  transform: translate(-50%, -50%);
+}
+
+.ck-season-1 { left: 200rpx; top: 64rpx; }
+.ck-season-2 { left: 200rpx; top: 200rpx; }
+.ck-season-3 { left: 64rpx; top: 200rpx; }
+.ck-season-4 { left: 64rpx; top: 64rpx; }
+
+.ck-face {
+  position: absolute;
+  left: 56rpx;
+  top: 56rpx;
+  width: 152rpx;
+  height: 152rpx;
   border-radius: 50%;
-  background-color: #1b140e;
-  overflow: hidden;
-}
-
-/* 水位：进视野后由 inline style 从 0 涨到目标百分比 */
-.gauge-water {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 0;
-  background-image: linear-gradient(180deg, #8ec9a6 0%, #4d8b7d 55%, #3a7168 100%);
-  transition: height 1.5s cubic-bezier(0.22, 0.8, 0.3, 1);
-}
-
-/* 两片旋转的圆角块：颜色与球底一致，弧边扫过水面就是波浪 */
-.wave {
-  position: absolute;
-  left: 50%;
-  top: -570rpx;
-  width: 600rpx;
-  height: 600rpx;
-  margin-left: -300rpx;
-  border-radius: 43%;
-  background-color: #1b140e;
-  animation: wave-spin 8s linear infinite;
-}
-
-.wave-b {
-  border-radius: 47%;
-  background-color: rgba(27, 20, 14, 0.72);
-  animation-duration: 12s;
-  animation-direction: reverse;
-}
-
-.gauge-center {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(-50%);
+  justify-content: center;
+  background-image: radial-gradient(circle at 50% 34%, #2c3b35 0%, #1c2a26 62%, #16211e 100%);
+  box-shadow: inset 0 0 24rpx rgba(0, 0, 0, 0.35);
 }
 
-.gauge-term {
+.ck-term {
   font-family: var(--font-serif);
-  font-size: 60rpx;
+  font-size: 44rpx;
+  letter-spacing: 3rpx;
   line-height: 1.1;
-  color: #f8e9c9;
-  text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.6);
+  color: #f6eedf;
 }
 
-.gauge-pos {
-  margin-top: 10rpx;
-  font-size: 20rpx;
-  letter-spacing: 0.06em;
-  color: rgba(248, 233, 201, 0.9);
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.6);
+.ck-pos {
+  margin-top: 6rpx;
+  font-size: 18rpx;
+  letter-spacing: 0.5rpx;
+  color: #7fc9ba;
 }
 
-/* 右侧三行：每行一个数字 + 单位 + 一句口径，不再写成长句 */
-.dash-lines {
+/* —— 右侧三组数字 —— */
+.ck-kpis {
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  margin-left: 14rpx;
+  margin-left: 18rpx;
 }
 
-.dash-line {
-  display: flex;
-  align-items: center;
-  margin: 14rpx 0;
+.ck-kpi {
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid rgba(243, 234, 218, 0.12);
 }
 
-.dash-line-num {
-  flex: none;
-  width: 88rpx;
-  margin-right: 14rpx;
+.ck-kpi:last-child {
+  border-bottom: 0;
+}
+
+.ck-kpi-n {
+  display: flex;
+  align-items: baseline;
+}
+
+.ck-num {
   font-family: var(--font-serif);
-  font-size: 52rpx;
+  font-size: 48rpx;
   line-height: 1;
-  text-align: right;
-  color: #f0d9a8;
+  color: #f6eedf;
 }
 
-.dash-line-side {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.dash-line-unit {
-  font-size: 22rpx;
-  letter-spacing: 0.06em;
-  color: #e6cfa5;
-}
-
-.dash-line-sub {
-  margin-top: 4rpx;
+.ck-unit {
+  margin-left: 4rpx;
   font-size: 20rpx;
-  line-height: 1.5;
-  color: rgba(222, 203, 172, 0.72);
+  color: #7fc9ba;
 }
 
-/* —— 三个小水球 —— */
-.dash-mini {
+.ck-k {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 22rpx;
+  letter-spacing: 0.04em;
+  color: #e9dcc6;
+}
+
+.ck-s {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  line-height: 1.4;
+  color: rgba(243, 234, 218, 0.48);
+}
+
+/* —— 三个环 —— */
+.ck-rings {
   display: flex;
   margin-top: 24rpx;
-  padding-top: 24rpx;
-  border-top: 2rpx solid rgba(217, 164, 65, 0.16);
+  padding-top: 22rpx;
+  border-top: 1rpx solid rgba(243, 234, 218, 0.12);
 }
 
-.dash-mini-item {
+.ck-ring-item {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.gauge-mini {
+.ck-ring {
   position: relative;
-  width: 140rpx;
-  height: 140rpx;
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.gauge-mini .gauge-ball {
-  left: 0;
-  top: 0;
-  width: 140rpx;
-  height: 140rpx;
+.ck-ring-in {
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 50%;
+  background-color: #1b1710;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 小球的水波块尺寸按比例缩到 280rpx，否则会把整个球盖住 */
-.ball-mini .wave {
-  top: -265rpx;
-  width: 280rpx;
-  height: 280rpx;
-  margin-left: -140rpx;
+.ck-ring-t {
+  font-size: 22rpx;
+  color: #f3eada;
 }
 
-.gauge-mini-num {
+.ck-rk {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #eadcc6;
+}
+
+.ck-rs {
+  margin-top: 2rpx;
+  font-size: 18rpx;
+  color: rgba(243, 234, 218, 0.45);
+}
+
+.ck-note {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 20rpx;
+  line-height: 1.65;
+  color: rgba(243, 234, 218, 0.5);
+}
+
+/* —— 展开 / 收起 —— */
+.ck-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18rpx;
+  padding: 14rpx 0 4rpx;
+  border-top: 1rpx solid rgba(243, 234, 218, 0.12);
+}
+
+.ck-more-t {
+  font-size: 22rpx;
+  letter-spacing: 0.08em;
+  color: #c9a227;
+}
+
+.ck-chev {
+  margin-left: 8rpx;
+  font-size: 24rpx;
+  line-height: 1;
+  color: #c9a227;
+  transition: transform 0.25s ease;
+}
+
+.ck-chev.up {
+  transform: rotate(180deg);
+}
+
+/* —— 分区台 —— */
+.ck-panel {
+  margin-top: 14rpx;
+}
+
+/* 五个分区不横滑、直接换行：小屏上横滑会把第 5 个藏起来，
+   换行虽然多占一行，但五个入口一眼全见，选中态也不会跑到屏幕外。 */
+.ck-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5rpx;
+}
+
+.ck-tab {
+  display: flex;
+  align-items: center;
+  margin: 0 5rpx 10rpx;
+  padding: 12rpx 18rpx;
+  border: 1rpx solid rgba(243, 234, 218, 0.16);
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  color: rgba(243, 234, 218, 0.62);
+}
+
+.ck-tab.on {
+  border-color: rgba(201, 162, 39, 0.75);
+  background-color: rgba(201, 162, 39, 0.14);
+  color: #f0d79a;
+}
+
+.ck-tab-n {
+  margin-right: 8rpx;
+  font-size: 18rpx;
+  color: rgba(201, 162, 39, 0.8);
+}
+
+.ck-tab.on .ck-tab-n {
+  color: #f0d79a;
+}
+
+.ck-pcap {
+  display: block;
+  margin: 16rpx 2rpx 2rpx;
+  font-size: 20rpx;
+  letter-spacing: 0.04em;
+  color: rgba(243, 234, 218, 0.42);
+}
+
+.ck-p {
+  margin-top: 6rpx;
+}
+
+/* 指标网格 6 格 */
+.ck-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 6rpx;
+}
+
+.ck-metric {
+  width: 33.33%;
+  padding: 14rpx 0;
+  box-sizing: border-box;
+  text-align: center;
+  border-right: 1rpx solid rgba(243, 234, 218, 0.08);
+  border-bottom: 1rpx solid rgba(243, 234, 218, 0.08);
+}
+
+.ck-metric:nth-child(3n) {
+  border-right: 0;
+}
+
+.ck-metric-n {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.ck-mv {
   font-family: var(--font-serif);
   font-size: 36rpx;
   line-height: 1.1;
-  color: #fdf1d8;
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.65);
+  color: #f6eedf;
 }
 
-.dash-mini-k {
-  margin-top: 16rpx;
-  font-size: 26rpx;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #e6cfa5;
+.ck-mu {
+  margin-left: 2rpx;
+  font-size: 18rpx;
+  color: #7fc9ba;
 }
 
-.dash-mini-v {
-  margin-top: 6rpx;
-  font-size: 20rpx;
-  line-height: 1.5;
-  text-align: center;
-  color: rgba(222, 203, 172, 0.7);
-}
-
-.dash-note {
+.ck-ml {
   display: block;
-  margin-top: 24rpx;
-  padding-top: 20rpx;
-  border-top: 2rpx solid rgba(217, 164, 65, 0.16);
-  font-size: 24rpx;
-  line-height: 1.7;
-  color: rgba(222, 203, 172, 0.82);
+  margin-top: 4rpx;
+  font-size: 18rpx;
+  line-height: 1.3;
+  color: rgba(243, 234, 218, 0.5);
 }
 
-@keyframes dash-breathe {
+/* 24 节气格 */
+.ck-cells {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 14rpx;
+}
+
+.ck-cell {
+  width: 16.66%;
+  padding: 8rpx 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.ck-cell-t {
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.5);
+}
+
+.ck-cell.cur .ck-cell-t {
+  font-weight: 600;
+  color: #e7c75b;
+}
+
+/* 菜系卡 */
+.ck-cu {
+  margin-top: 14rpx;
+  padding: 16rpx;
+  border: 1rpx solid rgba(243, 234, 218, 0.1);
+  border-radius: 16rpx;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.ck-cu-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ck-cu-n {
+  font-family: var(--font-serif);
+  font-size: 26rpx;
+  color: #f3eada;
+}
+
+.ck-cu-v {
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.5);
+}
+
+.ck-stack {
+  display: flex;
+  height: 14rpx;
+  margin: 12rpx 0 10rpx;
+  border-radius: 7rpx;
+  overflow: hidden;
+  background-color: rgba(243, 234, 218, 0.08);
+}
+
+.ck-stack-lib {
+  height: 18rpx;
+  margin: 10rpx 0 8rpx;
+}
+
+.ck-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.5);
+}
+
+.ck-cu-f {
+  display: block;
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+  border-top: 1rpx dashed rgba(243, 234, 218, 0.12);
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.55);
+}
+
+/* 条形 */
+.ck-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.ck-bar-l {
+  flex: none;
+  width: 112rpx;
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.72);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ck-track {
+  flex: 1;
+  height: 10rpx;
+  margin: 0 12rpx;
+  border-radius: 5rpx;
+  background-color: rgba(243, 234, 218, 0.08);
+  overflow: hidden;
+}
+
+.ck-fill {
+  height: 100%;
+  border-radius: 5rpx;
+}
+
+.ck-fill.jade {
+  background-image: linear-gradient(90deg, #7fc9ba, #3e7f72);
+}
+
+.ck-fill.bam {
+  background-image: linear-gradient(90deg, #8fae84, #5b7f52);
+}
+
+.ck-fill.cin {
+  background-image: linear-gradient(90deg, #c96a51, #b4442f);
+}
+
+.ck-fill.ochre {
+  background-image: linear-gradient(90deg, #a98462, #8c6a4a);
+}
+
+.ck-fill.hatch {
+  background-image: repeating-linear-gradient(45deg, rgba(154, 145, 134, 0.5) 0 4rpx, transparent 4rpx 8rpx);
+}
+
+.ck-bar-v {
+  flex: none;
+  width: 72rpx;
+  text-align: right;
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.55);
+}
+
+/* 小标题 + 示例标签 */
+.ck-cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  font-size: 20rpx;
+  letter-spacing: 0.06em;
+  color: rgba(243, 234, 218, 0.45);
+}
+
+.ck-cap-gap {
+  margin-top: 24rpx;
+}
+
+.ck-tag {
+  padding: 2rpx 10rpx;
+  border: 1rpx solid rgba(201, 162, 39, 0.45);
+  border-radius: 6rpx;
+  font-size: 18rpx;
+  letter-spacing: 0.06em;
+  color: rgba(201, 162, 39, 0.9);
+}
+
+/* 图谱摘要 */
+.ck-graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12rpx;
+  padding: 22rpx 16rpx;
+  border: 1rpx solid rgba(201, 162, 39, 0.18);
+  border-radius: 16rpx;
+  background-image: linear-gradient(150deg, #221b13, #120e09);
+}
+
+.ck-g-core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140rpx;
+  height: 140rpx;
+  border: 1rpx solid rgba(201, 162, 39, 0.5);
+  border-radius: 50%;
+  background-color: rgba(232, 220, 196, 0.06);
+}
+
+.ck-g-core-n {
+  font-family: var(--font-serif);
+  font-size: 22rpx;
+  color: #f3eada;
+}
+
+.ck-g-core-s {
+  margin-top: 4rpx;
+  font-size: 18rpx;
+  color: #7fc9ba;
+}
+
+.ck-g-rings {
+  display: flex;
+  width: 100%;
+  margin-top: 18rpx;
+}
+
+.ck-g-ring {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ck-g-ring-n {
+  font-family: var(--font-serif);
+  font-size: 32rpx;
+  line-height: 1.1;
+  color: #f6eedf;
+}
+
+.ck-g-ring-l {
+  margin-top: 2rpx;
+  font-size: 18rpx;
+  color: rgba(243, 234, 218, 0.5);
+}
+
+.ck-g-edge {
+  margin-top: 14rpx;
+  font-size: 18rpx;
+  letter-spacing: 0.06em;
+  color: rgba(201, 162, 39, 0.8);
+}
+
+/* 漏斗 */
+.ck-fn {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.ck-fn-l {
+  flex: none;
+  width: 150rpx;
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.7);
+}
+
+.ck-fn-bar {
+  height: 40rpx;
+  min-width: 64rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  border-radius: 6rpx;
+  display: flex;
+  align-items: center;
+}
+
+.ck-fn-bar text {
+  font-size: 18rpx;
+  color: #12100b;
+}
+
+.ck-tone-jade {
+  background-image: linear-gradient(90deg, #7fc9ba, #3e7f72);
+}
+
+.ck-tone-gold {
+  background-color: #c9a227;
+}
+
+.ck-tone-ochre {
+  background-color: #8c6a4a;
+}
+
+.ck-tone-stone {
+  background-color: rgba(154, 145, 134, 0.8);
+}
+
+.ck-tone-ochre text,
+.ck-tone-stone text {
+  color: #f7f0e1;
+}
+
+/* 分层 */
+.ck-lv {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.ck-lv-l {
+  flex: none;
+  width: 140rpx;
+  font-size: 20rpx;
+  color: rgba(243, 234, 218, 0.7);
+}
+
+.ck-lv-v {
+  flex: none;
+  width: 100rpx;
+  text-align: right;
+  font-size: 18rpx;
+  color: rgba(243, 234, 218, 0.5);
+}
+
+.ck-pnote {
+  display: block;
+  margin-top: 18rpx;
+  padding-top: 14rpx;
+  border-top: 1rpx dashed rgba(243, 234, 218, 0.12);
+  font-size: 20rpx;
+  line-height: 1.7;
+  color: rgba(243, 234, 218, 0.45);
+}
+
+@keyframes ck-breathe {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
 
-@keyframes tick-in {
+/* 只动透明度：刻度本身带 inline rotate，动 transform 会把角度覆盖掉 */
+@keyframes ck-tick-in {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-@keyframes wave-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .tap-hover { opacity: 0.82; }

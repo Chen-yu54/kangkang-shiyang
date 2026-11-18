@@ -41,22 +41,8 @@ function build(current) {
 
   const avgIngredients = list.length ? Math.round((ingredientCount / list.length) * 10) / 10 : 0;
 
-  // 24 段刻度：用圆心坐标算位置，不靠 rotate+translate 排一圈（真机 transform 叠加容易歪）
-  // 圆心 (190, 190)、半径 178，0 度在正上方，单位 rpx，与 .gauge-ring 的 380rpx 对齐
-  // 半径比球半径（150）大 28rpx，刻度才不会贴着球边糊成一片
-  const ticks = [];
-  for (let i = 0; i < termTotal; i += 1) {
-    const deg = (360 / termTotal) * i;
-    const rad = ((deg - 90) * Math.PI) / 180;
-    ticks.push({
-      n: i,
-      deg,
-      x: Math.round((190 + 178 * Math.cos(rad)) * 10) / 10,
-      y: Math.round((190 + 178 * Math.sin(rad)) * 10) / 10,
-      on: termOrder > 0 && i < termOrder,
-      now: termOrder > 0 && i === termOrder - 1,
-    });
-  }
+  // 24 段刻度的坐标不在这里算了：驾驶舱的罗盘在 data/cockpit.js 里按自己的尺寸重算，
+  // 这一层只负责「当前节气走到第几段」和三个环的百分比。
 
   return {
     term: {
@@ -65,7 +51,6 @@ function build(current) {
       total: termTotal,
       progress: pct(termOrder, termTotal), // 水波涨到一年里的这个位置
     },
-    ticks,
     avgIngredients,
     mealCount: meals.size,
     coveredTerms: covered.size,
