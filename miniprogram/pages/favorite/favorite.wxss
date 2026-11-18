@@ -1,0 +1,12 @@
+/* pages/favorite/favorite.wxss —— 收藏页样式，全部取 app.wxss 的 CSS 变量 */
+
+.count-text {
+  display: block;
+  margin-bottom: 16rpx;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.tap-hover {
+  opacity: 0.82;
+}

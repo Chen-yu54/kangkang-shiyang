@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "当令推荐",
+  "usingComponents": {
+    "dish-card": "../../components/dishCard/dishCard",
+    "dish-media": "../../components/dishMedia/dishMedia",
+    "empty-state": "../../components/emptyState/emptyState",
+    "loading": "../../components/loading/loading",
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

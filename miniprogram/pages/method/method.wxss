@@ -1,0 +1,110 @@
+/* pages/method/method.wxss —— 方法说明页，版式与协议页一致（长文可扫读） */
+
+.doc-title {
+  display: block;
+  padding: 8rpx 0 12rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  color: var(--color-ink);
+}
+
+.doc-lead {
+  display: block;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+  font-size: var(--font-base);
+  line-height: 1.8;
+  color: var(--color-ink-3);
+}
+
+.doc-sec {
+  margin-top: 32rpx;
+}
+
+.doc-h {
+  display: block;
+  margin-bottom: 12rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.doc-p {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-base);
+  line-height: 1.85;
+  color: var(--color-ink-2);
+  text-align: justify;
+}
+
+/* —— 指标卡：每项一张，避免宽表在长字号下错行 —— */
+.m-list {
+  margin-top: 8rpx;
+}
+
+.m-card {
+  padding: 20rpx 24rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+  background-color: var(--color-card);
+}
+
+.m-head {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8rpx;
+}
+
+.m-id {
+  flex: none;
+  margin-right: 12rpx;
+  padding: 2rpx 12rpx;
+  border-radius: var(--radius-small);
+  background-color: var(--color-green-bg);
+  font-size: var(--font-btn);
+  color: var(--color-green-ink);
+}
+
+.m-name {
+  flex: 1;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.m-row {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 4rpx;
+}
+
+.m-key {
+  flex: none;
+  width: 88rpx;
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}
+
+.m-val {
+  flex: 1;
+  font-size: var(--font-btn);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+/* 当前达成值加重：这是会被追问的那一列 */
+.m-val-strong {
+  color: var(--color-brand-deep);
+}
+
+.doc-foot {
+  display: block;
+  margin-top: 40rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid var(--color-border-hair);
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}

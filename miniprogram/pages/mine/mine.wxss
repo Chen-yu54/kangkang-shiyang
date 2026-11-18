@@ -1,0 +1,451 @@
+/* pages/mine/mine.wxss —— 我的页样式（档案式版面），颜色与字号全部取 app.wxss 变量 */
+
+/* —— 刊头 —— */
+.mast {
+  display: flex;
+  flex-direction: column;
+  padding: 8rpx 0 20rpx;
+}
+
+.mast-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  font-weight: 600;
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+/* —— 节气封面条 —— */
+.cover {
+  position: relative;
+  height: 200rpx;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background-color: var(--color-skeleton);
+}
+
+.cover-img {
+  display: block;
+  width: 100%;
+  height: 200rpx;
+}
+
+.cover-shade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120rpx;
+  background-image: linear-gradient(180deg, rgba(26, 17, 11, 0) 0%, rgba(26, 17, 11, 0.55) 100%);
+}
+
+/* 节气名压在封面右下：只做一层纸色胶囊，不叠大字。
+   bottom 留 44rpx，避开下方档案卡向上压住的那一条 */
+.cover-pill {
+  position: absolute;
+  right: 20rpx;
+  bottom: 44rpx;
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-pill);
+  background-color: rgba(251, 247, 234, 0.92);
+  font-size: var(--font-caption);
+  letter-spacing: 2rpx;
+  color: var(--color-ink);
+}
+
+/* —— 档案卡 —— */
+.idcard {
+  margin-top: -32rpx;
+  padding: 28rpx 24rpx 8rpx;
+  border: 2rpx solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.idcard-top {
+  display: flex;
+  align-items: center;
+}
+
+/* 头像位：未登录用素袍人像 + 虚线圈（暗示「还没设置」），登录后换成实拍头像 */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 112rpx;
+  height: 112rpx;
+  margin-right: 22rpx;
+  border: 2rpx dashed var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-skeleton);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.avatar-on {
+  border-style: solid;
+  border-color: var(--color-border);
+  background-color: var(--color-bg-soft);
+}
+
+.avatar-photo {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+}
+
+.avatar-icon {
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.idcard-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.idcard-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.idcard-name {
+  font-size: var(--font-subtitle);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* 「已登录」小签：只做身份确认，不抢名字 */
+.idcard-tag {
+  margin-left: 12rpx;
+  padding: 2rpx 12rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.idcard-sub {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+.idcard-arrow {
+  flex: none;
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 12rpx;
+  opacity: 0.7;
+}
+
+/* 三个数字：收藏 / 口味 / 字号 —— 全是本机真有的数，不摆没有的指标 */
+.stats {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  padding-top: 18rpx;
+  border-top: 2rpx solid var(--color-border-hair);
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 96rpx;
+  justify-content: center;
+}
+
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+/* 「已记录 / 标准」这类文字值：字号降一档，避免三个数字里两个像标题 */
+.stat-num-sm {
+  font-size: var(--font-base);
+  font-weight: 600;
+}
+
+.stat-label {
+  margin-top: 6rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.stat-div {
+  flex: none;
+  width: 2rpx;
+  height: 48rpx;
+  background-color: var(--color-border-hair);
+}
+
+/* —— 栏目头：壹贰叁 与首页同一套 —— */
+.sec {
+  display: flex;
+  align-items: baseline;
+  margin: 40rpx 0 16rpx;
+}
+
+.sec-no {
+  margin-right: 12rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.sec-title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  font-weight: 600;
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+.sec-more {
+  flex: none;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+/* —— 收藏横滑 —— */
+.fav-scroll {
+  white-space: nowrap;
+}
+
+.fav {
+  display: inline-block;
+  width: 300rpx;
+  margin-right: 16rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+  background-color: var(--color-card);
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.fav-body {
+  padding: 14rpx 16rpx 16rpx;
+}
+
+.fav-name {
+  display: block;
+  font-size: var(--font-btn);
+  font-weight: 600;
+  color: var(--color-ink);
+  white-space: normal;
+}
+
+.fav-meta {
+  display: block;
+  margin-top: 4rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fav-empty {
+  padding: 32rpx 24rpx;
+  border: 2rpx dashed var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.fav-empty-title {
+  display: block;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.fav-empty-sub {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+/* —— 设置行：一张纸卡里逐行排，行高 ≥ 112rpx —— */
+.rows {
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 112rpx;
+  padding: 18rpx 24rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+  box-sizing: border-box;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.row-label {
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.row-value {
+  display: block;
+  margin-top: 6rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+.row-value-on {
+  color: var(--color-green-deep);
+  font-weight: 600;
+}
+
+.row-arrow {
+  flex: none;
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 12rpx;
+  opacity: 0.7;
+}
+
+.row-switch {
+  flex: none;
+  margin-left: 12rpx;
+  transform: scale(0.9);
+}
+
+/* 字号三档：在行里平铺，不另起一块 */
+.row-col {
+  flex-wrap: wrap;
+}
+
+.font-options {
+  display: flex;
+  flex: none;
+}
+
+.font-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 104rpx;
+  min-height: var(--tap-min);
+  margin-left: 12rpx;
+  border: 2rpx solid var(--color-border-soft);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.font-option-on {
+  border-color: var(--color-brand);
+  background-color: var(--color-card);
+}
+
+.font-option-on .font-option-text {
+  font-weight: 600;
+  color: var(--color-brand-deep);
+}
+
+.font-option-text {
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+}
+
+.rows-note {
+  display: block;
+  margin-top: 14rpx;
+  padding: 0 4rpx;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* —— 底部 —— */
+.tour-again {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+  margin-top: 32rpx;
+  border: 2rpx dashed var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.tour-again-text {
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}
+
+.version {
+  display: block;
+  margin-top: 32rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+  text-align: center;
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* —— 长辈模式：一页只留「名字 + 三个入口」，装饰全收 ——
+ * 1.6 倍字下原本的三层小字（刊头 / 海报胶囊 / 数字标签）挤在一起，
+ * 一眼分不出哪行是标题、哪行能点。这里把层数减到两级：标题与正文。 */
+.elder .mast {
+  padding-bottom: 24rpx;
+}
+
+/* 封面条收起后，档案卡不再往上压那 32rpx */
+.elder .idcard {
+  margin-top: 0;
+  padding-bottom: 24rpx;
+}
+
+/* 名字用副标题档，下面那行说明降到 caption 档，两级之间留出明显落差 */
+.elder .idcard-sub {
+  font-size: var(--font-caption);
+}
+
+/* 收藏卡加宽：大字下 300rpx 只放得下三个字，菜名要折成两行 */
+.elder .fav {
+  width: 400rpx;
+}
+
+/* 行内「标签 + 值」改成上下两行，值不再被标签挤到换行 */
+.elder .row {
+  flex-wrap: wrap;
+  min-height: var(--tap-min);
+  padding: 22rpx 24rpx;
+}
+
+.elder .row-col {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.elder .row-switch {
+  transform: scale(1.1);
+}

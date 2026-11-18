@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "饮食偏好小测试",
+  "usingComponents": {
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

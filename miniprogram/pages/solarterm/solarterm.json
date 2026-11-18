@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "二十四节气",
+  "usingComponents": {
+    "term-card": "../../components/termCard/termCard",
+    "dish-card": "../../components/dishCard/dishCard",
+    "empty-state": "../../components/emptyState/emptyState",
+    "loading": "../../components/loading/loading",
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

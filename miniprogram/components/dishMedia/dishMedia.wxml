@@ -1,0 +1,40 @@
+<view
+  class="dm dm-{{mode}} tone-{{cuisine}} {{image && !failed ? 'dm-has' : 'dm-empty'}} {{flush ? 'dm-flush' : ''}} {{round ? 'dm-round' : ''}}"
+  style="height:{{height}}rpx;"
+>
+  <image
+    wx:if="{{image && !failed}}"
+    class="dm-img"
+    src="{{image}}"
+    mode="aspectFill"
+    lazy-load
+    binderror="onError"
+  />
+
+  <!-- 照片态三层质感：节气色温 → 底部压暗 → 顶部高光（高光在 wxss 用 inset 阴影）。
+       全部纯 CSS，不占包体；有图时才渲染，风味签不需要 -->
+  <block wx:if="{{image && !failed}}">
+    <view wx:if="{{tint}}" class="dm-tint"></view>
+    <view wx:if="{{veil}}" class="dm-veil"></view>
+    <view wx:if="{{steam}}" class="dm-steam" aria-hidden="true">
+      <view class="dm-steam-i dm-steam-1"></view>
+      <view class="dm-steam-i dm-steam-2"></view>
+      <view class="dm-steam-i dm-steam-3"></view>
+    </view>
+  </block>
+
+  <!-- 生成式内容显式标识：固定压在图片左下角，不遮挡菜品主体 -->
+  <text wx:if="{{image && !failed && aiTag}}" class="dm-ai">{{aiTag}}</text>
+
+  <!-- 无图或图挂了：渲染风味签。这里用独立的 wx:if 而不是 wx:else，
+       否则上面那条 AI 标识的 wx:if 为假时会把占位块也带出来，压在图上 -->
+  <block wx:if="{{!image || failed}}">
+    <!-- 有菜系水彩就铺一张淡底（三系各一幅），没有才退回小图标 -->
+    <image wx:if="{{wash}}" class="dm-wash" src="{{wash}}" mode="aspectFill" lazy-load />
+    <view wx:if="{{wash}}" class="dm-wash-veil"></view>
+    <image wx:else class="dm-mark" src="/images/cuisine-{{cuisine}}.png" mode="aspectFit" />
+    <view class="dm-seal">
+      <text class="dm-seal-text">{{sealChar}}</text>
+    </view>
+  </block>
+</view>

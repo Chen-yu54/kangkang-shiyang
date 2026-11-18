@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>节气详情 · 文化简介 + 早中晚</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e9e2d3; font-family: -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+         color: #3d2b1a; padding: 32px 16px 64px; }
+  .head { max-width: 1000px; margin: 0 auto 22px; }
+  .head h1 { font-size: 17px; font-weight: 600; }
+  .head p { font-size: 12.5px; color: #7a6a52; margin-top: 8px; line-height: 1.8; }
+  .row { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+  .cell { width: 375px; }
+  .cell > .ct { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .cell > .cd { font-size: 11.5px; color: #8a7a60; margin-bottom: 8px; min-height: 16px; }
+  .frame { width: 375px; height: 700px; background: #f7f0e1; border: 1px solid #d9c39c; border-radius: 18px;
+           overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(90,60,30,.12); }
+  .nav { height: 44px; flex: none; display: flex; align-items: center; justify-content: center;
+         font-size: 16px; font-weight: 600; border-bottom: 1px solid #ecdfc2; }
+  .scroll { flex: 1; overflow-y: auto; padding: 12px; }
+  .scroll::-webkit-scrollbar { width: 0; }
+  .back { height: 40px; display: flex; align-items: center; font-size: 13px; color: #5a4630;
+          border-bottom: 1px solid #ecdfc2; padding: 0 12px; margin: -12px -12px 12px; }
+  .dname { font-family: "Songti SC","SimSun",serif; font-size: 28px; font-weight: 700; color: #5a3a1e; }
+  .dwin { font-size: 13px; color: #5a4630; margin-top: 4px; }
+  .intro { margin-top: 14px; padding: 14px; background: #fbf7ea; border: 1px solid #ecdfc2; border-radius: 16px; }
+  .intro .lb { font-size: 11px; color: #8a7458; letter-spacing: 1px; }
+  .intro .tx { font-size: 13.5px; line-height: 1.8; color: #4a3826; margin-top: 6px; }
+  .label { font-size: 13px; font-weight: 600; margin: 18px 0 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 13px; padding: 5px 12px; border: 1px solid #e6d7b8; border-radius: 20px; background: #fbf7ea; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 6px; }
+  .tab { flex: 1; height: 36px; display: flex; align-items: center; justify-content: center;
+         font-size: 13px; border: 1px solid #e6d7b8; border-radius: 18px; background: #fbf7ea; color: #5a4630; }
+  .tab.on { border-color: #8b5a2b; background: #fbf7ea; font-weight: 600; color: #5a3a1e; }
+  .hint { font-size: 11px; color: #8a7458; margin-bottom: 12px; }
+  .card { background: #fbf7ea; border: 1px solid #ecdfc2; border-radius: 16px; overflow: hidden; margin-bottom: 12px; }
+  .thumb { height: 120px; display: flex; align-items: center; justify-content: center; background: rgba(139,90,43,.1); font-size: 40px; }
+  .body { padding: 10px 12px; }
+  .name { font-size: 16px; font-weight: 600; }
+  .meta { font-size: 12px; color: #5a4630; margin-top: 4px; }
+  .meal { font-size: 11px; color: #8b5a2b; margin-top: 6px; }
+  .empty { padding: 28px; text-align: center; font-size: 13px; color: #8a7458;
+           border: 1px dashed #d9c39c; border-radius: 14px; margin-bottom: 12px; }
+  .disc { flex: none; margin: 0 10px 10px; padding: 10px 12px; background: #e8f1e4;
+          border: 1px solid #d7e7d1; border-radius: 14px; display: flex; align-items: center; gap: 8px; }
+  .ico { width: 20px; height: 20px; border-radius: 50%; background: #3f7a45; color: #fff;
+         font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; }
+  .disc span { font-size: 11px; line-height: 1.5; color: #3a4f38; }
+  .foot { max-width: 1000px; margin: 22px auto 0; font-size: 12px; color: #7a6a52; line-height: 1.85; }
+  .foot b { color: #3d2b1a; }
+</style></head>
+<body>
+  <div class="head">
+    <h1>节气详情 · 文化简介 + 早中晚餐次</h1>
+    <p>左侧是「全部」视图，右侧是「早餐」「午餐」「晚餐」「早餐为空态」四种筛选结果。数据用当前节气「霜降」的真实构建产物（4 道当令菜）。</p>
+  </div>
+
+  <div class="row">
+    <div class="cell">
+      <div class="ct">节气详情 · 全部</div>
+      <div class="cd">文化简介 + 当令食材 + 餐次筛选</div>
+      <div class="frame">
+        <div class="nav">二十四节气</div>
+        <div class="scroll">
+          <div class="back">‹ 返回节气列表</div>
+          <div class="dname">霜降</div>
+          <div class="dwin">undefined</div>
+          <div class="intro">
+            <div class="lb">节气简介</div>
+            <div class="tx">霜降是秋季最后一个节气（公历 10 月 23-24 日），天气渐冷，开始有霜。岭南地区霜降秋意最浓，凉燥明显，是秋季向冬季过渡的关键时期，宜温润进补。</div>
+          </div>
+          <div class="label">当令食材</div>
+          <div class="chips"><span class="chip">雪梨</span><span class="chip">银耳</span><span class="chip">百合</span><span class="chip">山药</span><span class="chip">栗子</span><span class="chip">核桃</span><span class="chip">白萝卜</span><span class="chip">牛肉</span><span class="chip">鸭肉</span><span class="chip">柿子</span></div>
+          <div class="label">当令菜品</div>
+          <div class="tabs"><div class="tab on">全部</div><div class="tab">早餐</div><div class="tab">午餐</div><div class="tab">晚餐</div></div>
+          <div class="hint">餐次按做法建议，不是数据标注</div>
+          
+    <div class="card">
+      <div class="thumb"><span>🍲</span></div>
+      <div class="body">
+        <div class="name">柿子饼</div>
+        <div class="meta">岭南家常（大众菜式） · 熟透柿子去皮捣泥，与糯米粉混合揉成团，分成小剂子压扁，煎至两面金黄。</div>
+        <div class="meal">建议餐次 午 · 晚</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb"><span>🍲</span></div>
+      <div class="body">
+        <div class="name">栗子山药牛肉汤</div>
+        <div class="meta">岭南家常（大众菜式） · 牛肉焯水切块，栗子去壳，山药去皮切块。同煲 2 小时，加姜片，盐调味。</div>
+        <div class="meal">建议餐次 午 · 晚</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb"><span>🍲</span></div>
+      <div class="body">
+        <div class="name">核桃百合炒西芹</div>
+        <div class="meta">岭南家常（大众菜式） · 核桃仁略炒，西芹去筋切段，百合掰瓣。热油炒西芹至断生，加百合、核桃翻炒，盐调味。</div>
+        <div class="meal">建议餐次 午 · 晚</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb"><span>🍲</span></div>
+      <div class="body">
+        <div class="name">白萝卜炖鸭肉</div>
+        <div class="meta">岭南家常（大众菜式） · 鸭肉焯水，白萝卜去皮切滚刀块。鸭肉先炖 1 小时，加白萝卜再炖 30 分钟，加姜片，盐调味。</div>
+        <div class="meal">建议餐次 午 · 晚</div>
+      </div>
+    </div>
+        </div>
+        <div class="disc"><i class="ico">!</i><span>本内容为饮食文化科普，仅供日常饮食参考，不构成医疗建议。</span></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="ct">切到「早餐」</div>
+      <div class="cd">该节气没有早餐候选时的诚实空态</div>
+      <div class="frame">
+        <div class="nav">二十四节气</div>
+        <div class="scroll">
+          <div class="back">‹ 返回节气列表</div>
+          <div class="dname">霜降</div>
+          <div class="label">当令菜品</div>
+          <div class="tabs"><div class="tab">全部</div><div class="tab on">早餐</div><div class="tab">午餐</div><div class="tab">晚餐</div></div>
+          <div class="hint">餐次按做法建议，不是数据标注</div>
+          <div class="empty">这个餐次的菜还在补</div>
+        </div>
+        <div class="disc"><i class="ico">!</i><span>本内容为饮食文化科普，仅供日常饮食参考，不构成医疗建议。</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>文化简介来源</b>　知识库 <code>库C_叙事与文献库/节气卡.md</code> 的「节气简介」栏，构建期剔掉了含疗效表述的句子（如「温阳散寒」），只保留时间 + 物候 + 岭南气候的客观描述。<br>
+    <b>餐次怎么来的</b>　知识库没有餐次字段。构建期按做法推断：煮 / 蒸 → 三餐皆可；炒 / 炖 / 煲 / 焖 / 红烧 / 煎 / 炸 / 烤 / 卤 / 拌 → 午晚。页面明确写「按做法建议，不是数据标注」。<br>
+    <b>为什么早餐会空</b>　霜降 的 4 道当令菜做法分别是 煎 / 煲 / 炒 / 炖，都不属于早餐候选。这里不拿午晚餐充数，直接说「还在补」。<br>
+    <b>覆盖情况</b>　全库 419 道：可作早餐 133 道、午餐 419 道、晚餐 377 道。
+  </div>
+</body></html>

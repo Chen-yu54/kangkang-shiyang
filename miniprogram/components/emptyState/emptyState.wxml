@@ -1,0 +1,7 @@
+<view class="empty {{compact ? 'empty-compact' : ''}}">
+  <image wx:if="{{image}}" class="empty-art" src="{{image}}" mode="aspectFit" lazy-load="{{true}}" />
+  <text class="empty-text">{{text}}</text>
+  <view wx:if="{{actionText}}" class="empty-action" hover-class="empty-action-hover" bindtap="onAction">
+    <text class="empty-action-text">{{actionText}}</text>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "数据分享说明",
+  "usingComponents": {
+    "disclaimer": "/components/disclaimer/disclaimer"
+  }
+}

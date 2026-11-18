@@ -1,0 +1,39 @@
+<!-- page-meta 必须是页面第一个节点，一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+    <view class="masthead">
+      <text class="masthead-title">{{copy.masthead}}</text>
+      <text class="masthead-no">{{copy.mastheadNo}}</text>
+    </view>
+
+    <loading wx:if="{{status === 'loading'}}" type="skeleton" />
+
+    <empty-state
+      wx:elif="{{status === 'empty'}}"
+      text="{{copy.empty}}"
+      actionText="{{copy.emptyAction}}"
+      bind:action="onEmptyAction"
+    />
+
+    <view wx:elif="{{status === 'error'}}" class="state-box">
+      <text class="state-text">{{copy.error}}</text>
+      <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+    </view>
+
+    <block wx:else>
+      <text class="count-text">{{countText}}</text>
+      <dish-card
+        wx:for="{{list}}"
+        wx:key="id"
+        dish="{{item}}"
+        faved="{{true}}"
+        bind:cardtap="onTapDish"
+        bind:favoritetap="onFavoriteTap"
+      />
+    </block>
+  </view>
+
+  <disclaimer />
+</view>

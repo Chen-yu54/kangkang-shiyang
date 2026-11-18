@@ -1,0 +1,101 @@
+<!-- page-meta 必须是页面第一个节点，一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+
+    <view class="masthead">
+      <text class="masthead-title">{{copy.title}}</text>
+      <text class="masthead-no">{{termName}}</text>
+    </view>
+
+    <!-- 降级提示：service 未接入时如实标注，不冒充个性化推荐 -->
+    <view wx:if="{{degraded}}" class="degraded">
+      <text class="degraded-text">{{copy.degraded}}</text>
+    </view>
+
+    <loading wx:if="{{status === 'loading'}}" type="skeleton" />
+
+    <empty-state
+      wx:elif="{{status === 'empty'}}"
+      text="{{copy.empty}}"
+      actionText="{{copy.emptyAction}}"
+      bind:action="onGoTerm"
+    />
+
+    <view wx:elif="{{status === 'error'}}" class="state-box">
+      <text class="state-text">{{copy.failed}}</text>
+      <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+    </view>
+
+    <!-- 紧凑卡：图 240rpx，3 张一屏 -->
+    <block wx:else>
+      <view
+        class="pack"
+        wx:for="{{dishes}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        hover-class="tap-hover"
+        bindtap="onTapDish"
+      >
+        <dish-media image="{{item.image}}" name="{{item.name}}" cuisine="{{item.cuisine}}" height="240" mode="thumb" ai-tag="{{copy.aiTag}}" />
+
+        <view class="pack-body">
+          <text class="pack-name">{{item.name}}</text>
+          <text class="pack-desc" wx:if="{{item.subText}}">{{item.subText}}</text>
+        </view>
+      </view>
+
+      <view class="btn" hover-class="tap-hover" bindtap="onRefresh">{{copy.refresh}}</view>
+    </block>
+
+    <!-- 推荐过程：默认收起 -->
+    <view class="reason-section">
+      <view class="reason-head" hover-class="tap-hover" bindtap="onToggleReason">
+        <text class="reason-title">{{copy.reason}}</text>
+        <image
+          class="reason-arrow"
+          src="{{expanded ? '/images/icons/zhujian-jianhao.png' : '/images/icons/zhuqian-jiahao.png'}}"
+          mode="aspectFit"
+        />
+      </view>
+
+      <view wx:if="{{expanded}}" class="reason-body">
+        <!-- 依据链路：四步固定顺序，任何一步没命中都会在下面对应项里显示为空 -->
+        <view class="chain">
+          <text class="chain-step">{{copy.chainTerm}}</text>
+          <image class="chain-dot" src="/images/icons/taodian.png" mode="aspectFit" />
+          <text class="chain-step">{{copy.chainPref}}</text>
+          <image class="chain-dot" src="/images/icons/taodian.png" mode="aspectFit" />
+          <text class="chain-step">{{copy.chainRecall}}</text>
+          <image class="chain-dot" src="/images/icons/taodian.png" mode="aspectFit" />
+          <text class="chain-step">{{copy.chainFilter}}</text>
+        </view>
+        <view wx:if="{{termName}}" class="reason-item">
+          <text class="reason-key">{{copy.reasonTerm}}</text>
+          <text class="reason-value">{{termName}}</text>
+        </view>
+
+        <view wx:if="{{reason.length}}" class="reason-item">
+          <text class="reason-key">{{copy.reasonPrefs}}</text>
+          <view class="chip-row">
+            <text class="chip" wx:for="{{reason}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+
+        <view wx:if="{{recallSource.length}}" class="reason-item">
+          <text class="reason-key">{{copy.reasonRecall}}</text>
+          <view class="chip-row">
+            <text class="chip" wx:for="{{recallSource}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+
+        <text wx:if="{{!reason.length && !recallSource.length}}" class="reason-empty">{{copy.reasonEmpty}}</text>
+
+        <text class="gen-note">{{degraded ? copy.genRule : copy.genModel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <disclaimer />
+</view>

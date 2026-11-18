@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "dish-media": "../dishMedia/dishMedia"
+  }
+}

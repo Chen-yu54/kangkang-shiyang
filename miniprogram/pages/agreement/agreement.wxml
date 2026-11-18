@@ -1,0 +1,21 @@
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+    <text class="doc-title">{{title}}</text>
+
+    <view class="doc-meta">
+      <text class="doc-meta-text">{{effectiveText}}</text>
+      <text class="doc-meta-text">{{versionText}}</text>
+    </view>
+
+    <view class="doc-sec" wx:for="{{sections}}" wx:key="h" wx:for-item="sec">
+      <text class="doc-h">{{sec.h}}</text>
+      <text class="doc-p" wx:for="{{sec.p}}" wx:key="*this" wx:for-item="para">{{para}}</text>
+    </view>
+
+    <view class="doc-end">
+      <text class="doc-end-text">{{effectiveText}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<view class="term term-{{seasonKey}} {{active ? 'term-active' : ''}}" hover-class="term-hover" bindtap="onTap">
+  <view class="term-bar"></view>
+  <view class="term-head">
+    <text class="term-name">{{term.name}}</text>
+    <text wx:if="{{active}}" class="term-flag">{{activeText}}</text>
+    <text wx:if="{{term.windowText}}" class="term-window">{{term.windowText}}</text>
+  </view>
+  <text wx:if="{{term.headline}}" class="term-headline">{{term.headline}}</text>
+</view>

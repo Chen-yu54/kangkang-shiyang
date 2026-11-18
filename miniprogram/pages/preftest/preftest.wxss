@@ -1,0 +1,225 @@
+/* pages/preftest/preftest.wxss —— 偏好测试页样式，全部取 app.wxss 的 CSS 变量 */
+
+.intro {
+  padding: 16rpx 0 24rpx;
+}
+
+.intro-text {
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.progress {
+  margin-bottom: 32rpx;
+}
+
+.progress-text {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16rpx;
+  border-radius: var(--radius-card);
+  background-color: var(--color-skeleton);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-brand);
+  transition: width 0.2s ease;
+}
+
+.question-title {
+  display: block;
+  margin-bottom: 24rpx;
+  font-size: var(--font-title);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 20rpx 28rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.option-active {
+  border-color: var(--color-brand);
+}
+
+.option-active .option-text {
+  font-weight: 600;
+}
+
+.option-text {
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+
+
+.prev-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 0 32rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-sizing: border-box;
+}
+
+.prev-text {
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* —— 前置同意页 —— */
+.intro-head {
+  padding: 8rpx 0 32rpx;
+}
+
+.intro-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  color: var(--color-ink);
+}
+
+.intro-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+.switch-list {
+  border-top: 2rpx solid var(--color-border-hair);
+}
+
+/* 整行高度 112rpx，热区达标；右侧是原生 switch */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 112rpx;
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid var(--color-border-hair);
+  box-sizing: border-box;
+}
+
+.switch-row-off {
+  opacity: 0.6;
+}
+
+.switch-text {
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.switch-title {
+  display: block;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.switch-desc {
+  display: block;
+  margin-top: 6rpx;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+.switch-hint {
+  display: block;
+  margin-top: 24rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* 主按钮：实心，反白文字 */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  margin-top: 32rpx;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-brand);
+  font-size: var(--font-btn);
+  color: var(--color-on-brand);
+  box-sizing: border-box;
+}
+/* —— 多选支持：题型提示 / 选中勾标 / 推进按钮 ——
+   选中态不能只靠底色（色觉异常看不出），额外给「已选」文字标记。 */
+
+.question-hint {
+  display: block;
+  margin: -12rpx 0 20rpx;
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}
+
+.option-check {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 4rpx 14rpx;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-green-bg);
+  font-size: var(--font-btn);
+  color: var(--color-green-ink);
+}
+
+/* 上一题 + 下一题并排，各占一半，点击区都不小于 88rpx */
+.actions {
+  display: flex;
+  margin-top: 16rpx;
+}
+
+.prev-btn + .next-btn {
+  margin-left: 20rpx;
+}
+
+.next-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 0 32rpx;
+  border-radius: var(--radius-card);
+  background-color: var(--color-green-deep);
+  box-sizing: border-box;
+}
+
+.next-text {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-on-brand);
+}
+
+/* 未选任何项：按钮仍占位，只降不透明度，点击给提示 */
+.next-btn-off {
+  opacity: 0.42;
+}

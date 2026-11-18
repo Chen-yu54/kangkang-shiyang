@@ -1,0 +1,86 @@
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+    <text class="doc-title">{{copy.title}}</text>
+    <text class="doc-lead">{{copy.lead}}</text>
+
+    <!-- 四项说明：分享什么 / 不分享什么 / 给谁 / 做什么 -->
+    <view class="ex-card ex-yes">
+      <text class="ex-label">{{copy.whatTitle}}</text>
+      <text class="ex-body">{{copy.whatBody}}</text>
+    </view>
+
+    <view class="ex-card ex-no">
+      <text class="ex-label">{{copy.notTitle}}</text>
+      <text class="ex-body">{{copy.notBody}}</text>
+    </view>
+
+    <view class="ex-card">
+      <text class="ex-label">{{copy.whoTitle}}</text>
+      <text class="ex-body">{{copy.whoBody}}</text>
+    </view>
+
+    <view class="ex-card">
+      <text class="ex-label">{{copy.purposeTitle}}</text>
+      <text class="ex-body">{{copy.purposeBody}}</text>
+    </view>
+
+    <!-- 已同意状态 -->
+    <block wx:if="{{view === 'done'}}">
+      <view class="state-box">
+        <text class="state-text">{{copy.grantedAt}}：{{districtName}} · {{communityName}}</text>
+        <view class="btn btn-quiet" hover-class="tap-hover" bindtap="onRevoke">{{copy.revoke}}</view>
+      </view>
+    </block>
+
+    <!-- 未配置社区名单：如实说明，不给假选项 -->
+    <block wx:elif="{{!configured}}">
+      <view class="state-box">
+        <text class="state-text">{{copy.notConfigured}}</text>
+      </view>
+    </block>
+
+    <!-- 选择归属 + 同意 / 拒绝 -->
+    <block wx:else>
+      <view class="region">
+        <text class="region-title">{{copy.regionTitle}}</text>
+
+        <text class="region-label">{{copy.district}}</text>
+        <view class="chip-row">
+          <view
+            class="chip {{districtId === item.id ? 'chip-on' : ''}}"
+            wx:for="{{districtList}}"
+            wx:key="id"
+            data-id="{{item.id}}"
+            hover-class="tap-hover"
+            bindtap="onPickDistrict"
+          >{{item.name}}</view>
+        </view>
+
+        <block wx:if="{{communityList.length}}">
+          <text class="region-label">{{copy.community}}</text>
+          <view class="chip-row">
+            <view
+              class="chip {{communityId === item.id ? 'chip-on' : ''}}"
+              wx:for="{{communityList}}"
+              wx:key="id"
+              data-id="{{item.id}}"
+              hover-class="tap-hover"
+              bindtap="onPickCommunity"
+            >{{item.name}}</view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 两个按钮同样大小：不做「同意很大、拒绝很小」的诱导 -->
+      <view class="actions">
+        <view class="btn btn-primary" hover-class="tap-hover" bindtap="onAgree">{{copy.agree}}</view>
+        <view class="btn btn-quiet" hover-class="tap-hover" bindtap="onDecline">{{copy.decline}}</view>
+      </view>
+      <text class="actions-hint">{{copy.declineHint}}</text>
+    </block>
+
+    <disclaimer />
+  </view>
+</view>

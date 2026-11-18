@@ -1,0 +1,295 @@
+<!-- page-meta 必须是页面第一个节点，且一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<!-- elder：长辈模式（1.6 倍字）下整页换一套排版规则——
+     大字会让原来「一行两栏」的地方挤成两行半，所以这一档只保顺序、不保栏位 -->
+<view class="page {{elderMode ? 'elder' : ''}}">
+  <view class="content">
+
+    <!-- 长辈模式：首屏可见，一键切换大字与精简功能。
+         开了之后只留「退出长辈模式」一行——此时再写「字更大，只留最常用的几块」
+         是废话，还会把按钮挤成竖排。 -->
+    <view class="elder-entry {{elderMode ? 'elder-entry-on' : ''}}" hover-class="tap-hover" bindtap="onToggleElder">
+      <text class="elder-entry-text">{{elderMode ? copy.elderOff : copy.elderOn}}</text>
+      <text wx:if="{{!elderMode}}" class="elder-entry-hint">{{copy.elderHint}}</text>
+    </view>
+
+    <!-- 1. 封面 hero（暗底食光层）：节气海报压暗 + 刊名栏 + 日期印章 + 出版信息 + 蒸汽。
+         节气名只由海报书法字承担，页面不再重复叠字；下方标题走 slogan，印章走日期。 -->
+    <view wx:if="{{banner}}" id="tour-hero" class="hero" hover-class="tap-hover" bindtap="onTapTerm">
+      <image
+        wx:if="{{termPoster}}"
+        class="hero-poster"
+        src="{{termPoster}}"
+        mode="aspectFill"
+        lazy-load
+      />
+      <view wx:else class="hero-fallback"></view>
+      <!-- 全屏暖黑压暗 + 暗角，聚焦中央 -->
+      <view class="hero-shade"></view>
+
+      <!-- 顶部刊名栏：左刊名，右日期印章 -->
+      <view class="hero-top">
+        <text class="hero-kicker">{{copy.heroKicker}}</text>
+        <view wx:if="{{sealText}}" class="hero-seal">
+          <text class="hero-seal-text">{{sealText}}</text>
+        </view>
+      </view>
+
+      <!-- 底部：headline + 距下一节气；大字下一行放不下时整行折下去 -->
+      <view class="hero-foot">
+        <text wx:if="{{banner.headline}}" class="hero-headline">{{banner.headline}}</text>
+        <text wx:if="{{banner.hint}}" class="hero-hint">{{banner.hint}}</text>
+        <text wx:if="{{!elderMode}}" class="hero-ainote">{{copy.heroAiNote}}</text>
+      </view>
+
+      <!-- 蒸汽：刚出锅的通感，纯 CSS -->
+      <view class="hero-steam" aria-hidden="true">
+        <view class="hero-steam-i hero-steam-1"></view>
+        <view class="hero-steam-i hero-steam-2"></view>
+        <view class="hero-steam-i hero-steam-3"></view>
+      </view>
+    </view>
+
+    <!-- 1.5 参考警示条：首次进入显示，「我知道了」后本机记忆不再打扰。 -->
+    <view wx:if="{{showNotice}}" class="notice" aria-role="alert">
+      <view class="notice-head">
+        <image class="notice-ico" src="/images/icons/taoyin-gantanhao.png" mode="aspectFit" />
+        <text class="notice-title">{{copy.noticeTitle}}</text>
+      </view>
+      <text class="notice-body">{{copy.noticeBody}}</text>
+      <view class="notice-btn" hover-class="tap-hover" bindtap="onDismissNotice">
+        <text class="notice-btn-text">{{copy.noticeAction}}</text>
+      </view>
+    </view>
+
+    <!-- ==================== 2. 主区：时令菜品 ====================
+         这一页只看当令，不看口味。口味测试 → 推演 → 专属食单是另一条链路，
+         归「专属推荐」tab 的今日食单，两边不混。 -->
+    <view class="lead">
+      <text class="lead-kicker">{{copy.leadKicker}}</text>
+      <view class="lead-row">
+        <view class="lead-main">
+          <text class="lead-no">{{copy.noDishes}}</text>
+          <text class="lead-title">{{copy.sectionDishes}}</text>
+        </view>
+        <view class="lead-tags">
+          <text wx:if="{{termName}}" class="lead-term">{{termName}}</text>
+        </view>
+      </view>
+    </view>
+
+    <loading wx:if="{{status === 'loading'}}" type="skeleton" />
+
+    <empty-state wx:elif="{{status === 'empty'}}" text="{{copy.empty}}" />
+
+    <view wx:elif="{{status === 'error'}}" class="state-box">
+      <text class="state-text">{{copy.error}}</text>
+      <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+    </view>
+
+    <block wx:else>
+      <!-- 当令展示牌：一道一屏，自动轮播，展签（菜名 / 做法）跟着图一起换 -->
+      <view wx:if="{{showcase.length}}" id="tour-showcase" class="showcase">
+        <swiper
+          class="sc-swiper"
+          autoplay="{{showcase.length > 1}}"
+          circular="{{showcase.length > 1}}"
+          interval="4800"
+          duration="620"
+          bindchange="onShowcaseChange"
+        >
+          <swiper-item wx:for="{{showcase}}" wx:key="id">
+            <view
+              class="sc-slide"
+              data-id="{{item.id}}"
+              hover-class="tap-hover"
+              bindtap="onTapDish"
+            >
+              <dish-media
+                image="{{item.image}}"
+                name="{{item.name}}"
+                cuisine="{{item.cuisine}}"
+                height="420"
+                mode="hero"
+                flush="{{true}}"
+                steam="{{true}}"
+                tint="{{true}}"
+                ai-tag="{{copy.aiTag}}"
+              />
+              <view class="sc-caption">
+                <text class="sc-no">{{item.idxText}}</text>
+                <view class="sc-cap-main">
+                  <view class="sc-cap-head">
+                    <text class="sc-name">{{item.name}}</text>
+                    <text class="sc-cuisine">{{item.cuisineName}}</text>
+                  </view>
+                  <text wx:if="{{item.how}}" class="sc-how">{{item.how}}</text>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+
+        <!-- 轮播刻度：一格一道菜，当前格朱砂填满 -->
+        <view class="sc-dots" aria-hidden="true">
+          <view
+            class="sc-dot {{showcaseIndex === index ? 'sc-dot-on' : ''}}"
+            wx:for="{{showcase}}"
+            wx:key="id"
+          ></view>
+        </view>
+      </view>
+
+      <view class="section-more" hover-class="tap-hover" bindtap="onTapMenu">
+        <text class="section-more-text">{{copy.seeAll}}</text>
+        <image class="section-more-arrow" src="/images/icons/yuntou-zhejiao.png" mode="aspectFit" />
+      </view>
+    </block>
+
+    <!-- ==================== 3. 次区：节气文化 + 搜菜 ====================
+         菜系卡撤掉后，次区只剩两件事：读懂这个节气、按名字找菜。
+         两块挨着放，中间不再插分隔线——它们是同一段「补充信息」。 -->
+    <view wx:if="{{termCulture}}" class="sec">
+      <view class="sec-main">
+        <text class="sec-no">{{copy.noCulture}}</text>
+        <text class="sec-title">{{copy.sectionCulture}}</text>
+      </view>
+    </view>
+
+    <!-- 3.1 节气文化卡：先只亮三样——节气名、一句、一首诗。
+         三候 / 食俗 / 食材不在这一屏展开，点「立冬的讲究」直接去节气详情页看。 -->
+    <view wx:if="{{termCulture}}" id="tour-culture" class="tculture">
+      <view class="tculture-head">
+        <text class="tculture-tag">{{copy.cultureTag}}</text>
+        <text class="tculture-term">{{termName}}</text>
+      </view>
+      <text class="tculture-slogan">{{termCulture.slogan}}</text>
+
+      <view wx:if="{{termCulture.poem}}" class="tculture-poem">
+        <text class="tculture-poem-text">{{termCulture.poem.text}}</text>
+        <text class="tculture-poem-by">{{termCulture.poem.author}}</text>
+      </view>
+
+      <!-- 可点的框：整框就是入口，去节气详情页，看三候 / 食俗 / 当令食材 -->
+      <view class="tmore" hover-class="tap-hover" bindtap="onTapTermDetail">
+        <view class="tmore-main">
+          <text class="tmore-title">{{cultureTitle}}</text>
+          <text class="tmore-sub">{{copy.cultureOpenSub}}</text>
+        </view>
+        <text class="tmore-act">{{copy.cultureOpen}} ›</text>
+      </view>
+    </view>
+
+    <!-- 3.2 搜菜名 / 食材：整行都是点击区，大字下也不挤 -->
+    <view class="search-entry" hover-class="tap-hover" bindtap="onTapSearch">
+      <text class="search-text">{{copy.searchPlaceholder}}</text>
+      <text class="search-go">›</text>
+    </view>
+
+    <!-- 3.3 数据快照：长辈模式下收起，一屏里数字太多读不清 -->
+    <block wx:if="{{!elderMode}}">
+      <view class="sec">
+        <view class="sec-main">
+          <text class="sec-no">{{copy.noSnapshot}}</text>
+          <text class="sec-title">{{copy.snapshotTitle}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{stats}}" id="dash" class="dash">
+        <view class="dash-top">
+          <view class="dash-live">
+            <view class="dash-live-dot"></view>
+            <text class="dash-live-text">{{copy.snapLive}}</text>
+          </view>
+          <text class="dash-ver">{{copy.snapAsOf}} {{dataVersion}}</text>
+        </view>
+
+        <!-- 主水球：外圈 24 段＝24 个节气，水位＝今天走到一年里的哪一段。
+             水波是活的：进视野后从 0 涨到当前位置，圆角波浪一直慢慢转。 -->
+        <view class="dash-main">
+          <view class="gauge-main {{dashOn ? 'on' : ''}}">
+            <view class="gauge-ring">
+              <view
+                class="gauge-tick {{item.on ? 'tick-on' : ''}} {{item.now ? 'tick-now' : ''}}"
+                wx:for="{{stats.ticks}}"
+                wx:key="n"
+                style="left: {{item.x}}rpx; top: {{item.y}}rpx; transform: rotate({{item.deg}}deg); animation-delay: {{index * 26}}ms"
+              ></view>
+            </view>
+            <view class="gauge-ball">
+              <view class="gauge-water" style="height: {{dashOn ? stats.term.progress : 0}}%">
+                <view class="wave wave-a"></view>
+                <view class="wave wave-b"></view>
+              </view>
+              <view class="gauge-center">
+                <text class="gauge-term">{{stats.term.name}}</text>
+                <text class="gauge-pos">{{stats.term.posText}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="dash-lines">
+            <view class="dash-line">
+              <text class="dash-line-num">{{stats.term.total}}</text>
+              <view class="dash-line-side">
+                <text class="dash-line-unit">{{copy.snapLine1Unit}}</text>
+                <text class="dash-line-sub">{{copy.snapLine1Sub}}</text>
+              </view>
+            </view>
+            <view class="dash-line">
+              <text class="dash-line-num">{{stats.perTerm}}</text>
+              <view class="dash-line-side">
+                <text class="dash-line-unit">{{copy.snapLine2Unit}}</text>
+                <text class="dash-line-sub">{{copy.snapLine2Sub}}</text>
+              </view>
+            </view>
+            <view class="dash-line">
+              <text class="dash-line-num">{{stats.mealCount}}</text>
+              <view class="dash-line-side">
+                <text class="dash-line-unit">{{copy.snapLine3Unit}}</text>
+                <text class="dash-line-sub">{{copy.snapLine3Sub}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 三个小水球：不堆数量，说「你能得到什么」，水位＝做到的程度 -->
+        <view class="dash-mini">
+          <view class="dash-mini-item" wx:for="{{stats.promises}}" wx:key="key">
+            <view class="gauge-mini {{dashOn ? 'on' : ''}}">
+              <view class="gauge-ball ball-mini">
+                <view
+                  class="gauge-water"
+                  style="height: {{dashOn ? item.pct : 0}}%; transition-delay: {{index * 140 + 200}}ms"
+                >
+                  <view class="wave wave-a"></view>
+                  <view class="wave wave-b"></view>
+                </view>
+                <view class="gauge-center">
+                  <text class="gauge-mini-num">{{item.text}}</text>
+                </view>
+              </view>
+            </view>
+            <text class="dash-mini-k">{{item.label}}</text>
+            <text class="dash-mini-v">{{item.sub}}</text>
+          </view>
+        </view>
+
+        <text class="dash-note">{{copy.snapNote}}</text>
+      </view>
+    </block>
+  </view>
+
+  <disclaimer />
+
+  <!-- 登录后的功能引导：跨三页走，进度在 app.globalData.tour -->
+  <guide-tour
+    visible="{{tourVisible}}"
+    step="{{tourStep}}"
+    index="{{tourIndex}}"
+    total="{{tourTotal}}"
+    bind:next="onTourNext"
+    bind:skip="onTourSkip"
+  />
+</view>

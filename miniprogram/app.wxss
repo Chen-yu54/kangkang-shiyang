@@ -1,0 +1,340 @@
+/* app.wxss —— 全局设计 token 与公共布局
+ *
+ * 视觉基线：《康康食养AI · 线框稿 v0.3》+ 版面设计图（米黄纸底 + 棕褐主色 + 墨绿强调）
+ *
+ * 四处已修正的地方（设计稿原样照抄会违反验收硬指标）：
+ *   1. 声明文案保留「本内容为食养科普，不构成医疗建议。」，不采用设计稿的弱化措辞
+ *   2. 不使用含禁用词的表述
+ *   3. 设计稿的浅色文字 #8a7458 / #a08d74 对纸底仅约 3.9:1，此处加深到 #5a4630（约 7.5:1）
+ *   4. 设计稿正文 15px / 标题 20px，换算后不足 36rpx / 48rpx，此处按适老化下限执行
+ *
+ * 约束：
+ *   - 本文件是「字号 / 颜色 / 圆角 / 阴影 / 点击区」的唯一真源，页面里禁止写死字号与色值
+ *   - 字号基准值改这里的同时必须改 app.js 的 BASE_FONT_RPX，两处必须一致
+ *   - 字号缩放走 <page-meta page-style="{{pageStyle}}"> 注入 CSS 变量，不在此处写死缩放
+ *   - 自定义组件默认样式隔离，取不到本文件的类选择器，但可以继承本文件声明的 CSS 变量
+ *
+ * 配色纪律（一屏最多三种色）：
+ *   ① 纸（--color-bg / --color-bg-soft / --color-card / --color-border*）
+ *   ② 墨（--color-ink / ink-2 / ink-3、--color-night）
+ *   ③ 一个强调色：朱砂 --color-flame 或当令节气的 --color-green 系，二选一，不并列使用
+ *   整块浅底色（声明条 / 提示条 / 徽章）一律回归纸底 + 一条强调色竖边，
+ *   不再给每种语义配一个新底色——色块一多，页面就没有主色了。
+ *
+ * 节气主题（24 节气换色）：
+ *   utils/solarTheme.js 按当日节气产出一组强调色（accent/deep/soft/bg），
+ *   app.js 的 getFontStyle() 把它拼进 pageStyle，覆盖下面这几个变量的值：
+ *       --color-green / --color-green-deep / --color-green-soft / --color-green-bg / --color-green-ink
+ *   即：声明条、加载环、选中态、徽章、浅底色块会跟着节气走；
+ *   --color-brand（棕）与 --color-spring/summer/autumn/winter（四季标识）保持恒定，
+ *   前者是品牌识别，后者是「季节」而非「当前节气」的语义。
+ */
+
+page {
+  /* —— 底色：米黄纸感，禁用纯白刺眼背景 —— */
+  --color-bg: #f7f0e1;
+  --color-bg-soft: #fbf7ea;
+  --color-card: #fbf7ea;
+  --color-skeleton: rgba(139, 90, 43, 0.1);
+
+  /* —— 文字三档，全部满足 ≥4.5:1 —— */
+  --color-ink: #3d2b1a; /* 主文字，约 12:1 */
+  --color-ink-2: #4a3826; /* 正文，约 10:1 */
+  --color-ink-3: #5a4630; /* 次文字 / 说明，约 7.5:1（设计稿此处偏浅，已加深） */
+
+  /* —— 主色：棕褐 —— */
+  --color-brand: #8b5a2b;
+  --color-brand-deep: #5a3a1e;
+
+  /* —— 强调：墨绿（声明条、选中态、加载态） —— */
+  --color-green: #3f7a45;
+  --color-green-deep: #2f5f36;
+  --color-green-soft: #d7e7d1;
+  --color-green-bg: #e8f1e4;
+  --color-green-ink: #3a4f38; /* 绿底上的文字，对 #e8f1e4 约 7.3:1 */
+  --color-on-brand: #ffffff;
+
+  /* 印章与图内标注：只用于图片上的装饰性文字（印章、角标），不是正文。
+     单独成 token，避免在组件里直接写色值。 */
+  --color-seal: #9c4a34;
+  --color-on-seal: #ffffff;
+  --color-danger: #a03b26;
+  --color-caption-on-dark: #f6ecd8;
+  --font-seal-lg: 44rpx;
+  --font-seal-md: 34rpx;
+  --font-seal-base: 30rpx;
+  --font-seal-sm: 26rpx;
+  --font-caption-on-img: 22rpx; /* 深色底上的反白文字 */
+
+  /* —— 四季色：节气分类的季节分组标识（「节气变化」在视觉上的落点） ——
+   * 菜单元数据里的 season 字段决定用哪一档，与 utils/… 里的 SEASON_COLOR 保持一致 */
+  --color-spring: #6f8f4e; /* 春 · 嫩绿 */
+  --color-summer: #3f7a45; /* 夏 · 浓绿 */
+  --color-autumn: #a9761f; /* 秋 · 赭黄 */
+  --color-winter: #44617e; /* 冬 · 黛蓝 */
+
+  /* —— 风味色谱：五菜系的「主色」档，用于首页五宫格、卡片色谱条、风味签压角。
+   * 与 --tone-* 浅底对配套：tone 是纸面，cuisine 是墨色。同族不同明度，屏内并置不打架 */
+  --cuisine-lingnan: #a97a3c; /* 岭南家常 · 陈米金 */
+  --cuisine-guangfu: #b35c26; /* 广府 · 烧腊橙 */
+  --cuisine-chaoshan: #a8432a; /* 潮汕 · 沙茶红 */
+  --cuisine-hakka: #7c6a30; /* 客家 · 咸菜绿金 */
+  --cuisine-other: #6f6046; /* 其他 · 杂粮褐 */
+
+  /* —— 食欲强调：朱砂锅气 + 焦糖金。只用于点火处（印章、主推标、热区描边），
+   * 不大面积铺，避免从「食养刊物」滑向「快餐促销」 —— */
+  --color-flame: #b5482a;
+  --color-flame-deep: #8a3018;
+  --color-gold: #b8863b;
+
+  /* —— 暗色「食光」层：封面 hero / 主推大卡 / 夜读区的承载色。
+   * 照片压暗后食物暖色更跳，是「食欲感」的主要来源；文本仍在纸色区，清晰不受影响 */
+  --color-night: #221712;
+  --color-night-2: #2f2016;
+  --color-on-night: #f6ecd8; /* 暗底上的米白，对 #221712 约 12.8:1 */
+  --color-on-night-dim: #d3bf9c; /* 暗底次级文字，对 #221712 约 7.6:1 */
+
+  /* —— 风味签：无配图时的暖色底对，按菜系分五档 ——
+   * 知识库配图不可能一上线就齐（419 道菜 / 29 张卡），无图的菜品图位统一渲染成
+   * 「风味签」：渐变底 + 45° 斜纹 + 内层细框 + 菜系图形水印 + 朱砂印章。
+   * 它是完整版式而不是占位符，因此列表里有图没图看不出缺口。
+   * 底色只在此处定义，components/dishMedia 按变量取用，不写死色值 */
+  --tone-lingnan: #f6ecda;
+  --tone-lingnan-deep: #e7d3ae;
+  --tone-guangfu: #fbe8c9;
+  --tone-guangfu-deep: #edcfa1;
+  --tone-chaoshan: #f7dfd2;
+  --tone-chaoshan-deep: #e4bfa9;
+  --tone-hakka: #f1e4c8;
+  --tone-hakka-deep: #dbc298;
+  --tone-other: #f5f0e2;
+  --tone-other-deep: #e1d7bf;
+
+  /* —— 边框：三档纸感描边 —— */
+  --color-border: #d9c39c;
+  --color-border-soft: #e6d7b8;
+  --color-border-hair: #ecdfc2;
+
+  /* —— 字号：适老化下限，不随设计稿缩小 —— */
+  --font-base: 36rpx; /* 正文，下限 36rpx */
+  --font-title: 48rpx; /* 标题，下限 48rpx */
+  --font-btn: 32rpx; /* 按钮文字，下限 32rpx */
+  --font-display: 64rpx; /* 节气主视觉大字（线框稿 32px × 2） */
+  --font-icon: 28rpx; /* 图形符号内的小字（如声明条感叹号），非正文 */
+
+  /* —— 字号阶梯扩展：视觉字与数据字
+   * display-xl / icon / emoji 是图形尺寸而不是排版字号，不参与缩放；
+   * subtitle / caption 是排版里真在用的两档，跟着 app.js 一起缩放，
+   * 否则长字号下一屏会出现「说明比标题还大」的倒挂。 */
+  --font-display-xl: 96rpx;
+  --font-subtitle: 40rpx; /* 栏目标题与正文之间的过渡档 */
+  --font-caption: 28rpx;
+
+  /* —— 字距：中文排版的「刊物感」主要来自字距与行高节奏，而非换字体 —— */
+  --tracking-title: 0.04em;
+  --tracking-display: 0.14em;
+  --tracking-caps: 0.28em; /* 数字 / 拼音 / 英文出版信息的宽排 */
+
+  /* 图形占位字号：emoji 图标，用于无图 / 图失败的占位，不参与正文字号校验 */
+  --font-emoji-sm: 44rpx;
+  --font-emoji-md: 72rpx;
+  --font-emoji-lg: 104rpx;
+
+  /* —— 字体：标题走宋体族，Android 无宋体时自动回退，不影响可读 —— */
+  --font-serif: "Songti SC", "STSong", "STZhongsong", "SimSun", "Noto Serif SC", serif;
+
+  /* —— 形状 —— */
+  --radius-card: 32rpx; /* 卡片 16px × 2 */
+  --radius-pill: 44rpx; /* 胶囊 22px × 2 */
+  --radius-small: 20rpx; /* 小圆角 10px × 2 */
+  --shadow-card: 0 4rpx 16rpx rgba(90, 60, 30, 0.08);
+  /* 抬升阴影：主推大卡 / 封面浮层，给「从纸面抬起」的纵深 */
+  --shadow-lift: 0 10rpx 28rpx rgba(60, 38, 20, 0.16);
+  /* 深阴影：暗底封面的下坠感，让亮卡像摆在暗桌上 */
+  --shadow-deep: 0 18rpx 44rpx rgba(24, 16, 10, 0.38);
+
+  /* —— 节气卡雪景（首页 hero 专用，渐变内的色值无法用类选择器复用，只在此处定义） —— */
+  --hero-sky-top: #eaf2f8;
+  --hero-sky-bottom: #c9dce6;
+  --hero-snow: #ffffff;
+  --hero-mountain-top: rgba(120, 150, 170, 0);
+  --hero-mountain-bottom: rgba(120, 150, 170, 0.35);
+  --hero-veil: rgba(251, 247, 234, 0.85);
+  --hero-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.12);
+
+  /* —— 交互 —— */
+  --tap-min: 88rpx; /* 点击区下限 88rpx × 88rpx */
+
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-size: var(--font-base);
+  line-height: 1.6;
+}
+
+/* 页面容器：纵向弹性布局，让声明条自然落到页面底部
+ * 只用 min-height，不用定高，保证系统字号放大时不破版、不截断 */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* 内容区：撑满剩余高度，把声明条推到底部 */
+.content {
+  flex: 1;
+}
+
+/* 空态 / 骨架占位区 */
+.state-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx 24rpx;
+}
+
+.state-text {
+  font-size: var(--font-base);
+  color: var(--color-ink-3);
+  text-align: center;
+}
+
+/* 通用按钮：胶囊形 */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240rpx;
+  min-height: var(--tap-min);
+  padding: 0 32rpx;
+  margin-top: 24rpx;
+  border: 2rpx solid var(--color-brand);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-soft);
+  font-size: var(--font-btn);
+  color: var(--color-brand-deep);
+  box-sizing: border-box;
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* ============================ 刊物公共件 ============================
+ * 以下三类是「杂志化」的骨架，所有页面复用，保证翻页时识别一致。
+ * 只用 CSS 变量，不写死色值；节气换色时 accent 部分自动跟随。
+ */
+
+/* 栏目头：宋体大标题 + 右侧编号 + 底部双线（一粗一细，书口线）。
+ * 用法：<view class="masthead"><text class="masthead-title">风味谱</text>
+ *        <text class="masthead-no">壹</text></view> */
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 16rpx;
+  margin-bottom: 24rpx;
+  border-bottom: 4rpx solid var(--color-ink);
+  position: relative;
+}
+
+.masthead::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6rpx;
+  border-bottom: 2rpx solid var(--color-ink);
+}
+
+.masthead-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+.masthead-no {
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-ink-3);
+}
+
+/* 引文荐语：编辑荐语 / 节气按语。宋体 + 两侧细线 + 居中大引号。
+ * 用法：<view class="pullquote"><text class="pullquote-text">…</text>
+ *        <text class="pullquote-by">— 二十四节气饮食谱系</text></view> */
+.pullquote {
+  position: relative;
+  padding: 40rpx 48rpx 32rpx;
+  margin: 8rpx 0 24rpx;
+  text-align: center;
+}
+
+.pullquote::before,
+.pullquote::after {
+  content: '';
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  height: 2rpx;
+  background-color: var(--color-border);
+}
+
+.pullquote::before {
+  top: 0;
+}
+
+.pullquote::after {
+  bottom: 0;
+}
+
+.pullquote-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  line-height: 1.7;
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink-2);
+}
+
+.pullquote-by {
+  display: block;
+  margin-top: 16rpx;
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-ink-3);
+}
+
+/* 风味色谱条：卡片 / 列表项底部的菜系色签，3 段渐隐，像书签绳。
+ * 用法：<view class="chromaribbon tone-{{cuisine}}"></view> */
+.chromaribbon {
+  width: 96rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background-color: currentColor;
+}
+
+.tone-lingnan,
+.tone-lingnan_home {
+  color: var(--cuisine-lingnan);
+}
+
+.tone-guangfu {
+  color: var(--cuisine-guangfu);
+}
+
+.tone-chaoshan {
+  color: var(--cuisine-chaoshan);
+}
+
+.tone-hakka {
+  color: var(--cuisine-hakka);
+}
+
+.tone-other {
+  color: var(--cuisine-other);
+}

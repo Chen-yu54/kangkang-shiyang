@@ -1,0 +1,27 @@
+<view class="page">
+  <!-- 图片加载失败：给可读的占位，不留白块也不显示碎图 -->
+  <view wx:if="{{error}}" class="fallback">
+    <text class="fallback-text">图片暂时打不开</text>
+    <text class="fallback-hint">{{name}}</text>
+  </view>
+
+  <image
+    wx:else
+    class="photo"
+    src="{{src}}"
+    mode="aspectFit"
+    bindload="onImageLoad"
+    binderror="onImageError"
+    bindlongpress="onLongPress"
+  />
+
+  <view class="bar">
+    <view class="bar-info">
+      <text class="bar-name">{{name}}</text>
+      <text wx:if="{{cuisine}}" class="bar-cuisine">{{cuisine}}</text>
+    </view>
+    <view class="bar-btn" hover-class="tap-hover" bindtap="onTapBack">返回</view>
+  </view>
+
+  <text class="hint">长按图片可保存到相册</text>
+</view>

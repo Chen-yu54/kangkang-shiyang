@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "方法说明",
+  "usingComponents": {
+    "disclaimer": "/components/disclaimer/disclaimer"
+  }
+}

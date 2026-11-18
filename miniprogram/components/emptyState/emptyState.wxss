@@ -1,0 +1,54 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56rpx 24rpx 64rpx;
+}
+
+/* 水彩空碗：一张图把空白的重量接住，比一行灰字温和 */
+.empty-art {
+  width: 260rpx;
+  height: 260rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-compact {
+  padding: 32rpx 20rpx 36rpx;
+}
+
+.empty-compact .empty-art {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 12rpx;
+}
+
+.empty-text {
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.empty-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240rpx;
+  min-height: var(--tap-min);
+  padding: 0 32rpx;
+  margin-top: 32rpx;
+  border: 2rpx solid var(--color-brand);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-sizing: border-box;
+}
+
+.empty-action-hover {
+  opacity: 0.82;
+}
+
+.empty-action-text {
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+}

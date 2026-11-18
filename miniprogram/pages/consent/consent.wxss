@@ -1,0 +1,159 @@
+/* 数据分享说明页：米黄纸感底 + 大字号 + 88rpx 点击区。
+   两个操作按钮同尺寸，拒绝不做小字弱化。 */
+.page {
+  min-height: 100vh;
+  background: #f7f0e1;
+}
+
+.content {
+  padding: 40rpx 32rpx 120rpx;
+}
+
+.doc-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #2d241a;
+  letter-spacing: 2rpx;
+}
+
+.doc-lead {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 36rpx;
+  line-height: 1.7;
+  color: #6b5a45;
+}
+
+/* 说明卡：同意项用墨绿边，不分享项用棕色边，颜色 + 文字双通道 */
+.ex-card {
+  margin-top: 24rpx;
+  padding: 24rpx 26rpx;
+  background: #fdf8ee;
+  border-radius: 16rpx;
+  border-left: 8rpx solid #8b5a2b;
+}
+
+.ex-card.ex-yes {
+  border-left-color: #3f7a45;
+}
+
+.ex-card.ex-no {
+  border-left-color: #8b5a2b;
+}
+
+.ex-label {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #2d241a;
+  margin-bottom: 10rpx;
+}
+
+.ex-body {
+  display: block;
+  font-size: 36rpx;
+  line-height: 1.7;
+  color: #5a4a35;
+}
+
+.region {
+  margin-top: 40rpx;
+  padding: 26rpx;
+  background: #fdf8ee;
+  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border-radius: 16rpx;
+}
+
+.region-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #3f7a45;
+  margin-bottom: 16rpx;
+}
+
+.region-label {
+  display: block;
+  font-size: 32rpx;
+  color: #8b7a5b;
+  margin: 16rpx 0 12rpx;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 点击区 ≥88rpx 高 */
+.chip {
+  min-height: 88rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 28rpx;
+  margin: 0 16rpx 16rpx 0;
+  font-size: 36rpx;
+  color: #5a4a35;
+  background: rgba(139, 90, 43, 0.08);
+  border: 2rpx solid transparent;
+  border-radius: 12rpx;
+}
+
+.chip-on {
+  color: #3f7a45;
+  background: #ecf2e6;
+  border-color: #3f7a45;
+  font-weight: 600;
+}
+
+.actions {
+  margin-top: 40rpx;
+}
+
+.btn {
+  min-height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+/* 主按钮：深色底 + 白字（唯一满足 4.5:1 的组合） */
+.btn-primary {
+  background: #3f7a45;
+  color: #ffffff;
+}
+
+/* 拒绝按钮：同样尺寸，只换底色，不弱化 */
+.btn-quiet {
+  margin-top: 20rpx;
+  background: #ffffff;
+  color: #8b5a2b;
+  border: 2rpx solid rgba(139, 90, 43, 0.4);
+}
+
+.actions-hint {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 32rpx;
+  line-height: 1.6;
+  color: #8b7a5b;
+  text-align: center;
+}
+
+.state-box {
+  margin-top: 40rpx;
+  padding: 32rpx 26rpx;
+  background: #fdf8ee;
+  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border-radius: 16rpx;
+}
+
+.state-text {
+  display: block;
+  font-size: 36rpx;
+  line-height: 1.7;
+  color: #2d241a;
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "偏好画像",
+  "usingComponents": {
+    "empty-state": "../../components/emptyState/emptyState",
+    "loading": "../../components/loading/loading",
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

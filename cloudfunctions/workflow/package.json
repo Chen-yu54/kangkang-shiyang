@@ -1,0 +1,10 @@
+{
+  "name": "workflow",
+  "version": "1.0.0",
+  "description": "扣子工作流转发：持 token、校验 code、二次 parse，前端零密钥",
+  "main": "index.js",
+  "dependencies": {},
+  "engines": {
+    "node": ">=16"
+  }
+}

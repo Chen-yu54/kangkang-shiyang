@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "康康食养AI",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "dish-media": "../../components/dishMedia/dishMedia",
+    "empty-state": "../../components/emptyState/emptyState",
+    "loading": "../../components/loading/loading",
+    "disclaimer": "../../components/disclaimer/disclaimer",
+    "guide-tour": "../../components/guideTour/guideTour"
+  }
+}

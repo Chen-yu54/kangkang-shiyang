@@ -1,0 +1,332 @@
+<!-- page-meta 必须是页面第一个节点，一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page {{elderMode ? 'elder' : ''}}">
+  <view class="content">
+
+    <!-- ===== 食养视图：按作答推荐 + 推荐过程可视化 ===== -->
+    <block wx:if="{{view === 'nutrition'}}">
+
+      <!-- 时辰问候条（自推荐页移入）：按本地时间六档变色，问候语 + 时辰饮食场景 + 节气信息；
+           图标为纯 CSS 动效（日出/太阳/灯笼/月亮），已登录带昵称。 -->
+      <view wx:if="{{greeting}}" class="daypart" style="{{greeting.style}}">
+        <view class="dp-icon dp-{{greeting.icon}}" aria-hidden="true">
+          <view wx:if="{{greeting.icon === 'sunrise' || greeting.icon === 'sun' || greeting.icon === 'sunlow'}}" class="dp-rays"></view>
+          <view wx:if="{{greeting.icon === 'sunrise' || greeting.icon === 'sun' || greeting.icon === 'sunlow'}}" class="dp-sun-core"></view>
+          <block wx:if="{{greeting.icon === 'lantern'}}">
+            <view class="dp-lantern-cap"></view>
+            <view class="dp-lantern-body"></view>
+          </block>
+          <block wx:if="{{greeting.icon === 'moon'}}">
+            <view class="dp-moon"></view>
+            <view class="dp-star dp-star-1"></view>
+            <view class="dp-star dp-star-2"></view>
+          </block>
+        </view>
+        <view class="dp-texts">
+          <view class="dp-greet-line">
+            <text class="dp-greet">{{greeting.greet}}</text>
+            <text wx:if="{{greeting.nick}}" class="dp-nick">，{{greeting.nick}}</text>
+          </view>
+          <view class="dp-sub-line">
+            <text class="dp-sub">{{greeting.tip}}</text>
+            <text wx:if="{{greeting.termText}}" class="dp-sep">·</text>
+            <text wx:if="{{greeting.termText}}" class="dp-sub">{{greeting.termText}}</text>
+            <text wx:if="{{greeting.nextText}}" class="dp-sep">·</text>
+            <text wx:if="{{greeting.nextText}}" class="dp-next">{{greeting.nextText}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 今日食单：壹 口味 → 贰 推演 → 叁 今日菜，一张卡里按顺序走完。
+           原先是「偏好卡 / 推荐卡 / 生成入口卡」三张并列，测试、生成、结果各在各的卡里，
+           用户得自己在脑子里把三块拼起来；现在按 壹贰叁 排成一条流，先后关系一眼可见。 -->
+      <view class="flow">
+        <view class="flow-head">
+          <text class="flow-title">{{copy.flowTitle}}</text>
+          <text class="flow-term">{{termName}}</text>
+        </view>
+
+        <!-- 壹 · 口味：答过就显示摘要，没答过就地给入口（未作答时这一屏只有这一段，
+             所以竖导轨也不往下画，避免留一截悬空的线） -->
+        <view id="tour-quiz" class="flow-step">
+          <view class="flow-rail">
+            <text class="flow-no">壹</text>
+            <view wx:if="{{profile.answered}}" class="flow-thread"></view>
+          </view>
+          <view class="flow-body">
+            <view class="flow-step-head">
+              <text class="flow-step-title">{{copy.stepTaste}}</text>
+              <text
+                wx:if="{{profile.answered}}"
+                class="flow-link"
+                hover-class="tap-hover"
+                bindtap="onStartQuiz"
+              >{{copy.redoQuiz}}</text>
+            </view>
+
+            <view wx:if="{{profile.answered}}" class="flow-chips">
+              <view class="flow-chip">
+                <text class="flow-chip-label">{{copy.profileTaste}}</text>
+                <text class="flow-chip-value">{{profile.tasteText}}</text>
+              </view>
+              <view class="flow-chip">
+                <text class="flow-chip-label">{{copy.profileAvoid}}</text>
+                <text class="flow-chip-value">{{profile.avoidText}}</text>
+              </view>
+            </view>
+
+            <!-- 没答过：问卷入口占整行，别做成一行小字——这一页的第一步就是它 -->
+            <view wx:else class="flow-quiz" hover-class="tap-hover" bindtap="onStartQuiz">
+              <view class="flow-quiz-main">
+                <text class="flow-quiz-title">{{copy.quizBig}}</text>
+                <text class="flow-quiz-sub">{{copy.quizSub}}</text>
+              </view>
+              <text class="flow-quiz-arrow">›</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 贰 · 推演：做完问卷回到这一页就地演，不另开页。
+             一条条落定 → 转圈等出单 → 下面直接铺今日食单。
+             没做问卷时整段不出现——这一屏只留「做一次口味问卷」一件事。 -->
+        <view wx:if="{{profile.answered}}" class="flow-step">
+          <view class="flow-rail">
+            <text class="flow-no">贰</text>
+          </view>
+          <view class="flow-body">
+            <view class="flow-step-head">
+              <text class="flow-step-title">{{copy.stepGen}}</text>
+              <text wx:if="{{genPhase === 'running'}}" class="flow-badge flow-badge-live">{{copy.genRunning}}</text>
+            </view>
+
+            <!-- 没开始（作答过但还没推演）：说明 + 主按钮 -->
+            <block wx:if="{{genPhase === 'idle'}}">
+              <text class="flow-note">{{copy.genDesc}}</text>
+              <view class="flow-cta" hover-class="tap-hover" bindtap="onRunGen">
+                <text class="flow-cta-text">{{copy.genTitle}}</text>
+                <text class="flow-cta-arrow">›</text>
+              </view>
+            </block>
+
+            <!-- 推演中：轨迹就地一步一步出来，末尾转圈等配菜 -->
+            <block wx:elif="{{genPhase === 'running'}}">
+              <view class="trace">
+                <view class="trace-step" wx:for="{{shownSteps}}" wx:key="no">
+                  <view class="trace-mark">
+                    <view wx:if="{{item.state === 'running'}}" class="trace-live"></view>
+                    <text wx:else class="trace-tick">✓</text>
+                  </view>
+                  <view class="trace-main">
+                    <text class="trace-title">{{item.title}}</text>
+                    <text
+                      wx:for="{{item.lines}}"
+                      wx:for-item="line"
+                      wx:key="*this"
+                      class="trace-line"
+                    >{{line}}</text>
+                  </view>
+                </view>
+
+                <view class="trace-wait">
+                  <view class="trace-spin"></view>
+                  <view class="trace-wait-texts">
+                    <text class="trace-wait-title">{{genWait ? copy.genMixing : copy.genThinking}}</text>
+                    <text wx:if="{{!genWait}}" class="trace-wait-sub">{{progressText}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+
+            <!-- 出单了：一行摘要 + 重推入口 -->
+            <block wx:else>
+              <text class="flow-note">{{copy.genSummary}}</text>
+              <text wx:if="{{genNote}}" class="flow-note flow-note-quiet">{{genNote}}</text>
+              <view class="flow-cta flow-cta-ghost" hover-class="tap-hover" bindtap="onRunGen">
+                <text class="flow-cta-text">{{copy.genAgain}}</text>
+                <text class="flow-cta-arrow">›</text>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- 叁 · 今日食单：推演出来的菜就地铺开，不跳页。
+           菜一道一卡，下面接节气食养小贴士 + 节气养生提醒（不写节气文化）。
+           没推演到 done 之前整块不出现，避免「没作答却有当令提醒」。 -->
+      <view wx:if="{{genPhase === 'done'}}" class="result">
+        <view class="result-head">
+          <text class="result-no">叁</text>
+          <view class="result-head-main">
+            <text class="result-title">{{copy.resultTitle}}</text>
+            <text class="result-sub">{{termName}} · {{resultDishes.length}} 道</text>
+          </view>
+        </view>
+
+        <view
+          class="rdish"
+          wx:for="{{resultDishes}}"
+          wx:key="index"
+          data-id="{{item.id}}"
+          hover-class="{{item.id ? 'tap-hover' : 'none'}}"
+          bindtap="onTapResultDish"
+        >
+          <view class="rdish-cover">
+            <image wx:if="{{item.image}}" class="rdish-img" src="{{item.image}}" mode="aspectFill" />
+            <view wx:else class="rdish-img rdish-img-none">
+              <text class="rdish-seal">{{item.name[0]}}</text>
+            </view>
+            <text wx:if="{{item.imgNote}}" class="rdish-img-note">{{item.imgNote}}</text>
+          </view>
+
+          <view class="rdish-body">
+            <view class="rdish-head">
+              <text class="rdish-no">{{index + 1}}</text>
+              <text class="rdish-name">{{item.name}}</text>
+              <text class="rdish-tag {{item.isSeasonal ? 'rdish-tag-on' : ''}}">{{item.isSeasonal ? copy.tagSeasonal : copy.tagYearRound}}</text>
+            </view>
+            <text wx:if="{{item.metaText}}" class="rdish-meta">{{item.metaText}}</text>
+            <text wx:if="{{item.howText}}" class="rdish-how">{{item.howText}}</text>
+            <text wx:if="{{item.whyText}}" class="rdish-why">{{copy.whyLabel}} · {{item.whyText}}</text>
+            <text wx:if="{{item.id}}" class="rdish-open">{{copy.dishOpen}} ›</text>
+            <text wx:else class="rdish-nodetail">{{copy.noDetail}}</text>
+          </view>
+        </view>
+
+        <!-- 节气食养小贴士：每节气 3 条，怎么挑 / 怎么配 / 怎么下锅 -->
+        <view wx:if="{{termTips.length}}" class="rblock">
+          <view class="rblock-head">
+            <image class="rblock-ico" src="/images/ill-tips-food.png" mode="aspectFit" />
+            <text class="rblock-title">{{copy.tipsTitle}}</text>
+          </view>
+          <view class="rtip" wx:for="{{termTips}}" wx:key="title">
+            <text class="rtip-k">{{item.title}}</text>
+            <text class="rtip-v">{{item.text}}</text>
+          </view>
+        </view>
+
+        <!-- 节气养生提醒：气候特征 + 今天怎么喝 + 当令吃什么 + 起居 -->
+        <view wx:if="{{health}}" class="rblock">
+          <view class="rblock-head">
+            <image class="rblock-ico" src="/images/ill-tips-term.png" mode="aspectFit" />
+            <text class="rblock-title">{{copy.healthTitle}}</text>
+          </view>
+          <text wx:if="{{health.climate}}" class="rblock-lead">{{health.climate}}</text>
+          <view class="rtip" wx:for="{{health.items}}" wx:key="k">
+            <text class="rtip-k">{{item.k}}</text>
+            <text class="rtip-v">{{item.v}}</text>
+          </view>
+        </view>
+
+        <text class="rnotice">{{copy.notice}}</text>
+      </view>
+
+      <!-- 按菜系浏览入口：长辈模式下收起，这一页只留「今日食单」一条线 -->
+      <view wx:if="{{!elderMode}}" class="nut-browse" hover-class="tap-hover" bindtap="onSwitchBrowse">
+        <text class="nut-browse-text">{{copy.browseEntry}}</text>
+      </view>
+    </block>
+
+    <!-- ===== 菜系浏览视图（原菜单内容） ===== -->
+    <block wx:else>
+      <view class="browse-back" hover-class="tap-hover" bindtap="onSwitchNutrition">
+        <text class="browse-back-text">{{copy.browseBack}}</text>
+      </view>
+
+    <view class="masthead">
+      <text class="masthead-title">{{copy.masthead}}</text>
+      <text class="masthead-no">{{copy.mastheadNo}}</text>
+    </view>
+
+    <cuisine-tab list="{{cuisines}}" current="{{current}}" bind:change="onCuisineChange" />
+
+    <!-- 风味卡：技法与搭配提示（来自知识库品类总览卡） -->
+    <view wx:if="{{currentCard}}" class="flavor-card">
+      <view class="flavor-head">
+        <text class="flavor-name">{{currentCard.name}}</text>
+        <text class="flavor-region">{{currentCard.region}}</text>
+      </view>
+      <text wx:if="{{currentCard.style}}" class="flavor-style">{{currentCard.style}}</text>
+      <view wx:if="{{currentCard.risk}}" class="flavor-risk">
+        <text class="flavor-risk-label">{{copy.riskLabel}}</text>
+        <text class="flavor-risk-text">{{currentCard.risk}}</text>
+      </view>
+    </view>
+    <!-- 左：节气分类（按四季分组，竖向滑动）｜右：菜品列表 -->
+    <view class="layout">
+
+      <scroll-view class="side" scroll-y enhanced show-scrollbar="{{false}}">
+        <view
+          class="side-item {{currentTerm === '' ? 'side-on' : ''}}"
+          data-name=""
+          hover-class="side-hover"
+          bindtap="onTapTerm"
+        >
+          <text class="side-text">{{copy.all}}</text>
+        </view>
+
+        <block wx:for="{{seasons}}" wx:key="key" wx:for-item="season">
+          <view class="season-label">
+            <view class="season-dot" style="background-color: {{season.color}}"></view>
+            <text class="season-text" style="color: {{season.color}}">{{season.label}}</text>
+          </view>
+
+          <view
+            class="side-item {{currentTerm === term.name ? 'side-on' : ''}}"
+            wx:for="{{season.terms}}"
+            wx:key="name"
+            wx:for-item="term"
+            data-name="{{term.name}}"
+            hover-class="side-hover"
+            bindtap="onTapTerm"
+          >
+            <view class="side-bar" wx:if="{{currentTerm === term.name}}" style="background-color: {{season.color}}"></view>
+            <text class="side-text">{{term.name}}</text>
+          </view>
+        </block>
+      </scroll-view>
+
+      <scroll-view class="main" scroll-y enhanced show-scrollbar="{{false}}">
+        <loading wx:if="{{status === 'loading'}}" type="skeleton" />
+
+        <empty-state
+          wx:elif="{{status === 'empty'}}"
+          text="{{copy.empty}}"
+          actionText="{{emptyAction}}"
+          bind:action="onEmptyAction"
+        />
+
+        <view wx:elif="{{status === 'error'}}" class="state-box">
+          <text class="state-text">{{copy.error}}</text>
+          <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+        </view>
+
+        <block wx:else>
+          <text class="count-text">{{countText}}</text>
+          <dish-card
+            wx:for="{{list}}"
+            wx:key="id"
+            dish="{{item}}"
+            showTerm="{{false}}"
+            faved="{{item.faved}}"
+            bind:cardtap="onTapDish"
+            bind:favoritetap="onFavoriteTap"
+          />
+        </block>
+      </scroll-view>
+    </view>
+    </block>
+  </view>
+
+  <disclaimer />
+
+  <!-- 登录后的功能引导：跨三页走，进度在 app.globalData.tour -->
+  <guide-tour
+    visible="{{tourVisible}}"
+    step="{{tourStep}}"
+    index="{{tourIndex}}"
+    total="{{tourTotal}}"
+    bind:next="onTourNext"
+    bind:skip="onTourSkip"
+  />
+</view>

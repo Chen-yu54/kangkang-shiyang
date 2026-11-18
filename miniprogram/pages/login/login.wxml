@@ -1,0 +1,117 @@
+<!-- pages/login/login.wxml —— 登录页：一个标志、一句话、一个按钮 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="lg">
+  <!-- 纸面上的暖光：让米黄底不至于死平 -->
+  <view class="lg-glow" aria-hidden="true"></view>
+
+  <!-- 从「我的」进来时才有返回 -->
+  <view wx:if="{{showBack}}" class="lg-back" hover-class="tap-hover" bindtap="onBack">
+    <text class="lg-back-text">‹</text>
+  </view>
+
+  <view class="lg-top" style="padding-top: {{safeTop}}px;">
+    <!-- 品牌区：圆形标志 + 名字 + 一句口号 -->
+    <view class="lg-brand">
+      <view class="lg-logo-ring">
+        <image class="lg-logo" src="/images/brand-logo.jpg" mode="aspectFill" />
+      </view>
+      <text class="lg-name">{{copy.brand}}</text>
+      <text class="lg-slogan">{{copy.slogan}}</text>
+    </view>
+
+    <!-- 一句话交代这个应用干什么，别让人靠猜 -->
+    <view class="lg-points">
+      <view class="lg-point">
+        <text class="lg-point-no">壹</text>
+        <text class="lg-point-text">按二十四节气，看这个时节该吃什么</text>
+      </view>
+      <view class="lg-point">
+        <text class="lg-point-no">贰</text>
+        <text class="lg-point-text">广府、潮汕、客家三系当令菜，共 288 道</text>
+      </view>
+      <view class="lg-point">
+        <text class="lg-point-no">叁</text>
+        <text class="lg-point-text">答六道口味题，排一份今日食单</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="lg-fill"></view>
+
+  <!-- 操作区：一个主按钮，协议一行，游客入口一行 -->
+  <view class="lg-bottom">
+    <view class="lg-btn" hover-class="lg-btn-hover" bindtap="onWxLogin">
+      <text class="lg-btn-text">{{copy.wxLogin}}</text>
+    </view>
+
+    <view class="lg-agree">
+      <text class="lg-agree-text">{{copy.agreeLine}}</text>
+      <text class="lg-link" hover-class="tap-hover" bindtap="onOpenService">《{{copy.serviceName}}》</text>
+      <text class="lg-link" hover-class="tap-hover" bindtap="onOpenPrivacy">《{{copy.privacyName}}》</text>
+    </view>
+
+    <view class="lg-skip" hover-class="tap-hover" bindtap="onSkip">
+      <text class="lg-skip-text">{{copy.skip}} ›</text>
+    </view>
+
+    <!-- 字号档位：视力不好的用户不必先登录再找设置 -->
+    <view class="lg-font">
+      <text class="lg-font-label">{{copy.fontScale}}</text>
+      <view class="lg-font-opts">
+        <text
+          wx:for="{{fontOptions}}"
+          wx:key="value"
+          class="lg-font-opt {{fontScale === item.value ? 'lg-font-on' : ''}}"
+          data-value="{{item.value}}"
+          bindtap="onTapFont"
+        >{{item.label}}</text>
+      </view>
+    </view>
+
+    <text class="lg-foot">{{copy.foot}}</text>
+  </view>
+</view>
+
+<!-- ===== 微信登录弹层：头像 + 昵称，只存本机 ===== -->
+<view wx:if="{{authVisible}}" class="auth-mask" bindtap="onCloseAuth">
+  <view class="auth-sheet" catchtap="noop">
+    <view class="auth-bar"></view>
+
+    <text class="auth-title">{{copy.authTitle}}</text>
+    <text class="auth-sub">{{copy.authSub}}</text>
+
+    <view class="auth-who">
+      <button class="auth-avatar" open-type="chooseAvatar" hover-class="tap-hover" bindchooseavatar="onChooseAvatar">
+        <image class="auth-avatar-img" src="{{avatarUrl || '/images/avatar-default.png'}}" mode="aspectFill" />
+        <text class="auth-avatar-hint">{{copy.whoHint}}</text>
+      </button>
+
+      <view class="auth-nick-box">
+        <text class="auth-nick-label">{{copy.nickLabel}}</text>
+        <input
+          class="auth-nick"
+          type="nickname"
+          maxlength="16"
+          value="{{nickName}}"
+          placeholder="{{copy.nickPlaceholder}}"
+          placeholder-class="auth-nick-ph"
+          bindinput="onNickInput"
+        />
+      </view>
+    </view>
+
+    <view class="auth-agree" hover-class="tap-hover" bindtap="onToggleAgree">
+      <view class="auth-cb {{agreed ? 'auth-cb-on' : ''}}">
+        <text wx:if="{{agreed}}" class="auth-cb-tick">✓</text>
+      </view>
+      <text class="auth-agree-text">{{copy.agreePre}}《{{copy.serviceName}}》《{{copy.privacyName}}》</text>
+    </view>
+
+    <view class="auth-submit" hover-class="lg-btn-hover" bindtap="onConfirmLogin">
+      <text class="auth-submit-text">{{copy.authConfirm}}</text>
+    </view>
+
+    <text class="auth-note">{{copy.note}}</text>
+  </view>
+</view>

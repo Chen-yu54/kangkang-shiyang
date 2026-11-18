@@ -1,0 +1,42 @@
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+    <text class="doc-title">{{title}}</text>
+    <text class="doc-lead">{{lead}}</text>
+
+    <view class="doc-sec" wx:for="{{sections}}" wx:key="h" wx:for-item="sec">
+      <text class="doc-h">{{sec.h}}</text>
+
+      <text class="doc-p" wx:for="{{sec.p}}" wx:key="*this" wx:for-item="para">{{para}}</text>
+
+      <!-- 指标表：目标 / 判定 / 当前达成值分列，不合并成一句「准确率 99%」 -->
+      <view wx:if="{{sec.metrics.length}}" class="m-list">
+        <view class="m-card" wx:for="{{sec.metrics}}" wx:key="id" wx:for-item="m">
+          <view class="m-head">
+            <text class="m-id">{{m.id}}</text>
+            <text class="m-name">{{m.name}}</text>
+          </view>
+          <view class="m-row">
+            <text class="m-key">目标</text>
+            <text class="m-val">{{m.target}}</text>
+          </view>
+          <view class="m-row">
+            <text class="m-key">判定</text>
+            <text class="m-val">{{m.judge}}</text>
+          </view>
+          <view class="m-row">
+            <text class="m-key">当前</text>
+            <text class="m-val m-val-strong">{{m.value}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <text class="doc-foot">{{footnote}}</text>
+
+    <!-- 指标页也要挂声明条：这里的「目标 / 判定 / 当前」是口径说明，
+         不是效果承诺，页面底部必须能读到这句。 -->
+    <disclaimer />
+  </view>
+</view>

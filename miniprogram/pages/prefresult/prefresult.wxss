@@ -1,0 +1,128 @@
+/* pages/prefresult/prefresult.wxss —— 偏好画像结果页样式，全部取 app.wxss 的 CSS 变量 */
+
+.notice {
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid var(--color-brand);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.notice-text {
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.section {
+  margin-top: 32rpx;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.section-hint {
+  display: block;
+  margin-bottom: 16rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 16rpx 28rpx;
+  margin: 0 12rpx 12rpx 0;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  font-size: var(--font-base);
+  color: var(--color-ink);
+  box-sizing: border-box;
+}
+
+.chip-tag {
+  border-color: var(--color-brand);
+}
+
+/* 开关行：整行高度保证 ≥ 88rpx，点击区不靠 switch 本身 */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--tap-min);
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.switch-label {
+  flex: 1;
+  margin-right: 16rpx;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.data-box {
+  padding: 24rpx;
+  margin-top: 16rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+}
+
+.data-line {
+  display: block;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.btn-danger {
+  border-color: var(--color-ink);
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* —— 画像标签：标签 + 一句说明 —— */
+.tag-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  padding: 12rpx 0;
+}
+
+.tag-chip {
+  flex: none;
+  margin-right: 16rpx;
+  padding: 6rpx 18rpx;
+  border: 2rpx solid rgba(139, 90, 43, 0.28);
+  border-radius: 8rpx;
+  background-color: rgba(139, 90, 43, 0.05);
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  letter-spacing: 0.04em;
+  color: var(--color-brand-deep);
+  box-sizing: border-box;
+}
+
+.tag-desc {
+  flex: 1;
+  min-width: 320rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}

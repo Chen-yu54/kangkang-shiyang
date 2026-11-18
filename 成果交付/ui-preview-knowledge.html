@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>知识库 → 界面 映射预览</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e9e2d3; font-family: -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+         color: #3d2b1a; padding: 32px 16px 64px; }
+  .head { max-width: 1000px; margin: 0 auto 22px; }
+  .head h1 { font-size: 17px; font-weight: 600; }
+  .head p { font-size: 12.5px; color: #7a6a52; margin-top: 8px; line-height: 1.8; }
+  .row { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+  .cell { width: 375px; }
+  .ct { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .cd { font-size: 11.5px; color: #8a7a60; margin-bottom: 8px; }
+  .frame { width: 375px; height: 660px; background: #f7f0e1; border: 1px solid #d9c39c; border-radius: 18px;
+           overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(90,60,30,.12); }
+  .nav { height: 44px; flex: none; display: flex; align-items: center; justify-content: center;
+         font-size: 16px; font-weight: 600; border-bottom: 1px solid #ecdfc2; }
+  .scroll { flex: 1; overflow-y: auto; padding: 12px; }
+  .scroll::-webkit-scrollbar { width: 0; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+  .tab { flex: 1; height: 34px; display: flex; align-items: center; justify-content: center;
+         font-size: 11.5px; border: 1px solid #e6d7b8; border-radius: 17px; background: #fbf7ea; color: #5a4630; }
+  .tab.on { border-color: #8b5a2b; font-weight: 600; color: #5a3a1e; }
+  .flavor { padding: 14px; border: 1px solid #ecdfc2; border-radius: 16px; background: #fbf7ea; margin-bottom: 12px; }
+  .fhead { display: flex; justify-content: space-between; align-items: baseline; }
+  .fname { font-family: "Songti SC","SimSun",serif; font-size: 20px; font-weight: 700; color: #5a3a1e; }
+  .fregion { font-size: 11px; color: #8a7458; }
+  .fstyle { font-size: 13px; line-height: 1.7; color: #4a3826; margin-top: 6px; }
+  .frisk { margin-top: 10px; padding-top: 10px; border-top: 1px solid #ecdfc2; }
+  .frisk b { display: block; font-size: 11px; color: #8a7458; margin-bottom: 4px; }
+  .frisk span { font-size: 12.5px; line-height: 1.65; color: #4a3826; }
+  .label { font-size: 13px; font-weight: 600; margin: 16px 0 6px; }
+  .hint { font-size: 11px; color: #8a7458; margin-bottom: 8px; }
+  .dname { font-family: "Songti SC","SimSun",serif; font-size: 26px; font-weight: 700; color: #5a3a1e; }
+  .list { border-top: 1px solid #ecdfc2; }
+  .irow { display: flex; align-items: baseline; justify-content: space-between; min-height: 42px;
+          padding: 8px 0; border-bottom: 1px solid #ecdfc2; }
+  .iname { flex: 1; font-size: 14px; }
+  .inature { font-size: 13px; color: #5a4630; margin: 0 12px; }
+  .iprice { font-size: 13px; color: #5a3a1e; }
+  .disc { flex: none; margin: 0 10px 10px; padding: 9px 11px; background: #e8f1e4;
+          border: 1px solid #d7e7d1; border-radius: 13px; display: flex; align-items: center; gap: 8px; }
+  .ico { width: 18px; height: 18px; border-radius: 50%; background: #3f7a45; color: #fff;
+         font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; }
+  .disc span { font-size: 10.5px; line-height: 1.5; color: #3a4f38; }
+  .foot { max-width: 1000px; margin: 22px auto 0; font-size: 12px; color: #7a6a52; line-height: 1.85; }
+  .foot b { color: #3d2b1a; }
+</style></head>
+<body>
+  <div class="head">
+    <h1>知识库还有哪些内容没用上 → 现在补上了</h1>
+    <p>左：菜单页新增「风味卡」（技法 + 搭配提示，来自品类总览卡）。右：节气详情的当令食材改为「性味 + 价格档次」表（来自节气卡食材表，功效列不上界）。全部是知识库原文，没有编造。</p>
+  </div>
+
+  <div class="row">
+    <div class="cell">
+      <div class="ct">菜单页 · 风味卡</div>
+      <div class="cd">切风味时同步换卡（当前展示广府菜）</div>
+      <div class="frame">
+        <div class="nav">菜单</div>
+        <div class="scroll">
+          <div class="tabs">
+            <div class="tab">岭南家常</div><div class="tab on">广府菜</div>
+            <div class="tab">潮汕菜</div><div class="tab">客家菜</div>
+          </div>
+          <div class="flavor">
+            <div class="fhead"><span class="fname">广府菜</span><span class="fregion">岭南三大风味之一。覆盖地域：广州、珠三角。</span></div>
+            <div class="fstyle">清鲜爽嫩、重火候（镬气）、老火靓汤、以蒸为主。</div>
+            <div class="frisk"><b>搭配提示</b><span>老火靓汤嘌呤高（痛风/高尿酸慎）；烧腊高盐高脂（高血压、高血脂减量）；腊味制品钠含量高。</span></div>
+          </div>
+          <div class="hint">下方是左侧节气分类 + 右侧列表（略）</div>
+        </div>
+        <div class="disc"><i class="ico">!</i><span>本内容为饮食文化科普，仅供日常饮食参考，不构成医疗建议。</span></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="ct">节气详情 · 食材性味表</div>
+      <div class="cd">霜降的 10 种当令食材</div>
+      <div class="frame">
+        <div class="nav">二十四节气</div>
+        <div class="scroll">
+          <div class="dname">霜降</div>
+          <div class="label">当令食材</div>
+          <div class="hint">性味与价格档次来自知识库食材表，供参考</div>
+          <div class="list">
+  <div class="irow"><span class="iname">雪梨</span><span class="inature">甘寒</span><span class="iprice">★</span></div>
+  <div class="irow"><span class="iname">银耳</span><span class="inature">甘平</span><span class="iprice">★</span></div>
+  <div class="irow"><span class="iname">百合</span><span class="inature">甘微寒</span><span class="iprice">★★</span></div>
+  <div class="irow"><span class="iname">山药</span><span class="inature">甘平</span><span class="iprice">★</span></div>
+  <div class="irow"><span class="iname">栗子</span><span class="inature">甘温</span><span class="iprice">★</span></div>
+  <div class="irow"><span class="iname">核桃</span><span class="inature">甘温</span><span class="iprice">★★</span></div>
+  <div class="irow"><span class="iname">白萝卜</span><span class="inature">辛甘凉</span><span class="iprice">★</span></div>
+  <div class="irow"><span class="iname">牛肉</span><span class="inature">甘温</span><span class="iprice">★★★</span></div>
+  <div class="irow"><span class="iname">鸭肉</span><span class="inature">甘咸平</span><span class="iprice">★★</span></div>
+  <div class="irow"><span class="iname">柿子</span><span class="inature">甘涩寒</span><span class="iprice">★</span></div></div>
+        </div>
+        <div class="disc"><i class="ico">!</i><span>本内容为饮食文化科普，仅供日常饮食参考，不构成医疗建议。</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>这一轮用起来的知识库内容</b><br>
+    ① <code>库C/品类总览卡.md</code> → 四张风味卡（定位 / 技法 / 风险点 / 适配），接进菜单页顶部<br>
+    ② <code>库C/节气卡.md</code> 的食材表 → 性味（甘温 / 甘平）+ 价格档次（★～★★★），接进节气详情；<b>功效列整列丢弃</b><br>
+    ③ 节气卡「节气简介」→ 文化简介卡（上一轮已接）<br>
+    ④ <code>solar_term_map.csv</code> → 24 节气日期 + 季节 + 当令食材（上一轮已接）<br>
+    <b>仍未使用（有原因）</b><br>
+    · <code>taboo_rules.csv</code>（禁忌规则表）—— 属判定层，前端自己跑会变成「用系统判系统」，留给 E<br>
+    · <code>库B 药膳库</code> —— 全部待核验，未签署不入推荐池<br>
+    · <code>refs.md</code> 文献索引 —— 已提取到 knowledge，但菜品与 REF 的对应关系知识库未给出，强行映射就是编造<br>
+    · <code>constitution_matrix.csv</code> / 体质卡 —— 字段名与内容都触碰脱敏词，用户端不可用
+  </div>
+</body></html>

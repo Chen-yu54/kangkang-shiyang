@@ -1,0 +1,118 @@
+/* components/guideTour —— 登录后的功能引导：压暗 + 亮圈 + 说明卡 */
+
+.tour {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9000;
+}
+
+/* 稍暗，不是全黑：被圈住的那块要能看清，其余部分也要看得见轮廓 */
+.mask {
+  position: fixed;
+  background-color: rgba(28, 18, 10, 0.62);
+}
+
+.ring {
+  position: fixed;
+  border: 3rpx solid rgba(255, 250, 236, 0.92);
+  border-radius: 20rpx;
+  box-shadow: 0 0 0 2rpx rgba(28, 18, 10, 0.25), 0 0 24rpx rgba(255, 246, 224, 0.35);
+  box-sizing: border-box;
+  animation: ring-breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes ring-breathe {
+  0%, 100% { box-shadow: 0 0 0 2rpx rgba(28, 18, 10, 0.25), 0 0 12rpx rgba(255, 246, 224, 0.28); }
+  50% { box-shadow: 0 0 0 2rpx rgba(28, 18, 10, 0.25), 0 0 32rpx rgba(255, 246, 224, 0.55); }
+}
+
+/* 说明卡：纸底 + 朱砂竖边，和全站同一套纸墨秩序 */
+.tip {
+  position: fixed;
+  padding: 26rpx 26rpx 20rpx;
+  border: 2rpx solid var(--color-border);
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: 0 14rpx 40rpx rgba(24, 16, 10, 0.32);
+  box-sizing: border-box;
+}
+
+.tip-head {
+  display: flex;
+  align-items: baseline;
+}
+
+.tip-no {
+  flex: none;
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  line-height: 1;
+  color: var(--color-flame);
+}
+
+.tip-total {
+  flex: none;
+  margin-left: 4rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.tip-title {
+  flex: 1;
+  min-width: 0;
+  margin-left: 16rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  font-weight: 600;
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+.tip-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.tip-acts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.tip-skip {
+  padding: 14rpx 4rpx;
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}
+
+.tip-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84rpx;
+  padding: 0 34rpx;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-flame);
+}
+
+.tip-next-text {
+  font-size: var(--font-btn);
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: #ffffff;
+}
+
+.tip-next-arrow {
+  margin-left: 8rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-btn);
+  color: rgba(255, 255, 255, 0.85);
+}

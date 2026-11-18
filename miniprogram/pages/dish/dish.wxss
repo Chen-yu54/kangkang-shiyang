@@ -1,0 +1,348 @@
+/* pages/dish/dish.wxss —— 菜品详情页样式，全部取 app.wxss 的 CSS 变量 */
+
+/* 图片位由 dishMedia 渲染：有图显示风味卡，无图显示风味签，两态等高 420rpx */
+.dish-media {
+  margin-bottom: 8rpx;
+}
+
+/* —— AI 生成内容标识 —— */
+.ai-tag {
+  display: block;
+  margin-bottom: 20rpx;
+  font-size: var(--font-btn);
+  text-align: right;
+  color: var(--color-ink-3);
+}
+
+/* —— 证据与出处 —— */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4rpx;
+}
+
+.badge {
+  margin: 0 12rpx 12rpx 0;
+  padding: 8rpx 20rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-soft);
+  font-size: var(--font-btn);
+  color: var(--color-ink-2);
+}
+
+/* 证据等级徽章只做纸底细边，不调色：
+   一红一黄一绿的等级色会被读成「质检结论」，也超出一个主题的三色 */
+.badge-ev {
+  border-color: var(--color-border-soft);
+  background-color: rgba(139, 90, 43, 0.05);
+  color: var(--color-ink-2);
+}
+
+.evidence-note {
+  display: block;
+  margin-top: 4rpx;
+  font-size: var(--font-btn);
+  line-height: 1.7;
+  color: var(--color-ink-3);
+}
+
+.src-toggle {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  margin-top: 8rpx;
+}
+
+.src-toggle-text {
+  font-size: var(--font-btn);
+  color: var(--color-brand-deep);
+  text-decoration: underline;
+}
+
+.src-toggle-ico {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 8rpx;
+}
+
+.src-body {
+  margin-top: 4rpx;
+}
+
+.dish-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.dish-name {
+  flex: 1;
+  font-size: var(--font-title);
+  color: var(--color-ink);
+}
+
+.dish-cost {
+  margin-left: 16rpx;
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.meta-text {
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.meta-dot {
+  width: 16rpx;
+  height: 16rpx;
+  margin: 0 8rpx;
+}
+
+/* 收藏按钮：整行可点，高度 88rpx */
+.fav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 0 32rpx;
+  margin-top: 24rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.fav-btn-on {
+  border-color: var(--color-brand);
+}
+
+.fav-text {
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+}
+
+.section {
+  margin-top: 32rpx;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* 需要留意 / 典籍药膳提示：单行提示条 */
+.notice-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  padding: 16rpx 20rpx;
+  margin-top: 12rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-small);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.notice-key {
+  margin-right: 12rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.notice-val {
+  flex: 1;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.section-body {
+  display: block;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 8rpx 24rpx;
+  margin: 0 12rpx 12rpx 0;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  font-size: var(--font-base);
+  color: var(--color-ink);
+  box-sizing: border-box;
+}
+
+.kv-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  min-height: var(--tap-min);
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.kv-key {
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.kv-val {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* —— 长辈模式：大字下把并排的「菜名 + 花费」「标签行」都改成可折行 —— */
+.elder .dish-head {
+  flex-wrap: wrap;
+}
+
+.elder .dish-cost {
+  margin-left: 0;
+  margin-top: 6rpx;
+}
+
+.elder .meta-row {
+  flex-wrap: wrap;
+}
+
+.elder .badge-row {
+  flex-wrap: wrap;
+}
+
+.elder .kv-row {
+  flex-wrap: wrap;
+}
+
+/* —— 当令由头：一句「为什么这个时节吃它」 —— */
+.why-box {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 20rpx;
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-small);
+  background-color: rgba(181, 72, 42, 0.05);
+  box-sizing: border-box;
+}
+
+.why-term {
+  flex: none;
+  margin-right: 16rpx;
+  padding: 2rpx 12rpx;
+  border: 2rpx solid var(--color-flame);
+  border-radius: 6rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  color: var(--color-flame);
+}
+
+.why-text {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+/* —— 同节气其他菜 —— */
+.rel-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.rel-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88rpx;
+  padding: 0 4rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+}
+
+.rel-name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rel-cuisine {
+  flex: none;
+  margin-left: 16rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+/* 长辈模式：两行折好，不挤在一行 */
+.elder .rel-item {
+  flex-wrap: wrap;
+  padding: 12rpx 4rpx;
+}
+
+.elder .rel-name {
+  flex: 1 1 100%;
+  white-space: normal;
+}
+
+.elder .rel-cuisine {
+  margin-left: 0;
+  margin-top: 4rpx;
+}
+/* 主料芯片可点：进入食材档案（分包页）。
+   点击区 ≥88rpx，右侧加 › 暗示可跳转。 */
+.chip-tap {
+  min-height: 88rpx;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 26rpx;
+  color: #3f7a45;
+  background: #ecf2e6;
+  border: 2rpx solid rgba(63, 122, 69, 0.28);
+  border-radius: 12rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.section-hint {
+  margin-left: 16rpx;
+  font-size: 30rpx;
+  color: #8b7a5b;
+}

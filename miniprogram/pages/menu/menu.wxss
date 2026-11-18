@@ -1,0 +1,1128 @@
+/* pages/menu/menu.wxss —— 菜单页：左侧节气分类 + 右侧列表
+ * 全部取 app.wxss 的 CSS 变量；四季标识色由 JS 通过内联 style 注入（与 --color-spring 等同源）。
+ */
+
+/* —— 两栏布局 —— */
+.layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 左栏：节气分类，竖向滑动 */
+.side {
+  flex: none;
+  width: 180rpx;
+  max-height: 100vh;
+  margin-right: 16rpx;
+  border-right: 2rpx solid var(--color-border-hair);
+  box-sizing: border-box;
+}
+
+/* 右栏：菜品列表 */
+.main {
+  flex: 1;
+  max-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* —— 左栏条目 —— */
+.side-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx; /* 点击区下限 */
+  padding: 8rpx 12rpx;
+  box-sizing: border-box;
+}
+
+.side-hover {
+  opacity: 0.7;
+}
+
+.side-on {
+  background-color: var(--color-bg-soft);
+  border-radius: var(--radius-small);
+}
+
+.side-on .side-text {
+  font-weight: 600;
+  color: var(--color-brand-deep);
+}
+
+.side-text {
+  font-size: var(--font-base);
+  line-height: 1.4;
+  color: var(--color-ink-3);
+  text-align: center;
+}
+
+/* 选中态的左侧竖条：颜色由所属季节注入 */
+.side-bar {
+  position: absolute;
+  left: 0;
+  top: 20rpx;
+  bottom: 20rpx;
+  width: 6rpx;
+  border-radius: 3rpx;
+}
+
+/* —— 四季分组标题 —— */
+.season-label {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 12rpx 8rpx;
+}
+
+.season-dot {
+  width: 12rpx;
+  height: 12rpx;
+  margin-right: 8rpx;
+  border-radius: 50%;
+}
+
+.season-text {
+  font-size: var(--font-btn);
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+/* —— 右栏内容 —— */
+/* 结果计数（数字来自当前列表条数，可当场复算） */
+.count-text {
+  display: block;
+  margin-bottom: 16rpx;
+  font-size: var(--font-base);
+  color: var(--color-ink-3);
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* —— 风味卡：技法 + 搭配提示 —— */
+.flavor-card {
+  padding: 20rpx 24rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.flavor-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.flavor-name {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  color: var(--color-brand-deep);
+}
+
+.flavor-region {
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}
+
+.flavor-style {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.flavor-risk {
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 2rpx solid var(--color-border-hair);
+}
+
+.flavor-risk-label {
+  display: block;
+  margin-bottom: 4rpx;
+  font-size: var(--font-btn);
+  font-weight: 600;
+  color: var(--color-ink-3);
+}
+
+.flavor-risk-text {
+  display: block;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+/* —— 食养视图：时辰问候条（自推荐页移入） / 画像卡 / 推荐过程 / 节气文化卡 ——
+   全部用 token，不写死字号色值；正文 ≥36rpx，点击区 ≥88rpx。 */
+
+/* ==================== 今日食单：一条流（口味 → 推演 → 三道菜） ====================
+ * 原先是三张并列卡，各说各的；现在一张卡、三段、左侧导轨编号 壹贰叁，
+ * 把「先测口味、再推演、最后出菜」的先后关系画出来。 */
+.flow {
+  padding: 28rpx 26rpx 8rpx;
+  margin-bottom: 22rpx;
+  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border-radius: 28rpx;
+  background-image: linear-gradient(168deg, #fffdf8 0%, #fbf4e3 100%);
+  box-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.06);
+  box-sizing: border-box;
+}
+
+.flow-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 18rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+}
+
+.flow-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+.flow-term {
+  font-size: var(--font-caption);
+  letter-spacing: 0.16em;
+  color: var(--color-ink-3);
+}
+
+/* 一段 = 左导轨（序号 + 竖线）+ 右内容 */
+.flow-step {
+  display: flex;
+  padding-top: 24rpx;
+}
+
+.flow-rail {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 56rpx;
+  margin-right: 20rpx;
+}
+
+.flow-no {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44rpx;
+  height: 44rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-bg-soft);
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  text-align: center;
+  color: var(--color-ink-3);
+  box-sizing: border-box;
+}
+
+/* 竖线：最后一段不画，避免悬空 */
+.flow-thread {
+  flex: 1;
+  width: 2rpx;
+  margin: 8rpx 0 0;
+  background-image: linear-gradient(
+    180deg,
+    var(--color-border) 0%,
+    var(--color-border-hair) 100%
+  );
+}
+
+.flow-body {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 24rpx;
+}
+
+.flow-step-last .flow-body {
+  padding-bottom: 20rpx;
+}
+
+.flow-step-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flow-step-title {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* 段内小动作（去测 / 重测）：不下沉成整颗按钮，别抢主按钮的位置 */
+.flow-link {
+  flex: none;
+  margin-left: auto;
+  padding: 8rpx 0;
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+  border-bottom: 2rpx solid currentColor;
+}
+
+.flow-note {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+/* 问卷入口（壹 · 口味，没答过时）：整行按钮，比「生成今日食单」轻一档，
+   用朱砂描边而不是深色实底——先答问卷，再谈生成。 */
+.flow-quiz {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 104rpx;
+  margin-top: 14rpx;
+  padding: 16rpx 22rpx;
+  border: 2rpx solid var(--color-flame);
+  border-radius: var(--radius-card);
+  background-color: rgba(181, 72, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.flow-quiz-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.flow-quiz-title {
+  display: block;
+  font-size: var(--font-base);
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: var(--color-flame);
+}
+
+.flow-quiz-sub {
+  display: block;
+  margin-top: 4rpx;
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+.flow-quiz-arrow {
+  flex: none;
+  margin-left: 12rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  color: var(--color-flame);
+}
+
+.flow-chips {
+  display: flex;
+  margin-top: 12rpx;
+}
+
+.flow-chip {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  margin-right: 16rpx;
+  padding: 12rpx 16rpx;
+  border-left: 4rpx solid var(--color-flame);
+  border-radius: 8rpx;
+  background-color: rgba(139, 90, 43, 0.05);
+  box-sizing: border-box;
+}
+
+.flow-chip:last-child {
+  margin-right: 0;
+}
+
+.flow-chip-label {
+  flex: none;
+  margin-right: 10rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.flow-chip-value {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 主推进：整宽描金按钮，只在「推演」这一段出现一次 */
+.flow-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  margin-top: 16rpx;
+  border-radius: var(--radius-card);
+  background-image: linear-gradient(140deg, #2a1c13 0%, #1a120c 100%);
+  box-shadow: 0 8rpx 20rpx rgba(34, 23, 18, 0.18);
+}
+
+.flow-cta-text {
+  font-size: var(--font-base);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-on-night);
+}
+
+.flow-cta-arrow {
+  margin-left: 10rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  color: rgba(226, 195, 140, 0.9);
+}
+
+/* 幽态：已有结果时的「重新推演」，降成描边小按钮，不抢三道菜的位置 */
+.flow-cta-ghost {
+  min-height: 64rpx;
+  background-image: none;
+  background-color: transparent;
+  border: 2rpx solid var(--color-border);
+  box-shadow: none;
+}
+
+.flow-cta-ghost .flow-cta-text {
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.flow-cta-ghost .flow-cta-arrow {
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.flow-badge {
+  flex: none;
+  white-space: nowrap;
+  margin-left: 12rpx;
+  min-width: 40rpx;
+  padding: 2rpx 12rpx;
+  border-radius: var(--radius-pill);
+  background-color: rgba(139, 90, 43, 0.08);
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-ink-3);
+  box-sizing: border-box;
+}
+
+/* 「未生成」：描边不填色，和道数徽章区分开，别看成「0 道」 */
+.flow-badge-off {
+  padding: 0 10rpx;
+  background-color: transparent;
+  border: 2rpx solid var(--color-border-hair);
+  line-height: 1.4;
+  color: rgba(90, 70, 48, 0.55);
+}
+
+/* 切换入口 */
+.nut-browse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  margin-bottom: 20rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-bg-soft);
+}
+
+.nut-browse-text {
+  font-size: var(--font-base);
+  color: var(--color-ink-2);
+}
+
+.browse-back {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  margin-bottom: 12rpx;
+}
+
+.browse-back-text {
+  font-size: var(--font-base);
+  color: var(--color-flame);
+}
+
+
+/* ==================== 0. 时辰问候条 ====================
+ * 背景渐变/文字色由 daypart.js 内联 style 注入（六时段六套配色），
+ * 这里只负责布局与四种图标的纯 CSS 动效。 */
+.daypart {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 22rpx 28rpx;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-deep);
+}
+
+.dp-icon {
+  position: relative;
+  flex: none;
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 22rpx;
+}
+
+/* —— 太阳族（日出 / 正午 / 午后）：内芯 + 旋转光芒环 —— */
+.dp-sun-core {
+  position: absolute;
+  left: 18rpx;
+  top: 18rpx;
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 246, 220, 0.95);
+  box-shadow: 0 0 16rpx rgba(255, 236, 190, 0.8);
+}
+
+.dp-rays {
+  position: absolute;
+  left: 6rpx;
+  top: 6rpx;
+  width: 52rpx;
+  height: 52rpx;
+  border: 4rpx dashed rgba(255, 246, 220, 0.75);
+  border-radius: 50%;
+  animation: dp-spin 14s linear infinite;
+}
+
+/* 日出：只露上半轮（底部被地平线裁掉） */
+.dp-sunrise .dp-sun-core {
+  top: 32rpx;
+  border-radius: 28rpx 28rpx 0 0;
+  height: 16rpx;
+}
+
+.dp-sunrise .dp-rays {
+  left: 10rpx;
+  top: 26rpx;
+  width: 44rpx;
+  height: 22rpx;
+  border-bottom: none;
+  border-radius: 44rpx 44rpx 0 0;
+}
+
+/* 午后：太阳偏西下沉，光弱一档 */
+.dp-sunlow .dp-sun-core {
+  top: 26rpx;
+  background-color: rgba(255, 224, 190, 0.9);
+  box-shadow: 0 0 12rpx rgba(255, 210, 160, 0.6);
+}
+
+.dp-sunlow .dp-rays {
+  top: 14rpx;
+  border-color: rgba(255, 224, 190, 0.55);
+}
+
+/* —— 灯笼：上下帽 + 灯身，暖光呼吸 —— */
+.dp-lantern-cap {
+  position: absolute;
+  left: 22rpx;
+  top: 6rpx;
+  width: 20rpx;
+  height: 6rpx;
+  border-radius: 3rpx;
+  background-color: rgba(255, 226, 180, 0.85);
+}
+
+.dp-lantern-body {
+  position: absolute;
+  left: 14rpx;
+  top: 14rpx;
+  width: 36rpx;
+  height: 42rpx;
+  border-radius: 16rpx;
+  background-color: rgba(255, 196, 120, 0.95);
+  box-shadow: 0 0 18rpx rgba(255, 180, 90, 0.55);
+  animation: dp-glow 2.6s ease-in-out infinite;
+}
+
+/* —— 月亮：月牙（box-shadow 叠影法）+ 闪烁星 —— */
+.dp-moon {
+  position: absolute;
+  left: 16rpx;
+  top: 14rpx;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  box-shadow: 9rpx 5rpx 0 0 rgba(240, 230, 200, 0.95);
+}
+
+.dp-star {
+  position: absolute;
+  width: 6rpx;
+  height: 6rpx;
+  border-radius: 50%;
+  background-color: rgba(240, 236, 220, 0.95);
+  animation: dp-twinkle 1.8s ease-in-out infinite alternate;
+}
+
+.dp-star-1 {
+  right: 10rpx;
+  top: 12rpx;
+}
+
+.dp-star-2 {
+  right: 22rpx;
+  top: 34rpx;
+  width: 5rpx;
+  height: 5rpx;
+  animation-delay: 0.9s;
+}
+
+/* —— 文案 —— */
+.dp-texts {
+  flex: 1;
+  min-width: 0;
+}
+
+.dp-greet-line {
+  display: flex;
+  align-items: baseline;
+}
+
+.dp-greet {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  line-height: 1.35;
+}
+
+.dp-nick {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  line-height: 1.35;
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 副行：三段各自不拆，整段折行。换行后第二行是「距小雪还有3天」，读得到 */
+.dp-sub-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-top: 6rpx;
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.dp-sub {
+  white-space: nowrap;
+}
+
+.dp-sep {
+  margin: 0 8rpx;
+  opacity: 0.55;
+}
+
+/* 节气倒计时：唯一带下划线的段落，一眼能看见 */
+.dp-next {
+  white-space: nowrap;
+  font-weight: 600;
+  border-bottom: 2rpx solid currentColor;
+  padding-bottom: 1rpx;
+}
+
+@keyframes dp-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dp-glow {
+  0%, 100% { box-shadow: 0 0 14rpx rgba(255, 180, 90, 0.4); }
+  50% { box-shadow: 0 0 26rpx rgba(255, 190, 100, 0.85); }
+}
+
+@keyframes dp-twinkle {
+  from { opacity: 0.25; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+
+
+/* ==================== 长辈模式（1.6 倍字）====================
+ * 大字下最容易被挤坏的是「左标题右状态」的横排：
+ * 标题吃掉宽度后右侧只剩一个字宽，状态被压成竖排、看起来像乱码。
+ * 这一档统一改成能折就折，卡片高度随内容长。
+ *
+ * 左侧导轨（壹贰叁 圆圈 + 竖线）是装饰：长辈模式下整条收掉，
+ * 正文拿回 76rpx 宽，一屏能少折两行。
+ */
+.elder .flow-rail {
+  display: none;
+}
+
+.elder .flow-head {
+  flex-wrap: wrap;
+}
+
+.elder .flow-term {
+  margin-top: 6rpx;
+}
+
+.elder .flow-step-head {
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.elder .flow-link {
+  margin-left: 0;
+  margin-top: 6rpx;
+}
+
+.elder .flow-chips {
+  flex-wrap: wrap;
+}
+
+.elder .flow-quiz {
+  flex-wrap: wrap;
+}
+
+.elder .flow-cta {
+  height: auto;
+  min-height: var(--tap-min);
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.elder .flow-cta-text {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.elder .dp-sub-line {
+  flex-wrap: wrap;
+}
+
+.elder .dp-next {
+  white-space: normal;
+}
+/* 一句话当令提醒：与下面的小方法区块用左侧色条区分 */
+
+/* 一句简介：做法摘取，不编内容 */
+/* 推荐理由：当令 / 主料 / 菜系，朱砂小字压尾 */
+
+/* 底部强调：虚线隔开，灰色小字，不抢正文但要一眼看到 */
+
+/* ==================== 贰 · 就地推演（轨迹 + 转圈） ====================
+ * 推演不再另开一页：问卷交卷回来，就在这一段里演。
+ * 这里不照搬推演页那套深色控制台——同一页里突然黑一块，像跳了个应用；
+ * 改用纸底、细虚线、落定打勾，当前步呼吸，末尾转圈等出单。
+ */
+.trace {
+  margin-top: 14rpx;
+  padding: 16rpx 20rpx 14rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: 20rpx;
+  background-color: rgba(139, 90, 43, 0.04);
+  box-sizing: border-box;
+}
+
+.trace-step {
+  display: flex;
+  padding: 6rpx 0;
+}
+
+.trace-mark {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  width: 34rpx;
+  padding-top: 6rpx;
+  margin-right: 12rpx;
+}
+
+.trace-tick {
+  font-size: var(--font-caption);
+  line-height: 1.4;
+  color: var(--color-green-deep);
+}
+
+/* 当前这一步：一个呼吸的小点，代替一直转的圈——六个圈一起转就看不见重点 */
+.trace-live {
+  width: 14rpx;
+  height: 14rpx;
+  margin-top: 6rpx;
+  border-radius: 50%;
+  background-color: var(--color-flame);
+  animation: trace-pulse 1.1s ease-in-out infinite;
+}
+
+.trace-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.trace-title {
+  display: block;
+  font-size: var(--font-base);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.trace-line {
+  display: block;
+  margin-top: 2rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+/* 转圈：轨迹走完，等出单 */
+.trace-wait {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+  padding-top: 14rpx;
+  border-top: 2rpx dashed var(--color-border-soft);
+}
+
+.trace-spin {
+  flex: none;
+  width: 36rpx;
+  height: 36rpx;
+  border: 4rpx solid rgba(181, 72, 42, 0.18);
+  border-top-color: var(--color-flame);
+  border-radius: 50%;
+  animation: gen-spin 0.9s linear infinite;
+  box-sizing: border-box;
+}
+
+.trace-wait-texts {
+  flex: 1;
+  min-width: 0;
+  margin-left: 16rpx;
+}
+
+.trace-wait-title {
+  display: block;
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.trace-wait-sub {
+  display: block;
+  margin-top: 2rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.flow-badge-live {
+  background-color: rgba(181, 72, 42, 0.1);
+  color: var(--color-flame);
+}
+
+@keyframes gen-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes trace-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==================== 叁 · 今日食单（同页铺开） ====================
+ * 推演完就在下方接一张卡：菜一道一卡，再往下是小贴士与养生提醒。
+ * 版式与「今日食单」流一致（纸底 + 细描边 + 朱砂一处强调），不另起视觉体系。
+ */
+.result {
+  padding: 26rpx 26rpx 22rpx;
+  margin-bottom: 22rpx;
+  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border-radius: 28rpx;
+  background-image: linear-gradient(168deg, #fffdf8 0%, #fbf4e3 100%);
+  box-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.06);
+  box-sizing: border-box;
+}
+
+.result-head {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+}
+
+.result-no {
+  flex: none;
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
+  border-radius: 10rpx;
+  background-color: var(--color-flame);
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  line-height: 44rpx;
+  text-align: center;
+  color: var(--color-on-brand);
+}
+
+.result-head-main {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.result-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+.result-sub {
+  flex: none;
+  margin-left: 12rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+/* —— 菜卡：上图下文。窄屏大字下「左图右文」会挤成两根细柱，干脆一律竖排 —— */
+.rdish {
+  margin-top: 20rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: 24rpx;
+  background-color: #fffdf8;
+  box-shadow: 0 6rpx 16rpx rgba(90, 60, 30, 0.05);
+  overflow: hidden;
+}
+
+.rdish-img {
+  display: block;
+  width: 100%;
+  height: 320rpx;
+  background-color: #eadfc6;
+}
+
+.rdish-img-none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(150deg, #f6ecda 0%, #e7d3ae 100%);
+}
+
+.rdish-seal {
+  font-family: var(--font-serif);
+  font-size: var(--font-display);
+  color: rgba(156, 74, 52, 0.5);
+}
+
+.rdish-body {
+  padding: 18rpx 20rpx 20rpx;
+}
+
+.rdish-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.rdish-no {
+  flex: none;
+  margin-right: 10rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  color: var(--color-flame);
+}
+
+.rdish-name {
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.rdish-tag {
+  margin-left: 12rpx;
+  padding: 0 10rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: 6rpx;
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+  box-sizing: border-box;
+}
+
+.rdish-tag-on {
+  border-color: rgba(181, 72, 42, 0.4);
+  color: var(--color-flame);
+}
+
+.rdish-meta {
+  display: block;
+  margin-top: 6rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.rdish-how {
+  display: block;
+  margin-top: 10rpx;
+  font-size: var(--font-btn);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.rdish-why {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  color: var(--color-flame);
+}
+
+.rdish-open {
+  display: block;
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 2rpx solid var(--color-border-hair);
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.rdish-nodetail {
+  display: block;
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 2rpx solid var(--color-border-hair);
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+/* —— 小贴士 / 养生提醒：同一套左侧竖边的浅底块，不各给一种底色 —— */
+.rblock {
+  margin-top: 22rpx;
+  padding: 18rpx 20rpx;
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: 14rpx;
+  background-color: rgba(139, 90, 43, 0.05);
+}
+
+/* 标题带一张小插画：整块纯文字排版太硬，一张 64rpx 的小图就够破题 */
+.rblock-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+.rblock-ico {
+  flex: none;
+  width: 88rpx;
+  height: 88rpx;
+  margin-right: 16rpx;
+}
+
+.rblock-title {
+  display: block;
+  margin-bottom: 0;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.rblock-lead {
+  display: block;
+  margin-bottom: 4rpx;
+  font-size: var(--font-btn);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+.rtip {
+  display: flex;
+  margin-top: 10rpx;
+}
+
+.rtip-k {
+  flex: none;
+  width: 130rpx;
+  margin-right: 12rpx;
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.rtip-v {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-btn);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.rnotice {
+  display: block;
+  margin-top: 18rpx;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* 长辈模式：左标签右正文在 1.6 倍字下只剩几字一行，改上下排 */
+.elder .rtip {
+  flex-direction: column;
+}
+
+.elder .rtip-k {
+  width: auto;
+  margin: 0 0 4rpx;
+}
+
+.elder .rdish-img {
+  height: 300rpx;
+}
+
+.elder .result-title {
+  font-size: var(--font-title);
+}
+
+/* 出单后的补充说明（模型没接上时如实写一句），比摘要素一档 */
+.flow-note-quiet {
+  margin-top: 4rpx;
+  color: var(--color-ink-3);
+}
+
+/* 菜卡配图：没有这道菜的照片时用菜系通用插画，右下角标「菜系示意」 */
+.rdish-cover {
+  position: relative;
+}
+
+.rdish-img-note {
+  position: absolute;
+  right: 12rpx;
+  bottom: 12rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  background-color: rgba(34, 23, 18, 0.55);
+  font-size: var(--font-caption);
+  color: var(--color-on-night);
+}

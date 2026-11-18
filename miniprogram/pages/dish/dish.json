@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "菜品详情",
+  "usingComponents": {
+    "dish-media": "../../components/dishMedia/dishMedia",
+    "loading": "../../components/loading/loading",
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/agreement/agreement",
+    "pages/method/method",
+    "pages/consent/consent",
+    "pages/index/index",
+    "pages/menu/menu",
+    "pages/mine/mine",
+    "pages/dish/dish",
+    "pages/solarterm/solarterm",
+    "pages/search/search",
+    "pages/favorite/favorite",
+    "pages/preftest/preftest",
+    "pages/prefresult/prefresult",
+    "pages/recommend/recommend"
+  ],
+  "subPackages": [
+    {
+      "root": "packageDishes",
+      "name": "dishMedia",
+      "pages": [
+        "pages/gallery/gallery"
+      ]
+    },
+    {
+      "root": "packageIngredient",
+      "name": "ingredientKb",
+      "pages": [
+        "pages/detail/detail"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTitleText": "康康食养AI",
+    "navigationBarBackgroundColor": "#f7f0e1",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f0e1",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#5a4630",
+    "selectedColor": "#3d2b1a",
+    "backgroundColor": "#fbf7ea",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "时令菜品",
+        "iconPath": "images/tabbar/tab-recommend.png",
+        "selectedIconPath": "images/tabbar/tab-recommend-on.png"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "专属推荐",
+        "iconPath": "images/tabbar/tab-menu.png",
+        "selectedIconPath": "images/tabbar/tab-menu-on.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/tabbar/tab-mine.png",
+        "selectedIconPath": "images/tabbar/tab-mine-on.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>图形资产与配图清单</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f2ece0; font-family: -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+         color: #3d2b1a; padding: 34px 18px 64px; line-height: 1.6; }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+  h1 { font-size: 19px; font-weight: 600; margin-bottom: 8px; }
+  .sub { font-size: 12.5px; color: #7a6a52; margin-bottom: 26px; }
+  h2 { font-size: 15px; font-weight: 600; margin: 30px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #d9c39c; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .ic { background: #fff; border: 1px solid #e6d7b8; border-radius: 14px; padding: 14px; }
+  .pair { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .pair img { width: 44px; height: 44px; }
+  .inm { font-size: 13.5px; font-weight: 600; }
+  .ishape { font-size: 11.5px; color: #7a6a52; margin-top: 4px; }
+  .iuse { font-size: 11.5px; color: #5a4630; margin-top: 4px; }
+  .iemoji { font-size: 11px; color: #a08d74; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e6d7b8; border-radius: 12px; overflow: hidden; font-size: 12.5px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid #f0e8d8; text-align: left; }
+  th { background: #f8f3e8; font-weight: 600; font-size: 11.5px; color: #6b5a3c; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  td.warn { color: #a9761f; }
+  td.ok { color: #3f7a45; }
+  .note { background: #fff; border: 1px solid #e6d7b8; border-left: 3px solid #8b5a2b;
+          border-radius: 12px; padding: 16px 20px; margin-top: 18px; font-size: 12.5px; }
+  .note b { color: #3d2b1a; }
+  .note ul { margin: 8px 0 0 18px; }
+  .note li { margin-bottom: 6px; }
+</style></head>
+<body><div class="wrap">
+  <h1>图形资产与配图清单</h1>
+  <div class="sub">11 个 PNG 全部由 System.Drawing 程序化生成（81 / 96 px，透明底），无第三方素材，无版权依赖。左图为未选中态、右图为选中态（仅 tabBar 有三态）。</div>
+
+  <h2>一、图标：形状 → 用途</h2>
+  <div class="grid">
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT6SURBVHhe7ZwtVNxAFIWRlZXIysrKysrKGkiooRLXloTTOuogS89BIpHISiRyZWUlElm5sj03P5B9mTt/O8tOsvOd8ww7k03uzrz35s2EnZ1EIpFIJBIJa2blxzcXxcFldZJfz8r8vfw8YaA6yc9mZf5P2K/Lz4cvZduEYFbu7c7KfK4QsLP786/7b2W/RAumbFXmfxXCLVuRLc7L/Ivsv9Wcnh6+gO8biGW2NL3B2bfslWH6mmy7p7fN9MXnVZE/yL8vWZEtZmX2SV5/8lTHBx+ah1eI0glY5L9/Hh+8xpStiuxWfj6w4+y7/J7JglEzEGBg2RV8Zb8fgolJePjWfp9JYhIQ0/e82M9lvw74P/hB2W/pGif5tew3GYwCttNX9pNgeiMyy/5CyDPZb/QgiBim4tw1XWmXg/I6T0IW2Q/ZZ7TUU1AjIIKG9H+gKvIjjM6qzP5AEFUbc345gajdTj3qw6iAiN6yLZmiEFi2fbQiW9i4iKjR+S4mIFD1w4iU7ToQzWX7fj/2PdGjCyQ6AcGszO9kH4xo2a6PzkeOMmLX1RjuB+9NQcRHRED61XZRZO9k+6iZlfmNfIjaUIGxWOsSMSxE3Ntly0QEKdk+WlCRlg/QmW0Jy1dEgBGn6NsJeSTbRwl+cXnzrc1lW8YqIgKW+mCU6nxxFOhGIT6T7RmrimiY1nGPRpZquEbHVUUEdcFieA2Y9Yx4djBNWH0QxVfZXkcIEev7IaMx2gRckxfeybYmQogIqG8kq5+Nw5Nd9/VrKBGZj4423WFR2ScahhIRhLyvtdIWGgY36vuLBxWRzJDoVjCqqktzo37l+pAiUl8d254Mu1GIK9vaEFJERGLFtZzTrrXDanq+UyakiPB9imuNR0TffCykiEBxLZhz6rVWmPN2TbI7QotIku4kogtkJRWZiGQ6R+0Ti+xWtt0oqIzIm4TpNuJ1hBSxPTQlr1WfspBtNwrLE22LsJKQIrIibXT70u3xjuGNeqYRIUXkJTH3Nf1aqf2OemPK68FDiqjafm3Mvkj8bJAH94rQ5FpeIqoiM/4m20UBi9A+0yaUiKwUhtEp20YBc+A++VgoEcmrHN4Bb+1o/KLz8i+EiKPcHgBs0961JBZCROSoimt41zifDTal4chdKskhRGRvJUS/ZQpYOd7FD60qIg0oRbZw+TE3BktuXU4frC6isn98Sz1Gvd9CAoztUouIYCUiW4I2FmGCzWD7vY24e7uyvcRXxLZiw07mxpkbMnTphU2k9hWRuZLmxxvRKOygD4QgYzij6CNiXfIibsTmh4sWFqlN56h9RCR9rF1ItOidPI+URBAqIisK1xbb/rIPvBTFtw9cRKz3lck0No340WA4cPmgOgTvIiJbmYw2mDDYOra1QephKyKr0sBsc9JRwbZV6wcW5wXJ+81LIur9bcSnYVeheflbPa1h/Z1Bkh7ddJ/Xa2PiByfxKpqO+m1T+dC9h+98WJOsL43GeZemtP/2ha1KvCrpowMpx/DBH+2+n9Mhge6PqnZZpw4kjYA0bZocrHjb2h1LS3z7TRLTiFK9QEmLGo0tjeCtwezbngIJ30m0f19wshjfyj/Jr0mk7tkWBBIThkRca5NMqH1hZ771tkWR2BZD6rNkvgeltgJtAOkEjO1wZoywN1U7AWXqkyCoihWokicBHUFl5+lYXHalqjsmEolEIjE5/gObP2fENm1B/gAAAABJRU5ErkJggg==" alt="" />
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUPSURBVHhe7ZwvcNswFMYLC0d2q1SQsbX27ja4W+3L4ODg4GBhYeFY4WBhYWFhYWFg4WDh4GDgds+yU+dZn/5FaWRHv7tHGsmxv0jvPT3JPTjIZDKZTCaTceZzIT9WhfxVleKmKo6+8s8zFqpSXtWl/Mfsbv5h9oq3zTDmxeujuhQLjYCNVaV8Ojs5/sT7ZVpoylaF+MuF41aVYlmX4oL332vms9kh+T4uloPl6U3M3715a5q+Ntv76e0yfenzqpR/+N/XhRTLupA/+PUnT3UqvinfNhTl2cTj/L04oSlbl/J++DmzQlzy75ksNGoGAjCrSnFNvnKtXykubMKTb+33mSQ2Advp+5336yD/R36Q91u7RilueL/JYBOwm768H6ed3nfD/n0h5RXvN3qaIGKcimLhm67QiBteZ+2aP3mf0aKmoElAec/9H1GfynManVUhf5MgujbW/HIKUZtGl8WHaQWk6M3boilKAvO2z33E0sVFJI3Fd2kFJHT9aETydh0UzXn7fj/0PcljCSRQQKIu5APvQyOat+tj8pGjjNhUjUF+kMSwBZEQEQldv87OyuMvvH3S1IW45Q+hhBBLl7WuTgwXEdWPh5aJ4pG3TxaqSA8fYPUgTiWsUBEJGnG878pO5TlvnyT0iw9uXgm44G0Rm4hIoNSHRqnJFyeBaRTSZ7w9YlMRjdM69dGIUg3f6LipiAS5Dn4NZe4z4sVRFWp9fZCKr7y9iRgiNvcDRmOyCTjMCwv5wNvaiCEiYfCN2tXPzoHJbsD6NZaI2Ecnmu6gqBwSDWOJSMS8r63S1vgGNxr6i8cUEc2Q5FYwuqpL8+CB5fqYImJfndieDLpREpe3dSGmiBSJ+bXU9fzSrq2DanqhUyaqiLPZIb/WqEQMzcdiikjwazUWkHptFeS8fZPsjtgiapPuLKIf2pVUaiKi6ZyyT6TqOm+7U9TO3OAm6cHhRryJqCI2h6Z09yauedudgvJE1yIsJ6aIuEib2L40lfyHNxmeRsQUEZbEAtb0W0WVnYYbU8EPHlXE4fYrmU+R+MXQPThZSITWXStURF1kpr/xdkmAInTItIklIi6FyTveNgmgAw/Ix2KJCF7lCA54Wwf5RTLf5V8MEUe5PUDATXvPklgMESlH5ddQFlbjfDHQlCZH7lNJjiEifCsh9S1TApXjffzQpiKigNIctfP4MXcGSm59Th9sKqKufytiWks9hDrYqQ8wrkstnQiuIuIlaKIJNgLv94olHfHg7TmhIrYRGZ3MTTM3RJjSC5dIHSoidiViOapR2IEeiMx2RjFERFpeIjfi8sMlC4rUtnPUISLq+qh+bi4kWUxO3hQpdYKYRERF4cZS218OAZWiyND2gY+ItIQzTGPjiB8NpgOXTe6oOQTvIyJamYw2mCDwOraxQerhKiKu0pC55aSjAm2rtgKtnRfUvd/MRTT526RPw25C+4qadlq3Iq12BrXpUSFuu8+b/5mD/OAUXkUzQW+b8ofuP3znw9q94t5oFIsuTWl9LFqVBFXSRwelHIMHXwkpn/o5HSXQ/VGlxNUHEtUfp02TAxVvGyvkA0pLQvtNEtuI0r1AiYoaZHwE7w123/YcSOBOYutLbWvxSWN7K1+lRZpI3bd9CCQ2LIm4xSaYUIeCznybbK8isSum1Idb6EGpvcAUQHqW1uHMFEFvqnYC8tQnA9AXK8RjFtATqux0x+Kaf8CmqTtmMplMJjM5/gPqwhSQFHJ/6gAAAABJRU5ErkJggg==" alt="" />
+    </div>
+    <div class="inm">推荐</div>
+    <div class="ishape">叶片（两段对称贝塞尔 + 中脉）</div>
+    <div class="iuse">tabBar 第 1 项</div>
+    <div class="iemoji">原占位 —</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFESURBVHhe7dkhTwMxGMbxSeQ+AhI5OcmnWN/NbBIHrF3ADbdrt2QSiZycRCKRSCQSiURCGtx7U0s7rs3/lzy673O5u+Te6/UAAAAAAAAAAACAkgQ3GXhrHmrK2ppL3TOb4MwsOPmpMWs73uq+WXgrn/rwmrK9nvZ15+SCNd/64LoyGejOyXlrntsH15H4lOm+WazuzHlw8qoHKD3emffmdjTUfQEAAAAAOEZjR+IX8hScvFSSnbdypXtmE7fA+uO9oux03yy8k68Dh1eTuKXSnZNaLqdnLGUTCE727YPriLfypvtmEf9BxHdHVXfkX5f9Zj6+0H0BAAAAADhG4+TmwGLzxDEzPVcxgjOPrQ/4f0pcEOv5itCxpeyHnq8IXMQEOvU4L2Sl5ytC/EUQh2+/6E+cubmPs+j5AAAAAAAAAAAA0H2/hwDIT6xp6EQAAAAASUVORK5CYII=" alt="" />
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dkhTwNBEIbhSiSOzFQcjrJDApLQ3Rw/A1mJRCLrKiuRyMpKJBKJRCKRSCTkUtQU1dyW2837JJ/e+ZreJjc3GgEAAAAAAAAAAAAluQp6kUzmNWVq42vfM5sUdJZMv2tMDLr0fbOIph/+8JrSnjeHvnPvosmXP7imdFeV79y7ZPrkD64l3VPm+2bRnhwdJ5MXP0DpiUHfppPxpe8LAAAAAMAuoulNNHlMQZ/riKzSqd76ntlsNsHbL/BVJMjK980iBvncOryidFsq37lXbdMcsJTtQTJd+4Pribz6vll03yC6u6Omf+Rvl3V7JhPfFwAAAACAXSSTu+3F5t4z83MVI5o8+Bf4/4vM/XxFGNJSNpq++/mKwI/YgyE9ztF04ecrwuYTgS7+uOj3HLnvZvHzAQAAAAAAAAAAYPh+AAKv6VJwouV2AAAAAElFTkSuQmCC" alt="" />
+    </div>
+    <div class="inm">菜单</div>
+    <div class="ishape">三条横线（末行缩短）</div>
+    <div class="iuse">tabBar 第 2 项</div>
+    <div class="iemoji">原占位 —</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQJSURBVHhe7ZstUBwxFMeRlZWVlZXISiSypiRgqKxre5ub4qiDXTqDrEQikUjkyUrkyUokks4/yfLxssnefhyb5N5v5k3pTDa3eZu8z92tLYZhGIZhGIZhNovfs/0PZ4XYKWf7n06LPYm/K3WwTccxBCisUuJPWch/lZIPPikLcV0W8uvx8eEbOsfGAuWVStxSZbUJlA1l0vk2CuykSskrqpyuggdw8lO8p/NnDxZdFvIvVUhfKZW8g92kv5Mt598O31ZKLqkiBksh7k9/7H2kv5cd9gjfOApw5aYsxK9TJb/D7uHvSslLKKph7KPATmZ/tMu5PKELf6GEubyo1Od39Loa7GKt0LAyF/S6bIByvIsvxD28NL3GB+LIkEnoMldSnBX753SxtQL7OAX9UDyKhNOi45NH20LPLoTdo+NXBY6EzvckmWU4Jhuhixxnx/h2OGwnHZs0SOfoIq0SB2ccgd14Q8cmjS8zGSscacq3EYDTcUmDsIMuEjaSjusLihLO/Eo+ZFWk8HjRJR3XFxNfOvOPttOjoClPHvO4+cwFgnM6NlnWfdzWbS6iwOudR8gsbEHDnVuJWzo2aVDip4vUCy3ENR3bFVuccObGg6NjkyaUsQzZjaF8vE8qGT0+49+3fBUqq2HOsextVCCXpYt9XHTHEn9ba2FIPh49urDasGijSHlXKfGFXkPRrdRwY2uZ5S6sCZWvnpQpbuEs6l5z3YOuZuKoKd58IT3Lasmhj7XHGQyVMQoayVApuWuOr6uI3jITR/R3sqetxL+ydGwtZAeyDV1U7X+8L7t49ayBIqDMFq+rRb8+oqs2mZX/xwTHvO41PxfEfqw4hmE2BeOpkaXI3UdbOJcXz+0i0kKMgd2k128sUIjtG/eJF5dQsqlV+t/fyRJdQNA7zG1zDpRF9kE3whNfr2VMMUWK9mpQUiCQDtX+1igwEbv0fpIDRYGGxb2qwOYmWV+0Hbiuu29Re2HjcMSOmedgu/6/9txzedJaV3RlkVSOrdO2FXJgSP1NSh/vCgXDM/vefqCC0lsSjke/obVaReZqzDxYf42wojKjdjp6Ie2F1sU6y/fWiXn7OM8kPoejX0hvOcIw8PS6dWG+0go8UH1axjsJgwn1fyFT2SK7K913dJ5kGY2z8b3uW9/olHkuHnBLgD/95xq6T+JxJNiBMTxp8+2LPySavEPojQUj+0TMHu3GIsekr5yEXgtB/EbHT02w3z1VuzVgtKe3Mx689lsrt3vAPwjbM3ZvRktEoQMBivKFPq/+EpTNY50bgY2kY2PDdA2d+379j4can2gh7qcMZ1bFxrWOk5kiljUValudtv/Gl0p5sE7RKBL2cCrHwjAMwzAMwzAMwzAMwzAMw3TjP54HIcBu83iqAAAAAElFTkSuQmCC" alt="" />
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAYAAACqj0o2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQUSURBVHhe7ZstUBwxFMeRlZhOL0FcXSHbGSo7ZXeuElmJRCKRSFwlElmJRCKRJ5FIJBKJpPN/2aW9l03Yr2OTvfebeTNwk927vE3eZ3ZrSxAEQRAEQRCEzWLxVe0eZDs/8z31K8/0Ef7+YfQ3Pk5gWIWpyzzTj0WmXwJyU+zpk8V8/oHfY2Mh5Rl9X6OsoJCy9/QJv99GgZVUZPqaK6et4AEsvnz6zO8/eTDpIlN3XCFdJTfqCXaTf89kWezPt/NMP3BF9JU8U88Huzvf+fdNDtrCRt9yBThCY9R5kalT2D3626grKMoZu6JI/Tj5rZ1n+jef+KoS1J+F+Tjj11VgFUOhYWWqJb9uMkA5vsnjc3hpfo0PxJEhk9DmXkmRG33BJ1spsItTsA/Fp0h1x8cnD2yhbxXC7vHxTYEjce9nZXIZDrYXn+RQK8a3wmE7+dikQTrnTlK/DJFxeFej0bd8bNL4MpOhwpG6fBsBOB+XNAg7nElm6pmP6woVJeoe0pSKFHVeFJ/xcV1BfMnvT0ocaKVHQV2ePOR285qL/fk2H5ss695u6zYXUeDzzkNkFjYVrLm30fd8bNKgxM8nWcoNH9sWW6hw7ouVeMnHJk0oY+mzGkP5eJdUMnp8xr9r+SpUVqN7DmRvowK5LJ/s66Rblvjfbi10z8ejB4VVd8KVItVTYfQxv4ZDrdRAYwvx5yRXYUW4fFUpEwpS51WvuepBF0ad1cWbqwrsVlZLDijG5wx6ywAFjWTIzeyQti9XQh8x6ox/z+R5q8TfVNq2FiYHtU+Nvui8vY26auPVJw0UQcoMeN1KEAOiajO58v+QYJu/9ppX5VQUJwjCpgBPbVO62WFlB23Z/z+7aPQxxsBu8us3ljIPvugSL+IaKBm1ytD5nUlCirOTd9qc/UQtJx90l6Ww2l7LsKLumlSDksKeig3V/tYjtN3N7JD/nuSw5St3gu8psLlJ1hfLDlzL1Ye2p/XCsJvkhffn2zAD1f9U/aGDouG6oitqmVSOTdWZBjlwKfadlA7etTz7feQ7/cAFpbckHA9OaDWsyFwPmQdTAaOhMqN2OrYS81ahVS3XWb4nJxbo41QSpcMp64LBLQwDz69bF/YtLf8DxW4Zcif0JtT/tcobxxaVLxw5Z3T+KVI/RONs/Md9yx86Yp5b9qcDAX4Er2vYPkm9I8EKjOFJl++++EOisTuEvliQ+r8RvSJmvXd9kWPUIyfBYyGZPuLjxybY7x6r3eo32hHYGQ8++w3ldgn4e0HNpJofA4kqdGDQMRZv6PPOh6DobIzzI0iu+djYoDdX3d/9/i8P1T1R2hIjhjNNsQdOXSczRixbVqhtdZoa6jGmUh6sk7GKJGczlmMRBEEQBEEQBEEQBEEQBEEQ2vEXfBwFM1+Q72gAAAAASUVORK5CYII=" alt="" />
+    </div>
+    <div class="inm">我的</div>
+    <div class="ishape">圆（头）+ 上方弧（肩）</div>
+    <div class="iuse">tabBar 第 3 项</div>
+    <div class="iemoji">原占位 —</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANeSURBVHhe7Zs9bBMxFMc7MjIydkJMiJENxqrETje60bGU1mbsBhtSldhjR8aOLEiZEAMDG4gpY5EYKqaKKVJBBb3YSY53F99d8H2F/0/6S1Vq6/meP97zu2RjAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxeDbYua2t/KiMvFRGXmjbp7/f/6/SRn7QRn4jf2gjvxwMH21zn0Xj6cnWXWXFT23lb2iprg8Hvcfcd1FQRnzKMAgx0W7gvouCNvIHNwZl6pr7LgrKiu8ZxiAuI6+476KghuJtyhiUkjJizH0XBW3FS24MSksZ+Zr7LgrKyH1uLGH0mLdfZ9RQ7nIfLCRe8fZROBqKrbSxime9pdCC4z5I+GKft4/C4aB3hxtbGBWXT148uMH7rCt0GeU+mIkWKm8fDWXEOTc4n4Sh3OXt15HQQtRWTrTt3+R9opETiEe8/TpCZ3zGs0+ljHzD20dF2/4mN5rUwcn2Ld5n3dCWamDpZ3fq7fD20ZkWoVKGndY9GIcyQZqYWuKgtmIvw/hclQahBvG7f8KfdyZlpOV9KoFmOTwQcV7LSqiZ0M536t/jfSojFIicxCnv02Vyjp7qgy/H74IxHwibhD3er4v4C2hox182knwcDcV9Ppi0sieBcmVKafkbpoZkKbfnYyTynB96xlrIP4rSA6TVErrQNaQJLajkOIs4nyYw2ad2ih1FpMUk0IpL/795JZ1ZxPn+1rs5d0ZT+KMob7DTO4I7epbXURrWxC2oIru6ZaWXgiuGRLfIdxmft0Ffi+1mUoPn/jJKTEJLJa7Sn2Wphc6fUW4SxK/0Z02ozDha7PwZ5SbByceHWm6SFDgpEaD8nY8jrA44f4avma8SbOmbdsc8JfxXaHK1Fc/pxpphM08Xna1v5bw/yBPtopF7/dd/6BV82eGyGNfWlQ/EWbh8HNYsc+N2OoVPUwtmF6U0ptx9xZ0WlDueaqjt10WZ/LoFGjVS26kDV1MXp2WDdD0SZ7FjT2uhc9V/tWPl8zmG6KhxpZEWlBSawr9hG3HnVCllxGcXpDseYGPjMphprIgaWL3DLQVWOL0gFLjdpY5S2b/fHXAHeyV/rWNdPzgcAAAAAAAA0C7+AOOw0PdzGeUfAAAAAElFTkSuQmCC" alt="" />
+      
+    </div>
+    <div class="inm">岭南家常</div>
+    <div class="ishape">碗形（半圆碗身 + 碗口线 + 底座线）</div>
+    <div class="iuse">首页风味入口 / 菜品卡无图占位</div>
+    <div class="iemoji">原占位 🍲</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,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" alt="" />
+      
+    </div>
+    <div class="inm">广府菜</div>
+    <div class="ishape">蒸笼（顶椭圆 + 笼身半圆 + 分层线）</div>
+    <div class="iuse">首页风味入口 / 菜品卡无图占位</div>
+    <div class="iemoji">原占位 🥟</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUuSURBVHhe7ZwtbORGFMcXFh48WFQVllQKqVJlnGtg4ZHT7AQFBka6PDvs4MGDgYGHTgsXVYVF1cFVQbWskSpVC1q11Ru/Tew33rG96/GO7feT/lLk9Xjs5/l47804s5kgCIIgCIIgCIIgCIIgCIIgCIIgCMJ0UG+yr5SBnxOTPqp5+rsyKf69PEA/KZP+Rtf79UKD4nUKhJrDt4mBvxOT/hdQ/yb67g2vW5jNZslluqowWOdSBv461dkXvP5Jc6ZvX3NDhZQycMfvYbKc6uxFYmDNjRRWsHmls6/5vUwSZdIProECav7095Lfy+RIdHZSNhC4ButSz8a3Ote3c35PkwEnQmXgF8dIRenshJdrw6nOXiYGHp3rPgnWeA4vNwkSDTeuQZ6FQxMvsw+Jhit+baZ7Xmb0/KCzL3EirDAGybbMF7zcvlBwV1FPLqWz73mZUZOYdMGNUBS6pbzMIZzr7BvfC1cGPk8mNmjg8y94mS5Ql+m7irqKL2H8sUG9zw8bHJ54uS7AFp4Y8ETbE4gNan1+DTe8TJco/fbCqbOs8cYGrs9fFrqkfYzDiUkfeN1FjTI26MPnb8okY4N9fX50D1GJhmucJLeiVlzM+y+Kv9tzNFxh2apeNanYoInPfzaH77Drk3GX/slyH9mJf2k9ITS+zk4mExuoy/Q9f7iybj3DQUDN4U9l0n+c488ax4Tsb2lZxbEedVlxrCD+LIPk3KSf+IPFpPOKY7ngD/4sg+JM3/7oTTmw1HB0mucpCpwzqibyaMFo0j/sxGn8Uk9w7g/WGMTxZ40KG+pbd9Pn8TQXxQ0f0TPC3rR1SbfapixsjMF+27qt6K7WNoZ2uu8yS9sZ5NZ9rrjhRsKyGAugoTFzya/fBbZn6rcXFCcc8FIi6w3ov7dv9TYSfcCyoZJvdWC0m987BnW+yLhaUWRP6QGcm9stWOHwEGM3pkCwVc846ktoafwlDi/8GjFCScP7imeo1FFeArmYzs24gvVQs4ut5rXAafQStLDhWVR5UpweQwsoi3tXP8fBJpTz4FCf24HNUIabptCact1EHWQptUTd4jb+FpWL1iFNXkLwhoeBEa90CsbfUv8SYM3LdEa+ksQrfBbm2nmZMVLngARbR/AvaNtlvOEkrA6EVuEq7BDQI/IuK4aqNFL8jTF94Od3gm83wdjHfo5vOMbYgZ/fCb5ud6x8zjHZHQvBip/bCd7FlZ62lMRCHoxW2CHkC/DurdRwxc8fMzWbzMIEZDXuV5hKI8W3xTKYO44LGryyooJHgZGQB2Pu8/diB/+GKVgNPflWByXnPGsGsAlqg7otfbTBdlz7KgmaeHc7IiGHnyK1m2wNrMbmljYxfm/ZgBoP4OlmxhKcNV2Y6fqzKi8tluwWQx2S7Hjvc73L6ncfabMuuRU8xroQvwtszU1aPYrmvf6fjV6CZ32ACzboP8c6P9jv1/KNZTtSDK6OZvwiLYajoha05/KowxM2Igow7/0rfa6iMP6WFmOlI+tVabjp6wtFG1BquG4+hFYqvg0HjTblNhBdA/d02j2h+yb6ilsRqZfilzetWrmrAXh3XW7Q3SWKRfj/h3PO61jxtfpd5N+FtR9XI9Ui2DpvaHCSpY1NjT2LOBS3x9Ya9DZo82sj3/pYoi9iBhWztMYOT3lS72MkQxS6xNejae1tsZ5Kvt0RvZTAQ5XdVLWkj0Fej7qlHwJOepQOQBcS/fWCt7Or19jjJc+IfTEvxhYEQRAEQRAEQRAEQRAEQRAEQRCEXvkfmgKOB7knwTcAAAAASUVORK5CYII=" alt="" />
+      
+    </div>
+    <div class="inm">潮汕菜</div>
+    <div class="ishape">粿盘（扁椭圆 + 上方梯形托）</div>
+    <div class="iuse">首页风味入口 / 菜品卡无图占位</div>
+    <div class="iemoji">原占位 🍜</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOwSURBVHhe7ZyvcxQxFMcrK5FIJBKJSphpAvwJyMqTFcxwm4rDIZGVlZVIJBKJRCKRSCTMy97NXd/tZfPrpZnu9zPzpiZ59/1ms9n8mp6dAQAAAAAAAAAAAAAAAAAAAAAAAAAAAADoC73RT/RgPypnvy0uru1nPbx+ztukGfq9fqqc+aWd/bfUUIP9q515ydumCb4HTIhaWtDbwNumCWowP7iYJQa9BbxtmrD04ecweNs0AQ9gH7xtmoAHsA/eNk0IPQBe9jHQnd/uBAnTnd/uBAnTnd/uBAnTnd/uBAnTnd/uBAnTnd/uBAnTnd+HEOR3X529VM5+OtqZdGZFG4S8Ti0ewm+QloJox1E5c8d/Zyrogej1xVueo5SWfqNoIUhv9Dn1dp4/JtRgbumN4TlzaeE3CWlB2tkXypmfPHdKKGd/6+uLVzx3DtJ+k5EU5Bt/sH943pzwhyYVhiRJv1lICRqHnbKez8O/CYUfaCm/2UgJyh3z50I584X/VgpSfrOREESzHZ6Lhx+aBrOmsZ16tf/rp6ZRb80l/81YJPwWISGIeinPdRjK2a+nhpKYGZMfijb6nNeNQcJvEbUF+d48kWsX1Pi8zhR6ba543Xsx2He8Tgy1/RZTW5BfyU7kovDDzomeP4VfjE3kGXOZW14+htp+i6ktyC+cJnL5WJsrXj5E6FtC3wpePobafoupLSjUa3NuoI2Xpo5z0XeAl42htt9iagsKzmIyPpwC+qrmK6a2oOAb8OHNM15+Dj/j4XkKLlLV9ltMbUHB3c7ErQR6YEc5tkG6efkYavstprYgumXN8+wi9f5l6N5q7oq4tt9iaguiDy3Pcz/MiteZYrsynqi/jcQZ1Y7afouREBTK6Wc1M4sof3Azt4ua8T0hQtp42SZICAotxnbh1wusEengZW4bwtd15u6wXgoSfouQEhScDR0EzXLGM+HA9JWVLzkhk/KbjZQg6t2nFlFFUXgyJuU3G0lBtG3Mc5YEzYr4b6Qi6TcLaUF+j7/Cm6AGe8Nz5yDtN5kWgmhqqgb7neePCT/mJy7gQrTwm0RLQXQClvI2+IOdgg/uFC39RtFa0HhgY1bUuHyuTw/Hz57oqDJj5zSG1n5n6U6QMN357U6QMN357U6QMN35DQk6+r8KjyECkwDeNk0IPYClBW+bJuAB7IO3TRNiN8GWELxtmhA8QlxQ5F5zKSZ092ZhkX3ftBjaa1nqUDTeuog7JgUAAAAAAAAAAAAAAAAAAAAAALA8/gMTWqIK2TlB6QAAAABJRU5ErkJggg==" alt="" />
+      
+    </div>
+    <div class="inm">客家菜</div>
+    <div class="ishape">酿盅（方形容器 + 中央圆馅）</div>
+    <div class="iuse">首页风味入口 / 菜品卡无图占位</div>
+    <div class="iemoji">原占位 🍚</div>
+  </div>
+  <div class="ic">
+    <div class="pair">
+      <img src="data:image/png;base64,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" alt="" />
+      
+    </div>
+    <div class="inm">通用菜品位</div>
+    <div class="ishape">盘（扁椭圆）+ 盖弧 + 支点线</div>
+    <div class="iuse">备用兜底（当前未启用）</div>
+    <div class="iemoji">原占位 🍽️</div>
+  </div></div>
+
+  <h2>二、原 emoji 占位 → 现图形</h2>
+  <table>
+    <tr><th>位置</th><th>原 emoji</th><th>现用图形</th><th>尺寸</th></tr>
+    <tr><td>首页 · 风味入口</td><td>🍲 🥟 🍜 🍚</td><td>cuisine-*.png（按菜系）</td><td>64rpx</td></tr>
+    <tr><td>首页 · 当令菜横滑卡</td><td>同风味 emoji</td><td>cuisine-*.png</td><td>88rpx</td></tr>
+    <tr><td>菜单/搜索/收藏/节气 · 菜品卡</td><td>按风味 emoji</td><td>cuisine-*.png</td><td>140rpx</td></tr>
+    <tr><td>菜品详情 · 大图位</td><td>按风味 emoji</td><td>cuisine-*.png</td><td>180rpx</td></tr>
+    <tr><td>为你挑的 · 紧凑卡</td><td>按风味 emoji</td><td>cuisine-*.png</td><td>96rpx</td></tr>
+    <tr><td>我的 · 头像位</td><td>👤</td><td><b>仍在用 emoji</b>（头像属个人位，暂不做图形）</td><td>44rpx</td></tr>
+  </table>
+
+  <h2>三、配图需求：每节气实际菜数</h2>
+  <div class="sub" style="margin-bottom:10px">“最经典 10 道”这个目标当前做不到——全库 419 道里没有任何一个节气达到 10 道。下表是真实缺口。</div>
+  <table>
+    <tr><th>节气</th><th>季</th><th>总数</th><th>岭南家常</th><th>广府</th><th>潮汕</th><th>客家</th><th>与 10 道的差距</th></tr>
+    <tr><td>小寒</td><td>冬</td><td class="n">7</td>
+    <td class="n">4</td><td class="n">2</td>
+    <td class="n">1</td><td class="n">0</td>
+    <td class="warn">差 3 道</td></tr><tr><td>大寒</td><td>冬</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>立春</td><td>春</td><td class="n">7</td>
+    <td class="n">4</td><td class="n">3</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 3 道</td></tr><tr><td>雨水</td><td>春</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>惊蛰</td><td>春</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>春分</td><td>春</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>清明</td><td>春</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>谷雨</td><td>春</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>立夏</td><td>夏</td><td class="n">9</td>
+    <td class="n">4</td><td class="n">3</td>
+    <td class="n">1</td><td class="n">1</td>
+    <td class="warn">差 1 道</td></tr><tr><td>小满</td><td>夏</td><td class="n">6</td>
+    <td class="n">4</td><td class="n">1</td>
+    <td class="n">1</td><td class="n">0</td>
+    <td class="warn">差 4 道</td></tr><tr><td>芒种</td><td>夏</td><td class="n">5</td>
+    <td class="n">4</td><td class="n">1</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 5 道</td></tr><tr><td>夏至</td><td>夏</td><td class="n">4</td>
+    <td class="n">3</td><td class="n">1</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>小暑</td><td>夏</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>大暑</td><td>夏</td><td class="n">3</td>
+    <td class="n">3</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 7 道</td></tr><tr><td>立秋</td><td>秋</td><td class="n">6</td>
+    <td class="n">4</td><td class="n">1</td>
+    <td class="n">1</td><td class="n">0</td>
+    <td class="warn">差 4 道</td></tr><tr><td>处暑</td><td>秋</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>白露</td><td>秋</td><td class="n">5</td>
+    <td class="n">4</td><td class="n">1</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 5 道</td></tr><tr><td>秋分</td><td>秋</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>寒露</td><td>秋</td><td class="n">5</td>
+    <td class="n">4</td><td class="n">1</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 5 道</td></tr><tr><td>霜降</td><td>秋</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>立冬</td><td>冬</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>小雪</td><td>冬</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>大雪</td><td>冬</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr><tr><td>冬至</td><td>冬</td><td class="n">4</td>
+    <td class="n">4</td><td class="n">0</td>
+    <td class="n">0</td><td class="n">0</td>
+    <td class="warn">差 6 道</td></tr>
+  </table>
+
+  <div class="note">
+    <b>配图优先级建议</b>
+    <ul>
+      <li><b>P0 · 24 节气各 4 道</b>（共 113 道）：这些是首页与节气页唯一会露出的菜，先配这批，界面立刻完整。</li>
+      <li><b>P1 · 全库 419 道</b>：菜单页/搜索页会露出全部，但可用器皿图标兜底，不阻塞上线。</li>
+      <li><b>P2 · 风味代表菜</b>：广府 16 / 潮汕 6 / 客家 2 全配（共 24 道），补齐结构失衡的观感。</li>
+    </ul>
+    <b>真正的缺口在内容侧，不在图</b>：客家全库仅 2 道、潮汕 6 道，14 个节气只有 4 道菜且全是岭南家常。要凑「每节气每风味 10 道」，需要 A 按 V3.0 矩阵补到每节气 14 道（全库 336 道）。<br>
+    <b>图片来源</b>：不能凭空生成菜品照片。建议 A 按 P0 清单出图（自制或 CC0），E 走 CDN，小程序内只留占位与 lazy-load。
+  </div>
+</div></body></html>

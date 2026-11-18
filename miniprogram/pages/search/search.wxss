@@ -1,0 +1,131 @@
+/* pages/search/search.wxss —— 搜索页样式，全部取 app.wxss 的 CSS 变量 */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.search-input {
+  flex: 1;
+  min-height: var(--tap-min);
+  padding: 0 24rpx;
+  background-color: var(--color-card);
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  font-size: var(--font-base);
+  color: var(--color-ink);
+  box-sizing: border-box;
+}
+
+.search-placeholder {
+  color: var(--color-ink);
+  opacity: 0.55;
+}
+
+.search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  margin-left: 8rpx;
+}
+
+.search-clear-ico {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 语音按钮：本期只留位置，不实现识别 */
+.voice-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  margin-left: 8rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-sizing: border-box;
+}
+
+.voice-text {
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160rpx;
+  min-height: var(--tap-min);
+  margin-left: 8rpx;
+  padding: 0 24rpx;
+  border: 2rpx solid var(--color-brand);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-sizing: border-box;
+}
+
+.search-btn-text {
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+}
+
+/* —— 历史 / 推荐词 —— */
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.section-action {
+  font-size: var(--font-btn);
+  color: var(--color-ink);
+  text-decoration: underline;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 16rpx 28rpx;
+  margin: 0 12rpx 12rpx 0;
+  min-height: var(--tap-min);
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  font-size: var(--font-base);
+  color: var(--color-ink);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.count-text {
+  display: block;
+  margin-bottom: 16rpx;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.tap-hover {
+  opacity: 0.82;
+}

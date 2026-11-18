@@ -1,0 +1,1097 @@
+/* pages/index/index.wxss —— 推荐页（杂志封面版）
+ * 约束：字号 / 颜色 / 圆角 / 阴影 / 点击区一律取 app.wxss 的 CSS 变量。
+ * 首屏：长辈模式条 → 节气封面 hero（立冬海报）→ 栏目头 → 当令菜展示牌。
+ * 时辰问候条与节气文化卡已移去食养 tab，首页不再压别的内容。
+ */
+
+/* ==================== 1. 封面 hero：暗底食光层 ==================== */
+.hero {
+  position: relative;
+  /* 600 → 560：封面仍是暗底开场，但把主区的栏目引题往上提 40rpx，
+     首屏能看见「本期 · 节气食单 / 当令菜」而不是只剩一张海报 */
+  height: 560rpx;
+  margin-bottom: 24rpx;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-deep);
+  overflow: hidden;
+  background-color: var(--color-night);
+}
+
+.hero-poster {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-fallback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(160deg, var(--color-night-2) 0%, var(--color-night) 100%);
+}
+
+/* 全屏暖黑压暗：顶部透气、底部沉，让上方字与底部字都可读；
+ * 再叠一层暗角把视线收向中央食物。色值取夜色变量，不写死。
+ * 海报是浅色水墨，底部渐变需压到 0.78 才能托住反白正文。 */
+.hero-shade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(34, 23, 18, 0.52) 0%,
+      rgba(34, 23, 18, 0.06) 26%,
+      rgba(34, 23, 18, 0.3) 56%,
+      rgba(34, 23, 18, 0.78) 100%
+    ),
+    radial-gradient(ellipse at center, rgba(34, 23, 18, 0) 50%, rgba(34, 23, 18, 0.46) 100%);
+}
+
+/* 顶部刊名栏 */
+.hero-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24rpx 28rpx 0;
+}
+
+.hero-kicker {
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-on-night-dim);
+  padding-top: 8rpx;
+}
+
+/* 朱砂日期印章：只打日期（如 11.7），节气名由海报书法字承担 */
+.hero-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88rpx;
+  height: 76rpx;
+  padding: 0 14rpx;
+  border-radius: 10rpx;
+  background-color: var(--color-flame);
+  box-shadow: 0 4rpx 12rpx rgba(24, 16, 10, 0.4);
+}
+
+.hero-seal-text {
+  font-family: var(--font-serif);
+  font-size: var(--font-seal-sm);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-on-night);
+}
+
+/* 底部信息 */
+.hero-foot {
+  position: absolute;
+  left: 32rpx;
+  right: 32rpx;
+  bottom: 28rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  line-height: 1.4;
+  color: var(--color-on-night);
+  text-shadow: 0 2rpx 12rpx rgba(24, 16, 10, 0.5);
+}
+
+.hero-hint {
+  margin-top: 6rpx;
+  font-size: var(--font-base);
+  color: var(--color-on-night-dim);
+}
+
+.hero-ainote {
+  margin-top: 14rpx;
+  padding: 4rpx 14rpx;
+  border: 1rpx solid rgba(246, 236, 216, 0.34);
+  border-radius: 999rpx;
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-on-night-dim);
+}
+
+/* 蒸汽：右下角三道，缓慢上升 */
+.hero-steam {
+  position: absolute;
+  right: 15%;
+  bottom: 24%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.hero-steam-i {
+  position: absolute;
+  bottom: 0;
+  width: 16rpx;
+  height: 110rpx;
+  border-radius: 999rpx;
+  background-image: linear-gradient(180deg, rgba(255, 252, 244, 0) 0%, rgba(255, 252, 244, 0.9) 45%, rgba(255, 252, 244, 0) 100%);
+  opacity: 0;
+  animation: hero-steam-rise 3.6s ease-in-out infinite;
+}
+
+.hero-steam-1 { right: 0; animation-delay: 0s; }
+.hero-steam-2 { right: 32rpx; height: 142rpx; animation-delay: 1.2s; }
+.hero-steam-3 { right: 64rpx; height: 92rpx; animation-delay: 2.4s; }
+
+@keyframes hero-steam-rise {
+  0%   { transform: translateY(28rpx) translateX(0) scaleY(0.7); opacity: 0; }
+  28%  { opacity: 0.9; }
+  62%  { transform: translateY(-110rpx) translateX(-12rpx) scaleY(1); opacity: 0.5; }
+  100% { transform: translateY(-190rpx) translateX(10rpx) scaleY(1.15); opacity: 0; }
+}
+
+/* ==================== 2.3 主区栏目头：朱砂引题 + 粗书口线 ====================
+ * 「当令菜」是推荐页的主区标题。层级靠三件事拉开，不靠加粗加大乱来：
+ *   ① 朱砂引题（本期 · 节气推荐）在上面起头
+ *   ② 标题 48rpx + 宋体 + 宽字距 + 前面一枚书口序号
+ *   ③ 双线书口加粗到 6rpx，风物区只有 2rpx 细线
+ * 右侧给节气签（立冬）与道数（3 道），节气名不重复进标题（海报已有书法字）。 */
+.lead {
+  margin: 4rpx 0 22rpx;
+}
+
+.lead-kicker {
+  display: block;
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-flame);
+}
+
+.lead-row {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 10rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 6rpx solid var(--color-ink);
+}
+
+/* 书口细线：跟 .masthead 一样的「一粗一细」印刷件 */
+.lead-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5rpx;
+  border-bottom: 2rpx solid var(--color-ink);
+}
+
+.lead-main {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.lead-no {
+  flex: none;
+  margin-right: 16rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-flame);
+}
+
+.lead-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.lead-tags {
+  flex: none;
+  display: flex;
+  align-items: baseline;
+  margin-left: 16rpx;
+}
+
+/* 节气签：朱砂描边小印，代替标题里的「· 立冬」 */
+.lead-term {
+  padding: 2rpx 14rpx;
+  border: 2rpx solid var(--color-flame);
+  border-radius: 6rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  color: var(--color-flame);
+}
+
+.lead-count {
+  margin-left: 12rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+/* ==================== 1.5 参考警示条 ====================
+ * 竖排便签：纸色底 + 左侧朱砂细条，跟全页暖色一致。
+ * 原版是绿色底 + 深绿胶囊按钮横排，标题被按钮挤成两行，颜色也跳出色系。 */
+.notice {
+  position: relative;
+  margin-bottom: 24rpx;
+  padding: 22rpx 26rpx 18rpx 30rpx;
+  background-color: var(--color-bg-soft);
+  border: 2rpx solid var(--color-border-hair);
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-small);
+  box-sizing: border-box;
+}
+
+.notice-head {
+  display: flex;
+  align-items: center;
+}
+
+.notice-ico {
+  flex: none;
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 12rpx;
+  opacity: 0.9;
+}
+
+.notice-title {
+  font-size: var(--font-btn);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.notice-body {
+  display: block;
+  margin-top: 6rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+/* 确认入口做成右下角文字链：不再是一个和标题抢宽度的实心胶囊 */
+.notice-btn {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 64rpx;
+  padding-top: 4rpx;
+}
+
+.notice-btn-text {
+  font-size: var(--font-btn);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-flame);
+  border-bottom: 2rpx solid currentColor;
+  padding-bottom: 2rpx;
+}
+
+/* ==================== 3. 次区：搜索 / 分隔 / 栏目头 ====================
+ * 主区（当令菜）之后的内容统一降一档：搜索只剩一根细描边，
+ * 风物区用居中小字分隔线，栏目头由 48rpx 双线降为 36rpx 单细线。 */
+.search-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--tap-min);
+  margin: 20rpx 0 0;
+  padding: 0 24rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.search-text { font-size: var(--font-base); color: var(--color-ink-3); }
+
+.search-go {
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  color: var(--color-border);
+}
+
+/* 风物区分隔：两根细线夹一个小字标签，像杂志里的「、」分隔页 */
+.band {
+  display: flex;
+  align-items: center;
+  margin: 40rpx 0 8rpx;
+}
+
+.band-rule {
+  flex: 1;
+  height: 2rpx;
+  background-color: var(--color-border);
+}
+
+.band-label {
+  flex: none;
+  margin: 0 20rpx;
+  font-family: var(--font-serif);
+  font-size: 24rpx;
+  letter-spacing: 0.3em;
+  color: var(--color-ink-3);
+}
+
+/* 栏目头（次区）：序号 + 小标题 + 单细线 */
+.sec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 32rpx 0 18rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+}
+
+.sec-main {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.sec-no {
+  flex: none;
+  margin-right: 14rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-flame);
+}
+
+.sec-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink-2);
+}
+
+/* 风物区的荐语：字号降一档、上下留白收紧，读起来是「附文」不是「社论」。
+ * 顶线去掉——上面紧跟分隔线，两道细线会叠成双横线；只留底线收尾。 */
+.pullquote-quiet {
+  padding: 30rpx 24rpx 26rpx;
+  margin: 8rpx 0 4rpx;
+}
+
+.pullquote-quiet::before {
+  display: none;
+}
+
+.pullquote-quiet .pullquote-text {
+  font-size: var(--font-base);
+  line-height: 1.85;
+}
+
+.pullquote-quiet::after {
+  left: 34%;
+  right: 34%;
+}
+
+/* ==================== 4. 节气文化卡（次区第一块） ====================
+ * 只取三种色：纸（底）、墨（文字）、朱砂（小签 / 入口框）。
+ * 冬季节气色是黛蓝，落在暖纸面上发冷，这里不走节气色；
+ * 卡片不原地铺开：立冬 + 一句 + 诗，点「立冬的讲究」直接去节气详情页。 */
+.tculture {
+  padding: 26rpx 26rpx 22rpx;
+  margin: 0 0 20rpx;
+  background-color: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+  box-sizing: border-box;
+}
+
+.tculture-head {
+  display: flex;
+  align-items: baseline;
+}
+
+/* 「节气」两字做成一枚小签，让立冬两个字一眼是主角 */
+.tculture-tag {
+  flex: none;
+  margin-right: 14rpx;
+  padding: 2rpx 10rpx;
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-flame);
+  border: 2rpx solid var(--color-flame);
+  border-radius: 6rpx;
+}
+
+.tculture-term {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  font-weight: 600;
+  letter-spacing: 8rpx;
+  color: var(--color-ink);
+}
+
+.tculture-slogan {
+  display: block;
+  margin-top: 6rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink-2);
+}
+
+/* 诗句并进卡头：原来它单占一屏，跟文化卡说的是同一件事 */
+.tculture-poem {
+  margin-top: 16rpx;
+  padding-left: 18rpx;
+  border-left: 2rpx solid var(--color-border);
+}
+
+.tculture-poem-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+.tculture-poem-by {
+  display: block;
+  margin-top: 4rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+/* 入口框：朱砂细边 + 极淡暖底，比正文块显眼一档，但仍是「纸上一页」不是按钮 */
+.tmore {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18rpx;
+  padding: 18rpx 20rpx;
+  border: 2rpx solid var(--color-flame);
+  border-radius: var(--radius-small);
+  background-color: rgba(181, 72, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.tmore-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.tmore-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: var(--color-flame);
+}
+
+.tmore-sub {
+  display: block;
+  margin-top: 4rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.tmore-act {
+  flex: none;
+  margin-left: 12rpx;
+  font-size: var(--font-caption);
+  white-space: nowrap;
+  color: var(--color-flame);
+}
+
+/* 展开到底再看整个节气页：挂在内容末尾，不占折叠态的位置 */
+/* ==================== 5. 当令展示牌 ====================
+ * 一道一屏自动轮播，图 + 展签（序号 / 菜名 / 做法）同步切换。
+ * 上一版是「一张主推大卡 + 三列 296rpx 横滑卡」，做法文字在窄列里被压成
+ * 两字一行、还读不完；改成整屏展示牌，一段话有两个整行可以落。 */
+.showcase {
+  margin-bottom: 4rpx;
+}
+
+.sc-swiper {
+  height: 640rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+
+.sc-slide {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 展签：左边朱砂序号，右边菜名 + 做法——像展品旁边的说明牌 */
+.sc-caption {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  padding: 22rpx 26rpx 16rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.sc-no {
+  flex: none;
+  margin-right: 20rpx;
+  padding-top: 6rpx;
+  font-family: var(--font-serif);
+  font-size: 40rpx;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-flame);
+}
+
+.sc-cap-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.sc-cap-head {
+  display: flex;
+  align-items: baseline;
+}
+
+.sc-name {
+  max-width: 400rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  letter-spacing: var(--tracking-title);
+  line-height: 1.3;
+  color: var(--color-ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sc-cuisine {
+  flex: none;
+  margin-left: 14rpx;
+  font-size: var(--font-caption);
+  letter-spacing: 0.08em;
+  color: var(--color-ink-3);
+}
+
+/* 做法：最多两行，超出裁掉（完整做法在菜品详情页） */
+.sc-how {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-top: 8rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+  overflow: hidden;
+}
+
+/* 轮播刻度：一格一道菜，当前格朱砂填满 */
+.sc-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 18rpx;
+}
+
+.sc-dot {
+  width: 40rpx;
+  height: 4rpx;
+  margin: 0 6rpx;
+  border-radius: 2rpx;
+  background-color: var(--color-border);
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.sc-dot-on {
+  width: 64rpx;
+  background-color: var(--color-flame);
+}
+
+/* 全部入口：主区的收尾动作，比风物区文字重半档 */
+.section-more {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 14rpx 0 4rpx;
+}
+
+.section-more-text { font-size: var(--font-btn); color: var(--color-ink-2); }
+.section-more-arrow { width: 28rpx; height: 28rpx; margin-left: 4rpx; }
+
+/* ==================== 6. 跟着节气吃：圆形水波仪表盘 ====================
+ * 全页第二块深色（与封面呼应）。不堆「我们有多少道菜」，说「你能得到什么」。
+ * 主球：24 段外环＝24 个节气，水位＝今天走到一年里的哪一段，水波一直慢慢晃。
+ * 三个小水球：不空档 / 不费事 / 顾得上，水位＝做到的程度。
+ * 水波做法：球内 overflow hidden，水面上叠两片旋转的圆角块（与球底同色），
+ *   弧边扫过水面就成了波浪；不用 SVG、不用 canvas，纯 CSS 动画，真机稳。
+ * 进视野后（index.js watchDash）水位才从 0 涨上去，用户不会错过。 */
+.dash {
+  padding: 32rpx 32rpx 28rpx;
+  border-radius: 28rpx;
+  background-image: linear-gradient(150deg, #241a12 0%, #1a120c 100%);
+  box-shadow: 0 14rpx 36rpx rgba(34, 23, 18, 0.22);
+  overflow: hidden;
+}
+
+.dash-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dash-live {
+  display: flex;
+  align-items: center;
+}
+
+.dash-live-dot {
+  width: 12rpx;
+  height: 12rpx;
+  margin-right: 12rpx;
+  border-radius: 50%;
+  background-color: #7fb08a;
+  box-shadow: 0 0 12rpx rgba(127, 176, 138, 0.6);
+  animation: dash-breathe 2.4s ease-in-out infinite;
+}
+
+.dash-live-text {
+  font-size: 22rpx;
+  letter-spacing: 0.14em;
+  color: rgba(226, 207, 172, 0.95);
+}
+
+.dash-ver {
+  font-size: 20rpx;
+  letter-spacing: 0.06em;
+  color: rgba(211, 191, 156, 0.55);
+}
+
+/* —— 主球 + 右侧三句话 —— */
+.dash-main {
+  display: flex;
+  align-items: center;
+  margin-top: 18rpx;
+}
+
+.gauge-main {
+  position: relative;
+  flex: none;
+  width: 380rpx;
+  height: 380rpx;
+}
+
+.gauge-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 380rpx;
+  height: 380rpx;
+}
+
+/* 24 根刻度：left/top 由 kbStats 按圆心坐标算好，这里只负责把中心对齐 */
+.gauge-tick {
+  position: absolute;
+  width: 4rpx;
+  height: 18rpx;
+  margin-left: -2rpx;
+  margin-top: -9rpx;
+  border-radius: 2rpx;
+  background-color: rgba(217, 164, 65, 0.32);
+  opacity: 0;
+}
+
+.on .gauge-tick {
+  animation: tick-in 0.4s ease-out both;
+}
+
+.tick-on {
+  background-color: rgba(230, 186, 98, 0.9);
+}
+
+.tick-now {
+  height: 24rpx;
+  margin-top: -12rpx;
+  background-color: #f4dda9;
+  box-shadow: 0 0 12rpx rgba(244, 221, 169, 0.85);
+}
+
+.gauge-ball {
+  position: absolute;
+  left: 40rpx;
+  top: 40rpx;
+  width: 300rpx;
+  height: 300rpx;
+  border: 2rpx solid rgba(217, 164, 65, 0.28);
+  border-radius: 50%;
+  background-color: #1b140e;
+  overflow: hidden;
+}
+
+/* 水位：进视野后由 inline style 从 0 涨到目标百分比 */
+.gauge-water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background-image: linear-gradient(180deg, #8ec9a6 0%, #4d8b7d 55%, #3a7168 100%);
+  transition: height 1.5s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+/* 两片旋转的圆角块：颜色与球底一致，弧边扫过水面就是波浪 */
+.wave {
+  position: absolute;
+  left: 50%;
+  top: -570rpx;
+  width: 600rpx;
+  height: 600rpx;
+  margin-left: -300rpx;
+  border-radius: 43%;
+  background-color: #1b140e;
+  animation: wave-spin 8s linear infinite;
+}
+
+.wave-b {
+  border-radius: 47%;
+  background-color: rgba(27, 20, 14, 0.72);
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+
+.gauge-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.gauge-term {
+  font-family: var(--font-serif);
+  font-size: 60rpx;
+  line-height: 1.1;
+  color: #f8e9c9;
+  text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.6);
+}
+
+.gauge-pos {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  letter-spacing: 0.06em;
+  color: rgba(248, 233, 201, 0.9);
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.6);
+}
+
+/* 右侧三行：每行一个数字 + 单位 + 一句口径，不再写成长句 */
+.dash-lines {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  margin-left: 14rpx;
+}
+
+.dash-line {
+  display: flex;
+  align-items: center;
+  margin: 14rpx 0;
+}
+
+.dash-line-num {
+  flex: none;
+  width: 88rpx;
+  margin-right: 14rpx;
+  font-family: var(--font-serif);
+  font-size: 52rpx;
+  line-height: 1;
+  text-align: right;
+  color: #f0d9a8;
+}
+
+.dash-line-side {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-line-unit {
+  font-size: 22rpx;
+  letter-spacing: 0.06em;
+  color: #e6cfa5;
+}
+
+.dash-line-sub {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  line-height: 1.5;
+  color: rgba(222, 203, 172, 0.72);
+}
+
+/* —— 三个小水球 —— */
+.dash-mini {
+  display: flex;
+  margin-top: 24rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid rgba(217, 164, 65, 0.16);
+}
+
+.dash-mini-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gauge-mini {
+  position: relative;
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.gauge-mini .gauge-ball {
+  left: 0;
+  top: 0;
+  width: 140rpx;
+  height: 140rpx;
+}
+
+/* 小球的水波块尺寸按比例缩到 280rpx，否则会把整个球盖住 */
+.ball-mini .wave {
+  top: -265rpx;
+  width: 280rpx;
+  height: 280rpx;
+  margin-left: -140rpx;
+}
+
+.gauge-mini-num {
+  font-family: var(--font-serif);
+  font-size: 36rpx;
+  line-height: 1.1;
+  color: #fdf1d8;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.65);
+}
+
+.dash-mini-k {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #e6cfa5;
+}
+
+.dash-mini-v {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(222, 203, 172, 0.7);
+}
+
+.dash-note {
+  display: block;
+  margin-top: 24rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid rgba(217, 164, 65, 0.16);
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: rgba(222, 203, 172, 0.82);
+}
+
+@keyframes dash-breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes tick-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes wave-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tap-hover { opacity: 0.82; }
+
+/* —— 长辈模式入口：首屏可见，切换大字与精简功能 ——
+   横排「标题 + 说明」在大字号下会把标题挤成一列竖字（一个字一行），
+   所以改成上下两行：标题一行不折，说明另起一行，多长都撑得开。 */
+.elder-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 16rpx 24rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.elder-entry-on {
+  border-color: var(--color-flame);
+  background-color: rgba(181, 72, 42, 0.07);
+}
+
+.elder-entry-text {
+  white-space: nowrap;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink-2);
+}
+
+.elder-entry-on .elder-entry-text {
+  color: var(--color-flame);
+}
+
+.elder-entry-hint {
+  margin-top: 4rpx;
+  font-size: var(--font-btn);
+  line-height: 1.4;
+  color: var(--color-ink-3);
+}
+
+/* ==================== 7. 长辈模式（1.6 倍字）====================
+ * 大字的问题不是字大，是「一行塞两栏」的版式撑不住：
+ * 绝对定位的封面信息会叠字、限定两行的做法会被裁、右侧标签会掉行。
+ * 这一档统一改成「只保顺序、不保栏位」：
+ *   ① 封面从绝对定位改成纵向流，高度随字长
+ *   ② 菜名允许换行，做法不再限两行
+ *   ③ 展示牌加高，让展签有地方落
+ *   ④ 次区的数字仪表盘整块收起（入口在 WXML 里用 elderMode 控制）
+ */
+.elder .hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  min-height: 520rpx;
+  padding: 24rpx 28rpx 30rpx;
+  box-sizing: border-box;
+}
+
+/* 海报是绝对定位的贴图层，会盖住处于普通文档流里的兄弟节点。
+   这里不能退回 static——必须留 relative + z-index，否则大字档下
+   刊名、日期印、标题全被海报压在下面（看不见字，只剩一张图）。 */
+.elder .hero-top {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+
+.elder .hero-foot {
+  position: relative;
+  z-index: 2;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  margin-top: 40rpx;
+}
+
+.elder .hero-kicker {
+  line-height: 1.5;
+}
+
+.elder .lead-row {
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.elder .lead-tags {
+  margin-left: 0;
+  margin-top: 10rpx;
+}
+
+.elder .sc-swiper {
+  height: 800rpx;
+}
+
+.elder .sc-caption {
+  padding: 24rpx 24rpx 20rpx;
+}
+
+.elder .sc-cap-head {
+  flex-wrap: wrap;
+}
+
+.elder .sc-name {
+  max-width: 100%;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.elder .sc-cuisine {
+  margin-left: 0;
+  margin-top: 4rpx;
+}
+
+.elder .sc-how {
+  -webkit-line-clamp: 3;
+}
+
+.elder .tculture-head {
+  flex-wrap: wrap;
+}
+
+.elder .tmore {
+  flex-wrap: wrap;
+}
+
+.elder .tmore-act {
+  margin-left: 0;
+  margin-top: 8rpx;
+}
+
+.elder .search-entry {
+  padding: 12rpx 24rpx;
+}
+
+/* 长辈模式下的入口条：只剩一行，居中，降到按钮字号——
+   它不是内容，别用正文大小跟「当令菜」抢视线 */
+.elder .elder-entry {
+  align-items: center;
+  padding: 8rpx 20rpx;
+  border-style: dashed;
+  background-color: transparent;
+}
+
+.elder .elder-entry-text {
+  font-size: var(--font-btn);
+}
+
+/* 蒸汽是通感装饰，长辈模式下省掉，把首屏留给真实的节气海报与菜名 */
+.elder .hero-steam {
+  display: none;
+}

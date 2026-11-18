@@ -1,0 +1,696 @@
+/* pages/solarterm/solarterm.wxss —— 节气页样式，全部取 app.wxss 的 CSS 变量 */
+
+/* —— 详情视图 —— */
+
+/* 节气海报头图（与首页 hero 同素材，560×315 已压缩） */
+.detail-poster {
+  display: block;
+  width: 100%;
+  height: 300rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-sizing: border-box;
+}
+
+.detail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.detail-name {
+  font-size: var(--font-title);
+  color: var(--color-ink);
+}
+
+.detail-window {
+  margin-left: 16rpx;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.detail-headline {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.section {
+  margin-top: 32rpx;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 8rpx 24rpx;
+  margin: 0 12rpx 12rpx 0;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  font-size: var(--font-base);
+  color: var(--color-ink);
+  box-sizing: border-box;
+}
+
+.share-section {
+  margin-top: 32rpx;
+}
+
+/* 长图画布：尺寸必须是 600 × 960 px，与 utils/share.js 的 LOGIC_W / LOGIC_H 对应
+ * 用负偏移移出屏幕，而不是 display:none —— 后者会让 canvas 不参与渲染，取不到节点 */
+.share-canvas {
+  position: fixed;
+  left: -2000px;
+  top: 0;
+  width: 600px;
+  height: 960px;
+}
+
+.tap-hover {
+  opacity: 0.82;
+}
+
+/* —— 节气文化简介卡 —— */
+.intro-card {
+  padding: 24rpx;
+  margin-top: 24rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.intro-label {
+  display: block;
+  margin-bottom: 10rpx;
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+  letter-spacing: 2rpx;
+}
+
+.intro-text {
+  display: block;
+  font-size: var(--font-base);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+/* —— 餐次筛选：全部 / 早餐 / 午餐 / 晚餐 —— */
+.meal-tabs {
+  display: flex;
+  margin-bottom: 12rpx;
+}
+
+.meal-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  margin-right: 12rpx;
+  border: 2rpx solid var(--color-border-soft);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.meal-tab:last-child {
+  margin-right: 0;
+}
+
+.meal-tab-on {
+  border-color: var(--color-brand);
+  background-color: var(--color-card);
+}
+
+.meal-tab-on .meal-tab-text {
+  font-weight: 600;
+  color: var(--color-brand-deep);
+}
+
+.meal-tab-text {
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+/* 餐次来源说明：按做法建议，不是数据标注 */
+.meal-hint {
+  display: block;
+  margin-bottom: 20rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+/* —— 当令食材：性味与价格档次 —— */
+.ingredient-hint {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+.ingredient-list {
+  border-top: 2rpx solid var(--color-border-hair);
+}
+
+.ingredient-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  min-height: var(--tap-min);
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid var(--color-border-hair);
+  box-sizing: border-box;
+}
+
+.ingredient-name {
+  flex: 1;
+  font-size: var(--font-base);
+  color: var(--color-ink);
+}
+
+.ingredient-nature {
+  margin: 0 16rpx;
+  font-size: var(--font-base);
+  color: var(--color-ink-3);
+}
+
+.ingredient-price {
+  display: flex;
+  align-items: center;
+}
+
+.price-star {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 4rpx;
+}
+/* —— 节气文化：标语 / 诗词 / 三候 / 民俗 ——
+   文案口径：民俗一律标「民间流传」，不写成结论；诗词与物候为传统文化记载。 */
+.culture-card {
+  position: relative;
+  overflow: hidden;
+  padding: 28rpx 24rpx;
+  margin-top: 24rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-sizing: border-box;
+}
+
+/* 节气渐变：伪元素 + 极低不透明度，只透出一丝当令色，保住米黄纸感。
+   24 套起止色由 solarTheme.styleVarsOf 注入，未注入时整层透明不影响阅读。 */
+.culture-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(158deg, var(--term-grad-from, transparent) 0%, var(--term-grad-to, transparent) 100%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* 卡内内容要压在渐变层之上 */
+.culture-card > view,
+.culture-card > text {
+  position: relative;
+  z-index: 1;
+}
+
+/* 标语 + 氛围词：左标题右题眼，放不下时换行 */
+.culture-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.culture-aura {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 4rpx 16rpx;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-green-bg);
+  font-size: var(--font-btn);
+  color: var(--color-green-ink);
+}
+
+.culture-slogan {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  line-height: 1.4;
+  letter-spacing: 4rpx;
+  color: var(--color-ink);
+}
+
+.culture-poem {
+  margin-top: 18rpx;
+  padding: 4rpx 0 4rpx 20rpx;
+  border-left: 4rpx solid var(--color-green-soft);
+}
+
+/* 诗词原文本身带换行，用 pre-line 保留，不靠 <br> 拼 */
+.poem-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-base);
+  line-height: 1.9;
+  color: var(--color-ink-2);
+  white-space: pre-line;
+}
+
+.poem-author {
+  display: block;
+  margin-top: 10rpx;
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+  text-align: right;
+}
+
+.culture-block {
+  margin-top: 26rpx;
+  padding-top: 22rpx;
+  border-top: 2rpx solid var(--color-border-hair);
+}
+
+.culture-label {
+  display: block;
+  font-size: var(--font-btn);
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: var(--color-ink-3);
+}
+
+.culture-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.culture-hint {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-btn);
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
+/* 置信度标记：与「文献可考 / 民间流传」口径一致，绿底深字 */
+.confidence-tag {
+  padding: 4rpx 16rpx;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-green-bg);
+  font-size: var(--font-btn);
+  color: var(--color-green-ink);
+}
+
+.pheno-row {
+  display: flex;
+  margin-top: 16rpx;
+}
+
+.pheno-item {
+  flex: 1;
+  min-width: 0;
+  padding: 16rpx 12rpx;
+  margin-right: 12rpx;
+  border-radius: var(--radius-small);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.pheno-item:last-child {
+  margin-right: 0;
+}
+
+.pheno-idx {
+  display: block;
+  font-size: var(--font-btn);
+  color: var(--color-ink-3);
+}
+
+.pheno-text {
+  display: block;
+  margin-top: 6rpx;
+  font-size: var(--font-base);
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.folk-item {
+  display: flex;
+  margin-top: 16rpx;
+  padding: 18rpx;
+  border-radius: var(--radius-small);
+  background-color: var(--color-bg-soft);
+  box-sizing: border-box;
+}
+
+.folk-icon {
+  flex-shrink: 0;
+  width: 60rpx;
+  font-size: var(--font-emoji-sm);
+  line-height: 1.3;
+}
+
+.folk-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.folk-title {
+  display: block;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.folk-desc {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-base);
+  line-height: 1.65;
+  color: var(--color-ink-2);
+}
+
+.folk-detail {
+  display: block;
+  margin-top: 8rpx;
+  font-size: var(--font-base);
+  line-height: 1.65;
+  color: var(--color-ink-3);
+}
+/* 文化区内的「仅供参考」小字。
+   不弱于底部声明条的口径，但视觉权重更低——它是说明，不是提醒。 */
+.culture-note {
+  display: block;
+  margin-top: 20rpx;
+  padding-top: 16rpx;
+  border-top: 2rpx dashed rgba(139, 90, 43, 0.2);
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #8b7a5b;
+}
+
+/* ==================== 节气动态背景（节气材料包，六层） ====================
+ * 只铺详情视图：天空渐变 + SVG 纹理 + 漂浮元素 + 粒子 + 覆盖层。
+ * 固定定位 + 负 z-index：在纸面全局底色之上、所有内容之下；
+ * 内容卡自带底色，直接落在背景上也读得清。 */
+
+.term-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.term-bg-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 400rpx 400rpx;
+  background-repeat: repeat;
+  opacity: 0.5;
+}
+
+.term-bg-elements,
+.term-bg-particles,
+.term-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.term-bg-element {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+  animation: term-float ease-in-out infinite;
+}
+
+.term-bg-element--maple-leaf {
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+}
+
+.term-bg-element--firefly {
+  opacity: 0.15;
+  animation: term-firefly ease-in-out infinite;
+}
+
+.term-bg-element--petal,
+.term-bg-element--plum-blossom,
+.term-bg-element--reed,
+.term-bg-element--chrysanthemum,
+.term-bg-element--persimmon,
+.term-bg-element--butterfly {
+  border-radius: 50% 0 50% 0;
+  opacity: 0.1;
+}
+
+.term-bg-element--lotus {
+  border-radius: 50% 50% 0 0;
+  opacity: 0.07;
+}
+
+.term-bg-element--snow-pine {
+  border-radius: 30% 30% 0 0;
+  opacity: 0.06;
+}
+
+.term-bg-element--wheat-ear {
+  border-radius: 2rpx;
+  opacity: 0.08;
+}
+
+.term-bg-element--ice-crystal {
+  border-radius: 2rpx;
+  opacity: 0.06;
+}
+
+.term-bg-element--kite {
+  border-radius: 4rpx;
+  opacity: 0.06;
+}
+
+.term-bg-element--snowflake,
+.term-bg-element--snow-pile {
+  opacity: 0.1;
+}
+
+.term-bg-element--sun-ray,
+.term-bg-element--cicada {
+  opacity: 0.06;
+}
+
+.term-bg-element--dragonfly {
+  opacity: 0.08;
+}
+
+.term-bg-element--frost-fern,
+.term-bg-element--bare-branch,
+.term-bg-element--reed-2 {
+  opacity: 0.05;
+}
+
+.term-bg-element--mist {
+  opacity: 0.04;
+}
+
+.term-bg-element--dewdrop {
+  opacity: 0.06;
+}
+
+.term-bg-element--warm-lantern {
+  opacity: 0.1;
+  animation: term-lantern ease-in-out infinite;
+}
+
+/* 纸色薄纱：把材料包的冷调季节色收回暖纸底里，避免整页发蓝 */
+.term-bg-veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    180deg,
+    rgba(247, 240, 225, 0.66) 0%,
+    rgba(247, 240, 225, 0.78) 50%,
+    rgba(247, 240, 225, 0.86) 100%
+  );
+}
+
+.term-bg-particle {
+  position: absolute;
+  top: -20rpx;
+  border-radius: 50%;
+  animation: term-fall linear infinite;
+}
+
+.term-bg-particle--petal,
+.term-bg-particle--maple-leaf,
+.term-bg-particle--feather-drift {
+  border-radius: 50% 0 50% 0;
+}
+
+.term-bg-particle--firefly {
+  box-shadow: 0 0 12rpx rgba(255, 240, 100, 0.6);
+}
+
+.term-bg-particle--rain-drop,
+.term-bg-particle--fine-rain,
+.term-bg-particle--heavy-rain {
+  width: 2rpx !important;
+}
+
+.term-bg-particle--snowflake,
+.term-bg-particle--heavy-snow,
+.term-bg-particle--soft-snow,
+.term-bg-particle--light-snow,
+.term-bg-particle--blizzard {
+  box-shadow: 0 0 6rpx rgba(255, 255, 255, 0.5);
+}
+
+.term-bg-particle--dew-sparkle {
+  box-shadow: 0 0 8rpx rgba(200, 220, 255, 0.4);
+}
+
+.term-bg-particle--frost-crystal,
+.term-bg-particle--frost-flake {
+  border-radius: 2rpx;
+  transform: rotate(45deg);
+}
+
+.term-bg-particle--steam {
+  filter: blur(4rpx);
+}
+
+.term-bg-particle--chaff,
+.term-bg-particle--wheat-chaff,
+.term-bg-particle--sun-dust,
+.term-bg-particle--heat-spark {
+  border-radius: 2rpx;
+}
+
+.term-bg-particle--willow-catkin {
+  filter: blur(2rpx);
+}
+
+.term-bg-particle--electric-spark {
+  box-shadow: 0 0 6rpx rgba(100, 255, 50, 0.4);
+}
+
+@keyframes term-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10rpx, -15rpx) rotate(3deg); }
+  50% { transform: translate(-5rpx, -25rpx) rotate(-2deg); }
+  75% { transform: translate(-10rpx, -10rpx) rotate(2deg); }
+}
+
+@keyframes term-firefly {
+  0%, 100% { opacity: 0.05; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.3); }
+}
+
+@keyframes term-lantern {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.18; }
+}
+
+@keyframes term-fall {
+  0% { transform: translateY(-20rpx) translateX(0) rotate(0deg); }
+  25% { transform: translateY(25vh) translateX(15rpx) rotate(90deg); }
+  50% { transform: translateY(50vh) translateX(-10rpx) rotate(180deg); }
+  75% { transform: translateY(75vh) translateX(10rpx) rotate(270deg); }
+  100% { transform: translateY(110vh) translateX(0) rotate(360deg); }
+}
+
+/* ==================== 养生建议卡 ====================
+ * 来自节气材料包：只写节气习俗与起居经验，已剔功效性表述；
+ * 纸面卡片 + 朱砂竖边，与全站三色纪律一致。 */
+.health-card {
+  padding: 24rpx;
+  margin-top: 24rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.health-label {
+  display: block;
+  margin-bottom: 10rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.health-text {
+  display: block;
+  font-size: var(--font-base);
+  line-height: 1.8;
+  color: var(--color-ink-2);
+}
+
+.health-note {
+  display: block;
+  margin-top: 12rpx;
+  padding-top: 10rpx;
+  border-top: 2rpx dashed var(--color-border-hair);
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* 养生提醒改成「今天 / 吃什么 / 起居」三条：左标签右正文，字号随全局档位 */
+.health-row {
+  display: flex;
+  margin-top: 10rpx;
+}
+
+.health-row-k {
+  flex: none;
+  width: 130rpx;
+  margin-right: 12rpx;
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.health-row-v {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-btn);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+

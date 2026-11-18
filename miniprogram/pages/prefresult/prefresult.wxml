@@ -1,0 +1,59 @@
+<!-- page-meta 必须是页面第一个节点，一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+    <loading wx:if="{{status === 'loading'}}" type="spinner" />
+
+    <empty-state
+      wx:elif="{{status === 'empty'}}"
+      text="{{copy.empty}}"
+      actionText="{{copy.emptyAction}}"
+      bind:action="onGoTest"
+    />
+
+    <block wx:elif="{{status === 'unavailable'}}">
+      <view class="notice">
+        <text class="notice-text">{{copy.serviceOffline}}</text>
+      </view>
+      <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+    </block>
+
+    <block wx:else>
+      <!-- 画像标签：标签 + 一句说明（线框稿版式） -->
+      <view wx:if="{{tags.length}}" class="section">
+        <text class="section-label">{{copy.profile}}</text>
+        <view class="tag-item" wx:for="{{tags}}" wx:key="label">
+          <text class="tag-chip">{{item.label}}</text>
+          <text class="tag-desc" wx:if="{{item.desc}}">{{item.desc}}</text>
+        </view>
+      </view>
+
+      <view class="section">
+        <text class="section-label">{{copy.consentTitle}}</text>
+        <text class="section-hint">{{copy.consentHint}}</text>
+
+        <view class="switch-row" wx:for="{{consents}}" wx:key="key">
+          <text class="switch-label">{{item.label}}</text>
+          <switch checked="{{item.value}}" data-key="{{item.key}}" bindchange="onConsentChange" />
+        </view>
+      </view>
+    </block>
+
+    <!-- 这一页只做「画像 + 数据授权 + 我的数据」三件事。
+         食单生成与三道菜已归到 /pages/menu（答完题回那一页就地铺开），
+         原先这里还挂着一个生成入口卡和一份重复的推荐列表，两处入口互相打架，已删除。 -->
+
+    <!-- 我的数据：不依赖画像是否可用，任何时候都能查看与删除 -->
+    <view class="section">
+      <text class="section-label">{{copy.myData}}</text>
+      <view class="btn" hover-class="tap-hover" bindtap="onViewData">{{copy.viewData}}</view>
+      <view wx:if="{{dataVisible}}" class="data-box">
+        <text class="data-line" wx:for="{{dataSummary}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="btn btn-danger" hover-class="tap-hover" bindtap="onDeleteData">{{copy.deleteData}}</view>
+    </view>
+  </view>
+
+  <disclaimer text="{{copy.disclaimer}}" />
+</view>

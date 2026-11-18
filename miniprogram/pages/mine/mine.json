@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "disclaimer": "../../components/disclaimer/disclaimer",
+    "dish-media": "../../components/dishMedia/dishMedia",
+    "guide-tour": "../../components/guideTour/guideTour"
+  }
+}

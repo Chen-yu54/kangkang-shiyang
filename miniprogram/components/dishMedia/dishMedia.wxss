@@ -1,0 +1,310 @@
+/* components/dishMedia —— 图片位 / 风味签
+ * 色值全部取 app.wxss 的风味签色对（--tone-*），组件内不写死主题色
+ * 朱砂印章色是装饰色，不属于主题色体系，在此单独定义
+ */
+
+.dm {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+  background-color: var(--tone-lingnan);
+  box-sizing: border-box;
+}
+
+/* 贴在卡片顶部：圆角与描边交给外层卡片，自己不做 */
+.dm-flush {
+  border: none;
+  border-radius: 0;
+}
+
+.dm-round {
+  border-radius: var(--radius-card);
+}
+
+.dm-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* AI 生成内容标识：出版感深底白字，既显式又不抢食物主体 */
+.dm-ai {
+  position: absolute;
+  left: 12rpx;
+  bottom: 12rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  background-color: rgba(34, 23, 18, 0.62);
+  font-size: var(--font-caption-on-img);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  color: var(--color-caption-on-dark);
+}
+
+/* —— 照片态质感三层（纯 CSS，零包体） —— */
+
+/* 顶部高光 + 四周内描边：让照片像「装裱」过，边缘收住 */
+.dm-has::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 2rpx 0 rgba(255, 250, 236, 0.35),
+    inset 0 0 0 2rpx rgba(34, 23, 18, 0.12);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 节气色温：极淡节气色罩在照片上，整屏图统一色调。
+ * --color-green-soft 随节气换（app.js 注入），等于一期一版调色 */
+.dm-tint {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-green-soft);
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 底部压暗：暖黑渐变，让叠字可读、视线聚到食物亮部 */
+.dm-veil {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background-image: linear-gradient(
+    180deg,
+    rgba(34, 23, 18, 0) 0%,
+    rgba(34, 23, 18, 0.72) 88%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 蒸汽：三道圆角长条缓慢上升、左右微摆、淡出。小图不开，避免显脏 */
+.dm-steam {
+  position: absolute;
+  right: 20%;
+  bottom: 18%;
+  width: 0;
+  height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.dm-steam-i {
+  position: absolute;
+  bottom: 0;
+  width: 14rpx;
+  height: 88rpx;
+  border-radius: 999rpx;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 252, 244, 0) 0%,
+    rgba(255, 252, 244, 0.85) 45%,
+    rgba(255, 252, 244, 0) 100%
+  );
+  opacity: 0;
+  animation: dm-steam-rise 3.4s ease-in-out infinite;
+}
+
+.dm-steam-1 {
+  right: 0;
+  animation-delay: 0s;
+}
+
+.dm-steam-2 {
+  right: 26rpx;
+  height: 116rpx;
+  animation-delay: 1.1s;
+}
+
+.dm-steam-3 {
+  right: 52rpx;
+  height: 76rpx;
+  animation-delay: 2.2s;
+}
+
+@keyframes dm-steam-rise {
+  0% {
+    transform: translateY(24rpx) translateX(0) scaleY(0.7);
+    opacity: 0;
+  }
+  28% {
+    opacity: 0.85;
+  }
+  62% {
+    transform: translateY(-96rpx) translateX(-10rpx) scaleY(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-168rpx) translateX(8rpx) scaleY(1.15);
+    opacity: 0;
+  }
+}
+
+/* —— 五个菜系的暖色底对，同一张屏里也有区分但不刺眼 —— */
+.tone-lingnan_home {
+  background: linear-gradient(135deg, var(--tone-lingnan) 0%, var(--tone-lingnan-deep) 100%);
+}
+
+.tone-guangfu {
+  background: linear-gradient(135deg, var(--tone-guangfu) 0%, var(--tone-guangfu-deep) 100%);
+}
+
+.tone-chaoshan {
+  background: linear-gradient(135deg, var(--tone-chaoshan) 0%, var(--tone-chaoshan-deep) 100%);
+}
+
+.tone-hakka {
+  background: linear-gradient(135deg, var(--tone-hakka) 0%, var(--tone-hakka-deep) 100%);
+}
+
+.tone-other {
+  background: linear-gradient(135deg, var(--tone-other) 0%, var(--tone-other-deep) 100%);
+}
+
+/* 内层细框：给扁平色块一层「书页/食谱卡」的纵深 */
+.dm-empty::before {
+  content: '';
+  position: absolute;
+  left: 10rpx;
+  top: 10rpx;
+  right: 10rpx;
+  bottom: 10rpx;
+  border: 2rpx solid rgba(139, 90, 43, 0.14);
+  border-radius: 12rpx;
+  pointer-events: none;
+}
+
+/* 45° 细斜纹：纸张纹理，静态不耗性能 */
+.dm-empty::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(139, 90, 43, 0.055) 0,
+    rgba(139, 90, 43, 0.055) 2rpx,
+    rgba(139, 90, 43, 0) 2rpx,
+    rgba(139, 90, 43, 0) 18rpx
+  );
+  pointer-events: none;
+}
+
+/* 菜系水彩底：无照片时铺一张淡插图，再盖一层纸色纱，
+   让图退成「背景纸」而不是抢主体的插画。三系各一幅，其余菜系仍走小图标。 */
+.dm-wash {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+}
+
+.dm-wash-veil {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    158deg,
+    rgba(251, 247, 234, 0.42) 0%,
+    rgba(251, 247, 234, 0.12) 46%,
+    rgba(251, 247, 234, 0.58) 100%
+  );
+  pointer-events: none;
+}
+
+/* 菜系图形水印：半透明压在正中，不做「缺图」提示 */
+.dm-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  opacity: 0.42;
+}
+
+/* 朱砂印章：右下角单字，装饰性标记 */
+.dm-seal {
+  position: absolute;
+  right: 16rpx;
+  bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 8rpx;
+  background-color: var(--color-seal);
+  box-shadow: 0 2rpx 8rpx rgba(90, 60, 30, 0.16);
+}
+
+.dm-seal-text {
+  font-family: var(--font-serif);
+  font-size: var(--font-seal-md);
+  line-height: 1;
+  color: var(--color-on-seal);
+}
+
+/* —— 按场景微调比例，保证小卡上也读得出图形 —— */
+.dm-thumb .dm-mark {
+  width: 46%;
+  height: 46%;
+}
+
+.dm-thumb .dm-seal {
+  right: 12rpx;
+  bottom: 12rpx;
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 6rpx;
+}
+
+.dm-thumb .dm-seal-text {
+  font-size: var(--font-seal-sm);
+}
+
+.dm-hero .dm-mark {
+  width: 32%;
+  height: 32%;
+}
+
+.dm-hero .dm-seal {
+  right: 24rpx;
+  bottom: 24rpx;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 10rpx;
+}
+
+.dm-hero .dm-seal-text {
+  font-size: var(--font-seal-lg);
+}
+
+.dm-hero.dm-empty::before {
+  left: 16rpx;
+  top: 16rpx;
+  right: 16rpx;
+  bottom: 16rpx;
+  border-radius: 20rpx;
+}

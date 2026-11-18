@@ -1,0 +1,17 @@
+<view wx:if="{{type === 'skeleton'}}" class="sk-wrap">
+  <view wx:if="{{banner}}" class="sk-block sk-banner"></view>
+  <view class="sk-block sk-card"></view>
+  <view class="sk-block sk-card"></view>
+</view>
+
+<view wx:else class="loading-center">
+  <view class="loading-circle">
+    <view class="loading-thread"></view>
+    <view class="loading-dot one"></view>
+    <view class="loading-dot two"></view>
+    <view class="loading-dot three"></view>
+  </view>
+  <text class="loading-title">{{loadingTitle}}</text>
+  <text class="loading-en">{{loadingEn}}</text>
+  <text class="loading-sub">{{loadingSub}}</text>
+</view>
