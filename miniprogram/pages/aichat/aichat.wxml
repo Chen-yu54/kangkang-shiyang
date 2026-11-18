@@ -1,0 +1,75 @@
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <!-- 顶部：标题 + 清空 -->
+  <view class="head">
+    <view class="head-back" hover-class="tap-hover" bindtap="onBack">‹</view>
+    <view class="head-info">
+      <text class="head-title">{{copy.title}}</text>
+      <text class="head-sub">{{copy.subtitle}}</text>
+    </view>
+    <view wx:if="{{messages.length > 1}}" class="head-clear" hover-class="tap-hover" bindtap="onClear">
+      {{copy.clear}}
+    </view>
+  </view>
+
+  <!-- 消息区 -->
+  <scroll-view
+    class="chat"
+    scroll-y
+    scroll-into-view="{{scrollTo}}"
+    scroll-with-animation
+  >
+    <view wx:for="{{messages}}" wx:key="index" id="m{{index}}" class="msg {{item.role === 'me' ? 'msg-me' : 'msg-bot'}}">
+      <view class="msg-ava">{{item.role === 'me' ? '我' : '康'}}</view>
+      <view class="bubble {{item.isError ? 'bubble-err' : ''}}">
+        <text class="bubble-text" user-select>{{item.text}}</text>
+      </view>
+    </view>
+
+    <!-- 等回复 -->
+    <view wx:if="{{sending}}" class="msg msg-bot">
+      <view class="msg-ava">康</view>
+      <view class="bubble">
+        <view class="typing"><view class="dot"></view><view class="dot"></view><view class="dot"></view></view>
+        <text class="bubble-text typing-text">{{copy.thinking}}</text>
+      </view>
+    </view>
+
+    <view id="bottom" class="chat-bottom"></view>
+  </scroll-view>
+
+  <!-- 常用问法 -->
+  <scroll-view wx:if="{{messages.length <= 2 && !sending}}" class="quick" scroll-x>
+    <view
+      class="quick-item"
+      wx:for="{{quick}}"
+      wx:key="*this"
+      data-text="{{item}}"
+      hover-class="tap-hover"
+      bindtap="onQuick"
+    >{{item}}</view>
+  </scroll-view>
+
+  <!-- 输入区 -->
+  <view class="composer">
+    <input
+      class="input"
+      value="{{inputText}}"
+      placeholder="{{copy.placeholder}}"
+      placeholder-class="input-ph"
+      confirm-type="send"
+      maxlength="500"
+      bindinput="onInput"
+      bindconfirm="onSend"
+      adjust-position
+    />
+    <view
+      class="send {{inputText && !sending ? 'send-on' : ''}}"
+      hover-class="{{inputText && !sending ? 'tap-hover' : ''}}"
+      bindtap="onSend"
+    >{{copy.send}}</view>
+  </view>
+
+  <disclaimer />
+</view>

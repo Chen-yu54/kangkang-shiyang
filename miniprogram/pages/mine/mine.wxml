@@ -140,6 +140,14 @@
         <switch class="row-switch" checked="{{elderMode}}" color="#3f7a45" bindchange="onToggleElder" />
       </view>
 
+      <view wx:if="{{!elderMode}}" class="row" hover-class="tap-hover" bindtap="onTapAgent">
+        <view class="row-main">
+          <text class="row-label">{{copy.agentEntry}}</text>
+          <text class="row-value">{{copy.agentEntryHint}}</text>
+        </view>
+        <image class="row-arrow" src="/images/icons/yuntou-zhejiao.png" mode="aspectFit" />
+      </view>
+
       <view wx:if="{{!elderMode}}" class="row" hover-class="tap-hover" bindtap="onTapConsent">
         <view class="row-main">
           <text class="row-label">{{copy.consent}}</text>
@@ -158,6 +166,14 @@
     </view>
 
     <view class="rows">
+      <view wx:if="{{!elderMode}}" class="row" hover-class="tap-hover" bindtap="onTapFoodSafety">
+        <view class="row-main">
+          <text class="row-label">{{copy.foodSafety}}</text>
+          <text class="row-value">{{copy.foodSafetyHint}}</text>
+        </view>
+        <image class="row-arrow" src="/images/icons/yuntou-zhejiao.png" mode="aspectFit" />
+      </view>
+
       <view wx:if="{{!elderMode}}" class="row" hover-class="tap-hover" bindtap="onTapMethod">
         <view class="row-main">
           <text class="row-label">{{copy.method}}</text>

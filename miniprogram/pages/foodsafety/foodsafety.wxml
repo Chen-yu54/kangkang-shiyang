@@ -1,0 +1,223 @@
+<!-- page-meta 必须是页面第一个节点，一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<!-- 食品安全：一页只讲两件事——抽检查出了什么、处罚罚了什么。
+     顺序照数据的分量走：抽查 717 批在前，处罚 3 起在后，页尾统一交代口径。 -->
+<view class="page {{elderMode ? 'elder' : ''}}">
+  <view class="content">
+
+    <!-- 页头：标题 + 一句结论 + 数据范围。
+         结论句里的数字全部来自数据，不在模板里写死 -->
+    <view class="head">
+      <text class="head-kicker">食品安全 · 公开数据</text>
+      <text class="head-title">食品安全</text>
+      <text class="head-lead">{{lead}}</text>
+      <view class="head-meta">
+        <text class="head-meta-item">{{scope.organ}}</text>
+        <view class="head-meta-dot"></view>
+        <text class="head-meta-item">{{scope.from}} — {{scope.to}}</text>
+      </view>
+    </view>
+
+    <!-- 概览四格：数字用衬线大字，单位跟小字，标签在下 -->
+    <view class="ov-head">
+      <image class="ov-ico" src="{{icons.overview}}" mode="aspectFit" />
+      <text class="ov-kicker">数据概览</text>
+    </view>
+
+    <view class="ov">
+      <view class="ov-item" wx:for="{{ov}}" wx:key="key">
+        <view class="ov-num-row">
+          <text class="ov-num">{{item.num}}</text>
+          <text wx:if="{{item.unit}}" class="ov-unit">{{item.unit}}</text>
+        </view>
+        <text class="ov-label">{{item.label}}</text>
+        <text class="ov-note">{{item.note}}</text>
+      </view>
+    </view>
+
+    <!-- ==================== 壹 · 近年的食材监督抽查 ==================== -->
+    <view class="sec">
+      <image class="sec-ico" src="{{icons.check}}" mode="aspectFit" />
+      <view class="sec-main">
+        <text class="sec-no">壹</text>
+        <text class="sec-title">近年的食材监督抽查</text>
+      </view>
+    </view>
+    <text class="sec-note">{{insp.batches}} 批次不合格 · {{insp.notices}} 期通告 · 只统计不合格批次</text>
+
+    <!-- 问题类型：按「不合格批次」归类，条形长度按最大一类归一 -->
+    <view class="card">
+      <view class="card-head">
+        <image class="card-ico" src="{{icons.problem}}" mode="aspectFit" />
+        <text class="card-title">问题集中在哪儿</text>
+        <text class="card-unit">按不合格项目</text>
+      </view>
+
+      <view class="bar" wx:for="{{insp.problems}}" wx:key="key">
+        <view class="bar-top">
+          <text class="bar-name {{index === 0 ? 'bar-name-top' : ''}}">{{item.name}}</text>
+          <text class="bar-val">{{item.n}} 批 · {{item.pct}}%</text>
+        </view>
+        <view class="bar-track">
+          <view
+            class="bar-fill {{index === 0 ? 'bar-fill-top' : ''}}"
+            style="width: {{item.w}}%"
+          ></view>
+        </view>
+      </view>
+
+      <text class="card-foot">占比按 {{insp.batches}} 批次不合格算，四舍五入到一位小数。</text>
+    </view>
+
+    <!-- 抽样环节：生产 / 流通 / 餐饮 三格 -->
+    <view class="card">
+      <view class="card-head">
+        <image class="card-ico" src="{{icons.stage}}" mode="aspectFit" />
+        <text class="card-title">在哪个环节查出</text>
+      </view>
+
+      <view class="stages">
+        <view class="stage" wx:for="{{insp.stages}}" wx:key="key">
+          <text class="stage-pct">{{item.pct}}%</text>
+          <text class="stage-name">{{item.name}}</text>
+          <text class="stage-n">{{item.n}} 批</text>
+        </view>
+      </view>
+
+      <text class="card-foot">流通＝商场、超市、网店等卖场；餐饮＝餐馆、食堂；生产＝加工厂。</text>
+    </view>
+
+    <!-- 关键食材：只统计能对上食材的条目，对不上的（碗盘、器具）单独说明 -->
+    <view class="card">
+      <view class="card-head">
+        <image class="card-ico" src="{{icons.ingredient}}" mode="aspectFit" />
+        <text class="card-title">反复出现的食材</text>
+        <text class="card-unit">{{insp.tagged}} 条可对上</text>
+      </view>
+
+      <view class="chips">
+        <view class="chip" wx:for="{{insp.ingredients}}" wx:key="name">
+          <text class="chip-name">{{item.name}}</text>
+          <text class="chip-n">{{item.n}}</text>
+        </view>
+      </view>
+
+      <text class="card-foot">另有 {{insp.unmatched}} 条是碗盘、加工器具等非食材项，没算进来；同一格里写了两样食材的，各记一次。</text>
+    </view>
+
+    <!-- 月度：11 根柱，1 月最高；11 月只到月初，条数天然偏少 -->
+    <view class="card">
+      <view class="card-head">
+        <image class="card-ico" src="{{icons.month}}" mode="aspectFit" />
+        <text class="card-title">各月不合格批次</text>
+        <text class="card-unit">按通告发布月份</text>
+      </view>
+
+      <view class="cols">
+        <view class="col" wx:for="{{months}}" wx:key="label">
+          <text class="col-n">{{item.n}}</text>
+          <view class="col-track">
+            <view class="col-bar" style="height: {{item.h}}%"></view>
+          </view>
+          <text class="col-x">{{item.label}}</text>
+        </view>
+      </view>
+
+      <text class="card-foot">最高是 {{monthFirst.label}}（{{monthFirst.n}} 批）；{{monthLast.label}} 只统计到月初，条数偏少。</text>
+    </view>
+
+    <!-- 最近通告：标题写全，期号与日期分开；标题里的批次数和本表收录条数都露出来 -->
+    <view class="card">
+      <view class="card-head">
+        <image class="card-ico" src="{{icons.notice}}" mode="aspectFit" />
+        <text class="card-title">最近的几期通告</text>
+      </view>
+
+      <view class="notice" wx:for="{{insp.latest}}" wx:key="no">
+        <view class="notice-top">
+          <text class="notice-no">{{item.no}}</text>
+          <text class="notice-date">{{item.date}}</text>
+        </view>
+        <text class="notice-title">{{item.title}}</text>
+        <text class="notice-count">通告 {{item.declared}} 批 · 本表收录 {{item.count}} 条</text>
+      </view>
+
+      <text class="card-foot">期号是通告编号，括号里是抽检期次；只列最近三期，原文可在官网「食品抽检」栏目查。</text>
+    </view>
+
+    <!-- ==================== 贰 · 近年的执法处罚 ==================== -->
+    <view class="sec">
+      <image class="sec-ico" src="{{icons.penalty}}" mode="aspectFit" />
+      <view class="sec-main">
+        <text class="sec-no">贰</text>
+        <text class="sec-title">近年的执法处罚</text>
+      </view>
+    </view>
+    <text class="sec-note">{{scope.penaltyNote}}</text>
+
+    <view class="card">
+      <view class="card-head">
+        <image class="card-ico" src="{{icons.basis}}" mode="aspectFit" />
+        <text class="card-title">食品类处罚，今年有多少</text>
+      </view>
+
+      <view class="pens">
+        <view class="pen">
+          <view class="pen-num-row">
+            <text class="pen-num">{{pen.food}}</text>
+            <text class="pen-unit">起</text>
+          </view>
+          <text class="pen-label">食品类</text>
+        </view>
+        <view class="pen">
+          <view class="pen-num-row">
+            <text class="pen-num">{{pen.amountWan}}</text>
+            <text class="pen-unit">万</text>
+          </view>
+          <text class="pen-label">罚没合计</text>
+        </view>
+        <view class="pen">
+          <view class="pen-num-row">
+            <text class="pen-num">{{pen.amountMaxWan}}</text>
+            <text class="pen-unit">万</text>
+          </view>
+          <text class="pen-label">最高单笔</text>
+        </view>
+      </view>
+
+      <text class="card-foot">同期公开的 {{pen.total}} 份省局处罚里，{{pen.other}} 份是特种设备、专利代理等非食品类，{{pen.pending}} 份待判定，这一块只留食品类。</text>
+    </view>
+
+    <view class="sub-head">
+      <text class="sub-title">三份决定书在说什么</text>
+      <text class="sub-note">按时间倒序</text>
+    </view>
+
+    <view class="case" wx:for="{{pen.cases}}" wx:key="doc">
+      <view class="case-top">
+        <text class="case-tag">{{item.tag}}</text>
+        <text class="case-date">{{item.date}}</text>
+      </view>
+      <text class="case-cause">{{item.cause}}</text>
+      <text class="case-basis">依据：{{item.basis}}</text>
+      <view class="case-foot">
+        <text class="case-action">{{item.action}}</text>
+        <text class="case-doc">{{item.doc}}</text>
+      </view>
+    </view>
+
+    <!-- 口径：三句话把「这页不做什么」说清，比加一句免责更有用 -->
+    <view class="note">
+      <view class="note-head">
+        <image class="note-ico" src="{{icons.foot}}" mode="aspectFit" />
+        <text class="note-title">怎么读这一页</text>
+      </view>
+      <text class="note-line">· 只统计通告里的不合格批次，没有合格批次总量，所以这页不给「合格率」。</text>
+      <text class="note-line">· 抽检数据来自{{scope.organ}}公开通告；处罚数据为决定书机器抽取，原文标注「待核验」。</text>
+      <text class="note-line">· 案例只写案由、法条和处理结果，商家名称原文已打码，这里不复述。</text>
+    </view>
+
+    <disclaimer />
+  </view>
+</view>

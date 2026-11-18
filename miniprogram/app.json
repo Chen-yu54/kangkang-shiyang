@@ -4,6 +4,8 @@
     "pages/agreement/agreement",
     "pages/method/method",
     "pages/consent/consent",
+    "pages/agent/agent",
+    "pages/aichat/aichat",
     "pages/index/index",
     "pages/menu/menu",
     "pages/mine/mine",
@@ -13,7 +15,8 @@
     "pages/favorite/favorite",
     "pages/preftest/preftest",
     "pages/prefresult/prefresult",
-    "pages/recommend/recommend"
+    "pages/recommend/recommend",
+    "pages/foodsafety/foodsafety"
   ],
   "subPackages": [
     {

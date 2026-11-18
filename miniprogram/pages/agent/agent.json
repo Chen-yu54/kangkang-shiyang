@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "问问康康",
+  "backgroundColor": "#f7f0e1",
+  "usingComponents": {
+    "disclaimer": "/components/disclaimer/disclaimer"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "食品安全",
+  "backgroundColor": "#f7f0e1",
+  "usingComponents": {
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

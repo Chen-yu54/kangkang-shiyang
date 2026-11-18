@@ -1,0 +1,112 @@
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <!-- 顶部身份条 -->
+  <view class="head">
+    <view class="head-back" hover-class="tap-hover" bindtap="onBack">‹</view>
+    <view class="head-ava">康</view>
+    <view class="head-info">
+      <text class="head-title">{{copy.title}}</text>
+      <text class="head-sub">{{copy.subtitle}}</text>
+    </view>
+    <view wx:if="{{stage === 'result'}}" class="head-restart" hover-class="tap-hover" bindtap="onRestart">
+      {{copy.restart}}
+    </view>
+  </view>
+
+  <!-- 对话区 -->
+  <scroll-view
+    class="chat"
+    scroll-y
+    scroll-into-view="{{scrollTo}}"
+    scroll-with-animation
+  >
+    <view wx:for="{{messages}}" wx:key="index" wx:if="{{!item.hidden}}">
+      <view id="m{{index}}" class="msg {{item.role === 'me' ? 'msg-me' : 'msg-bot'}}">
+        <view class="msg-ava">{{item.role === 'me' ? '我' : '康'}}</view>
+        <view class="msg-body">
+          <view class="bubble">
+            <text class="bubble-text">{{item.text}}</text>
+
+            <!-- 题目选项：点选而不是打字 -->
+            <view wx:if="{{item.options && item.step === step}}" class="opts">
+              <view
+                class="opt {{curMulti && picked.indexOf(opt.value) > -1 ? 'opt-on' : ''}}"
+                wx:for="{{curOptions}}"
+                wx:for-item="opt"
+                wx:key="value"
+                data-value="{{opt.value}}"
+                hover-class="tap-hover"
+                bindtap="onTapOption"
+              >{{opt.label}}</view>
+            </view>
+
+            <!-- 菜品卡 -->
+            <view wx:if="{{item.dishes}}" class="cards">
+              <view
+                class="card"
+                wx:for="{{item.dishes}}"
+                wx:for-item="d"
+                wx:key="key"
+                data-id="{{d.id}}"
+                hover-class="tap-hover"
+                bindtap="onTapDish"
+              >
+                <view class="card-head">
+                  <text class="card-name">{{d.name}}</text>
+                  <text wx:if="{{!d.matched}}" class="card-tag">{{copy.noLocal}}</text>
+                </view>
+                <text wx:if="{{d.cuisineName || d.difficultyText || d.costText}}" class="card-meta">
+                  {{d.cuisineName}}{{d.difficultyText ? ' · ' + d.difficultyText : ''}}{{d.costText ? ' · ' + d.costText : ''}}
+                </text>
+                <view wx:if="{{d.howText}}" class="card-row">
+                  <text class="card-label">做法</text>
+                  <text class="card-text">{{d.howText}}</text>
+                </view>
+                <view wx:if="{{d.whyText}}" class="card-row">
+                  <text class="card-label">理由</text>
+                  <text class="card-text">{{d.whyText}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <text wx:if="{{item.role === 'me'}}" class="msg-meta">{{copy.you}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 出菜中 -->
+    <view wx:if="{{stage === 'think'}}" class="msg msg-bot">
+      <view class="msg-ava">康</view>
+      <view class="msg-body">
+        <view class="bubble">
+          <view class="typing"><view class="dot"></view><view class="dot"></view><view class="dot"></view></view>
+          <text class="bubble-text typing-text">{{copy.thinking}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view id="bottom" class="chat-bottom"></view>
+  </scroll-view>
+
+  <!-- 底部操作区 -->
+  <view class="foot">
+    <!-- 多选：勾完点下一步 -->
+    <view wx:if="{{stage === 'ask' && curMulti}}" class="foot-multi">
+      <text class="foot-hint">{{copy.multiHint}}</text>
+      <view class="foot-btn" hover-class="tap-hover" bindtap="onNextStep">{{copy.next}}</view>
+    </view>
+
+    <!-- 答题进度 -->
+    <view wx:if="{{stage === 'ask'}}" class="foot-progress">
+      <text class="foot-progress-text">{{progressText}}</text>
+    </view>
+
+    <!-- 已出结果：说明这一轮用的是哪条路 -->
+    <view wx:if="{{stage === 'result'}}" class="foot-note">
+      <text class="foot-note-text">{{engineNote}}</text>
+    </view>
+
+    <disclaimer />
+  </view>
+</view>

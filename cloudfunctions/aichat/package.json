@@ -1,0 +1,10 @@
+{
+  "name": "aichat",
+  "version": "1.0.0",
+  "description": "扣子 Bot 对话转发：三跳流程（chat → retrieve 轮询 → message/list），前端零密钥",
+  "main": "index.js",
+  "dependencies": {},
+  "engines": {
+    "node": ">=16"
+  }
+}

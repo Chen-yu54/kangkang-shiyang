@@ -11,6 +11,7 @@
 
     <block wx:else>
       <view class="head">
+        <text class="head-kicker">食材档案</text>
         <view class="head-row">
           <text class="head-name">{{name}}</text>
           <text wx:if="{{typeText}}" class="head-tag">{{typeText}}</text>
@@ -23,12 +24,18 @@
         wx:for="{{sections}}"
         wx:key="label"
       >
-        <text class="sec-label">{{item.label}}</text>
+        <view class="sec-head">
+          <image wx:if="{{item.icon}}" class="sec-ico" src="{{item.icon}}" mode="aspectFit" />
+          <text class="sec-label">{{item.label}}</text>
+        </view>
         <text class="sec-text">{{item.text}}</text>
       </view>
 
       <view wx:if="{{basis}}" class="basis">
-        <text class="basis-label">资料依据</text>
+        <view class="basis-head">
+          <image class="basis-ico" src="/images/ingredients/season_intro_oldbook.png" mode="aspectFit" />
+          <text class="basis-label">资料依据</text>
+        </view>
         <text class="basis-text">{{basis}}</text>
       </view>
 

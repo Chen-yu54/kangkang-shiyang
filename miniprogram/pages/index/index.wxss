@@ -250,66 +250,7 @@
   color: var(--color-ink-3);
 }
 
-/* ==================== 1.5 参考警示条 ====================
- * 竖排便签：纸色底 + 左侧朱砂细条，跟全页暖色一致。
- * 原版是绿色底 + 深绿胶囊按钮横排，标题被按钮挤成两行，颜色也跳出色系。 */
-.notice {
-  position: relative;
-  margin-bottom: 24rpx;
-  padding: 22rpx 26rpx 18rpx 30rpx;
-  background-color: var(--color-bg-soft);
-  border: 2rpx solid var(--color-border-hair);
-  border-left: 6rpx solid var(--color-flame);
-  border-radius: var(--radius-small);
-  box-sizing: border-box;
-}
-
-.notice-head {
-  display: flex;
-  align-items: center;
-}
-
-.notice-ico {
-  flex: none;
-  width: 32rpx;
-  height: 32rpx;
-  margin-right: 12rpx;
-  opacity: 0.9;
-}
-
-.notice-title {
-  font-size: var(--font-btn);
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--color-ink);
-}
-
-.notice-body {
-  display: block;
-  margin-top: 6rpx;
-  font-size: var(--font-btn);
-  line-height: 1.5;
-  color: var(--color-ink-3);
-}
-
-/* 确认入口做成右下角文字链：不再是一个和标题抢宽度的实心胶囊 */
-.notice-btn {
-  display: flex;
-  justify-content: flex-end;
-  min-height: 64rpx;
-  padding-top: 4rpx;
-}
-
-.notice-btn-text {
-  font-size: var(--font-btn);
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--color-flame);
-  border-bottom: 2rpx solid currentColor;
-  padding-bottom: 2rpx;
-}
-
-/* ==================== 3. 次区：搜索 / 分隔 / 栏目头 ====================
+/* ==================== 3. 搜菜名 / 分隔 / 栏目头 ====================
  * 主区（当令菜）之后的内容统一降一档：搜索只剩一根细描边，
  * 风物区用居中小字分隔线，栏目头由 48rpx 双线降为 36rpx 单细线。 */
 .search-entry {
@@ -942,46 +883,6 @@
 
 .tap-hover { opacity: 0.82; }
 
-/* —— 长辈模式入口：首屏可见，切换大字与精简功能 ——
-   横排「标题 + 说明」在大字号下会把标题挤成一列竖字（一个字一行），
-   所以改成上下两行：标题一行不折，说明另起一行，多长都撑得开。 */
-.elder-entry {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: var(--tap-min);
-  padding: 16rpx 24rpx;
-  margin-bottom: 20rpx;
-  border: 2rpx solid var(--color-border);
-  border-radius: var(--radius-card);
-  background-color: var(--color-bg-soft);
-  box-sizing: border-box;
-}
-
-.elder-entry-on {
-  border-color: var(--color-flame);
-  background-color: rgba(181, 72, 42, 0.07);
-}
-
-.elder-entry-text {
-  white-space: nowrap;
-  font-size: var(--font-base);
-  font-weight: 600;
-  color: var(--color-ink-2);
-}
-
-.elder-entry-on .elder-entry-text {
-  color: var(--color-flame);
-}
-
-.elder-entry-hint {
-  margin-top: 4rpx;
-  font-size: var(--font-btn);
-  line-height: 1.4;
-  color: var(--color-ink-3);
-}
-
 /* ==================== 7. 长辈模式（1.6 倍字）====================
  * 大字的问题不是字大，是「一行塞两栏」的版式撑不住：
  * 绝对定位的封面信息会叠字、限定两行的做法会被裁、右侧标签会掉行。
@@ -1078,20 +979,71 @@
   padding: 12rpx 24rpx;
 }
 
-/* 长辈模式下的入口条：只剩一行，居中，降到按钮字号——
-   它不是内容，别用正文大小跟「当令菜」抢视线 */
-.elder .elder-entry {
-  align-items: center;
-  padding: 8rpx 20rpx;
-  border-style: dashed;
-  background-color: transparent;
-}
-
-.elder .elder-entry-text {
-  font-size: var(--font-btn);
-}
-
 /* 蒸汽是通感装饰，长辈模式下省掉，把首屏留给真实的节气海报与菜名 */
 .elder .hero-steam {
   display: none;
+}
+/* 问问康康入口：与搜索框并排的对话入口。
+   墨绿圆形头像 + 两行文案，点击区 108rpx。 */
+.ask-entry {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 32rpx 0;
+  padding: 24rpx 26rpx;
+  min-height: 108rpx;
+  background: #fdf8ee;
+  border: 2rpx solid rgba(63, 122, 69, 0.24);
+  border-radius: 16rpx;
+}
+
+.ask-ava {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 24rpx;
+  background: #3f7a45;
+  color: #ffffff;
+  font-size: 34rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin-right: 20rpx;
+}
+
+.ask-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ask-title {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #2d241a;
+}
+
+.ask-sub {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 32rpx;
+  color: #8b7a5b;
+}
+
+.ask-go {
+  font-size: 40rpx;
+  color: #3f7a45;
+  flex: none;
+  margin-left: 12rpx;
+}
+/* 第二个入口（康康对话）：用浅底 + 棕色边，与「问问康康」问卷入口区分开，
+   不要让用户觉得是同一个按钮点了两次。 */
+.ask-entry-alt {
+  background: #fdfaf4;
+  border-color: rgba(139, 90, 43, 0.22);
+  margin-top: 14rpx;
+}
+
+.ask-ava-alt {
+  background: #8b5a2b;
 }

@@ -48,7 +48,6 @@ Page({
     termName: '',
     termPoster: '',
     sealText: '',
-    showNotice: false,
     elderMode: false,
     copy: {},
     termCulture: null, // 节气文化摘要：slogan / 诗句（三候 / 食俗 / 食材在节气详情页）
@@ -64,9 +63,10 @@ Page({
     this.setData({
       copy: {
         searchPlaceholder: t('home.searchPlaceholder'),
-        elderOn: t('elder.on'),
-        elderOff: t('elder.off'),
-        elderHint: t('elder.hint'),
+        askTitle: t('home.askTitle'),
+        askSub: t('home.askSub'),
+        chatTitle: t('home.chatTitle'),
+        chatSub: t('home.chatSub'),
         sectionDishes: t('home.sectionDishes'),
         sectionCulture: t('home.sectionCulture'),
         seeAll: t('home.seeAll'),
@@ -85,9 +85,6 @@ Page({
         snapLine3Sub: t('snapshot.line3Sub'),
         snapNote: t('snapshot.note'),
         aiTag: t('common.aiGenerated'),
-        noticeTitle: t('common.noticeTitle'),
-        noticeBody: t('common.noticeBody'),
-        noticeAction: t('common.noticeAction'),
         // —— 杂志化新增
         heroKicker: t('home.heroKicker'),
         heroAiNote: t('home.heroAiNote'),
@@ -101,14 +98,6 @@ Page({
       },
     });
     this.applyTermTheme();
-    // 参考警示条：没确认过才显示
-    let acked = false;
-    try {
-      acked = !!wx.getStorageSync('noticeAck');
-    } catch (err) {
-      acked = false;
-    }
-    this.setData({ showNotice: !acked });
     this.loadData();
     track.pageView('index');
   },
@@ -163,15 +152,6 @@ Page({
     }
   },
 
-  // 「内容仅供参考」提示条：点「我知道了」后本机记忆，不再打扰
-  onDismissNotice() {
-    try {
-      wx.setStorageSync('noticeAck', true);
-    } catch (err) {
-      // 存储失败只是下次还会显示，不阻断
-    }
-    this.setData({ showNotice: false });
-  },
   onPullDownRefresh() {
     this.loadData();
   },
@@ -303,6 +283,16 @@ Page({
   },
 
   // 节气文化卡 → 节气详情页（solarterm 支持 ?term= 直接进详情，省一次列表点击）
+  // 问问康康：对话式问卷页
+  // 康康对话：连扣子 Bot 的自由问答
+  onTapAiChat() {
+    wx.navigateTo({ url: '/pages/aichat/aichat' });
+  },
+
+  onTapAgent() {
+    wx.navigateTo({ url: '/pages/agent/agent' });
+  },
+
   onTapTermDetail() {
     const name = this.data.termName;
     if (!name) return;
@@ -330,15 +320,6 @@ Page({
     const name = this.data.termName || '';
     const q = name ? '?term=' + encodeURIComponent(name) : '';
     wx.navigateTo({ url: '/pages/solarterm/solarterm' + q });
-  },
-
-  // 适老版开关：只改字号与次要入口显隐，布局不动
-  onToggleElder() {
-    const app = getApp();
-    if (!app.setElderMode) return;
-    const next = app.setElderMode(!app.getElderMode());
-    this.setData({ elderMode: next, pageStyle: app.getFontStyle() });
-    wx.showToast({ title: next ? t('elder.onHint') : '', icon: 'none' });
   },
 
   onTapSearch() {

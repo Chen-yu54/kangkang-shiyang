@@ -89,10 +89,14 @@ Page({
         logout: t('mine.logout'),
         service: t('mine.agreementService'),
         privacyDoc: t('mine.agreementPrivacy'),
+        agentEntry: t('mine.agentEntry'),
+        agentEntryHint: t('mine.agentEntryHint'),
         consent: t('mine.consent'),
         consentOn: t('mine.consentOn'),
         consentOff: t('mine.consentOff'),
         method: t('mine.method'),
+        foodSafety: t('mine.foodSafety'),
+        foodSafetyHint: t('mine.foodSafetyHint'),
         favorite: t('mine.favorite'),
         pref: t('mine.pref'),
         tasteLabel: t('mine.tasteLabel'),
@@ -105,6 +109,8 @@ Page({
         favEmptyTitle: t('mine.favEmptyTitle'),
         favEmptySub: t('mine.favEmptySub'),
         prefNote: t('mine.prefNote'),
+        prefEmpty: t('mine.prefEmpty'),
+        prefDone: t('mine.prefDone'),
         more: t('mine.more'),
         replayTour: t('mine.replayTour'),
         about: t('mine.about'),
@@ -199,8 +205,17 @@ Page({
   },
 
   // 数据分享设置：从「我的」进入，带 from=mine 以便返回
+  onTapAgent() {
+    wx.navigateTo({ url: '/pages/agent/agent' });
+  },
+
   onTapConsent() {
     wx.navigateTo({ url: '/pages/consent/consent?from=mine' });
+  },
+
+  // 食品安全：省局公开的抽检与处罚数据，独立页面，不占 tab
+  onTapFoodSafety() {
+    wx.navigateTo({ url: '/pages/foodsafety/foodsafety' });
   },
 
   onTapMethod() {

@@ -22,5 +22,7 @@ Component({
 
   data: {
     fallback: i18n.t('common.disclaimer'),
+    // 版权行：固定文案，不走 i18n（品牌名不翻译）
+    copyright: '© KangkangshiyangAI 2026',
   },
 });

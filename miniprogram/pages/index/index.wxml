@@ -6,14 +6,6 @@
 <view class="page {{elderMode ? 'elder' : ''}}">
   <view class="content">
 
-    <!-- 长辈模式：首屏可见，一键切换大字与精简功能。
-         开了之后只留「退出长辈模式」一行——此时再写「字更大，只留最常用的几块」
-         是废话，还会把按钮挤成竖排。 -->
-    <view class="elder-entry {{elderMode ? 'elder-entry-on' : ''}}" hover-class="tap-hover" bindtap="onToggleElder">
-      <text class="elder-entry-text">{{elderMode ? copy.elderOff : copy.elderOn}}</text>
-      <text wx:if="{{!elderMode}}" class="elder-entry-hint">{{copy.elderHint}}</text>
-    </view>
-
     <!-- 1. 封面 hero（暗底食光层）：节气海报压暗 + 刊名栏 + 日期印章 + 出版信息 + 蒸汽。
          节气名只由海报书法字承担，页面不再重复叠字；下方标题走 slogan，印章走日期。 -->
     <view wx:if="{{banner}}" id="tour-hero" class="hero" hover-class="tap-hover" bindtap="onTapTerm">
@@ -51,19 +43,69 @@
       </view>
     </view>
 
-    <!-- 1.5 参考警示条：首次进入显示，「我知道了」后本机记忆不再打扰。 -->
-    <view wx:if="{{showNotice}}" class="notice" aria-role="alert">
-      <view class="notice-head">
-        <image class="notice-ico" src="/images/icons/taoyin-gantanhao.png" mode="aspectFit" />
-        <text class="notice-title">{{copy.noticeTitle}}</text>
-      </view>
-      <text class="notice-body">{{copy.noticeBody}}</text>
-      <view class="notice-btn" hover-class="tap-hover" bindtap="onDismissNotice">
-        <text class="notice-btn-text">{{copy.noticeAction}}</text>
+    <!-- ==================== 2. 节气文化 ====================
+         封面之后先讲这个节气：一句标语、一首诗，点开看三候与食俗。
+         文化放前面，是因为它决定这一屏推什么菜——先讲为什么，再给吃什么。 -->
+    <view wx:if="{{termCulture}}" class="sec">
+      <view class="sec-main">
+        <text class="sec-no">{{copy.noCulture}}</text>
+        <text class="sec-title">{{copy.sectionCulture}}</text>
       </view>
     </view>
 
-    <!-- ==================== 2. 主区：时令菜品 ====================
+    <!-- 2.1 节气文化卡：先只亮三样——节气名、一句、一首诗。
+         三候 / 食俗 / 食材不在这一屏展开，点「立冬的讲究」直接去节气详情页看。 -->
+    <view wx:if="{{termCulture}}" id="tour-culture" class="tculture">
+      <view class="tculture-head">
+        <text class="tculture-tag">{{copy.cultureTag}}</text>
+        <text class="tculture-term">{{termName}}</text>
+      </view>
+      <text class="tculture-slogan">{{termCulture.slogan}}</text>
+
+      <view wx:if="{{termCulture.poem}}" class="tculture-poem">
+        <text class="tculture-poem-text">{{termCulture.poem.text}}</text>
+        <text class="tculture-poem-by">{{termCulture.poem.author}}</text>
+      </view>
+
+      <!-- 可点的框：整框就是入口，去节气详情页，看三候 / 食俗 / 当令食材 -->
+      <view class="tmore" hover-class="tap-hover" bindtap="onTapTermDetail">
+        <view class="tmore-main">
+          <text class="tmore-title">{{cultureTitle}}</text>
+          <text class="tmore-sub">{{copy.cultureOpenSub}}</text>
+        </view>
+        <text class="tmore-act">{{copy.cultureOpen}} ›</text>
+      </view>
+    </view>
+
+    <!-- 3. 搜菜名 / 食材：整行都是点击区，大字下也不挤 -->
+    <view class="search-entry" hover-class="tap-hover" bindtap="onTapSearch">
+      <text class="search-text">{{copy.searchPlaceholder}}</text>
+      <text class="search-go">›</text>
+    </view>
+
+    <!-- 问问康康：对话式问卷入口。
+         不放表单而放对话——问 6 道题容易中途退出，聊几句更容易走完。 -->
+    <view class="ask-entry" hover-class="tap-hover" bindtap="onTapAgent">
+      <view class="ask-ava">康</view>
+      <view class="ask-body">
+        <text class="ask-title">{{copy.askTitle}}</text>
+        <text class="ask-sub">{{copy.askSub}}</text>
+      </view>
+      <text class="ask-go">›</text>
+    </view>
+
+    <!-- 自由对话入口：连扣子 Bot，可以打字追问 -->
+    <view class="ask-entry ask-entry-alt" hover-class="tap-hover" bindtap="onTapAiChat">
+      <view class="ask-ava ask-ava-alt">问</view>
+      <view class="ask-body">
+        <text class="ask-title">{{copy.chatTitle}}</text>
+        <text class="ask-sub">{{copy.chatSub}}</text>
+      </view>
+      <text class="ask-go">›</text>
+    </view>
+
+    <!-- ==================== 4. 当令菜 ====================
+         讲完节气、给完入口，紧接着「今天吃什么」；数据仪表盘收在页尾做复盘。
          这一页只看当令，不看口味。口味测试 → 推演 → 专属食单是另一条链路，
          归「专属推荐」tab 的今日食单，两边不混。 -->
     <view class="lead">
@@ -147,47 +189,7 @@
       </view>
     </block>
 
-    <!-- ==================== 3. 次区：节气文化 + 搜菜 ====================
-         菜系卡撤掉后，次区只剩两件事：读懂这个节气、按名字找菜。
-         两块挨着放，中间不再插分隔线——它们是同一段「补充信息」。 -->
-    <view wx:if="{{termCulture}}" class="sec">
-      <view class="sec-main">
-        <text class="sec-no">{{copy.noCulture}}</text>
-        <text class="sec-title">{{copy.sectionCulture}}</text>
-      </view>
-    </view>
-
-    <!-- 3.1 节气文化卡：先只亮三样——节气名、一句、一首诗。
-         三候 / 食俗 / 食材不在这一屏展开，点「立冬的讲究」直接去节气详情页看。 -->
-    <view wx:if="{{termCulture}}" id="tour-culture" class="tculture">
-      <view class="tculture-head">
-        <text class="tculture-tag">{{copy.cultureTag}}</text>
-        <text class="tculture-term">{{termName}}</text>
-      </view>
-      <text class="tculture-slogan">{{termCulture.slogan}}</text>
-
-      <view wx:if="{{termCulture.poem}}" class="tculture-poem">
-        <text class="tculture-poem-text">{{termCulture.poem.text}}</text>
-        <text class="tculture-poem-by">{{termCulture.poem.author}}</text>
-      </view>
-
-      <!-- 可点的框：整框就是入口，去节气详情页，看三候 / 食俗 / 当令食材 -->
-      <view class="tmore" hover-class="tap-hover" bindtap="onTapTermDetail">
-        <view class="tmore-main">
-          <text class="tmore-title">{{cultureTitle}}</text>
-          <text class="tmore-sub">{{copy.cultureOpenSub}}</text>
-        </view>
-        <text class="tmore-act">{{copy.cultureOpen}} ›</text>
-      </view>
-    </view>
-
-    <!-- 3.2 搜菜名 / 食材：整行都是点击区，大字下也不挤 -->
-    <view class="search-entry" hover-class="tap-hover" bindtap="onTapSearch">
-      <text class="search-text">{{copy.searchPlaceholder}}</text>
-      <text class="search-go">›</text>
-    </view>
-
-    <!-- 3.3 数据快照：长辈模式下收起，一屏里数字太多读不清 -->
+    <!-- 5. 跟着节气吃：长辈模式下收起，一屏里数字太多读不清 -->
     <block wx:if="{{!elderMode}}">
       <view class="sec">
         <view class="sec-main">

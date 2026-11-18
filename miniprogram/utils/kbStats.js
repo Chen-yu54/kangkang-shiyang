@@ -17,7 +17,9 @@ function pct(part, all) {
 function build(current) {
   const list = Array.isArray(recipes) ? recipes : [];
   const termTotal = termsRaw.length; // 24
-  const termOrder = Number(current && current.order) || 0;
+  // 民俗序号从立春起算（terms.js 里的 termOrder：立春 1 … 立冬 19），
+  // 数组顺序是从小寒起的，直接用会得到「第 21 个节气」这种与常识不符的说法
+  const termOrder = Number(current && (current.termOrder || current.order)) || 0;
   const termName = (current && current.name) || '';
 
   // 有当令菜的节气数、出现过的餐次、家常难度占比、适老与少吃提示标注覆盖
@@ -81,7 +83,7 @@ function build(current) {
         key: 'easy',
         labelKey: 'snapshot.miniEasyLabel',
         subKey: 'snapshot.miniEasySub',
-        subParams: { count: Math.round(avgIngredients) },
+        subParams: { done: home, total: list.length },
         pct: pct(home, list.length),
         text: Math.round(pct(home, list.length)) + '%',
       },

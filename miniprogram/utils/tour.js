@@ -3,7 +3,7 @@
 // 写作口径：
 //   · 每站只说「这一块是干什么的」+「怎么用」，一句一屏不解释机制
 //   · target 是页面里真实存在的节点 id，引导按它量位置，不写死坐标
-//   · 顺序跟用户实际会走的路一致：先看今天吃什么 → 懂了节气 → 再轮到专属推荐 → 最后是「我的」
+//   · 顺序跟用户实际会走的路一致：先看今天什么节气 → 懂节气文化 → 再看当令菜 → 专属推荐 → 最后「我的」
 module.exports.STEPS = [
   {
     page: 'index',
@@ -13,15 +13,15 @@ module.exports.STEPS = [
   },
   {
     page: 'index',
-    target: '#tour-showcase',
-    title: '时令菜品',
-    desc: '广府、潮汕、客家各挑一道当令菜，会自动轮播，点菜名看做法。',
-  },
-  {
-    page: 'index',
     target: '#tour-culture',
     title: '节气文化',
     desc: '「立冬的讲究」点开，能看到三候、食俗和当令食材。',
+  },
+  {
+    page: 'index',
+    target: '#tour-showcase',
+    title: '当令菜',
+    desc: '广府、潮汕、客家各挑一道当令菜，会自动轮播，点菜名看做法。',
   },
   {
     page: 'menu',

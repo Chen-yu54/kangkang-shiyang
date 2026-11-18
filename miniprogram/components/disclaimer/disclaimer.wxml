@@ -1,4 +1,4 @@
 <view class="disc">
-  <image class="disc-ico" src="/images/icons/taoyin-gantanhao.png" mode="aspectFit" />
   <text class="disc-txt">{{text || fallback}}</text>
+  <text class="disc-copy">{{copyright}}</text>
 </view>

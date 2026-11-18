@@ -1,5 +1,6 @@
 /* 食材档案页：米黄纸感底，正文 36rpx，区块用左侧色条区分。
-   「质量与安全」块加重，因为这是用户最需要确认的一块。 */
+   「质量与安全」块加重，因为这是用户最需要确认的一块。
+   每块标题配一张手绘小图，把长篇文字分区，方便扫读。 */
 .page {
   min-height: 100vh;
   background: #f7f0e1;
@@ -12,6 +13,15 @@
 .head {
   padding: 8rpx 0 24rpx;
   border-bottom: 2rpx solid rgba(139, 90, 43, 0.16);
+}
+
+/* 「食材档案」小标：字距拉开，像档案袋上的铅字，不抢食材名 */
+.head-kicker {
+  display: block;
+  margin-bottom: 10rpx;
+  font-size: 26rpx;
+  letter-spacing: var(--tracking-caps, 0.24em);
+  color: #b5482a;
 }
 
 .head-row {
@@ -58,12 +68,25 @@
   background: #f6faf2;
 }
 
+/* 标题行：小图 + 栏名。图 52rpx，与 34rpx 的字对齐到视觉中线 */
+.sec-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.sec-ico {
+  flex: none;
+  width: 52rpx;
+  height: 52rpx;
+  margin-right: 12rpx;
+}
+
 .sec-label {
   display: block;
   font-size: 34rpx;
   font-weight: 600;
   color: #8b5a2b;
-  margin-bottom: 10rpx;
 }
 
 .sec-strong .sec-label {
@@ -83,11 +106,24 @@
   border-top: 2rpx dashed rgba(139, 90, 43, 0.2);
 }
 
+.basis-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.basis-ico {
+  flex: none;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  opacity: 0.85;
+}
+
 .basis-label {
   display: block;
   font-size: 32rpx;
   color: #8b7a5b;
-  margin-bottom: 8rpx;
 }
 
 .basis-text {

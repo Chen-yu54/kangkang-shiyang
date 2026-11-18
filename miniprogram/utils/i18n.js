@@ -26,9 +26,6 @@ const zhCN = {
 
   // 参考警示条（首页首次进入，点「我知道了」后本机记忆）
   // 措辞按版面设计稿，保留「结合实际情况判断」的行为约束，不写成泛泛的免责套话
-  'common.noticeTitle': '内容仅供参考，请结合实际情况判断',
-  'common.noticeBody': '食材与做法依个人口味偏好、当季供应调整',
-  'common.noticeAction': '我知道了',
 
   // —— 跟着节气吃（首页底部仪表盘）
   // 口径：全部按当前知识库实时计算，不写死、不估计。
@@ -46,18 +43,22 @@ const zhCN = {
   'snapshot.miniAllTermLabel': '节气有菜',
   'snapshot.miniAllTermSub': '{done}/{total} 个节气',
   'snapshot.miniEasyLabel': '家常做法',
-  'snapshot.miniEasySub': '平均 {count} 样主料',
+  'snapshot.miniEasySub': '{done}/{total} 道好上手',
   'snapshot.miniCareLabel': '人群提示',
   'snapshot.miniCareSub': '{done}/{total} 道有标注',
   'snapshot.note': '数字按当前知识库实时统计，库里的内容变了，这里就跟着变。',
 
   // —— 首页
   'home.searchPlaceholder': '搜菜名 / 食材',
+  'home.askTitle': '问问康康',
+  'home.askSub': '聊几句，帮你挑今天的菜',
+  'home.chatTitle': '康康对话',
+  'home.chatSub': '打字问，可以追问',
   'home.sectionCuisine': '按菜系逛',
   'home.sectionDishes': '当令菜',
   'home.seeAll': '查看全部当令菜',
   // 主区栏目引题：一句话交代「这三道菜是怎么来的」，把推荐抬成页面主角
-  'home.leadKicker': '本期 · 时令菜品',
+  'home.leadKicker': '当令 · 三系各一道',
   // 次区分隔：诗句 / 菜系 / 数据统一收在「节气风物」之下，不再与推荐并列
   'home.bandCulture': '节气风物',
   'home.countUnit': '道',
@@ -87,6 +88,39 @@ const zhCN = {
   'home.cultureOpenTitle': '{name}的讲究',
   'home.cultureOpenSub': '三候 · 食俗 · 当令食材',
   'home.cultureOpen': '点开看看',
+  // ── 康康对话（连扣子 Bot 的自由问答页 pages/aichat）──
+  'chat.title': '问问康康',
+  'chat.subtitle': '想吃什么、拿不准什么，都可以问',
+  'chat.placeholder': '说说你想吃什么…',
+  'chat.send': '发送',
+  'chat.clear': '清空',
+  'chat.thinking': '康康正在想…',
+  'chat.back': '返回',
+  'chat.clearConfirmTitle': '清空对话',
+  'chat.clearConfirmBody': '清空后这段对话不会再保留，确定吗？',
+  'chat.clearDone': '已清空',
+  'chat.q1': '今天吃什么好',
+  'chat.q2': '立冬喝什么汤',
+  'chat.q3': '我不吃海鲜，有什么推荐',
+  'chat.q4': '想吃清淡一点的',
+  // ── 问问康康（对话式问卷页 pages/agent）──
+  'qa.title': '问问康康',
+  'qa.subtitle': '聊几句，帮你挑今天的菜',
+  'qa.you': '你',
+  'qa.thinking': '让我按你的情况挑一挑…',
+  'qa.next': '下一题',
+  'qa.needPick': '先选一个吧',
+  'qa.multiHint': '可以多选，选完点下一步',
+  'qa.progress': '第 {current} / {total} 步',
+  'qa.pickLocal': '按你说的，先挑这几道：',
+  'qa.pickModel': '结合当令和你的口味，我挑这几道：',
+  'qa.localNote': '本地推荐 · 离线可用',
+  'qa.modelNote': 'Coze Agent 推荐',
+  'qa.modelFail': '模型这次没接上，先看本地推的这几道',
+  'qa.noLocal': '模型推荐',
+  'qa.noDetail': '这道菜库里没有详细页',
+  'qa.goDetail': '看详情',
+  'qa.restart': '重来',
   // 五宫格风味关键词：各菜系一句话气质，来自知识库菜系卡的 style 字段
   'home.cuisineTagLingnan': '中和日常',
   'home.cuisineTagGuangfu': '清鲜爽嫩',
@@ -95,10 +129,10 @@ const zhCN = {
   // 当令主推大卡的角标
   'home.featured': '主编力荐',
   // 数据快照（复算入口已撤：口径写清即可，不必再引一条说明链）
-  // 栏目编号（书口序号）：当令菜是主区，所以从壹开始；
-  // 菜系与数据快照落到次区，编号顺延为贰、叁
-  'home.noDishes': '壹',
-  'home.noCulture': '贰',
+  // 栏目编号（书口序号）：按版面从上往下排，标号跟着位置走，不跟板块身份走。
+  // 现在顺序是 节气文化 → 当令菜 → 跟着节气吃，所以 壹、贰、叁 依次对应。
+  'home.noCulture': '壹',
+  'home.noDishes': '贰',
   'home.noSnapshot': '叁',
   'home.sectionCulture': '节气文化',
 
@@ -170,15 +204,15 @@ const zhCN = {
   // 就地推演：过程只写「在做什么」，不写「AI 正在思考」这类空话
   'nutrition.genRunning': '推演中',
   // 扣子工作流：等模型 / 模型出单 / 模型没接上
-  'nutrition.modelPendingTitle': '正在请模型配菜',
-  'nutrition.modelPendingLine': '读当令菜与你的口味，通常要十几秒',
-  'nutrition.modelDoneTitle': '模型把菜配好了',
-  'nutrition.modelDoneLine': '模型返回了 {n} 道菜',
-  'nutrition.modelFailTitle': '模型没接上，改用本地规则',
+  'nutrition.modelPendingTitle': '大模型 Agent 正在选菜',
+  'nutrition.modelPendingLine': '读当令菜和你的口味，十几秒',
+  'nutrition.modelDoneTitle': '大模型把食单配好了',
+  'nutrition.modelDoneLine': '挑了 {n} 道，都是当令菜',
+  'nutrition.modelFailTitle': '大模型没接上，改用本机规则',
   'nutrition.modelFailLine': '条数与结论照旧可查',
-  'nutrition.genFallback': '模型这次没接上，这单按本地规则出。',
+  'nutrition.genFallback': '大模型这次没接上，这单按本机规则出，菜一样是当令的。',
   'nutrition.genThinking': '正在按你的口味挑',
-  'nutrition.genMixing': '正在配今天的菜…',
+  'nutrition.genMixing': '正在生成专属食单…',
   'nutrition.tipsTitle': '节气食养小贴士',
   'nutrition.healthTitle': '节气养生提醒',
   'nutrition.whyLabel': '推荐理由',
@@ -240,9 +274,6 @@ const zhCN = {
   'agent.modelFailLine': '上面的条数与结论不受影响，仍可在「查看依据」里复算',
 
   // —— 适老版 ——
-  'elder.on': '开启长辈模式',
-  'elder.off': '退出长辈模式',
-  'elder.hint': '字更大，只留最常用的几块',
   'elder.onHint': '长辈模式已开启',
 
   // —— 分类页
@@ -467,6 +498,8 @@ const zhCN = {
   'mine.more': '更多',
   'mine.replayTour': '再看一遍功能引导',
   'mine.consent': '数据分享设置',
+  'mine.agentEntry': '问问康康',
+  'mine.agentEntryHint': '聊几句挑菜',
   'mine.consentOn': '已开启',
   'mine.consentOff': '未开启',
   'mine.notLogin': '未登录 · 本地使用',
@@ -479,6 +512,8 @@ const zhCN = {
   'mine.agreementService': '用户服务协议',
   'mine.agreementPrivacy': '隐私政策',
   'mine.method': '方法说明',
+  'mine.foodSafety': '食品安全',
+  'mine.foodSafetyHint': '抽检与处罚公开数据',
   'mine.favorite': '我的收藏',
   'mine.favoriteCount': '{count} 道',
   'mine.pref': '饮食偏好',

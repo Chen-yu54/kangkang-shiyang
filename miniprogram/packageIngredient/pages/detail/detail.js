@@ -41,16 +41,25 @@ function findByName(name) {
 
 // 卡片区块定义：把字段映射成「标题 + 内容」，字段为空就整块不显示。
 // 顺序按「先判断能不能买、再判断怎么做」排，符合实际使用顺序。
+// 每块配一张手绘小图（images/ingredients/，来自康养智能体的插画包），
+// 选的不是「好看」，是跟这一块在讲什么对得上：罗盘对应产地、印章对应合格、
+// 砂锅对应下锅、警示牌对应注意。图只是引子，正文仍是唯一的信息来源。
 const SECTIONS = [
-  { key: 'identity', label: '这是什么' },
-  { key: 'origin', label: '产地与季节' },
-  { key: 'quality', label: '质量与安全', important: true },
-  { key: 'select', label: '怎么挑' },
-  { key: 'cook', label: '怎么处理' },
-  { key: 'caution', label: '要注意' },
-  { key: 'price', label: '价格与替代' },
-  { key: 'inspect', label: '检测与判定' },
+  { key: 'identity', label: '这是什么', icon: 'home_record_bamboo' },
+  { key: 'origin', label: '产地与季节', icon: 'register_location_compass' },
+  { key: 'quality', label: '质量与安全', icon: 'register_check_seal', important: true },
+  { key: 'select', label: '怎么挑', icon: 'home_today_bamboo' },
+  { key: 'cook', label: '怎么处理', icon: 'home_season_cauldron' },
+  { key: 'caution', label: '要注意', icon: 'home_warn_token' },
+  { key: 'price', label: '价格与替代', icon: 'home_analysis_bookmark' },
+  { key: 'inspect', label: '检测与判定', icon: 'home_text_scrollbrush' },
 ];
+
+// 统一在这里拼路径，模板里只拿现成值，免得路径散落在 wxml 里
+const ICON_DIR = '/images/ingredients/';
+function iconOf(name) {
+  return name ? ICON_DIR + name + '.png' : '';
+}
 
 Page({
   data: {
@@ -85,12 +94,22 @@ Page({
     // 组装非空区块；营养特点并入「这是什么」下方单独一块
     const sections = [];
     if (card.nutrition) {
-      sections.push({ label: '主要成分', text: card.nutrition, important: false });
+      sections.push({
+        label: '主要成分',
+        text: card.nutrition,
+        important: false,
+        icon: iconOf('home_effect_ginseng'),
+      });
     }
     SECTIONS.forEach((s) => {
       const text = card[s.key];
       if (!text) return;
-      sections.push({ label: s.label, text, important: !!s.important });
+      sections.push({
+        label: s.label,
+        text,
+        important: !!s.important,
+        icon: iconOf(s.icon),
+      });
     });
 
     this.setData({
