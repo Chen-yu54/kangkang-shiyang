@@ -6,7 +6,7 @@
 // 两条纪律：
 //   1. 能从 data/recipes.js、data/terms.js 算出来的，一律现算（标 [实算]）。
 //      知识库改了，这里跟着变，不写死。
-//   2. 知识库里没有的（体质宜忌、食材库分层、图谱关系），集中在下面 SAMPLE 一处，
+//   2. 知识库里没有的（人群偏向、食材库分层、图谱关系），集中在下面 SAMPLE 一处，
 //      标注 [示例]，替换时只改这一块，页面不用动。
 
 const recipes = require('../data/recipes.js');
@@ -19,26 +19,27 @@ const pct = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : 0);
 // 换成真实数据时：保持 { name, n } 的形状，max 会自动按最大值算。
 // ——————————————————————————————————————————————
 const SAMPLE = {
-  // 体质「宜」：多标签，不可相加（示例）
+  // 人群自述「偏向」：直接用问卷 Q1–Q4 的选项措辞，不用中医证型名。
+  // 多标签，不可相加（示例）
   fitGood: [
-    { name: '气虚', n: 128 },
-    { name: '阳虚', n: 92 },
-    { name: '阴虚', n: 71 },
-    { name: '湿热', n: 66 },
-    { name: '平和', n: 60 },
-    { name: '痰湿', n: 49 },
-    { name: '气郁', n: 38 },
-    { name: '血瘀', n: 28 },
+    { name: '怕冷', n: 128 },
+    { name: '怕热', n: 92 },
+    { name: '容易出汗', n: 71 },
+    { name: '经常口干', n: 66 },
+    { name: '冷热都怕', n: 60 },
+    { name: '很少出汗', n: 49 },
+    { name: '偏干硬', n: 38 },
+    { name: '时干时稀', n: 28 },
   ],
-  // 体质「忌 / 少」（示例）
+  // 「想少吃」的（示例）
   fitAvoid: [
-    { name: '阳虚', n: 27 },
-    { name: '湿热', n: 18 },
-    { name: '脾胃虚寒', n: 11 },
-    { name: '痛风', n: 9 },
-    { name: '痰湿', n: 6 },
+    { name: '海鲜', n: 27 },
+    { name: '牛肉', n: 18 },
+    { name: '鸡蛋', n: 11 },
+    { name: '牛奶', n: 9 },
+    { name: '豆制品', n: 6 },
   ],
-  // 忌口风险标签（示例）
+  // 少吃提示标签（示例）
   risk: [
     { name: '高盐偏咸', n: 67 },
     { name: '高脂油腻', n: 53 },
@@ -67,7 +68,7 @@ const SAMPLE = {
       { name: '其他', n: 176, pct: 61.1, dim: true },
     ],
   },
-  // 图谱：主料 / 体质节点（示例，菜系与节气是实算的）
+  // 图谱：主料 / 偏向节点（示例，菜系与节气是实算的）
   graphIngredients: [
     { name: '猪肉', n: 54 },
     { name: '鸡肉', n: 32 },
@@ -76,11 +77,11 @@ const SAMPLE = {
     { name: '豆腐', n: 20 },
   ],
   graphFits: [
-    { name: '气虚', n: 128 },
-    { name: '阳虚', n: 92 },
-    { name: '阴虚', n: 71 },
-    { name: '湿热', n: 66 },
-    { name: '平和', n: 60 },
+    { name: '怕冷', n: 128 },
+    { name: '怕热', n: 92 },
+    { name: '容易出汗', n: 71 },
+    { name: '经常口干', n: 66 },
+    { name: '冷热都怕', n: 60 },
   ],
   graphEdges: 85,
 };
@@ -160,7 +161,7 @@ function build(current) {
       { v: covered.size + '/' + termsRaw.length, u: '', label: '节气覆盖' },
       { v: avgIng, u: '种', label: '平均主料 / 道' },
       { v: pct(lowCost, total), u: '%', label: '大众价位占比' },
-      { v: pct(cared, total), u: '%', label: '忌口提示覆盖' },
+      { v: pct(cared, total), u: '%', label: '少吃提示覆盖' },
     ],
     cells,
     covered: covered.size,
@@ -209,7 +210,7 @@ function build(current) {
       '一句话：吃好选潮汕、吃省选客家、求稳选广府。',
   };
 
-  // —— 体质适配（示例）——
+  // —— 人群偏向（示例）——
   const fit = {
     sample: true,
     good: withW(SAMPLE.fitGood, { unit: ' 道' }),
@@ -226,12 +227,12 @@ function build(current) {
       { name: '菜系', n: cuisineList.length },
       { name: '节气', n: termsRaw.length },
       { name: '主料', n: 291 },
-      { name: '体质', n: 9 },
+      { name: '偏好', n: 9 },
     ],
     ingredients: withW(SAMPLE.graphIngredients, { unit: ' 道' }),
     fits: withW(SAMPLE.graphFits, { unit: ' 道' }),
     edges: SAMPLE.graphEdges,
-    note: `核心节点 1 个、菜系 ${cuisineList.length} 个、节气 ${termsRaw.length} 个，主料与体质节点为示例；边的含义是「菜系—节气—菜品—主料—体质」的归属关系。`,
+    note: `核心节点 1 个、菜系 ${cuisineList.length} 个、节气 ${termsRaw.length} 个，主料与偏好节点为示例；边的含义是「菜系—节气—菜品—主料—偏好」的归属关系。`,
   };
 
   // —— 食材深库（示例）——
@@ -248,8 +249,8 @@ function build(current) {
     tabs: [
       { key: 'term', name: '节气视图', cap: `${termsRaw.length} 个节气 × 3 菜系，每格 4 道` },
       { key: 'cuisine', name: '菜系对照', cap: '潮汕 / 广府 / 客家 的结构与成本' },
-      { key: 'fit', name: '体质适配', cap: '九种体质宜忌与忌口风险' },
-      { key: 'graph', name: '知识图谱', cap: '节气 — 菜系 — 菜品 — 主料 — 体质' },
+      { key: 'fit', name: '人群偏向', cap: '问卷选项分布与少吃提示' },
+      { key: 'graph', name: '知识图谱', cap: '节气 — 菜系 — 菜品 — 主料 — 偏好' },
       { key: 'library', name: '食材深库', cap: '主料索引到标准卡的减法过程' },
     ],
     term,
@@ -260,4 +261,4 @@ function build(current) {
   };
 }
 
-module.exports = { build };
+module.exports = { build, buildTicks };

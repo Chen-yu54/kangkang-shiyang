@@ -1,0 +1,269 @@
+<!-- page-meta 必须是页面第一个节点，且一页只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page {{elderMode ? 'elder' : ''}}">
+  <view class="content">
+
+    <!-- 页头：与「食品安全」页同一套米黄纸底 + 宋体标题 -->
+    <view class="head">
+      <text class="head-kicker">{{copy.kicker}}</text>
+      <text class="head-title">{{copy.title}}</text>
+      <text class="head-lead">{{copy.lead}}</text>
+      <view class="head-meta">
+        <text class="head-meta-item">{{copy.live}}</text>
+        <view class="head-meta-dot"></view>
+        <text class="head-meta-item">{{copy.asOf}} {{dataVersion}}</text>
+      </view>
+    </view>
+
+    <!-- ==================== 概览 ==================== -->
+    <view class="sec">
+      <view class="sec-main">
+        <text class="sec-no">壹</text>
+        <text class="sec-title">{{copy.overview}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{stats}}" class="ck">
+      <!-- 罗盘：24 根刻度＝24 节气，四段暖金弧＝四季，中心是当前节气 -->
+      <view class="ck-hero">
+        <view class="ck-compass {{dashOn ? 'on' : ''}}">
+          <view class="ck-arcs"></view>
+          <view class="ck-disc"></view>
+          <view
+            class="ck-tick {{item.on ? 'on' : ''}} {{item.now ? 'now' : ''}}"
+            wx:for="{{ck.term.ticks}}"
+            wx:key="n"
+            style="left: {{item.x}}rpx; top: {{item.y}}rpx; transform: rotate({{item.deg}}deg); animation-delay: {{index * 20}}ms"
+          ></view>
+          <view class="ck-face">
+            <text class="ck-term">{{stats.term.name}}</text>
+            <text class="ck-pos">{{stats.term.posText}}</text>
+          </view>
+        </view>
+
+        <view class="ck-kpis">
+          <view class="ck-kpi">
+            <view class="ck-kpi-n"><text class="ck-num">{{stats.perTerm}}</text><text class="ck-unit">道</text></view>
+            <text class="ck-k">每个节气</text>
+            <text class="ck-s">{{copy.ckKpi1}}</text>
+          </view>
+          <view class="ck-kpi">
+            <view class="ck-kpi-n"><text class="ck-num">{{stats.term.total}}</text><text class="ck-unit">个</text></view>
+            <text class="ck-k">节气 · 每年</text>
+            <text class="ck-s">{{copy.ckKpi2}}</text>
+          </view>
+          <view class="ck-kpi">
+            <view class="ck-kpi-n"><text class="ck-num">{{stats.easyPct}}</text><text class="ck-unit">%</text></view>
+            <text class="ck-k">家常可做</text>
+            <text class="ck-s">{{copy.ckKpi3}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 三个环：进度由 inline conic-gradient 画，百分比同时以数字呈现 -->
+      <view class="ck-rings">
+        <view class="ck-ring-item" wx:for="{{stats.promises}}" wx:key="key">
+          <view
+            class="ck-ring"
+            style="background: conic-gradient(#b5482a 0 {{item.pct}}%, rgba(139,90,43,0.13) {{item.pct}}% 100%)"
+          >
+            <view class="ck-ring-in"><text class="ck-ring-t">{{item.text}}</text></view>
+          </view>
+          <text class="ck-rk">{{item.label}}</text>
+          <text class="ck-rs">{{item.sub}}</text>
+        </view>
+      </view>
+
+      <text class="ck-note">外圈四段弧＝四季，24 根刻度＝24 节气。{{copy.note}}</text>
+    </view>
+
+    <!-- ==================== 分区 ==================== -->
+    <view class="sec">
+      <view class="sec-main">
+        <text class="sec-no">贰</text>
+        <text class="sec-title">{{copy.sections}}</text>
+      </view>
+    </view>
+    <text class="sec-note">{{copy.tip}}</text>
+
+    <!-- 五个入口：默认 01 节气视图，选中的整块高亮；换行保证一屏全见 -->
+    <view class="ck-tabs">
+      <view
+        class="ck-tab {{ckTab === item.key ? 'on' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        hover-class="tap-hover"
+        bindtap="onPickTab"
+      >
+        <text class="ck-tab-n">{{item.no}}</text>
+        <text class="ck-tab-t">{{item.name}}</text>
+      </view>
+    </view>
+
+    <text class="ck-pcap">{{ckCap}}</text>
+
+    <!-- 01 节气视图（实算） -->
+    <view wx:if="{{ckTab === 'term'}}" class="ck-p ck-card">
+      <view class="ck-metrics">
+        <view class="ck-metric" wx:for="{{ck.term.metrics}}" wx:key="label">
+          <view class="ck-metric-n"><text class="ck-mv">{{item.v}}</text><text class="ck-mu">{{item.u}}</text></view>
+          <text class="ck-ml">{{item.label}}</text>
+        </view>
+      </view>
+
+      <view class="ck-cap ck-cap-gap"><text>24 节气覆盖</text></view>
+      <view class="ck-cells">
+        <view class="ck-cell {{item.cur ? 'cur' : ''}}" wx:for="{{ck.term.cells}}" wx:key="name">
+          <text class="ck-cell-t">{{item.name}}</text>
+        </view>
+      </view>
+
+      <text class="ck-pnote">{{ck.term.note}}</text>
+    </view>
+
+    <!-- 02 菜系对照（实算） -->
+    <view wx:if="{{ckTab === 'cuisine'}}" class="ck-p">
+      <view class="ck-card ck-cu" wx:for="{{ck.cuisine.list}}" wx:key="name">
+        <view class="ck-cu-h">
+          <text class="ck-cu-n">{{item.name}}</text>
+          <text class="ck-cu-v">{{item.n}} 道</text>
+        </view>
+        <view class="ck-stack">
+          <view style="width: {{item.lowPct}}%; background-color: #d9b071"></view>
+          <view style="width: {{item.midPct}}%; background-color: #b8863b"></view>
+          <view style="width: {{item.highPct}}%; background-color: #b5482a"></view>
+        </view>
+        <view class="ck-legend">
+          <text>低 {{item.low}}</text>
+          <text>中 {{item.mid}}</text>
+          <text>高 {{item.high}}</text>
+        </view>
+        <text class="ck-cu-f">★★★ {{item.hard}} 道 · 少吃提示 {{item.caution}}/{{item.n}}</text>
+      </view>
+      <text class="ck-pnote">{{ck.cuisine.note}}</text>
+    </view>
+
+    <!-- 03 人群偏向（示例） -->
+    <view wx:if="{{ckTab === 'fit'}}" class="ck-p ck-card">
+      <view class="ck-cap">
+        <text>宜（多标签，不可相加）</text>
+        <text wx:if="{{ck.fit.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
+      </view>
+      <view class="ck-bar" wx:for="{{ck.fit.good}}" wx:key="name">
+        <text class="ck-bar-l">{{item.name}}</text>
+        <view class="ck-track"><view class="ck-fill jade" style="width: {{item.w}}%"></view></view>
+        <text class="ck-bar-v">{{item.v}}</text>
+      </view>
+
+      <view class="ck-cap ck-cap-gap">
+        <text>忌 / 少（同轴对照）</text>
+        <text wx:if="{{ck.fit.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
+      </view>
+      <view class="ck-bar" wx:for="{{ck.fit.avoid}}" wx:key="name">
+        <text class="ck-bar-l">{{item.name}}</text>
+        <view class="ck-track"><view class="ck-fill cin" style="width: {{item.w}}%"></view></view>
+        <text class="ck-bar-v">{{item.v}}</text>
+      </view>
+
+      <view class="ck-cap ck-cap-gap">
+        <text>少吃提示标签</text>
+        <text wx:if="{{ck.fit.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
+      </view>
+      <view class="ck-bar" wx:for="{{ck.fit.risk}}" wx:key="name">
+        <text class="ck-bar-l">{{item.name}}</text>
+        <view class="ck-track"><view class="ck-fill cin" style="width: {{item.w}}%"></view></view>
+        <text class="ck-bar-v">{{item.v}}</text>
+      </view>
+
+      <text class="ck-pnote">{{ck.fit.note}}</text>
+    </view>
+
+    <!-- 04 知识图谱（计数实算，节点示例） -->
+    <view wx:if="{{ckTab === 'graph'}}" class="ck-p ck-card">
+      <view class="ck-graph">
+        <view class="ck-g-core">
+          <text class="ck-g-core-n">{{ck.graph.core.name}}</text>
+          <text class="ck-g-core-s">{{ck.graph.core.sub}}</text>
+        </view>
+        <view class="ck-g-rings">
+          <view class="ck-g-ring" wx:for="{{ck.graph.rings}}" wx:key="name">
+            <text class="ck-g-ring-n">{{item.n}}</text>
+            <text class="ck-g-ring-l">{{item.name}}</text>
+          </view>
+        </view>
+        <text class="ck-g-edge">{{ck.graph.edges}} 条关系边</text>
+      </view>
+
+      <view class="ck-cap ck-cap-gap">
+        <text>主料节点</text>
+        <text wx:if="{{ck.graph.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
+      </view>
+      <view class="ck-bar" wx:for="{{ck.graph.ingredients}}" wx:key="name">
+        <text class="ck-bar-l">{{item.name}}</text>
+        <view class="ck-track"><view class="ck-fill ochre" style="width: {{item.w}}%"></view></view>
+        <text class="ck-bar-v">{{item.v}}</text>
+      </view>
+
+      <view class="ck-cap ck-cap-gap">
+        <text>偏好节点</text>
+        <text wx:if="{{ck.graph.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
+      </view>
+      <view class="ck-bar" wx:for="{{ck.graph.fits}}" wx:key="name">
+        <text class="ck-bar-l">{{item.name}}</text>
+        <view class="ck-track"><view class="ck-fill bam" style="width: {{item.w}}%"></view></view>
+        <text class="ck-bar-v">{{item.v}}</text>
+      </view>
+
+      <text class="ck-pnote">{{ck.graph.note}}</text>
+    </view>
+
+    <!-- 05 食材深库（示例） -->
+    <view wx:if="{{ckTab === 'library'}}" class="ck-p ck-card">
+      <view class="ck-cap">
+        <text>291 条索引怎么变成 222 张卡</text>
+        <text wx:if="{{ck.library.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
+      </view>
+      <view class="ck-fn" wx:for="{{ck.library.funnel}}" wx:key="name">
+        <text class="ck-fn-l">{{item.name}}</text>
+        <view class="ck-fn-bar ck-tone-{{item.tone}}" style="width: {{item.w}}%">
+          <text>{{item.n}}</text>
+        </view>
+      </view>
+
+      <view class="ck-cap ck-cap-gap"><text>成熟度</text></view>
+      <view class="ck-lv" wx:for="{{ck.library.levels}}" wx:key="name">
+        <text class="ck-lv-l">{{item.name}}</text>
+        <view class="ck-track">
+          <view class="ck-fill {{item.building ? 'hatch' : 'jade'}}" style="width: {{item.pct}}%"></view>
+        </view>
+        <text class="ck-lv-v">{{item.note}}</text>
+      </view>
+
+      <view class="ck-cap ck-cap-gap"><text>出处构成（288 道）</text></view>
+      <view class="ck-stack ck-stack-lib">
+        <view
+          wx:for="{{ck.library.sources}}"
+          wx:key="name"
+          style="width: {{item.pct}}%; background-color: {{item.dim ? 'rgba(139,90,43,0.18)' : (index === 0 ? '#b8863b' : '#b5482a')}}"
+        ></view>
+      </view>
+      <view class="ck-legend">
+        <text wx:for="{{ck.library.sources}}" wx:key="name">{{item.name}} {{item.n}}</text>
+      </view>
+
+      <text class="ck-pnote">{{ck.library.note}}</text>
+    </view>
+
+    <!-- 口径：真实数据与示例数据分开说清，方便以后替换 -->
+    <view class="note">
+      <text class="note-title">{{copy.noteTitle}}</text>
+      <text class="note-line">{{copy.lead}}</text>
+      <text class="note-line">节气、菜系、成本、难度、少吃提示来自当前知识库实算；标「{{copy.sampleTag}}」的分组是可替换示例，接真实数据时只改 data/cockpit.js 的 SAMPLE 一处。</text>
+    </view>
+
+  </view>
+
+  <disclaimer />
+</view>

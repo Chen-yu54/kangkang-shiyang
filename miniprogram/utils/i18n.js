@@ -52,6 +52,18 @@ const zhCN = {
   'snapshot.ckKpi3': '≤ 两星难度，日常能上手',
   'snapshot.ckExpand': '展开全部数据',
   'snapshot.ckCollapse': '收起数据',
+  'snapshot.ckEnterTitle': '看完整数据',
+  'snapshot.ckEnterSub': '点开看五个分区，逐项细看',
+
+  // —— 节气数据详情页（点首页预览卡进入）
+  'cockpit.title': '节气数据',
+  'cockpit.kicker': '跟着节气吃 · 数据概览',
+  'cockpit.lead': '数字按当前知识库实时统计，库里的内容变了，这里就跟着变。',
+  'cockpit.overview': '本期概览',
+  'cockpit.sections': '分区细看',
+  'cockpit.tip': '点分区切换数据，当前选中的会高亮。',
+  'cockpit.noteTitle': '数据口径',
+  'cockpit.sampleTag': '示例',
 
   // —— 首页
   'home.searchPlaceholder': '搜菜名 / 食材',

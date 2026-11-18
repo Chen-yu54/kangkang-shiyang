@@ -43,13 +43,9 @@ Page({
     showcase: [], // 节气推荐展示牌：当前节气的三道当令菜
     showcaseIndex: 0,
     dataVersion: '',
-    stats: null, // 跟着节气吃：罗盘 + 三个数字 + 三个环，全部实时算
+    stats: null, // 跟着节气吃：小罗盘 + 三个数字 + 三枚好处环，全部实时算
+    miniTicks: [], // 小罗盘 24 根刻度，坐标由 cockpit.buildTicks 算好
     dashOn: false, // 罗盘刻度依次点亮，进视野才播
-    // 驾驶舱分区台：默认收起、默认停在 01 节气视图
-    ckOpen: false,
-    ckTab: 'term',
-    ckCap: '',
-    ck: null,
     banner: null,
     termName: '',
     termPoster: '',
@@ -93,8 +89,8 @@ Page({
         ckKpi1: t('snapshot.ckKpi1'),
         ckKpi2: t('snapshot.ckKpi2'),
         ckKpi3: t('snapshot.ckKpi3'),
-        ckExpand: t('snapshot.ckExpand'),
-        ckCollapse: t('snapshot.ckCollapse'),
+        ckEnterTitle: t('snapshot.ckEnterTitle'),
+        ckEnterSub: t('snapshot.ckEnterSub'),
         aiTag: t('common.aiGenerated'),
         // —— 杂志化新增
         heroKicker: t('home.heroKicker'),
@@ -145,18 +141,9 @@ Page({
     }
   },
 
-  // 驾驶舱展开 / 收起。默认收起，展开后停在当前选中分区（首次为 01 节气视图）
-  onToggleCockpit() {
-    this.setData({ ckOpen: !this.data.ckOpen });
-  },
-
-  // 切换分区：点哪一块就换哪一块的数据，标签下的说明句同步换
-  onPickCockpitTab(e) {
-    const key = e.currentTarget.dataset.key;
-    if (!key || key === this.data.ckTab) return;
-    const ck = this.data.ck;
-    const tab = ck && ck.tabs.filter((item) => item.key === key)[0];
-    this.setData({ ckTab: key, ckCap: tab ? tab.cap : '' });
+  // 首页只放预览：点整张卡去「节气数据」详情页看完整罗盘与五个分区
+  onTapCockpit() {
+    wx.navigateTo({ url: '/pages/cockpit/cockpit' });
   },
 
   onShow() {
@@ -222,11 +209,8 @@ Page({
         // 环里只有 100% / 93% 这种整数，KPI 那一栏要一位小数（93.1%），两者口径不同
         stats.easyPct = stats.promises[1] ? stats.promises[1].pct : 0;
 
-        // 分区台：默认停在第一个（节气视图）；下拉刷新后保留用户当前选中的分区
-        const ck = cockpit.build(current);
-        const firstTab = ck.tabs[0];
-        const keep = ck.tabs.filter((item) => item.key === this.data.ckTab)[0];
-        const activeTab = keep || firstTab;
+        // 首页小罗盘的 24 根刻度（详情页用同一份 buildTicks，视觉对得上）
+        const miniTicks = cockpit.buildTicks(current);
 
         this.setData({
           status: list.length > 0 ? 'ready' : 'empty',
@@ -241,9 +225,7 @@ Page({
           dataVersion: (dataSource.getDataVersionLabel().split('·').pop() || '').trim(),
           // 跟着节气吃：全部按当前知识库实时算，扩容后自动更新，不写死任何数字
           stats,
-          ck,
-          ckCap: activeTab ? activeTab.cap : '',
-          ckTab: activeTab ? activeTab.key : 'term',
+          miniTicks,
           banner: this.buildBanner(),
         });
       })

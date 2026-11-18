@@ -16,7 +16,8 @@
     "pages/preftest/preftest",
     "pages/prefresult/prefresult",
     "pages/recommend/recommend",
-    "pages/foodsafety/foodsafety"
+    "pages/foodsafety/foodsafety",
+    "pages/cockpit/cockpit"
   ],
   "subPackages": [
     {

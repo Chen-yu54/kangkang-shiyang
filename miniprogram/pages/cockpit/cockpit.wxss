@@ -1,0 +1,498 @@
+/* pages/cockpit/cockpit.wxss —— 节气数据详情页
+ *
+ * 视觉基线沿用「食品安全」页：米黄纸底、宋体标题、细描边卡片、
+ * 一屏只用朱砂（--color-flame）+ 赭金（--color-gold）两档暖强调色。
+ * 不复用首页原先那块深墨底 + 冷青绿环，避免和整体暖浅主题割裂。
+ * 进度条 / 堆叠条 / 环全部改成同族暖色不同明度，靠深浅分层，不靠多个色相。
+ */
+
+/* ==================== 页头 ==================== */
+
+.head { padding: 12rpx 4rpx 0; }
+
+.head-kicker {
+  display: block;
+  font-size: 26rpx;
+  letter-spacing: 0.28em;
+  color: var(--color-flame);
+}
+
+.head-title {
+  display: block;
+  margin-top: 10rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-display);
+  letter-spacing: var(--tracking-title);
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.head-lead {
+  display: block;
+  margin-top: 14rpx;
+  font-size: var(--font-base);
+  line-height: 1.75;
+  color: var(--color-ink-2);
+}
+
+.head-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 16rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+}
+
+.head-meta-item {
+  font-size: var(--font-caption);
+  letter-spacing: 0.04em;
+  color: var(--color-ink-3);
+}
+
+.head-meta-dot {
+  width: 8rpx;
+  height: 8rpx;
+  margin: 0 12rpx;
+  border-radius: 50%;
+  background-color: var(--color-border);
+}
+
+/* ==================== 栏目头 ==================== */
+
+.sec {
+  display: flex;
+  align-items: center;
+  margin: 34rpx 0 8rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
+}
+
+.sec-main { display: flex; align-items: baseline; min-width: 0; }
+
+.sec-no {
+  flex: none;
+  margin-right: 12rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-flame);
+}
+
+.sec-title {
+  font-family: var(--font-serif);
+  font-size: 40rpx;
+  letter-spacing: var(--tracking-title);
+  color: var(--color-ink);
+}
+
+.sec-note {
+  display: block;
+  margin: 10rpx 2rpx 4rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* ==================== 概览卡 ==================== */
+
+.ck,
+.ck-card {
+  margin-top: 16rpx;
+  padding: 26rpx 24rpx 22rpx;
+  border: 1rpx solid rgba(139, 90, 43, 0.14);
+  border-radius: 24rpx;
+  background-image: linear-gradient(160deg, #fffdf8 0%, #fbf3e2 100%);
+  box-shadow: 0 4rpx 12rpx rgba(90, 60, 30, 0.05);
+}
+
+.ck-hero { display: flex; align-items: center; }
+
+/* 罗盘：264rpx 方框，圆心 (132,132)、半径 118；坐标由 cockpit.buildTicks 算好。
+   四段 conic-gradient 是四季弧，中间盖一张纸色圆盘露出环带，不用 mask，真机稳。 */
+.ck-compass {
+  position: relative;
+  flex: none;
+  width: 264rpx;
+  height: 264rpx;
+}
+
+.ck-arcs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 264rpx;
+  height: 264rpx;
+  border-radius: 50%;
+  background: conic-gradient(from -90deg,
+    #d8ac63 0 86deg, transparent 86deg 90deg,
+    #c07a3a 90deg 176deg, transparent 176deg 180deg,
+    #b5482a 180deg 266deg, transparent 266deg 270deg,
+    #8b5a2b 270deg 356deg, transparent 356deg 360deg);
+}
+
+.ck-disc {
+  position: absolute;
+  left: 22rpx;
+  top: 22rpx;
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 50%;
+  background-color: #fffaf0;
+  box-shadow: inset 0 0 0 1rpx rgba(139, 90, 43, 0.1);
+}
+
+.ck-tick {
+  position: absolute;
+  width: 4rpx;
+  height: 14rpx;
+  margin-left: -2rpx;
+  margin-top: -7rpx;
+  border-radius: 2rpx;
+  background-color: rgba(139, 90, 43, 0.28);
+  opacity: 0;
+}
+
+.ck-compass.on .ck-tick { animation: ck-tick-in 0.4s ease-out both; }
+.ck-tick.on { background-color: #c9a15a; }
+.ck-tick.now {
+  height: 22rpx;
+  margin-top: -11rpx;
+  background-color: var(--color-flame);
+}
+
+.ck-face {
+  position: absolute;
+  left: 22rpx;
+  top: 22rpx;
+  z-index: 3;
+  width: 220rpx;
+  height: 220rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ck-term {
+  font-family: var(--font-serif);
+  font-size: 52rpx;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.ck-pos { margin-top: 8rpx; font-size: 22rpx; color: var(--color-ink-3); }
+
+.ck-kpis {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  margin-left: 18rpx;
+}
+
+.ck-kpi { padding: 8rpx 0; border-bottom: 1rpx solid rgba(139, 90, 43, 0.1); }
+.ck-kpi:last-child { border-bottom: 0; }
+.ck-kpi-n { display: flex; align-items: baseline; }
+
+.ck-num {
+  font-family: var(--font-serif);
+  font-size: 54rpx;
+  line-height: 1.05;
+  color: var(--color-flame);
+}
+
+.ck-unit { margin-left: 4rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.ck-k { display: block; margin-top: 2rpx; font-size: 26rpx; color: var(--color-ink-2); }
+.ck-s { display: block; margin-top: 2rpx; font-size: 22rpx; line-height: 1.45; color: var(--color-ink-3); }
+
+.ck-rings {
+  display: flex;
+  margin-top: 22rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid rgba(139, 90, 43, 0.12);
+}
+
+.ck-ring-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.ck-ring { position: relative; width: 132rpx; height: 132rpx; border-radius: 50%; }
+
+.ck-ring-in {
+  position: absolute;
+  left: 16rpx;
+  top: 16rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: #fffaf0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ck-ring-t { font-family: var(--font-serif); font-size: 28rpx; color: var(--color-ink); }
+.ck-rk { margin-top: 10rpx; font-size: 26rpx; color: var(--color-ink-2); }
+.ck-rs { margin-top: 4rpx; font-size: 22rpx; line-height: 1.45; text-align: center; color: var(--color-ink-3); }
+
+.ck-note {
+  display: block;
+  margin-top: 20rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(139, 90, 43, 0.12);
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: var(--color-ink-3);
+}
+
+@keyframes ck-tick-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==================== 分区入口 ==================== */
+
+.ck-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16rpx;
+}
+
+.ck-tab {
+  display: flex;
+  align-items: center;
+  margin: 0 10rpx 10rpx 0;
+  padding: 12rpx 18rpx;
+  border: 1rpx solid var(--color-border-soft);
+  border-radius: var(--radius-pill);
+  background-color: #fffdf8;
+}
+
+.ck-tab.on {
+  border-color: var(--color-flame);
+  background-color: var(--color-flame);
+}
+
+.ck-tab-n {
+  margin-right: 8rpx;
+  font-family: var(--font-serif);
+  font-size: 22rpx;
+  color: var(--color-ink-3);
+}
+
+.ck-tab.on .ck-tab-n { color: rgba(255, 255, 255, 0.78); }
+.ck-tab-t { font-size: 26rpx; color: var(--color-ink-2); }
+.ck-tab.on .ck-tab-t { color: #ffffff; font-weight: 600; }
+
+.ck-pcap {
+  display: block;
+  margin: 4rpx 2rpx 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+.tap-hover { opacity: 0.82; }
+
+/* ==================== 分区数据区 ==================== */
+
+.ck-p { margin-top: 4rpx; }
+.ck-p .ck-card { margin-top: 0; }
+.ck-p > .ck-card { margin-top: 0; }
+
+.ck-cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+  font-size: 26rpx;
+  color: var(--color-ink-2);
+}
+
+.ck-cap-gap { margin-top: 26rpx; }
+
+.ck-tag {
+  padding: 2rpx 14rpx;
+  border-radius: var(--radius-pill);
+  background-color: rgba(181, 72, 42, 0.1);
+  font-size: 22rpx;
+  color: var(--color-flame);
+}
+
+/* 01 节气视图：六个指标 + 24 格 */
+.ck-metrics { display: flex; flex-wrap: wrap; }
+
+.ck-metric {
+  width: 33.33%;
+  padding: 12rpx 6rpx;
+  box-sizing: border-box;
+}
+
+.ck-metric-n { display: flex; align-items: baseline; }
+.ck-mv { font-family: var(--font-serif); font-size: 42rpx; line-height: 1.1; color: var(--color-ink); }
+.ck-mu { margin-left: 4rpx; font-size: 22rpx; color: var(--color-ink-3); }
+.ck-ml { display: block; margin-top: 4rpx; font-size: 22rpx; color: var(--color-ink-3); }
+
+.ck-cells { display: flex; flex-wrap: wrap; margin-top: 6rpx; }
+
+.ck-cell {
+  width: 16.66%;
+  padding: 10rpx 2rpx;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 8rpx;
+}
+
+.ck-cell-t { font-size: 22rpx; color: var(--color-ink-2); }
+.ck-cell.cur { background-color: var(--color-flame); }
+.ck-cell.cur .ck-cell-t { color: #ffffff; font-weight: 600; }
+
+/* 02 菜系对照 */
+.ck-cu {
+  margin-top: 14rpx;
+  padding: 20rpx 22rpx;
+  border: 1rpx solid rgba(139, 90, 43, 0.14);
+  border-radius: 20rpx;
+  background-color: #fffdf8;
+}
+
+.ck-cu-h { display: flex; align-items: baseline; justify-content: space-between; }
+.ck-cu-n { font-size: 30rpx; font-weight: 600; color: var(--color-ink); }
+.ck-cu-v { font-size: 24rpx; color: var(--color-ink-3); }
+
+.ck-stack {
+  display: flex;
+  height: 16rpx;
+  margin: 14rpx 0 8rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  background-color: rgba(139, 90, 43, 0.08);
+}
+
+.ck-legend { display: flex; justify-content: space-between; font-size: 22rpx; color: var(--color-ink-3); }
+.ck-cu-f { display: block; margin-top: 10rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.ck-stack-lib { margin-top: 10rpx; }
+
+/* 03 / 04 条形 */
+.ck-bar { display: flex; align-items: center; margin-bottom: 12rpx; }
+.ck-bar-l { flex: none; width: 120rpx; font-size: 24rpx; color: var(--color-ink-2); }
+
+.ck-track {
+  flex: 1;
+  min-width: 0;
+  height: 14rpx;
+  border-radius: 7rpx;
+  background-color: rgba(139, 90, 43, 0.11);
+  overflow: hidden;
+}
+
+.ck-fill { height: 100%; border-radius: 7rpx; }
+.ck-fill.jade { background-color: #b8863b; }
+.ck-fill.cin { background-color: #b5482a; }
+.ck-fill.ochre { background-color: #8b5a2b; }
+.ck-fill.bam { background-color: #c07a3a; }
+
+.ck-fill.hatch {
+  background-image: repeating-linear-gradient(45deg,
+    #c9a15a 0 8rpx, #e3cda1 8rpx 16rpx);
+}
+
+.ck-bar-v {
+  flex: none;
+  width: 96rpx;
+  padding-left: 10rpx;
+  text-align: right;
+  font-size: 22rpx;
+  color: var(--color-ink-3);
+}
+
+/* 04 知识图谱 */
+.ck-graph {
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: rgba(139, 90, 43, 0.05);
+}
+
+.ck-g-core { text-align: center; }
+.ck-g-core-n { display: block; font-family: var(--font-serif); font-size: 32rpx; color: var(--color-ink); }
+.ck-g-core-s { display: block; margin-top: 2rpx; font-size: 22rpx; color: var(--color-ink-3); }
+
+.ck-g-rings { display: flex; margin-top: 18rpx; }
+
+.ck-g-ring { flex: 1; text-align: center; }
+.ck-g-ring + .ck-g-ring { border-left: 1rpx solid var(--color-border-hair); }
+.ck-g-ring-n { display: block; font-family: var(--font-serif); font-size: 34rpx; color: var(--color-flame); }
+.ck-g-ring-l { display: block; margin-top: 2rpx; font-size: 22rpx; color: var(--color-ink-3); }
+
+.ck-g-edge {
+  display: block;
+  margin-top: 14rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: var(--color-ink-3);
+}
+
+/* 05 食材深库 */
+.ck-fn { display: flex; align-items: center; margin-bottom: 10rpx; }
+.ck-fn-l { flex: none; width: 170rpx; font-size: 24rpx; color: var(--color-ink-2); }
+
+.ck-fn-bar {
+  min-width: 70rpx;
+  display: flex;
+  align-items: center;
+  height: 34rpx;
+  padding-left: 10rpx;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+  color: #ffffff;
+}
+
+.ck-tone-jade { background-color: #b8863b; }
+.ck-tone-gold { background-color: #c9a15a; }
+.ck-tone-ochre { background-color: #8b5a2b; }
+.ck-tone-stone { background-color: #a9967a; }
+
+.ck-lv { display: flex; align-items: center; margin-bottom: 10rpx; }
+.ck-lv-l { flex: none; width: 150rpx; font-size: 24rpx; color: var(--color-ink-2); }
+.ck-lv-v { flex: none; width: 120rpx; padding-left: 10rpx; text-align: right; font-size: 22rpx; color: var(--color-ink-3); }
+
+.ck-pnote {
+  display: block;
+  margin-top: 16rpx;
+  padding-top: 14rpx;
+  border-top: 1rpx solid var(--color-border-hair);
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: var(--color-ink-3);
+}
+
+/* ==================== 口径 ==================== */
+
+.note {
+  margin-top: 30rpx;
+  padding: 22rpx 24rpx;
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: 8rpx 22rpx 22rpx 8rpx;
+  background-color: rgba(139, 90, 43, 0.05);
+}
+
+.note-title {
+  display: block;
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-ink-2);
+}
+
+.note-line {
+  display: block;
+  font-size: 24rpx;
+  line-height: 1.75;
+  color: var(--color-ink-3);
+}
+
+/* 长辈模式：数字与标题跟着放大 */
+.elder .head-title { font-size: 76rpx; }
+.elder .sec-title { font-size: 46rpx; }
+.elder .ck-num,
+.elder .ck-mv { font-size: 62rpx; }
+.elder .ck-term { font-size: 60rpx; }

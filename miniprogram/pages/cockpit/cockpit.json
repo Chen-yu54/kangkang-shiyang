@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "节气数据",
+  "usingComponents": {
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}
