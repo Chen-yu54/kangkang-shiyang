@@ -28,6 +28,8 @@ Page({
     ckTab: 'term', // 默认展示 01 节气视图
     ckCap: '',
     dashOn: false, // 罗盘刻度进页面后依次点亮
+    ckNode: 'core', // 图谱当前选中的节点，默认核心
+    ckNodeInfo: {},
   },
 
   onLoad(options) {
@@ -79,6 +81,8 @@ Page({
       tabs,
       ckTab: active.key,
       ckCap: active.cap,
+      ckNode: 'core',
+      ckNodeInfo: ck.graph.map.detail.core,
     });
   },
 
@@ -101,6 +105,15 @@ Page({
     if (!key || key === this.data.ckTab) return;
     const tab = this.data.tabs.filter((x) => x.key === key)[0];
     this.setData({ ckTab: key, ckCap: tab ? tab.cap : '' });
+  },
+
+  // 点图谱节点：只换明细条，不重排图
+  onTapNode(e) {
+    const id = e.currentTarget.dataset.id;
+    const graph = this.data.ck && this.data.ck.graph;
+    const info = graph && graph.map.detail[id];
+    if (!info || id === this.data.ckNode) return;
+    this.setData({ ckNode: id, ckNodeInfo: info });
   },
 
   onTapBack() {

@@ -180,24 +180,54 @@
       <text class="ck-pnote">{{ck.fit.note}}</text>
     </view>
 
-    <!-- 04 知识图谱（计数实算，节点示例） -->
+    <!-- 04 知识图谱：放射星图（骨架实算，主料示例） -->
     <view wx:if="{{ckTab === 'graph'}}" class="ck-p ck-card">
-      <view class="ck-graph">
-        <view class="ck-g-core">
-          <text class="ck-g-core-n">{{ck.graph.core.name}}</text>
-          <text class="ck-g-core-s">{{ck.graph.core.sub}}</text>
+      <view class="ck-gmap">
+        <view
+          class="ck-gline ck-gline-{{item.tone}}"
+          wx:for="{{ck.graph.map.links}}"
+          wx:key="id"
+          style="left: {{item.x1}}rpx; top: {{item.y1}}rpx; width: {{item.len}}rpx; transform: rotate({{item.deg}}deg);"
+        ></view>
+        <text
+          class="ck-glbl {{item.now ? 'now' : ''}}"
+          wx:for="{{ck.graph.map.labels}}"
+          wx:key="id"
+          style="left: {{item.x}}rpx; top: {{item.y}}rpx;"
+        >{{item.text}}</text>
+        <view
+          class="ck-gnode ck-gnode-{{item.type}} {{ckNode === item.id ? 'on' : ''}}"
+          wx:for="{{ck.graph.map.nodes}}"
+          wx:key="id"
+          style="left: {{item.x}}rpx; top: {{item.y}}rpx;"
+          data-id="{{item.id}}"
+          hover-class="tap-hover"
+          bindtap="onTapNode"
+        >
+          <view wx:if="{{item.dot}}" class="ck-gdot"></view>
+          <text wx:if="{{item.name}}" class="ck-gn-n">{{item.name}}</text>
+          <text wx:if="{{item.sub}}" class="ck-gn-s">{{item.sub}}</text>
         </view>
-        <view class="ck-g-rings">
-          <view class="ck-g-ring" wx:for="{{ck.graph.rings}}" wx:key="name">
-            <text class="ck-g-ring-n">{{item.n}}</text>
-            <text class="ck-g-ring-l">{{item.name}}</text>
-          </view>
+      </view>
+
+      <view class="ck-glegend">
+        <text class="ck-glegend-i" wx:for="{{ck.graph.map.legend}}" wx:key="name">{{item.name}} {{item.n}}</text>
+        <text class="ck-glegend-i">{{ck.graph.edges}} 条关系边</text>
+      </view>
+
+      <view class="ck-gdet">
+        <view class="ck-gdet-h">
+          <text class="ck-gdet-n">{{ckNodeInfo.name}}</text>
+          <text class="ck-gdet-s">{{ckNodeInfo.sub}}</text>
         </view>
-        <text class="ck-g-edge">{{ck.graph.edges}} 条关系边</text>
+        <view class="ck-gdet-row" wx:for="{{ckNodeInfo.rows}}" wx:key="k">
+          <text class="ck-gdet-k">{{item.k}}</text>
+          <text class="ck-gdet-v">{{item.v}}</text>
+        </view>
       </view>
 
       <view class="ck-cap ck-cap-gap">
-        <text>主料节点</text>
+        <text>主料节点 Top5</text>
         <text wx:if="{{ck.graph.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
       </view>
       <view class="ck-bar" wx:for="{{ck.graph.ingredients}}" wx:key="name">
@@ -207,7 +237,7 @@
       </view>
 
       <view class="ck-cap ck-cap-gap">
-        <text>偏好节点</text>
+        <text>体质节点</text>
         <text wx:if="{{ck.graph.sample}}" class="ck-tag">{{copy.sampleTag}}</text>
       </view>
       <view class="ck-bar" wx:for="{{ck.graph.fits}}" wx:key="name">

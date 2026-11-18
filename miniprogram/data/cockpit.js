@@ -15,6 +15,37 @@ const termsRaw = require('../data/terms.js');
 const pct = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : 0);
 
 // ——————————————————————————————————————————————
+// 知识图谱的坐标：全部在 640 × 620 的方框里算好，WXSS 只管摆位置。
+// 不上 canvas 的原因：canvas 是原生组件，层级压在普通节点之上，
+// 「点节点看明细」得自己做 hit-test，改一次布局要重算一遍；
+// 这里节点最多 33 个、连线 32 条，用绝对定位的 view 反而更稳，bindtap 直接能用。
+// ——————————————————————————————————————————————
+const MAP = { w: 640, h: 620, cx: 320, cy: 310, r0: 78 };
+
+function pt(r, deg) {
+  const a = (deg * Math.PI) / 180;
+  return {
+    x: Math.round((MAP.cx + r * Math.cos(a)) * 10) / 10,
+    y: Math.round((MAP.cy + r * Math.sin(a)) * 10) / 10,
+  };
+}
+
+// 一条线：给左上角坐标 + 长度 + 角度，WXSS 用 rotate 绕左上角转
+function seg(id, x1, y1, x2, y2, tone) {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  return {
+    id,
+    x1,
+    y1,
+    len: Math.round(Math.sqrt(dx * dx + dy * dy) * 10) / 10,
+    deg: Math.round(((Math.atan2(dy, dx) * 180) / Math.PI) * 10) / 10,
+    tone,
+  };
+}
+
+
+// ——————————————————————————————————————————————
 // [示例] 知识库里没有这三组数据，先用与数据驾驶舱一致的数值占位。
 // 换成真实数据时：保持 { name, n } 的形状，max 会自动按最大值算。
 // ——————————————————————————————————————————————
@@ -124,6 +155,97 @@ function buildTicks(current) {
   return rows;
 }
 
+// —— 图谱布局 ——
+// 三层：内圈 3 个菜系（实算道数）→ 中圈 5 个主料（示例）→ 外圈 24 个节气点。
+// 24 个节气每 15° 一个，每 3 个标一次名，正好避开「每个都标会糊成一片」。
+const CU_DEG = [200, 340, 90];
+const CU_R = 176;
+const TERM_R = 244;
+const TERM_LBL_R = 272;
+
+function buildGraphMap(cuisineList, termName, total, perTerm) {
+  const nodes = [];
+  const labels = [];
+  const links = [];
+  const detail = {};
+
+  const edge = (id, deg, tx, ty, tone) => {
+    const a = (deg * Math.PI) / 180;
+    return seg(
+      id,
+      Math.round((MAP.cx + MAP.r0 * Math.cos(a)) * 10) / 10,
+      Math.round((MAP.cy + MAP.r0 * Math.sin(a)) * 10) / 10,
+      tx,
+      ty,
+      tone
+    );
+  };
+
+  nodes.push({ id: 'core', type: 'core', name: '岭南食养库', sub: total + ' 道', x: MAP.cx, y: MAP.cy });
+  detail.core = {
+    name: '岭南食养库',
+    sub: total + ' 道',
+    rows: [
+      { k: '结构', v: termsRaw.length + ' 节气 × 3 菜系 × 4 道' },
+      { k: '关系边', v: SAMPLE.graphEdges + ' 条（节气—菜系—菜品—主料）' },
+    ],
+  };
+
+  cuisineList.forEach((c, i) => {
+    const deg = CU_DEG[i];
+    const p = pt(CU_R, deg);
+    const id = 'cu-' + i;
+    nodes.push({ id, type: 'cu', name: c.name + '菜', sub: c.n + ' 道', x: p.x, y: p.y });
+    links.push(edge('l-' + id, deg, p.x, p.y, 'cu'));
+    detail[id] = {
+      name: c.name + '菜',
+      sub: c.n + ' 道',
+      rows: [
+        { k: '成本结构', v: '低 ' + c.low + ' · 中 ' + c.mid + ' · 高 ' + c.high },
+        { k: '★★★ 难度', v: c.hard + ' 道' },
+        { k: '少吃提示', v: c.caution + ' 道' },
+      ],
+    };
+  });
+
+  const termTotal = termsRaw.length || 24;
+  // 数组是小寒起排的，星图要从立春（index 2）起算：立春在正上方，顺时针走完一年
+  const start = termsRaw.findIndex((x) => x.name === '立春');
+  const base = start > 0 ? start : 0;
+  termsRaw.forEach((item, i) => {
+    const order = (i - base + termTotal) % termTotal;
+    const deg = -90 + (360 / termTotal) * order;
+    const p = pt(TERM_R, deg);
+    const now = item.name === termName;
+    const id = 't-' + i;
+    nodes.push({ id, type: now ? 'now' : 'term', dot: true, x: p.x, y: p.y });
+    links.push(edge('l-' + id, deg, p.x, p.y, now ? 'now' : 'term'));
+    // 每 3 个标一次名，正好落在立春/春分/立夏/夏至/立秋/秋分/立冬/冬至
+    if (order % 3 === 0) {
+      const lp = pt(TERM_LBL_R, deg);
+      labels.push({ id: 'lb-' + i, x: lp.x, y: lp.y, text: item.name, now });
+    }
+    detail[id] = {
+      name: item.name,
+      sub: now ? '当前节气' : '第 ' + (order + 1) + ' 个节气',
+      rows: [{ k: '当令菜', v: (perTerm[item.name] || 0) + ' 道（3 菜系 × 4 道）' }],
+    };
+  });
+
+  return {
+    w: MAP.w,
+    h: MAP.h,
+    nodes,
+    labels,
+    links,
+    detail,
+    legend: [
+      { name: '菜系', n: cuisineList.length },
+      { name: '节气', n: termTotal },
+    ],
+  };
+}
+
 function build(current) {
   const list = (Array.isArray(recipes) ? recipes : []).slice();
   const total = list.length || 1;
@@ -219,20 +341,20 @@ function build(current) {
     note: '宜为多标签，不可相加；忌与宜同轴对照，同一道菜可能两边都出现。',
   };
 
-  // —— 知识图谱（计数实算，节点示例）——
+  // —— 知识图谱（骨架实算，主料示例）——
   const graph = {
     sample: true,
     core: { name: '岭南食养库', sub: total + ' 道' },
-    rings: [
-      { name: '菜系', n: cuisineList.length },
-      { name: '节气', n: termsRaw.length },
-      { name: '主料', n: 291 },
-      { name: '偏好', n: 9 },
-    ],
+    map: buildGraphMap(cuisineList, termName, total, perTerm),
     ingredients: withW(SAMPLE.graphIngredients, { unit: ' 道' }),
     fits: withW(SAMPLE.graphFits, { unit: ' 道' }),
     edges: SAMPLE.graphEdges,
-    note: `核心节点 1 个、菜系 ${cuisineList.length} 个、节气 ${termsRaw.length} 个，主料与偏好节点为示例；边的含义是「菜系—节气—菜品—主料—偏好」的归属关系。`,
+    note:
+      '图的骨架全是实算：核心 1 个、菜系 3 个、节气 ' +
+      termsRaw.length +
+      ' 个、关系边 ' +
+      SAMPLE.graphEdges +
+      ' 条。手机上不塞 24 个节气名——只标 8 个大节气，其余留点；点任一节点，下面换成它的明细。',
   };
 
   // —— 食材深库（示例）——
