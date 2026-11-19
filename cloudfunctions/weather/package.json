@@ -1,0 +1,10 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "和风天气转发：持 key、只回必要字段、失败如实返回错误码",
+  "main": "index.js",
+  "dependencies": {},
+  "engines": {
+    "node": ">=16"
+  }
+}

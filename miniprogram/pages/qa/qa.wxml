@@ -1,0 +1,115 @@
+<view class="page {{elderMode ? 'elder' : ''}}">
+  <view class="topbar">
+    <text class="topbar-tip">按你的偏好、少吃和收藏来推荐</text>
+    <text class="topbar-clear" bindtap="onClear">清空</text>
+  </view>
+
+  <scroll-view
+    class="msg-list"
+    scroll-y
+    scroll-into-view="{{scrollIntoView}}"
+    scroll-with-animation
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <view wx:for="{{messages}}" wx:key="id" id="m{{item.id}}" class="msg-row {{item.role}}">
+      <view wx:if="{{item.role === 'user'}}" class="bubble user-bubble">{{item.text}}</view>
+
+      <view wx:elif="{{item.role === 'loading'}}" class="bubble bot-bubble loading">
+        <text>{{item.text}}</text>
+      </view>
+
+      <view wx:else class="bubble bot-bubble">
+        <text class="reply" user-select>{{item.text}}</text>
+
+        <view wx:if="{{item.degraded}}" class="degrade-tag">
+          <text>网络问答暂不可用，以下是当令菜</text>
+        </view>
+
+        <view wx:if="{{item.dishes.length}}" class="dish-list">
+          <view wx:for="{{item.dishes}}" wx:for-item="d" wx:key="id" class="dish-card">
+            <view class="dish-head">
+              <text class="dish-name">{{d.name}}</text>
+              <text wx:if="{{d.cuisine}}" class="dish-cuisine">{{d.cuisine}}</text>
+            </view>
+            <text class="dish-reason">{{d.reason}}</text>
+            <view class="dish-actions">
+              <text class="btn-mini" data-id="{{d.id}}" bindtap="onOpenDish">看详情</text>
+              <text class="btn-mini {{d.favorited ? 'btn-mini-on' : ''}}" data-id="{{d.id}}" bindtap="onFav">
+                {{d.favorited ? '已收藏' : '收藏'}}
+              </text>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{item.followups.length}}" class="chips-inline">
+          <text
+            wx:for="{{item.followups}}"
+            wx:for-item="f"
+            wx:key="*this"
+            class="chip chip-sm"
+            data-q="{{f}}"
+            bindtap="onChip"
+          >{{f}}</text>
+        </view>
+
+        <view wx:if="{{item.sources.length}}" class="sources">
+          <text class="source-toggle" data-id="{{item.id}}" bindtap="onToggleSources">
+            {{item.showSources ? '收起来源' : '网络信息，仅供参考'}}
+          </text>
+          <view wx:if="{{item.showSources}}" class="source-list">
+            <view wx:for="{{item.sources}}" wx:for-item="s" wx:key="url" class="source-item">
+              <text class="source-title" data-url="{{s.url}}" bindtap="onOpenSource">{{s.title}}</text>
+            </view>
+          </view>
+        </view>
+
+        <text wx:if="{{item.disclaimer}}" class="disclaimer">{{item.disclaimer}}</text>
+      </view>
+    </view>
+
+    <view class="bottom-pad"></view>
+  </scroll-view>
+
+  <view wx:if="{{messages.length <= 1}}" class="chips">
+    <text
+      wx:for="{{chips}}"
+      wx:key="*this"
+      class="chip"
+      data-q="{{item}}"
+      bindtap="onChip"
+    >{{item}}</text>
+  </view>
+
+  <view class="input-bar">
+    <input
+      class="input"
+      value="{{input}}"
+      placeholder="{{canAsk ? '问问康康，今天吃什么' : '问答未开通'}}"
+      placeholder-class="ph"
+      bindinput="onInput"
+      confirm-type="send"
+      bindconfirm="onSend"
+      disabled="{{!canAsk}}"
+      cursor-spacing="24"
+    />
+    <button class="send-btn" bindtap="onSend" disabled="{{sending || !canAsk}}">
+      {{sending ? '…' : '发送'}}
+    </button>
+  </view>
+
+  <!-- 首次使用说明 -->
+  <view wx:if="{{showIntro}}" class="mask">
+    <view class="intro-card">
+      <text class="intro-title">AI 问答说明</text>
+      <text class="intro-text">1. 康康会根据你的偏好自述、少吃和收藏推荐菜，只从菜品库里选，不会编菜名。</text>
+      <text class="intro-text">2. 食养建议不构成医疗建议，长期与用药请遵医嘱。</text>
+      <text class="intro-text">3. 对话记录只保存在你手机上，不上传头像昵称。</text>
+      <text class="intro-text">4. 每天最多问 30 次。</text>
+      <view class="intro-actions">
+        <text class="intro-cancel" bindtap="onIntroClose">暂不使用</text>
+        <text class="intro-ok" bindtap="onIntroAgree">同意并继续</text>
+      </view>
+    </view>
+  </view>
+</view>

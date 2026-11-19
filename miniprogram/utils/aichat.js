@@ -66,6 +66,85 @@ function cloudReady() {
   return !!(cfg.CLOUD_ENV && typeof wx !== 'undefined' && wx.cloud);
 }
 
+// —— 模型输出的拆包 ——
+// Bot 侧设了结构化输出（{"reply":…,"dishes":[…],"followups":[…]})，
+// 云函数把整段原始内容原样当 reply 传回来。气泡里绝不能出现花括号，
+// 所以在这里统一取一次：要说的那句话、提到的菜、可以接着点的问题。
+function unfence(text) {
+  return String(text || '')
+    .trim()
+    .replace(/^```(?:json)?\s*/i, '')
+    .replace(/\s*```$/, '')
+    .trim();
+}
+
+function unescapeSeg(seg) {
+  try {
+    return JSON.parse('"' + seg + '"');
+  } catch (e) {
+    return String(seg)
+      .replace(/\\n/g, '\n')
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, '\\');
+  }
+}
+
+// 菜名 / 追问都可能是字符串，也可能是 {name:…} 这类对象，统一成字符串数组
+function pickList(list, max) {
+  if (!Array.isArray(list)) return [];
+  return list
+    .map((x) => (typeof x === 'string' ? x : (x && (x.name || x.title || x.dish)) || ''))
+    .map((x) => String(x).trim())
+    .filter(Boolean)
+    .slice(0, max || 4);
+}
+
+/**
+ * 把模型回复拆成 { reply, dishes, followups }。
+ * 普通文本原样返回；结构化输出取出 reply；JSON 被截断时至少捞回 reply。
+ */
+function normalize(raw) {
+  const text = String(raw == null ? '' : raw).trim();
+  if (!text) return { reply: '', dishes: [], followups: [] };
+
+  const body = unfence(text);
+  let obj = null;
+  if (body.charAt(0) === '{') {
+    try {
+      obj = JSON.parse(body);
+    } catch (e) {
+      obj = null;
+    }
+  }
+
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+    // JSON 被截断：正文和菜名能捞多少捞多少，别把半截花括号给用户
+    const m = body.match(/"reply"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+    const dm = body.match(/"dishes"\s*:\s*\[([^\]]*)\]/);
+    const dishes = dm
+      ? pickList((dm[1].match(/"((?:[^"\\]|\\.)*)"/g) || []).map((x) => unescapeSeg(x.slice(1, -1))), 3)
+      : [];
+    if (m) {
+      const reply = unescapeSeg(m[1]).trim();
+      if (reply) return { reply, dishes, followups: [] };
+    }
+    return { reply: text, dishes: [], followups: [] };
+  }
+
+  const reply = typeof obj.reply === 'string' ? obj.reply.trim() : '';
+  const dishes = pickList(obj.dishes, 3);
+  const followups = pickList(obj.followups, 4);
+
+  // 结构里没有正文字段：说明这不是给对话用的结构，别吞掉内容
+  if (!reply && !dishes.length) return { reply: text, dishes, followups: [] };
+
+  return {
+    reply: reply || '给你挑了几道当令菜，点开看看。',
+    dishes,
+    followups,
+  };
+}
+
 /**
  * 问一句。
  * @param {string} question 用户输入
@@ -93,7 +172,13 @@ function ask(question, opts) {
       success: (res) => {
         const r = (res && res.result) || {};
         if (r.status === 'success' && r.reply) {
-          resolve({ reply: r.reply, conversationId: r.conversationId || '' });
+          const n = normalize(r.reply);
+          resolve({
+            reply: n.reply,
+            dishes: n.dishes,
+            followups: n.followups,
+            conversationId: r.conversationId || '',
+          });
           return;
         }
         reject({ code: r.code || 'UNKNOWN', message: r.message || '' });
@@ -135,6 +220,7 @@ function explain(err) {
 module.exports = {
   ask,
   explain,
+  normalize,
   userId,
   readHistory,
   saveHistory,

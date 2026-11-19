@@ -28,6 +28,7 @@ const i18n = require('../../utils/i18n');
 // 节气两套内容：食养小贴士（怎么挑/配/下锅）＋ 养生提醒（气候/喝水/当令/起居）
 const termTipsData = require('../../data/termTips');
 const termHealth = require('../../data/termHealth');
+const weatherUtil = require('../../utils/weather');
 // 风味卡是构建产物（data/cuisines.js），只读
 const CUISINE_CARDS = require('../../data/cuisines.js');
 
@@ -40,6 +41,15 @@ const CUISINE_KEYS = ['guangfu', 'chaoshan', 'hakka'];
 const PREFS_KEY = 'prefAnswers';
 // 扣子工作流二：前端只传别名，长 ID 与 token 都在服务端
 const WORKFLOW_NAME = require('../../utils/config').WORKFLOW_ALIAS.recommend;
+
+// 等模型出单时轮着播的话：转圈不空着，也不把「正在生成」说得太机械
+const WAIT_LINES = [
+  '康康正在输入…',
+  '正在为您精挑细选…',
+  '翻翻当令的菜谱…',
+  '按节气挑几样食材…',
+  '再想想怎么搭更顺口…',
+];
 
 // 菜系通用图：某道菜没有自己的配图时，用所属菜系的插画顶上。
 // 三张分别是广府 / 潮汕 / 客家的菜系卡；岭南家常与其他没有专属卡，借广府那张。
@@ -142,6 +152,8 @@ Page({
     progressText: '',
     resultDishes: [], // 一道一道菜：图 + 菜系/难度/价格 + 做法 + 理由
     termTips: [], // 节气食养小贴士（data/termTips.js，每节气 3 条）
+    weatherTip: '', // 今天天气 + 怎么吃（说不上就留空，不显示这一行）
+    weatherCity: '', // 天气对应的城市名，显示在行尾
     health: null, // 节气养生提醒（data/termHealth.js，含按时间给的喝水提醒）
     elderMode: false,
     // 登录后的功能引导（跨 tab，进度存在 app.globalData.tour）
@@ -149,6 +161,28 @@ Page({
     tourStep: null,
     tourIndex: 0,
     tourTotal: 0,
+    // 等模型出单时轮播的一句话（genWait 阶段用）
+    waitWords: [],
+  },
+
+  // 等出单期间轮着换话术；推演一结束回调自己会停，不用到处补清理
+  startWaitWords() {
+    this.stopWaitWords();
+    this._waitIdx = 0;
+    this.setData({ waitWords: [WAIT_LINES[0]] });
+    this._waitTimer = setInterval(() => {
+      if (this.data.genPhase !== 'running') {
+        this.stopWaitWords();
+        return;
+      }
+      this._waitIdx = (this._waitIdx + 1) % WAIT_LINES.length;
+      this.setData({ waitWords: [WAIT_LINES[this._waitIdx]] });
+    }, 2200);
+  },
+
+  stopWaitWords() {
+    if (this._waitTimer) clearInterval(this._waitTimer);
+    this._waitTimer = null;
   },
 
   onLoad() {
@@ -201,6 +235,7 @@ Page({
         genThinking: t('nutrition.genThinking'),
         genMixing: t('nutrition.genMixing'),
         tipsTitle: t('nutrition.tipsTitle'),
+        weatherTag: t('nutrition.weatherTag'),
         healthTitle: t('nutrition.healthTitle'),
         whyLabel: t('nutrition.whyLabel'),
         dishOpen: t('nutrition.dishOpen'),
@@ -231,6 +266,7 @@ Page({
     this.startDaypartTimer();
     // 从问卷回来 / 已经推演过：重算这一步该显示什么（genStore 可能刚写好）
     this.refreshNutrition();
+    this.loadWeather();
 
     // 问卷交卷时在 globalData 里留了一笔：回到这一页就把推演接着演完
     const auto = !!(app.globalData && app.globalData.autoRunGen);
@@ -242,6 +278,7 @@ Page({
 
   onHide() {
     this.stopDaypartTimer();
+    this.stopWaitWords();
     // 演到一半被切走：停表并回到「未开始」，回来点一下重演，不停在半截
     if (this.data.genPhase === 'running') {
       this.clearGenTimer();
@@ -253,6 +290,7 @@ Page({
 
   onUnload() {
     this.stopDaypartTimer();
+    this.stopWaitWords();
     this.clearGenTimer();
   },
 
@@ -301,6 +339,24 @@ Page({
 
   // —— 食养：按作答生成推荐 ——
   // 答案来自 preftest 写入的 prefAnswers；未作答就只留问卷入口，不铺任何菜。
+  // 天气：异步拉，失败就不显示这一行，不阻塞页面也不编造
+  loadWeather() {
+    weatherUtil
+      .fetch()
+      .then((w) => {
+        if (!w) {
+          this.setData({ weatherTip: '', weatherCity: '' });
+          return;
+        }
+        const tip = weatherUtil.toTip(w);
+        this.setData({ weatherTip: tip, weatherCity: w.cityName || '' });
+      })
+      .catch(() => {
+        // 拿不到就当作没有，界面少一行而已
+        this.setData({ weatherTip: '', weatherCity: '' });
+      });
+  },
+
   refreshNutrition() {
     const answers = readAnswers();
 
@@ -395,6 +451,7 @@ Page({
     });
 
     // 推演是页面内的动作，不再单记一次 page_view（页面浏览在 onLoad 里已记过）
+    this.startWaitWords();
     this.playSteps(stepsAll);
   },
 
@@ -607,7 +664,7 @@ Page({
       return;
     }
     if (st.step && st.step.page !== 'menu') {
-      wx.switchTab({ url: '/pages/mine/mine' });
+      wx.switchTab({ url: require('../../utils/tour').tabUrlOf(st.step.page) });
       return;
     }
     this.setData({

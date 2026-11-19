@@ -820,6 +820,15 @@
   color: var(--color-flame);
 }
 
+.trace-wait-flash {
+  animation: mnWaitFade 0.45s ease both;
+}
+
+@keyframes mnWaitFade {
+  from { opacity: 0; transform: translateY(6rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .trace-wait-sub {
   display: block;
   margin-top: 2rpx;
@@ -1125,4 +1134,39 @@
   background-color: rgba(34, 23, 18, 0.55);
   font-size: var(--font-caption);
   color: var(--color-on-night);
+}
+
+/* 今天天气 + 怎么吃：放在当令小贴士上方，因为「今天」比「这个节气」更即时。
+   拿不到天气时整块不渲染（wxml 用 wx:if 判断），不留空白。 */
+.rweather {
+  margin: 20rpx 0 0;
+  padding: 22rpx 24rpx;
+  background: #f6faf2;
+  border-left: 8rpx solid #3f7a45;
+  border-radius: 12rpx;
+}
+
+.rweather-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8rpx;
+}
+
+.rweather-tag {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #3f7a45;
+}
+
+.rweather-city {
+  margin-left: 12rpx;
+  font-size: 28rpx;
+  color: #8b7a5b;
+}
+
+.rweather-text {
+  display: block;
+  font-size: 36rpx;
+  line-height: 1.6;
+  color: #2d241a;
 }

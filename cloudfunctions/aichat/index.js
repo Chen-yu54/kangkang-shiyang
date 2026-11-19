@@ -17,7 +17,12 @@
 const https = require('https');
 
 const TOKEN = process.env.COZE_TOKEN;
-const BOT_ID = process.env.COZE_BOT_ID;
+
+// Bot ID：填了环境变量以环境变量为准，没填用这个默认值。
+// Bot ID 不是密钥——它单独泄露无法调用（还要 token），但仍只放在服务端：
+// 小程序包里不出现，前端只传问题与匿名 id。
+const DEFAULT_BOT_ID = '7709769802239475721';
+const BOT_ID = process.env.COZE_BOT_ID || DEFAULT_BOT_ID;
 
 const API_HOST = 'api.coze.cn';
 const REQUEST_TIMEOUT = 12000; // 单次 HTTP 请求

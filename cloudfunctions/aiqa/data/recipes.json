@@ -1,0 +1,7541 @@
+[
+  {
+    "id": "TS0001",
+    "name": "白灼西兰花",
+    "cuisine": "广府",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "西兰花",
+      "生抽",
+      "蒜"
+    ],
+    "method": "其他",
+    "caution": "甲状腺功能低下者不宜大量生食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 12,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0002",
+    "name": "春笋炒火腩",
+    "cuisine": "广府",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "春笋",
+      "火腩（烧肉）",
+      "蒜苗",
+      "头抽"
+    ],
+    "method": "炒",
+    "caution": "春笋粗纤维多，胃溃疡/结石患者少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0003",
+    "name": "韭菜炒虾仁",
+    "cuisine": "广府",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "韭菜",
+      "虾仁",
+      "姜丝"
+    ],
+    "method": "炒",
+    "caution": "韭菜辛温，胃热/痔疮发作期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 10,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0004",
+    "name": "荠菜云吞",
+    "cuisine": "广府",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "云吞皮",
+      "荠菜",
+      "鲜虾",
+      "猪肉末"
+    ],
+    "method": "煮",
+    "caution": "虾类过敏忌",
+    "allergen": [
+      "虾"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0005",
+    "name": "木棉花薏米祛湿汤",
+    "cuisine": "广府",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "干木棉花",
+      "薏米",
+      "赤小豆",
+      "猪骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "孕妇忌薏米；常口干的人少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0006",
+    "name": "陈皮白粥",
+    "cuisine": "广府",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "大米",
+      "陈皮",
+      "姜丝"
+    ],
+    "method": "煮",
+    "caution": "糖友控制粥量（升糖快）",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0007",
+    "name": "粉葛赤小豆猪骨汤",
+    "cuisine": "广府",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "粉葛",
+      "赤小豆",
+      "猪骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "粉葛偏凉，脾胃虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0008",
+    "name": "陈皮红豆沙",
+    "cuisine": "广府",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "红豆",
+      "陈皮",
+      "冰糖",
+      "莲子"
+    ],
+    "method": "煮",
+    "caution": "含糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 250,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0009",
+    "name": "清蒸黄鱼",
+    "cuisine": "广府",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "黄鱼",
+      "姜葱",
+      "料酒"
+    ],
+    "method": "蒸",
+    "caution": "过敏者忌；痛风少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0010",
+    "name": "西洋菜煲猪骨",
+    "cuisine": "广府",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "西洋菜",
+      "猪骨",
+      "蜜枣",
+      "姜"
+    ],
+    "method": "煮",
+    "caution": "西洋菜偏凉，脾胃虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 80,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0011",
+    "name": "韭黄炒蛋",
+    "cuisine": "广府",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "韭黄",
+      "鸡蛋",
+      "盐"
+    ],
+    "method": "炒",
+    "caution": "韭黄辛温，常口干的人火旺少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0012",
+    "name": "韭黄鲜虾肠粉",
+    "cuisine": "广府",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "韭黄",
+      "鲜虾",
+      "生抽"
+    ],
+    "method": "蒸",
+    "caution": "虾类过敏忌；肠粉升糖快，糖友少",
+    "allergen": [
+      "虾"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0013",
+    "name": "清蒸鲈鱼",
+    "cuisine": "广府",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "鲈鱼",
+      "姜葱",
+      "蒸鱼豉油"
+    ],
+    "method": "蒸",
+    "caution": "痛风少食；鱼刺小心",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0014",
+    "name": "荠菜鱼片汤",
+    "cuisine": "广府",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "荠菜",
+      "鲩鱼片",
+      "姜",
+      "胡椒粉"
+    ],
+    "method": "腌",
+    "caution": "鱼刺小心；荠菜偏凉",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0015",
+    "name": "荷塘小炒",
+    "cuisine": "广府",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "藕片",
+      "木耳",
+      "荷兰豆",
+      "胡萝卜"
+    ],
+    "method": "炒",
+    "caution": "藕性偏凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0016",
+    "name": "虾饺",
+    "cuisine": "广府",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "澄面",
+      "鲜虾",
+      "笋粒",
+      "猪油"
+    ],
+    "method": "蒸",
+    "caution": "虾类过敏忌",
+    "allergen": [
+      "虾"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0017",
+    "name": "白切鸡",
+    "cuisine": "广府",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "清远鸡",
+      "姜葱",
+      "盐",
+      "冰水"
+    ],
+    "method": "焖",
+    "caution": "痛风急性期少汤皮；禽类过敏忌",
+    "allergen": [
+      "禽"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 50,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0018",
+    "name": "荠菜炒烧肉",
+    "cuisine": "广府",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "荠菜（荞菜）",
+      "烧肉",
+      "蒜"
+    ],
+    "method": "炒",
+    "caution": "烧肉高脂高盐，三高少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0019",
+    "name": "甘蔗茅根水",
+    "cuisine": "广府",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "竹蔗",
+      "白茅根",
+      "马蹄",
+      "胡萝卜"
+    ],
+    "method": "煮",
+    "caution": "含糖，糖友少；性凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0020",
+    "name": "脆皮烧肉",
+    "cuisine": "广府",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "五花肉",
+      "粗盐",
+      "五香粉",
+      "白醋"
+    ],
+    "method": "煮",
+    "caution": "高脂高盐，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 50,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0021",
+    "name": "土茯苓赤小豆猪骨汤",
+    "cuisine": "广府",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "土茯苓",
+      "赤小豆",
+      "猪骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "常口干的人慎；孕妇慎土茯苓",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0022",
+    "name": "冬瓜薏米老鸭汤",
+    "cuisine": "广府",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "薏米",
+      "老鸭",
+      "蜜枣"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；怕冷的人少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0023",
+    "name": "鸡骨草煲猪横脷",
+    "cuisine": "广府",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "鸡骨草",
+      "猪横脷（猪胰）",
+      "蜜枣",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "鸡骨草偏凉，脾胃虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0024",
+    "name": "粉葛鲮鱼赤小豆汤",
+    "cuisine": "广府",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "粉葛",
+      "鲮鱼",
+      "赤小豆",
+      "蜜枣"
+    ],
+    "method": "煲",
+    "caution": "鱼刺小心；孕妇慎赤小豆",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0025",
+    "name": "冬瓜盅（清炖冬瓜盅）",
+    "cuisine": "广府",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "瘦肉",
+      "莲子",
+      "夜香花"
+    ],
+    "method": "炖",
+    "caution": "冬瓜性寒，怕冷的人、经期少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0026",
+    "name": "绿豆沙",
+    "cuisine": "广府",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "绿豆",
+      "陈皮",
+      "冰糖（可加海带）"
+    ],
+    "method": "煮",
+    "caution": "糖友控糖；绿豆性凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0027",
+    "name": "荷叶饭（荷叶蒸饭）",
+    "cuisine": "广府",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "鲜荷叶",
+      "丝苗米",
+      "香菇",
+      "腊肠/鸡丁"
+    ],
+    "method": "蒸",
+    "caution": "糯米/米饭升糖，糖友控量",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0028",
+    "name": "荷叶冬瓜粥",
+    "cuisine": "广府",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "鲜荷叶",
+      "冬瓜",
+      "大米",
+      "瘦肉"
+    ],
+    "method": "煮",
+    "caution": "体虚少食；糖友控粥量",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0029",
+    "name": "白灼虾",
+    "cuisine": "广府",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "基围虾",
+      "姜片",
+      "头抽"
+    ],
+    "method": "煮",
+    "caution": "痛风/高尿酸忌；虾类过敏忌",
+    "allergen": [
+      "虾"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0030",
+    "name": "苦瓜黄豆排骨汤",
+    "cuisine": "广府",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "黄豆",
+      "排骨",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "苦瓜寒凉，脾胃虚寒/孕妇少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0031",
+    "name": "凉瓜炒牛肉",
+    "cuisine": "广府",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "牛肉片",
+      "豆豉",
+      "蒜"
+    ],
+    "method": "炒",
+    "caution": "苦瓜寒凉，脾胃虚寒/孕妇少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0032",
+    "name": "苦瓜炒蛋",
+    "cuisine": "广府",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "鸡蛋",
+      "豆豉"
+    ],
+    "method": "炒",
+    "caution": "苦瓜寒凉，脾胃虚寒/孕妇少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0033",
+    "name": "酸梅汤",
+    "cuisine": "广府",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "乌梅",
+      "山楂",
+      "甘草",
+      "桂花",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "糖友控糖；胃酸过多/溃疡少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 70,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0034",
+    "name": "老黄瓜薏米汤",
+    "cuisine": "广府",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "老黄瓜",
+      "薏米",
+      "赤小豆",
+      "猪骨"
+    ],
+    "method": "煲",
+    "caution": "孕妇忌薏米",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0035",
+    "name": "五花茶",
+    "cuisine": "广府",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "金银花",
+      "菊花",
+      "木棉花",
+      "鸡蛋花",
+      "槐花"
+    ],
+    "method": "煎",
+    "caution": "性凉，脾胃虚寒、经期慎饮",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0036",
+    "name": "西瓜翠衣水",
+    "cuisine": "广府",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "西瓜皮（去红瓤留白）",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "性凉，脾胃虚寒少；糖友控糖",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0037",
+    "name": "莲子鸭肉冬瓜盅",
+    "cuisine": "广府",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "鸭肉",
+      "莲子",
+      "陈皮"
+    ],
+    "method": "炖",
+    "caution": "鸭肉偏凉，怕冷的人少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0038",
+    "name": "白灼秋葵",
+    "cuisine": "广府",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "秋葵",
+      "生抽",
+      "蒜"
+    ],
+    "method": "其他",
+    "caution": "秋葵性凉，虚寒少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 12,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0039",
+    "name": "清补凉汤",
+    "cuisine": "广府",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "沙参",
+      "玉竹",
+      "莲子",
+      "百合",
+      "瘦肉"
+    ],
+    "method": "煲",
+    "caution": "偏凉，怕冷的人少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0040",
+    "name": "虾子捞面",
+    "cuisine": "广府",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "全蛋面",
+      "虾籽",
+      "蚝油",
+      "韭黄"
+    ],
+    "method": "煮",
+    "caution": "含盐偏高，高血压少；虾过敏忌",
+    "allergen": [
+      "虾"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0041",
+    "name": "白灼鱿鱼",
+    "cuisine": "广府",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "鲜鱿",
+      "姜",
+      "酱油"
+    ],
+    "method": "其他",
+    "caution": "鱿鱼胆固醇高，高血脂少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 12,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0042",
+    "name": "冬瓜荷叶薏米汤",
+    "cuisine": "广府",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "鲜荷叶",
+      "薏米"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；体虚少饮",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0043",
+    "name": "丝瓜炒蛋",
+    "cuisine": "广府",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "丝瓜",
+      "鸡蛋",
+      "姜丝"
+    ],
+    "method": "炒",
+    "caution": "丝瓜性凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0044",
+    "name": "节瓜章鱼猪骨汤",
+    "cuisine": "广府",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "节瓜",
+      "章鱼干",
+      "猪骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "痛风少（章鱼嘌呤高）",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0045",
+    "name": "冬瓜薏米水",
+    "cuisine": "广府",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "薏米",
+      "蜜枣"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；体虚少饮",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0046",
+    "name": "绿豆莲藕排骨汤",
+    "cuisine": "广府",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "绿豆",
+      "莲藕",
+      "排骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "绿豆性凉，虚寒少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 210,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0047",
+    "name": "咸柠七",
+    "cuisine": "广府",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "咸柠檬",
+      "七喜/苏打水",
+      "冰块"
+    ],
+    "method": "其他",
+    "caution": "含糖与钠，糖友/高血压少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0048",
+    "name": "腐竹白果薏米糖水",
+    "cuisine": "广府",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "腐竹",
+      "白果",
+      "薏米",
+      "鸡蛋",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；白果不可多食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0049",
+    "name": "清蒸鳗鱼",
+    "cuisine": "广府",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "鳗鱼",
+      "姜",
+      "豆豉"
+    ],
+    "method": "蒸",
+    "caution": "鳗鱼滋腻，体胖易困的人少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0050",
+    "name": "雪梨无花果煲猪肺",
+    "cuisine": "广府",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "雪梨",
+      "无花果",
+      "猪肺",
+      "南北杏"
+    ],
+    "method": "煲",
+    "caution": "猪肺须彻底清洗；寒咳少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0051",
+    "name": "蜜瓜响螺汤",
+    "cuisine": "广府",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "蜜瓜",
+      "响螺片",
+      "瘦肉",
+      "姜"
+    ],
+    "method": "煮",
+    "caution": "痛风少；蜜瓜含糖，糖友控量",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0052",
+    "name": "木瓜雪耳糖水",
+    "cuisine": "广府",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "青木瓜",
+      "雪耳",
+      "南北杏",
+      "冰糖"
+    ],
+    "method": "炖",
+    "caution": "含糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0053",
+    "name": "蜜汁叉烧",
+    "cuisine": "广府",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "猪梅头肉",
+      "蜜糖",
+      "玫瑰露",
+      "叉烧酱"
+    ],
+    "method": "烤",
+    "caution": "糖友控制蜜汁糖分；高血脂减半",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0054",
+    "name": "沙参玉竹老鸭汤",
+    "cuisine": "广府",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "老鸭",
+      "沙参",
+      "玉竹",
+      "生姜"
+    ],
+    "method": "煲",
+    "caution": "鸭肉寒凉；外感初期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0055",
+    "name": "西洋菜陈肾汤",
+    "cuisine": "广府",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "西洋菜",
+      "陈肾（腊鸭肾）",
+      "蜜枣",
+      "南北杏"
+    ],
+    "method": "煮",
+    "caution": "陈肾偏咸，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 80,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0056",
+    "name": "咸蛋芥菜汤",
+    "cuisine": "广府",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "咸蛋",
+      "芥菜",
+      "瘦肉",
+      "姜"
+    ],
+    "method": "煮",
+    "caution": "咸蛋含盐高，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0057",
+    "name": "清蒸花蛤",
+    "cuisine": "广府",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "花蛤",
+      "姜丝",
+      "葱花"
+    ],
+    "method": "蒸",
+    "caution": "贝类过敏；痛风忌",
+    "allergen": [
+      "贝"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0058",
+    "name": "银耳雪梨炖瘦肉",
+    "cuisine": "广府",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "银耳",
+      "雪梨",
+      "瘦肉",
+      "蜜枣"
+    ],
+    "method": "炖",
+    "caution": "银耳偏凉，体胖易困的人少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0059",
+    "name": "百合莲子糖水",
+    "cuisine": "广府",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "鲜百合",
+      "莲子",
+      "银耳",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "含糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0060",
+    "name": "川贝炖雪梨",
+    "cuisine": "广府",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "雪梨",
+      "川贝母",
+      "冰糖"
+    ],
+    "method": "炖",
+    "caution": "寒咳（白痰）不宜；糖友控糖",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0061",
+    "name": "清蒸甲鱼",
+    "cuisine": "广府",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "甲鱼",
+      "姜",
+      "料酒"
+    ],
+    "method": "蒸",
+    "caution": "孕妇忌；脾胃虚寒忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0062",
+    "name": "莲藕章鱼煲猪骨",
+    "cuisine": "广府",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "莲藕",
+      "章鱼干",
+      "猪骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "痛风少（章鱼嘌呤高）",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0063",
+    "name": "木瓜花生鸡脚汤",
+    "cuisine": "广府",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "青木瓜",
+      "花生",
+      "鸡脚",
+      "蜜枣"
+    ],
+    "method": "煮",
+    "caution": "鸡脚胶质高，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0064",
+    "name": "香煎芋头糕",
+    "cuisine": "广府",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "粘米粉",
+      "腊肠",
+      "虾米"
+    ],
+    "method": "蒸",
+    "caution": "高油高盐，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0065",
+    "name": "清蒸多宝鱼",
+    "cuisine": "广府",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "多宝鱼",
+      "姜葱",
+      "豉油"
+    ],
+    "method": "蒸",
+    "caution": "痛风少食；过敏者忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0066",
+    "name": "霸王花煲猪骨",
+    "cuisine": "广府",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "霸王花",
+      "猪骨",
+      "蜜枣",
+      "南北杏"
+    ],
+    "method": "煲",
+    "caution": "霸王花偏凉，寒咳少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0067",
+    "name": "椰子鸡汤",
+    "cuisine": "广府",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "老椰肉",
+      "椰水",
+      "走地鸡",
+      "红枣"
+    ],
+    "method": "煲",
+    "caution": "椰肉偏温润，体胖易困的人少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0068",
+    "name": "姜葱焗蟹",
+    "cuisine": "广府",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "膏蟹/肉蟹",
+      "姜",
+      "葱",
+      "米酒"
+    ],
+    "method": "煎",
+    "caution": "高嘌呤高胆固醇，痛风/高血脂/孕妇忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 12,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0069",
+    "name": "白灼芥蓝",
+    "cuisine": "广府",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "芥蓝",
+      "姜",
+      "生抽"
+    ],
+    "method": "其他",
+    "caution": "芥蓝偏凉，虚寒者慎",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 12,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0070",
+    "name": "萝卜牛腩煲",
+    "cuisine": "广府",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "白萝卜",
+      "牛腩",
+      "姜",
+      "柱侯酱"
+    ],
+    "method": "焖",
+    "caution": "牛腩高脂，高血脂少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0071",
+    "name": "莲藕焖腩肉",
+    "cuisine": "广府",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "莲藕",
+      "五花腩",
+      "南乳",
+      "姜"
+    ],
+    "method": "焖",
+    "caution": "高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0072",
+    "name": "花胶炖竹丝鸡",
+    "cuisine": "广府",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "花胶",
+      "竹丝鸡（乌鸡）",
+      "红枣",
+      "姜"
+    ],
+    "method": "炖",
+    "caution": "感冒发热期忌；高蛋白，肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0073",
+    "name": "白灼菜心",
+    "cuisine": "广府",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "增城菜心",
+      "蒜",
+      "生抽"
+    ],
+    "method": "其他",
+    "caution": "脾胃虚寒者不宜多食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 12,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0074",
+    "name": "姜醋猪脚蛋",
+    "cuisine": "广府",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "猪脚",
+      "鸡蛋",
+      "甜醋",
+      "姜"
+    ],
+    "method": "煮",
+    "caution": "高糖高脂，糖友/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 110,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0075",
+    "name": "栗子炆鸡",
+    "cuisine": "广府",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "栗子",
+      "鸡块",
+      "姜",
+      "生抽"
+    ],
+    "method": "煎",
+    "caution": "栗子淀粉高，糖友控量",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0076",
+    "name": "五指毛桃煲鸡",
+    "cuisine": "广府",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "五指毛桃",
+      "走地鸡",
+      "蜜枣",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "常口干的人火旺少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0077",
+    "name": "黄芪炖乳鸽",
+    "cuisine": "广府",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "乳鸽",
+      "黄芪",
+      "红枣",
+      "姜"
+    ],
+    "method": "炖",
+    "caution": "外感发热期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0078",
+    "name": "腊味煲仔饭",
+    "cuisine": "广府",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "腊肠腊肉",
+      "丝苗米",
+      "青菜",
+      "豉油"
+    ],
+    "method": "煮",
+    "caution": "高盐高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 45,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0079",
+    "name": "白萝卜炖羊肉",
+    "cuisine": "广府",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "白萝卜",
+      "羊肉",
+      "姜",
+      "胡椒"
+    ],
+    "method": "炖",
+    "caution": "羊肉温热，易上火的人/常口干的人火旺忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0080",
+    "name": "腊肠蒸鸡",
+    "cuisine": "广府",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "腊肠",
+      "鸡块",
+      "姜",
+      "米酒"
+    ],
+    "method": "蒸",
+    "caution": "高盐高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0081",
+    "name": "党参枸杞炖乳鸽",
+    "cuisine": "广府",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "乳鸽",
+      "党参",
+      "枸杞"
+    ],
+    "method": "炖",
+    "caution": "外感发热期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0082",
+    "name": "支竹羊腩煲",
+    "cuisine": "广府",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "羊腩",
+      "支竹（腐竹）",
+      "马蹄",
+      "南乳",
+      "姜"
+    ],
+    "method": "焖",
+    "caution": "羊肉温热，易上火的人/常口干的人火旺忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0083",
+    "name": "鸡煲蟹",
+    "cuisine": "广府",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "走地鸡",
+      "膏蟹",
+      "姜葱",
+      "米酒"
+    ],
+    "method": "焖",
+    "caution": "高嘌呤高胆固醇，痛风/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0084",
+    "name": "红烧乳鸽",
+    "cuisine": "广府",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "乳鸽",
+      "生抽",
+      "冰糖",
+      "八角",
+      "姜"
+    ],
+    "method": "焖",
+    "caution": "高蛋白高嘌呤，痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0085",
+    "name": "清蒸带子",
+    "cuisine": "广府",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "鲜带子",
+      "蒜蓉",
+      "粉丝"
+    ],
+    "method": "蒸",
+    "caution": "贝类过敏/痛风忌",
+    "allergen": [
+      "贝"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0086",
+    "name": "腊味糯米饭",
+    "cuisine": "广府",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "糯米",
+      "腊肠腊肉",
+      "虾米",
+      "冬菇"
+    ],
+    "method": "炒",
+    "caution": "糯米升糖快、黏滞，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 240,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0087",
+    "name": "广府盆菜",
+    "cuisine": "广府",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "烧肉",
+      "豉油鸡",
+      "冬菇",
+      "腐竹",
+      "萝卜",
+      "蚝豉"
+    ],
+    "method": "其他",
+    "caution": "高脂高盐高嘌呤，三高/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "B",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0088",
+    "name": "麻蓉汤圆",
+    "cuisine": "广府",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "黑芝麻",
+      "猪油",
+      "糖"
+    ],
+    "method": "煮",
+    "caution": "糯米升糖黏滞，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0089",
+    "name": "黄芪枸杞炖乳鸽",
+    "cuisine": "广府",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "乳鸽",
+      "黄芪",
+      "枸杞",
+      "姜"
+    ],
+    "method": "炖",
+    "caution": "外感发热期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0090",
+    "name": "胡椒猪肚鸡（双标）",
+    "cuisine": "广府",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "猪肚",
+      "走地鸡",
+      "白胡椒",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "胃热、痔疮发作期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 3,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0091",
+    "name": "羊肉煲",
+    "cuisine": "广府",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "羊肉",
+      "马蹄",
+      "竹蔗",
+      "姜",
+      "腐乳"
+    ],
+    "method": "焖",
+    "caution": "羊肉温热，易上火的人/常口干的人火旺忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0092",
+    "name": "荷叶糯米鸡",
+    "cuisine": "广府",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "糯米",
+      "鸡腿肉",
+      "香菇",
+      "咸蛋黄",
+      "荷叶"
+    ],
+    "method": "蒸",
+    "caution": "糯米升糖，糖友少；高脂",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0093",
+    "name": "老火例汤（章鱼莲藕猪骨）",
+    "cuisine": "广府",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "章鱼干",
+      "莲藕",
+      "猪骨",
+      "陈皮"
+    ],
+    "method": "煲",
+    "caution": "痛风少（章鱼嘌呤高）",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 150,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0094",
+    "name": "太爷鸡",
+    "cuisine": "广府",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "三黄鸡",
+      "茶叶",
+      "糖",
+      "卤水"
+    ],
+    "method": "卤",
+    "caution": "熏制偏燥，常口干的人火旺少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 45,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0095",
+    "name": "陈皮鸭",
+    "cuisine": "广府",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "老鸭",
+      "陈皮",
+      "姜",
+      "冰糖"
+    ],
+    "method": "焖",
+    "caution": "鸭肉偏凉；糖友控糖",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0096",
+    "name": "腊味萝卜糕",
+    "cuisine": "广府",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "白萝卜",
+      "粘米粉",
+      "腊肠腊肉",
+      "虾米"
+    ],
+    "method": "蒸",
+    "caution": "高盐高油，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0097",
+    "name": "春菜排骨煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "春菜（潮汕芥菜）",
+      "排骨",
+      "姜片",
+      "盐"
+    ],
+    "method": "煮",
+    "caution": "春菜性凉，脾胃虚寒者不宜单食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 45,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0098",
+    "name": "韭菜粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "韭菜",
+      "虾米",
+      "猪油",
+      "盐"
+    ],
+    "method": "蒸",
+    "caution": "韭菜辛温，胃热、痔疮发作期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0099",
+    "name": "潮汕春饼",
+    "cuisine": "潮汕",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "春饼皮",
+      "绿豆瓣",
+      "猪肉",
+      "虾米",
+      "香菇"
+    ],
+    "method": "煎",
+    "caution": "油炸偏高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0100",
+    "name": "糖葱薄饼",
+    "cuisine": "潮汕",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "薄饼皮",
+      "糖葱（麦芽糖葱）",
+      "花生碎",
+      "芫荽"
+    ],
+    "method": "其他",
+    "caution": "高糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0101",
+    "name": "咸菜猪肚汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "潮汕咸菜",
+      "猪肚",
+      "白胡椒粒",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "咸菜偏咸，高血压限盐；胃溃疡少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0102",
+    "name": "蚝豉发菜汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "蚝豉（干蚝）",
+      "发菜",
+      "瘦肉",
+      "姜"
+    ],
+    "method": "煮",
+    "caution": "蚝豉高嘌呤，痛风/高尿酸慎；发菜需充分泡洗",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0103",
+    "name": "咸柠檬炖鸭",
+    "cuisine": "潮汕",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "咸柠檬",
+      "老鸭",
+      "姜",
+      "陈皮"
+    ],
+    "method": "炖",
+    "caution": "鸭肉偏凉；咸柠檬含盐，高血压限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0104",
+    "name": "橄榄糁蒸鱼",
+    "cuisine": "潮汕",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "鲜鱼",
+      "橄榄糁（南姜橄榄酱）",
+      "姜丝"
+    ],
+    "method": "蒸",
+    "caution": "腌制品偏咸，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0105",
+    "name": "春笋粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "春笋",
+      "五花肉丁",
+      "虾米",
+      "芹菜粒"
+    ],
+    "method": "蒸",
+    "caution": "春笋粗纤维多，胃病、结石患者少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0106",
+    "name": "菜脯炒蛋",
+    "cuisine": "潮汕",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "潮汕菜脯（萝卜干）",
+      "鸡蛋",
+      "葱花"
+    ],
+    "method": "炒",
+    "caution": "菜脯偏咸，高血压、肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0107",
+    "name": "菜头粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "白萝卜",
+      "腊肠",
+      "虾米",
+      "芹菜粒"
+    ],
+    "method": "蒸",
+    "caution": "煎制偏油，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0108",
+    "name": "红桃粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "糯米",
+      "香菇",
+      "虾米",
+      "猪肉（红曲染色）"
+    ],
+    "method": "蒸",
+    "caution": "糯米黏滞升糖，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0109",
+    "name": "薄壳米炒蛋",
+    "cuisine": "潮汕",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "薄壳米（小海蛤肉）",
+      "鸡蛋",
+      "九层塔",
+      "鱼露"
+    ],
+    "method": "炒",
+    "caution": "贝类高嘌呤，痛风/过敏者忌",
+    "allergen": [
+      "贝"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0110",
+    "name": "粿条汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "潮汕粿条",
+      "猪骨汤",
+      "瘦肉片",
+      "猪肝",
+      "芹菜粒",
+      "蒜头油"
+    ],
+    "method": "其他",
+    "caution": "内脏胆固醇高，高血脂少加猪肝",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0111",
+    "name": "潮汕炒粿条",
+    "cuisine": "潮汕",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "粿条",
+      "牛肉/猪杂",
+      "芥蓝",
+      "沙茶酱"
+    ],
+    "method": "炒",
+    "caution": "油盐偏高，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0112",
+    "name": "油泡鱿鱼",
+    "cuisine": "潮汕",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "鲜鱿",
+      "蒜",
+      "辣椒",
+      "鱼露",
+      "芫荽"
+    ],
+    "method": "其他",
+    "caution": "高胆固醇，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 12,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0113",
+    "name": "朴籽粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "朴籽叶（朴树叶）",
+      "糖"
+    ],
+    "method": "蒸",
+    "caution": "朴籽叶性凉，虚寒者少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0114",
+    "name": "春菜猪血汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "春菜",
+      "猪血",
+      "姜丝",
+      "胡椒粉"
+    ],
+    "method": "煮",
+    "caution": "猪血需新鲜煮透；高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0115",
+    "name": "鼠壳粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "鼠壳草（艾蒿类）",
+      "豆沙/糯米馅"
+    ],
+    "method": "蒸",
+    "caution": "糯米黏滞升糖，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0116",
+    "name": "咸水粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "米浆",
+      "菜脯粒",
+      "蒜",
+      "油"
+    ],
+    "method": "蒸",
+    "caution": "油盐偏高，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0117",
+    "name": "金不换炒薄壳",
+    "cuisine": "潮汕",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "薄壳（海瓜子）",
+      "九层塔（金不换）",
+      "蒜",
+      "辣椒",
+      "鱼露"
+    ],
+    "method": "炒",
+    "caution": "贝类高嘌呤，痛风/贝类过敏忌",
+    "allergen": [
+      "贝"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0118",
+    "name": "苦瓜黄豆排骨煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "黄豆",
+      "排骨",
+      "咸菜",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "苦瓜性寒，脾胃虚寒、孕妇少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0119",
+    "name": "石橄榄炖鸡汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "石橄榄",
+      "老母鸡",
+      "姜",
+      "蜜枣"
+    ],
+    "method": "炖",
+    "caution": "石橄榄偏凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0120",
+    "name": "上汤螺把",
+    "cuisine": "潮汕",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "角螺（响螺类）",
+      "上汤",
+      "火腿",
+      "笋"
+    ],
+    "method": "蒸",
+    "caution": "痛风少；螺类须鲜活",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0121",
+    "name": "草粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "仙草（凉粉草）",
+      "薯粉",
+      "红糖/白糖"
+    ],
+    "method": "其他",
+    "caution": "性凉，脾胃虚寒、经期慎食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0122",
+    "name": "苦瓜煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "排骨/五花肉",
+      "咸菜",
+      "蒜"
+    ],
+    "method": "煲",
+    "caution": "苦瓜寒凉，胃寒、孕妇忌多",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0123",
+    "name": "老菜脯粥",
+    "cuisine": "潮汕",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "老菜脯（陈年萝卜干）",
+      "大米",
+      "瘦肉",
+      "姜"
+    ],
+    "method": "炒",
+    "caution": "老菜脯偏咸，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0124",
+    "name": "潮汕廿四味凉茶",
+    "cuisine": "潮汕",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "廿四味草药包（含金银花/野菊花等）",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "性寒凉，脾胃虚寒/孕妇/经期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 70,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0125",
+    "name": "冬瓜薏米煲老鸭",
+    "cuisine": "潮汕",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "薏米",
+      "老鸭",
+      "陈皮",
+      "姜"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；鸭肉偏凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0126",
+    "name": "橄榄菜蒸肉饼",
+    "cuisine": "潮汕",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "潮汕橄榄菜",
+      "猪前腿肉",
+      "马蹄",
+      "生粉"
+    ],
+    "method": "蒸",
+    "caution": "橄榄菜偏咸油，高血压、高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0127",
+    "name": "沙茶牛肉",
+    "cuisine": "潮汕",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "牛肉片",
+      "沙茶酱",
+      "芥蓝",
+      "蒜"
+    ],
+    "method": "炒",
+    "caution": "沙茶含盐油，高血压少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0128",
+    "name": "清炖乌耳鳗",
+    "cuisine": "潮汕",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "乌耳鳗",
+      "姜",
+      "米酒",
+      "当归（少量）"
+    ],
+    "method": "炖",
+    "caution": "鳗鱼滋腻，体胖易困的人少；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0129",
+    "name": "绿豆爽",
+    "cuisine": "潮汕",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "绿豆",
+      "薯粉（或西米）",
+      "白糖",
+      "橘饼粒"
+    ],
+    "method": "煮",
+    "caution": "含糖，糖友少食；绿豆性凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0130",
+    "name": "冬瓜蟹汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "青蟹（或花蟹）",
+      "姜",
+      "芹菜粒"
+    ],
+    "method": "煎",
+    "caution": "蟹高嘌呤高胆固醇，痛风/过敏/孕妇忌",
+    "allergen": [
+      "蟹"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0131",
+    "name": "粿汁",
+    "cuisine": "潮汕",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "粿汁片",
+      "卤肉卤蛋",
+      "卤汁",
+      "芹菜粒"
+    ],
+    "method": "卤",
+    "caution": "卤汁偏咸，高血压限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0132",
+    "name": "干炸蟹塔",
+    "cuisine": "潮汕",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "青蟹",
+      "猪网油",
+      "马蹄",
+      "蛋液",
+      "面包糠"
+    ],
+    "method": "炸",
+    "caution": "高嘌呤高胆固醇，痛风/高血脂/孕妇忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0133",
+    "name": "潮州冻蟹",
+    "cuisine": "潮汕",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "青蟹",
+      "盐",
+      "姜",
+      "蒜",
+      "辣椒",
+      "鱼露（蘸碟）"
+    ],
+    "method": "蒸",
+    "caution": "痛风/高尿酸、蟹过敏、孕妇忌；忌与柿子同食",
+    "allergen": [
+      "蟹"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0134",
+    "name": "潮汕鱼饭",
+    "cuisine": "潮汕",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "鲜鱼（巴浪鱼/乌鱼）",
+      "盐",
+      "普宁豆酱（蘸）"
+    ],
+    "method": "蒸",
+    "caution": "高嘌呤，痛风忌；腌制偏咸，肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0135",
+    "name": "潮汕鱼丸汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "手打鱼丸",
+      "紫菜",
+      "芹菜粒",
+      "胡椒粉"
+    ],
+    "method": "煮",
+    "caution": "鱼丸含盐，高血压少；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0136",
+    "name": "八宝素菜",
+    "cuisine": "潮汕",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "白菜胆",
+      "香菇",
+      "草菇",
+      "腐竹",
+      "白果",
+      "莲子",
+      "笋",
+      "发菜"
+    ],
+    "method": "蒸",
+    "caution": "嘌呤中等，痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0137",
+    "name": "生腌血蚶",
+    "cuisine": "潮汕",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "血蚶",
+      "蒜",
+      "辣椒",
+      "鱼露",
+      "芫荽",
+      "白醋"
+    ],
+    "method": "其他",
+    "caution": "生食风险高：孕妇、儿童、免疫低下、肝病者禁；痛风忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0138",
+    "name": "蒜蓉蒸薄壳",
+    "cuisine": "潮汕",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "薄壳",
+      "蒜蓉",
+      "粉丝",
+      "鱼露",
+      "芹菜粒"
+    ],
+    "method": "蒸",
+    "caution": "贝类高嘌呤/过敏者忌；须吐沙彻底",
+    "allergen": [
+      "贝"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0139",
+    "name": "生腌虾",
+    "cuisine": "潮汕",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "鲜虾",
+      "蒜",
+      "辣椒",
+      "芫荽",
+      "鱼露",
+      "白酒"
+    ],
+    "method": "其他",
+    "caution": "生食高风险：孕妇/儿童/免疫低下/肝病禁；痛风忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 180,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0140",
+    "name": "生腌濑尿虾",
+    "cuisine": "潮汕",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "濑尿虾（虾蛄）",
+      "蒜",
+      "辣椒",
+      "鱼露",
+      "白酒"
+    ],
+    "method": "腌",
+    "caution": "生食高风险：孕妇/儿童/免疫低下/肝病禁；痛风忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 240,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0141",
+    "name": "老香黄水",
+    "cuisine": "潮汕",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "老香黄（佛手腌制凉果）",
+      "温水/冰水"
+    ],
+    "method": "泡",
+    "caution": "含糖盐，糖友、高血压少；空腹不宜",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0142",
+    "name": "清心丸",
+    "cuisine": "潮汕",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "薯粉",
+      "白糖",
+      "栀子（或清心丸成品）",
+      "冰水"
+    ],
+    "method": "煮",
+    "caution": "含糖偏高，糖友少；性凉，虚寒慎",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0143",
+    "name": "鸭屎香单丛冷泡",
+    "cuisine": "潮汕",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "凤凰单丛（鸭屎香）",
+      "冷水/冰块"
+    ],
+    "method": "其他",
+    "caution": "含咖啡因，失眠/心悸者少；空腹不宜",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 360,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0144",
+    "name": "咸柠檬水",
+    "cuisine": "潮汕",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "咸柠檬",
+      "温水/冰水",
+      "蜂蜜（可选）"
+    ],
+    "method": "其他",
+    "caution": "含钠，高血压/肾病限；胃酸过多少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0145",
+    "name": "秋瓜叶粿",
+    "cuisine": "潮汕",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "秋瓜叶（丝瓜叶/秋瓜嫩叶）",
+      "糖/盐",
+      "花生碎"
+    ],
+    "method": "蒸",
+    "caution": "叶类偏凉，虚寒者少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0146",
+    "name": "橄榄炖瘦肉",
+    "cuisine": "潮汕",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "青橄榄",
+      "瘦肉",
+      "蜜枣",
+      "姜"
+    ],
+    "method": "炖",
+    "caution": "青橄榄酸涩，胃酸过多少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0147",
+    "name": "油柑蜜饮",
+    "cuisine": "潮汕",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "油柑（余甘子）",
+      "蜂蜜",
+      "温水"
+    ],
+    "method": "煮",
+    "caution": "油柑酸涩，胃酸过多少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0148",
+    "name": "潮汕花生汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "花生",
+      "冰糖",
+      "白果（可选）"
+    ],
+    "method": "煮",
+    "caution": "含糖高，糖友少；花生过敏忌",
+    "allergen": [
+      "花生"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0149",
+    "name": "蚝烙",
+    "cuisine": "潮汕",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "鲜蚝（牡蛎）",
+      "薯粉",
+      "鸡蛋",
+      "芫荽",
+      "鱼露"
+    ],
+    "method": "煎",
+    "caution": "高嘌呤、高胆固醇，痛风/高血脂少；蚝须新鲜",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0150",
+    "name": "响螺汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "响螺",
+      "瘦肉",
+      "姜",
+      "陈皮"
+    ],
+    "method": "炖",
+    "caution": "响螺价高需鲜活；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0151",
+    "name": "九层塔炒花蛤",
+    "cuisine": "潮汕",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "花蛤",
+      "九层塔",
+      "蒜",
+      "辣椒",
+      "鱼露"
+    ],
+    "method": "炒",
+    "caution": "贝类高嘌呤/过敏者忌；须吐沙彻底",
+    "allergen": [
+      "贝"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0152",
+    "name": "油泡虾球",
+    "cuisine": "潮汕",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "鲜虾",
+      "蛋清",
+      "生粉",
+      "蒜",
+      "鱼露"
+    ],
+    "method": "腌",
+    "caution": "虾类过敏忌；痛风少",
+    "allergen": [
+      "虾"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0153",
+    "name": "橄榄菜蒸鱼",
+    "cuisine": "潮汕",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "鲜鱼（鲈鱼/黄花鱼）",
+      "潮汕橄榄菜",
+      "姜丝",
+      "葱花"
+    ],
+    "method": "蒸",
+    "caution": "橄榄菜偏咸油，高血压少；鱼刺小心",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0154",
+    "name": "老药桔炖鸭",
+    "cuisine": "潮汕",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "老药桔（腌桔）",
+      "老鸭",
+      "姜",
+      "陈皮"
+    ],
+    "method": "炖",
+    "caution": "鸭肉偏凉；凉果含盐糖，高血压糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0155",
+    "name": "青橄榄汁",
+    "cuisine": "潮汕",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "青橄榄",
+      "冰糖",
+      "水"
+    ],
+    "method": "煮",
+    "caution": "酸涩伤胃，胃酸过多/溃疡少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0156",
+    "name": "枇杷花炖瘦肉",
+    "cuisine": "潮汕",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "枇杷花",
+      "瘦肉",
+      "蜜枣",
+      "南北杏"
+    ],
+    "method": "炖",
+    "caution": "寒咳不宜",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0157",
+    "name": "卤狮头鹅",
+    "cuisine": "潮汕",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "狮头鹅",
+      "酱油",
+      "南姜",
+      "八角",
+      "桂皮",
+      "香茅",
+      "蒜头",
+      "冰糖"
+    ],
+    "method": "卤",
+    "caution": "卤味偏咸高脂，高血压/高血脂/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 110,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0158",
+    "name": "金瓜芋泥",
+    "cuisine": "潮汕",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "南瓜（金瓜）",
+      "白糖",
+      "猪油（或植物油）"
+    ],
+    "method": "蒸",
+    "caution": "高糖高脂，糖友、高血脂、减肥期少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0159",
+    "name": "羔烧芋泥白果",
+    "cuisine": "潮汕",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "白果",
+      "白糖",
+      "猪油"
+    ],
+    "method": "炸",
+    "caution": "高糖高脂，糖友/高血脂少；白果不可多食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0160",
+    "name": "卤水鹅肠",
+    "cuisine": "潮汕",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "鹅肠",
+      "潮汕卤水（南姜/香茅/桂皮）"
+    ],
+    "method": "卤",
+    "caution": "高嘌呤高盐，痛风/高血压少；须洗净煮透",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0161",
+    "name": "菜脯焖猪肉",
+    "cuisine": "潮汕",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "潮汕菜脯",
+      "五花肉",
+      "蒜",
+      "冰糖",
+      "酱油"
+    ],
+    "method": "焖",
+    "caution": "菜脯咸、五花肉肥，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0162",
+    "name": "明炉烧响螺",
+    "cuisine": "潮汕",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "响螺",
+      "蒜蓉",
+      "酱油",
+      "花生油",
+      "芫荽"
+    ],
+    "method": "其他",
+    "caution": "成本高需活螺；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0163",
+    "name": "南姜羊肉煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "羊肉",
+      "南姜",
+      "米酒",
+      "腐竹"
+    ],
+    "method": "焖",
+    "caution": "羊肉温热，易上火的人/常口干的人火旺忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0164",
+    "name": "护国菜",
+    "cuisine": "潮汕",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "番薯叶（或菠菜等绿叶）",
+      "上汤",
+      "火腿末",
+      "香菇"
+    ],
+    "method": "其他",
+    "caution": "嘌呤中等；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0165",
+    "name": "潮汕牛肉火锅",
+    "cuisine": "潮汕",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "黄牛（吊龙/匙柄/胸口朥等部位）",
+      "牛骨汤",
+      "沙茶酱",
+      "芹菜粒",
+      "南姜"
+    ],
+    "method": "其他",
+    "caution": "高嘌呤高蛋白，痛风/肾病限；牛肉须新鲜现切",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0166",
+    "name": "蚝豉煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "蚝豉（干蚝）",
+      "萝卜/腐竹",
+      "瘦肉",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "蚝豉高嘌呤，痛风忌；偏咸，肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0167",
+    "name": "牛肉丸粿条",
+    "cuisine": "潮汕",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "手打牛肉丸",
+      "粿条",
+      "牛骨汤",
+      "沙茶酱"
+    ],
+    "method": "其他",
+    "caution": "高嘌呤，痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0168",
+    "name": "卤水牛展",
+    "cuisine": "潮汕",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "牛展（牛腱）",
+      "潮汕卤水",
+      "南姜"
+    ],
+    "method": "卤",
+    "caution": "高嘌呤高盐，痛风/高血压少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0169",
+    "name": "潮汕牛肉丸汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "手打牛肉丸",
+      "牛骨汤",
+      "芹菜粒",
+      "蒜头油",
+      "沙茶酱"
+    ],
+    "method": "煮",
+    "caution": "高嘌呤，痛风少；丸类含淀粉，糖友注意",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0170",
+    "name": "潮汕砂锅粥",
+    "cuisine": "潮汕",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "珍珠米",
+      "膏蟹/虾/鳝",
+      "姜丝",
+      "冬菜",
+      "芹菜粒",
+      "猪油"
+    ],
+    "method": "煮",
+    "caution": "海鲜高嘌呤，痛风忌；粥品升糖快，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0171",
+    "name": "老菜脯炖鸡汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "老菜脯",
+      "老母鸡",
+      "姜",
+      "陈皮"
+    ],
+    "method": "炖",
+    "caution": "老菜脯偏咸，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0172",
+    "name": "潮汕鱼生（打冷）",
+    "cuisine": "潮汕",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "鲜鱼（草鱼/鲷）",
+      "南姜末",
+      "花生",
+      "芝麻",
+      "酸咸菜",
+      "鱼露"
+    ],
+    "method": "其他",
+    "caution": "生食高风险：孕妇/儿童/免疫低下/肝病禁；淡水鱼生须谨慎",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0173",
+    "name": "卤水鹅掌翼",
+    "cuisine": "潮汕",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "鹅掌",
+      "鹅翼",
+      "卤水（酱油",
+      "南姜",
+      "香茅",
+      "八角",
+      "桂皮）"
+    ],
+    "method": "卤",
+    "caution": "高嘌呤高盐，痛风/高血压少；卤水反复使用需注意",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0174",
+    "name": "冬菜蒸肉饼",
+    "cuisine": "潮汕",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "潮汕冬菜",
+      "猪前腿肉",
+      "马蹄",
+      "生粉",
+      "麻油"
+    ],
+    "method": "蒸",
+    "caution": "冬菜偏咸，高血压/肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0175",
+    "name": "卤水豆腐煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "老豆腐",
+      "潮汕卤水",
+      "蒜",
+      "芹菜粒"
+    ],
+    "method": "煲",
+    "caution": "卤水偏咸，高血压限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0176",
+    "name": "潮汕咸菜煮鱼",
+    "cuisine": "潮汕",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "潮汕咸菜",
+      "鲜鱼（乌头/黄脚立）",
+      "姜",
+      "番茄"
+    ],
+    "method": "煮",
+    "caution": "咸菜偏咸，高血压/肾病限；鱼刺小心",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0177",
+    "name": "响螺炖鸡汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "响螺",
+      "老母鸡",
+      "姜",
+      "陈皮",
+      "红枣"
+    ],
+    "method": "炖",
+    "caution": "成本高需鲜活；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0178",
+    "name": "潮州卤水鹅",
+    "cuisine": "潮汕",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "狮头鹅/普通鹅",
+      "卤水（南姜",
+      "香茅",
+      "桂皮",
+      "八角",
+      "酱油",
+      "冰糖）"
+    ],
+    "method": "卤",
+    "caution": "高盐高脂高嘌呤，高血压/痛风/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0179",
+    "name": "蚝豉发菜焖猪手",
+    "cuisine": "潮汕",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "蚝豉",
+      "发菜",
+      "猪手",
+      "姜",
+      "冰糖"
+    ],
+    "method": "焖",
+    "caution": "蚝豉高嘌呤，痛风忌；偏咸",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0180",
+    "name": "花胶炖响螺",
+    "cuisine": "潮汕",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "花胶",
+      "响螺",
+      "老鸡",
+      "姜",
+      "陈皮"
+    ],
+    "method": "炖",
+    "caution": "高胶原高嘌呤，痛风少；成本高",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 180,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0181",
+    "name": "冬节丸",
+    "cuisine": "潮汕",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "红糖/白糖",
+      "姜",
+      "花生碎（咸甜两制）"
+    ],
+    "method": "煮",
+    "caution": "糯米黏滞升糖快，糖友、胃弱者少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0182",
+    "name": "鸭母捻",
+    "cuisine": "潮汕",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "芝麻/豆沙/芋泥馅",
+      "糖水",
+      "银耳/白果（配料）"
+    ],
+    "method": "煮",
+    "caution": "高糖，糖友少；糯米黏滞，胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0183",
+    "name": "卤水拼盘（冬节）",
+    "cuisine": "潮汕",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "卤鹅片",
+      "卤蛋",
+      "卤豆腐",
+      "卤猪耳"
+    ],
+    "method": "卤",
+    "caution": "高盐高嘌呤，高血压/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0184",
+    "name": "姜薯甜汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "姜薯（潮汕山药）",
+      "白果",
+      "银耳",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "含糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0185",
+    "name": "生腌膏蟹",
+    "cuisine": "潮汕",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "膏蟹",
+      "蒜",
+      "辣椒",
+      "芫荽",
+      "鱼露",
+      "酱油",
+      "白酒"
+    ],
+    "method": "其他",
+    "caution": "生食高风险：孕妇、儿童、免疫低下、肝病禁；痛风忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 300,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0186",
+    "name": "卤水鹅肝",
+    "cuisine": "潮汕",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "狮头鹅肝",
+      "卤水（南姜",
+      "香茅",
+      "桂皮",
+      "酱油）"
+    ],
+    "method": "卤",
+    "caution": "高胆固醇高嘌呤，高血脂/痛风少；卤味偏咸",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0187",
+    "name": "卤水鸭",
+    "cuisine": "潮汕",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "鸭（光鸭）",
+      "潮汕卤水（南姜/香茅/桂皮）"
+    ],
+    "method": "卤",
+    "caution": "偏咸高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0188",
+    "name": "潮汕胡椒猪肚煲",
+    "cuisine": "潮汕",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "猪肚",
+      "白胡椒",
+      "姜",
+      "咸菜"
+    ],
+    "method": "煮",
+    "caution": "胃热、痔疮发作期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 130,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0189",
+    "name": "老香黄炖鸭",
+    "cuisine": "潮汕",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "老香黄（腌佛手）",
+      "老鸭",
+      "陈皮",
+      "姜"
+    ],
+    "method": "炖",
+    "caution": "鸭肉偏凉；凉果含盐糖，高血压/糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0190",
+    "name": "牛杂汤",
+    "cuisine": "潮汕",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "牛杂（牛肚/牛肠/牛腩）",
+      "牛骨汤",
+      "南姜",
+      "芹菜粒",
+      "沙茶酱"
+    ],
+    "method": "煮",
+    "caution": "内脏高嘌呤高胆固醇，痛风/高血脂少；须煮透",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0191",
+    "name": "巧烧雁鹅",
+    "cuisine": "潮汕",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "雁鹅（或狮头鹅）",
+      "南姜",
+      "酱油",
+      "香茅",
+      "冰糖"
+    ],
+    "method": "焖",
+    "caution": "高脂高盐高嘌呤，三高/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0192",
+    "name": "卤水乳鸽",
+    "cuisine": "潮汕",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "乳鸽",
+      "潮汕卤水（南姜/香茅/桂皮/冰糖）"
+    ],
+    "method": "卤",
+    "caution": "高嘌呤，痛风少；卤味偏咸",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0193",
+    "name": "春笋炒腊肉",
+    "cuisine": "客家",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "春笋",
+      "客家腊肉",
+      "蒜苗"
+    ],
+    "method": "蒸",
+    "caution": "腊肉高盐，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0194",
+    "name": "春笋煲咸鸡",
+    "cuisine": "客家",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "春笋",
+      "客家咸鸡",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "咸鸡偏咸，高血压限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0195",
+    "name": "客家腌面",
+    "cuisine": "客家",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "碱水面",
+      "猪油",
+      "蒜茸",
+      "葱花",
+      "酱油"
+    ],
+    "method": "煮",
+    "caution": "油盐偏高，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0196",
+    "name": "客家五香炸肉",
+    "cuisine": "客家",
+    "terms": [
+      "立春"
+    ],
+    "mainIngredients": [
+      "五花肉/梅头肉",
+      "五香粉",
+      "薯粉",
+      "鸡蛋"
+    ],
+    "method": "炸",
+    "caution": "油炸高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0197",
+    "name": "煎酿豆腐",
+    "cuisine": "客家",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "客家豆腐",
+      "猪肉馅",
+      "葱花",
+      "生抽"
+    ],
+    "method": "焖",
+    "caution": "豆腐偏凉，脾胃虚寒少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0198",
+    "name": "酿春卷",
+    "cuisine": "客家",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "春卷皮",
+      "猪肉馅",
+      "马蹄",
+      "香菇"
+    ],
+    "method": "炸",
+    "caution": "油炸偏高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0199",
+    "name": "客家酿豆腐卜",
+    "cuisine": "客家",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "油豆腐（豆腐卜）",
+      "猪肉馅",
+      "葱花",
+      "胡椒"
+    ],
+    "method": "蒸",
+    "caution": "油炸豆腐偏油，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0200",
+    "name": "客家酿茄子",
+    "cuisine": "客家",
+    "terms": [
+      "雨水"
+    ],
+    "mainIngredients": [
+      "茄子",
+      "猪肉馅",
+      "豆豉",
+      "蒜"
+    ],
+    "method": "焖",
+    "caution": "煎制偏油，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0201",
+    "name": "三及第汤",
+    "cuisine": "客家",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "猪肝",
+      "瘦肉",
+      "粉肠",
+      "枸杞叶",
+      "客家酒糟"
+    ],
+    "method": "腌",
+    "caution": "内脏胆固醇高，高血脂少；须新鲜煮透",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0202",
+    "name": "客家咸鸡",
+    "cuisine": "客家",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "走地鸡",
+      "粗盐",
+      "沙姜",
+      "花生油"
+    ],
+    "method": "蒸",
+    "caution": "偏咸，高血压/肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0203",
+    "name": "陆河擂茶",
+    "cuisine": "客家",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "茶叶",
+      "花生",
+      "芝麻",
+      "薄荷",
+      "炒米（擂制冲饮）"
+    ],
+    "method": "炒",
+    "caution": "含咖啡因，失眠者少；空腹少饮",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0204",
+    "name": "客家粄条汤",
+    "cuisine": "客家",
+    "terms": [
+      "惊蛰"
+    ],
+    "mainIngredients": [
+      "米浆粄条",
+      "猪肉片",
+      "香菇",
+      "芹菜",
+      "胡椒"
+    ],
+    "method": "煮",
+    "caution": "粄条升糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0205",
+    "name": "白斩河田鸡",
+    "cuisine": "客家",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "河田鸡",
+      "姜葱",
+      "盐",
+      "客家米酒"
+    ],
+    "method": "焖",
+    "caution": "禽类过敏忌；痛风少",
+    "allergen": [
+      "禽"
+    ],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0206",
+    "name": "咸菜炒猪肠",
+    "cuisine": "客家",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "客家咸菜",
+      "猪大肠",
+      "姜",
+      "蒜"
+    ],
+    "method": "煮",
+    "caution": "内脏高脂高嘌呤，高血脂/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0207",
+    "name": "客家酿三宝",
+    "cuisine": "客家",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "茄子",
+      "青椒",
+      "猪肉馅"
+    ],
+    "method": "焖",
+    "caution": "苦瓜偏凉；煎制偏油",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0208",
+    "name": "客家三杯鸭",
+    "cuisine": "客家",
+    "terms": [
+      "春分"
+    ],
+    "mainIngredients": [
+      "番鸭",
+      "米酒",
+      "酱油",
+      "麻油",
+      "九层塔",
+      "姜"
+    ],
+    "method": "焖",
+    "caution": "鸭肉偏凉需姜酒制；易上火的人少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0209",
+    "name": "艾粄",
+    "cuisine": "客家",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "鲜艾叶",
+      "花生/芝麻馅",
+      "糖"
+    ],
+    "method": "蒸",
+    "caution": "糯米黏滞升糖快，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0210",
+    "name": "萝卜粄",
+    "cuisine": "客家",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "白萝卜丝",
+      "腊肉",
+      "虾米",
+      "胡椒"
+    ],
+    "method": "蒸",
+    "caution": "糯米黏滞，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0211",
+    "name": "艾草煎蛋",
+    "cuisine": "客家",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "鲜艾叶",
+      "鸡蛋",
+      "盐"
+    ],
+    "method": "煎",
+    "caution": "艾叶辛温，常口干的人火旺少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0212",
+    "name": "客家艾丸",
+    "cuisine": "客家",
+    "terms": [
+      "清明"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "鲜艾叶",
+      "花生芝麻馅"
+    ],
+    "method": "煮",
+    "caution": "糯米黏滞升糖，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0213",
+    "name": "山坑鱼干蒸腊味",
+    "cuisine": "客家",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "山坑鱼干",
+      "客家腊肉",
+      "姜",
+      "米酒"
+    ],
+    "method": "蒸",
+    "caution": "高盐高嘌呤，高血压/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0214",
+    "name": "梅菜蒸肉饼",
+    "cuisine": "客家",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "客家梅菜",
+      "猪前腿肉",
+      "马蹄",
+      "生粉"
+    ],
+    "method": "蒸",
+    "caution": "梅菜偏咸，高血压/肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0215",
+    "name": "山坑螺煲鸡",
+    "cuisine": "客家",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "山坑螺",
+      "走地鸡",
+      "姜",
+      "米酒"
+    ],
+    "method": "煲",
+    "caution": "螺类高嘌呤，痛风少；须吐净泥沙",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0216",
+    "name": "客家酿莲藕",
+    "cuisine": "客家",
+    "terms": [
+      "谷雨"
+    ],
+    "mainIngredients": [
+      "莲藕",
+      "糯米/猪肉馅",
+      "香菇",
+      "胡椒"
+    ],
+    "method": "焖",
+    "caution": "糯米升糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0217",
+    "name": "凉瓜酿",
+    "cuisine": "客家",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "猪肉馅",
+      "豆豉",
+      "蒜"
+    ],
+    "method": "焖",
+    "caution": "苦瓜寒凉，脾胃虚寒/孕妇少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0218",
+    "name": "仙人粄（仙人冻）",
+    "cuisine": "客家",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "仙人草（凉粉草）",
+      "薯粉/蕉芋粉",
+      "红糖水"
+    ],
+    "method": "其他",
+    "caution": "性凉，脾胃虚寒、经期慎食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0219",
+    "name": "腐竹白果薏米汤",
+    "cuisine": "客家",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "腐竹",
+      "白果",
+      "薏米",
+      "陈皮"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；白果不可多食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0220",
+    "name": "客家咸菜干煲猪骨",
+    "cuisine": "客家",
+    "terms": [
+      "立夏"
+    ],
+    "mainIngredients": [
+      "客家咸菜干",
+      "猪骨",
+      "蜜枣",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "咸菜干偏咸，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0221",
+    "name": "苦瓜酿肉",
+    "cuisine": "客家",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "猪肉馅",
+      "豆豉"
+    ],
+    "method": "焖",
+    "caution": "苦瓜寒凉，脾胃虚寒忌多",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0222",
+    "name": "冬瓜煲咸肉",
+    "cuisine": "客家",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "客家咸肉",
+      "姜",
+      "胡椒"
+    ],
+    "method": "煲",
+    "caution": "咸肉高盐，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0223",
+    "name": "客家咸鱼蒸肉饼",
+    "cuisine": "客家",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "客家咸鱼",
+      "猪前腿肉",
+      "马蹄",
+      "生粉"
+    ],
+    "method": "蒸",
+    "caution": "咸鱼高盐，高血压/肾病限；腌制食品少食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0224",
+    "name": "客家酿豆角",
+    "cuisine": "客家",
+    "terms": [
+      "小满"
+    ],
+    "mainIngredients": [
+      "长豆角",
+      "猪肉馅",
+      "蒜",
+      "豆豉"
+    ],
+    "method": "焖",
+    "caution": "须煮透（豆角未熟有毒）",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0225",
+    "name": "兜汤",
+    "cuisine": "客家",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "猪瘦肉",
+      "薯粉",
+      "香菇",
+      "芹菜",
+      "胡椒"
+    ],
+    "method": "其他",
+    "caution": "汤品含淀粉，糖友注意",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0226",
+    "name": "碗粄",
+    "cuisine": "客家",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "红糖/白糖",
+      "芝麻"
+    ],
+    "method": "蒸",
+    "caution": "含糖，糖友少；黏滞，胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0227",
+    "name": "客家米筛目",
+    "cuisine": "客家",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "粘米浆",
+      "肉末",
+      "香菇",
+      "芹菜",
+      "胡椒（筛孔漏制）"
+    ],
+    "method": "其他",
+    "caution": "黏滞升糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0228",
+    "name": "客家水粄",
+    "cuisine": "客家",
+    "terms": [
+      "芒种"
+    ],
+    "mainIngredients": [
+      "粘米浆",
+      "肉末",
+      "香菇",
+      "芹菜",
+      "蒜油"
+    ],
+    "method": "蒸",
+    "caution": "黏滞升糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0229",
+    "name": "萝卜苗煲",
+    "cuisine": "客家",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "萝卜苗（萝卜缨）",
+      "瘦肉/咸肉",
+      "姜"
+    ],
+    "method": "其他",
+    "caution": "萝卜苗偏凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 12,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0230",
+    "name": "酿蚝豉",
+    "cuisine": "客家",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "蚝豉（干蚝）",
+      "猪肉馅",
+      "姜",
+      "米酒"
+    ],
+    "method": "蒸",
+    "caution": "蚝豉高嘌呤，痛风忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0231",
+    "name": "客家苦瓜黄豆煲",
+    "cuisine": "客家",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "苦瓜",
+      "黄豆",
+      "排骨",
+      "客家咸菜"
+    ],
+    "method": "煲",
+    "caution": "苦瓜寒凉，脾胃虚寒/孕妇少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0232",
+    "name": "客家咸菜米粉汤",
+    "cuisine": "客家",
+    "terms": [
+      "夏至"
+    ],
+    "mainIngredients": [
+      "客家咸菜",
+      "米粉",
+      "瘦肉",
+      "胡椒"
+    ],
+    "method": "煮",
+    "caution": "咸菜偏咸，高血压限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0233",
+    "name": "沙姜焗鸡",
+    "cuisine": "客家",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "三黄鸡",
+      "沙姜",
+      "头抽",
+      "花生油"
+    ],
+    "method": "焗",
+    "caution": "沙姜辛温，常口干的人火旺忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0234",
+    "name": "客家焖猪肉",
+    "cuisine": "客家",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "五花肉",
+      "客家咸菜",
+      "南乳",
+      "冰糖"
+    ],
+    "method": "焖",
+    "caution": "高脂高盐，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0235",
+    "name": "客家酿冬菇",
+    "cuisine": "客家",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "干冬菇",
+      "猪肉馅",
+      "虾米",
+      "生粉"
+    ],
+    "method": "蒸",
+    "caution": "冬菇嘌呤中等，痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0236",
+    "name": "客家手打鱼丸汤",
+    "cuisine": "客家",
+    "terms": [
+      "小暑"
+    ],
+    "mainIngredients": [
+      "鱼肉（鲩鱼/鲮鱼）",
+      "薯粉",
+      "芹菜粒",
+      "胡椒"
+    ],
+    "method": "煮",
+    "caution": "鱼刺去净；痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0237",
+    "name": "冬瓜薏米煲鸭",
+    "cuisine": "客家",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "冬瓜",
+      "薏米",
+      "老鸭",
+      "陈皮"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌薏米；鸭肉偏凉",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0238",
+    "name": "芋子包",
+    "cuisine": "客家",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "木薯粉",
+      "猪肉笋干馅",
+      "胡椒"
+    ],
+    "method": "蒸",
+    "caution": "黏滞难消化，胃弱/糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0239",
+    "name": "客家绿豆薏米糖水",
+    "cuisine": "客家",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "绿豆",
+      "薏米",
+      "红糖/冰糖"
+    ],
+    "method": "煮",
+    "caution": "糖友控糖；孕妇忌薏米",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0240",
+    "name": "客家布惊茶",
+    "cuisine": "客家",
+    "terms": [
+      "大暑"
+    ],
+    "mainIngredients": [
+      "布惊叶（黄荆/牡荆叶）",
+      "水（可加红糖）"
+    ],
+    "method": "煮",
+    "caution": "性凉，脾胃虚寒/孕妇忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0241",
+    "name": "娘酒鸡",
+    "cuisine": "客家",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "走地鸡",
+      "客家娘酒（糯米酒）",
+      "姜"
+    ],
+    "method": "焖",
+    "caution": "酒精未挥发完全，孕妇/儿童/肝病忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0242",
+    "name": "芋子饺",
+    "cuisine": "客家",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "薯粉",
+      "猪肉馅",
+      "芹菜"
+    ],
+    "method": "蒸",
+    "caution": "黏滞难消化，胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0243",
+    "name": "客家酿青椒",
+    "cuisine": "客家",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "青椒",
+      "猪肉馅",
+      "豆豉",
+      "蒜"
+    ],
+    "method": "焖",
+    "caution": "偏辣，胃热/痔疮忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0244",
+    "name": "客家咸菜蒸鱼",
+    "cuisine": "客家",
+    "terms": [
+      "立秋"
+    ],
+    "mainIngredients": [
+      "客家咸菜",
+      "鲜鱼",
+      "姜丝",
+      "米酒"
+    ],
+    "method": "蒸",
+    "caution": "咸菜偏咸，高血压限；鱼刺小心",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0245",
+    "name": "蒸腊味",
+    "cuisine": "客家",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "客家腊肉腊肠",
+      "姜",
+      "米酒"
+    ],
+    "method": "蒸",
+    "caution": "高盐高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0246",
+    "name": "酿蛋角",
+    "cuisine": "客家",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "鸡蛋",
+      "猪肉馅",
+      "葱花"
+    ],
+    "method": "煎",
+    "caution": "煎制偏油，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 25,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0247",
+    "name": "客家腊味煲仔饭",
+    "cuisine": "客家",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "客家腊肉腊肠",
+      "丝苗米",
+      "青菜"
+    ],
+    "method": "煮",
+    "caution": "高盐高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0248",
+    "name": "客家腊味炒芥蓝",
+    "cuisine": "客家",
+    "terms": [
+      "处暑"
+    ],
+    "mainIngredients": [
+      "客家腊肉腊肠",
+      "芥蓝",
+      "蒜"
+    ],
+    "method": "炒",
+    "caution": "高盐高脂，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0249",
+    "name": "客家黄酒鸡",
+    "cuisine": "客家",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "走地鸡",
+      "客家黄酒",
+      "姜",
+      "红枣"
+    ],
+    "method": "焖",
+    "caution": "孕妇/儿童/肝病忌（含酒）",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0250",
+    "name": "甜酒酿蛋",
+    "cuisine": "客家",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "客家娘酒（酒酿）",
+      "鸡蛋",
+      "红糖"
+    ],
+    "method": "煮",
+    "caution": "孕妇忌酒酿；糖友少糖",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0251",
+    "name": "客家腐竹白果糖水",
+    "cuisine": "客家",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "腐竹",
+      "白果",
+      "薏米/百合",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "含糖，糖友少；白果不可多食",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0252",
+    "name": "客家柿饼",
+    "cuisine": "客家",
+    "terms": [
+      "白露"
+    ],
+    "mainIngredients": [
+      "柿子（晾晒成饼）",
+      "可配陈皮"
+    ],
+    "method": "其他",
+    "caution": "空腹慎食（易结石）；糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 35,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0253",
+    "name": "梅菜扣肉",
+    "cuisine": "客家",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "五花肉",
+      "客家梅菜",
+      "冰糖",
+      "南乳"
+    ],
+    "method": "蒸",
+    "caution": "高脂高盐，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0254",
+    "name": "算盘子",
+    "cuisine": "客家",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "薯粉",
+      "肉末",
+      "香菇",
+      "虾米"
+    ],
+    "method": "炒",
+    "caution": "黏滞，胃弱/糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0255",
+    "name": "客家酿豆腐煲",
+    "cuisine": "客家",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "客家豆腐",
+      "猪肉馅",
+      "香菇",
+      "上汤"
+    ],
+    "method": "煲",
+    "caution": "豆腐偏凉，虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0256",
+    "name": "客家芋头焖饭",
+    "cuisine": "客家",
+    "terms": [
+      "秋分"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "大米",
+      "腊肉",
+      "香菇",
+      "虾米"
+    ],
+    "method": "焖",
+    "caution": "升糖较快，糖友控量",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 45,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0257",
+    "name": "客家腐竹煲",
+    "cuisine": "客家",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "腐竹",
+      "五花肉/排骨",
+      "香菇",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "腐竹偏凉，脾胃虚寒少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0258",
+    "name": "老鼠粄",
+    "cuisine": "客家",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "粘米粉",
+      "肉末",
+      "香菇",
+      "芹菜",
+      "胡椒"
+    ],
+    "method": "煮",
+    "caution": "黏滞升糖，糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0259",
+    "name": "客家萝卜丸",
+    "cuisine": "客家",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "白萝卜",
+      "薯粉",
+      "猪肉末",
+      "胡椒"
+    ],
+    "method": "蒸",
+    "caution": "黏滞，胃弱/糖友少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0260",
+    "name": "客家花生焖猪手",
+    "cuisine": "客家",
+    "terms": [
+      "寒露"
+    ],
+    "mainIngredients": [
+      "花生",
+      "猪手",
+      "姜",
+      "南乳"
+    ],
+    "method": "焖",
+    "caution": "高脂高嘌呤，高血脂/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0261",
+    "name": "胡椒猪肚鸡汤",
+    "cuisine": "客家",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "猪肚",
+      "走地鸡",
+      "白胡椒",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "胃热、痔疮忌；高血脂少汤",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 120,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0262",
+    "name": "盐焗鸡翼",
+    "cuisine": "客家",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "鸡翼",
+      "粗盐",
+      "沙姜",
+      "香油"
+    ],
+    "method": "焗",
+    "caution": "偏咸，高血压/肾病限",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0263",
+    "name": "客家芋头扣肉",
+    "cuisine": "客家",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "芋头",
+      "五花肉",
+      "南乳",
+      "冰糖"
+    ],
+    "method": "蒸",
+    "caution": "高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0264",
+    "name": "客家萝卜焖腩肉",
+    "cuisine": "客家",
+    "terms": [
+      "霜降"
+    ],
+    "mainIngredients": [
+      "白萝卜",
+      "五花腩",
+      "蒜",
+      "南乳"
+    ],
+    "method": "焖",
+    "caution": "高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0265",
+    "name": "胡椒猪肚汤",
+    "cuisine": "客家",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "猪肚",
+      "白胡椒",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "胃热、痔疮发作期忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0266",
+    "name": "客家盆菜",
+    "cuisine": "客家",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "五花肉",
+      "鸡",
+      "腐竹",
+      "萝卜",
+      "香菇",
+      "蚝豉"
+    ],
+    "method": "焖",
+    "caution": "高脂高盐高嘌呤，三高/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 45,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0267",
+    "name": "客家腊鸭焖芋头",
+    "cuisine": "客家",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "客家腊鸭",
+      "芋头",
+      "姜",
+      "米酒"
+    ],
+    "method": "焖",
+    "caution": "腊鸭偏咸高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0268",
+    "name": "客家炸腐卷",
+    "cuisine": "客家",
+    "terms": [
+      "立冬"
+    ],
+    "mainIngredients": [
+      "腐皮",
+      "猪肉馅",
+      "马蹄",
+      "香菇（卷后炸）"
+    ],
+    "method": "炸",
+    "caution": "油炸高脂，高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0269",
+    "name": "盐焗鸡",
+    "cuisine": "客家",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "走地鸡",
+      "粗盐",
+      "沙姜",
+      "花生油"
+    ],
+    "method": "焗",
+    "caution": "偏咸，高血压/肾病限盐",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0270",
+    "name": "沙姜猪手",
+    "cuisine": "客家",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "猪手",
+      "沙姜",
+      "冰糖",
+      "生抽"
+    ],
+    "method": "焖",
+    "caution": "高血脂少食；易上火的人少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0271",
+    "name": "客家姜醋猪脚",
+    "cuisine": "客家",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "猪脚",
+      "甜醋",
+      "姜",
+      "鸡蛋"
+    ],
+    "method": "煲",
+    "caution": "高糖高脂，糖友/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0272",
+    "name": "客家腊味糯米饭",
+    "cuisine": "客家",
+    "terms": [
+      "小雪"
+    ],
+    "mainIngredients": [
+      "糯米",
+      "客家腊肠腊肉",
+      "虾米",
+      "冬菇"
+    ],
+    "method": "炒",
+    "caution": "糯米升糖黏滞，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 240,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0273",
+    "name": "麒麟脱胎",
+    "cuisine": "客家",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "猪肚",
+      "乳鸽/小鸡",
+      "党参",
+      "枸杞",
+      "姜"
+    ],
+    "method": "炖",
+    "caution": "高脂高嘌呤，三高/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 150,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0274",
+    "name": "四星望月",
+    "cuisine": "客家",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "草鱼片",
+      "米粉",
+      "辣椒",
+      "姜",
+      "蒜"
+    ],
+    "method": "蒸",
+    "caution": "偏辣，胃热/痔疮忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 15,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0275",
+    "name": "客家八宝酿鸡",
+    "cuisine": "客家",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "走地鸡",
+      "糯米",
+      "腊味",
+      "香菇",
+      "莲子",
+      "虾米"
+    ],
+    "method": "蒸",
+    "caution": "高脂高盐，三高少；糯米升糖",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0276",
+    "name": "客家萝卜牛杂煲",
+    "cuisine": "客家",
+    "terms": [
+      "大雪"
+    ],
+    "mainIngredients": [
+      "白萝卜",
+      "牛杂（牛肚/牛肠）",
+      "南姜",
+      "胡椒"
+    ],
+    "method": "煲",
+    "caution": "高嘌呤高胆固醇，痛风/高血脂少；须煮透",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0277",
+    "name": "娘酒羊肉煲",
+    "cuisine": "客家",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "羊肉",
+      "客家娘酒",
+      "姜",
+      "当归（少量）"
+    ],
+    "method": "焖",
+    "caution": "羊肉温热，易上火的人/常口干的人火旺忌；含酒",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0278",
+    "name": "桂花酒酿圆子",
+    "cuisine": "客家",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "客家娘酒（酒酿）",
+      "桂花",
+      "冰糖"
+    ],
+    "method": "煮",
+    "caution": "糖友控糖；酒精敏感忌",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 1,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0279",
+    "name": "客家咸汤圆",
+    "cuisine": "客家",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "糯米粉",
+      "猪肉末",
+      "香菇",
+      "虾米",
+      "芹菜（咸馅）"
+    ],
+    "method": "煮",
+    "caution": "糯米升糖黏滞，糖友/胃弱少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0280",
+    "name": "客家捶肉丸汤",
+    "cuisine": "客家",
+    "terms": [
+      "冬至"
+    ],
+    "mainIngredients": [
+      "猪后腿肉（捶打成丸）",
+      "芹菜粒",
+      "胡椒",
+      "上汤"
+    ],
+    "method": "煮",
+    "caution": "高蛋白高嘌呤，痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0281",
+    "name": "子姜焖鸭",
+    "cuisine": "客家",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "番鸭",
+      "子姜",
+      "米酒",
+      "南乳"
+    ],
+    "method": "焖",
+    "caution": "鸭肉偏凉需姜制；易上火的人少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 40,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0282",
+    "name": "猪肚包鸡",
+    "cuisine": "客家",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "猪肚",
+      "走地鸡",
+      "白胡椒",
+      "姜"
+    ],
+    "method": "煲",
+    "caution": "高脂高嘌呤，三高/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 3,
+    "difficulty": 3,
+    "evidence": "A",
+    "timeMinutes": 150,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0283",
+    "name": "客家咸菜炒腊肉",
+    "cuisine": "客家",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "客家咸菜",
+      "腊肉",
+      "蒜苗",
+      "辣椒"
+    ],
+    "method": "炒",
+    "caution": "高盐高脂，高血压/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 1,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 20,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0284",
+    "name": "客家盐焗鸽",
+    "cuisine": "客家",
+    "terms": [
+      "小寒"
+    ],
+    "mainIngredients": [
+      "乳鸽",
+      "粗盐",
+      "沙姜",
+      "香油"
+    ],
+    "method": "焗",
+    "caution": "偏咸，高血压/肾病限；高嘌呤",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 30,
+    "timeEstimated": true
+  },
+  {
+    "id": "TS0285",
+    "name": "汀州泡猪腰",
+    "cuisine": "客家",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "猪腰",
+      "客家米酒",
+      "姜",
+      "胡椒"
+    ],
+    "method": "炒",
+    "caution": "内脏高嘌呤高胆固醇，痛风/高血脂少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 10,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0286",
+    "name": "客家卤猪脚",
+    "cuisine": "客家",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "猪脚",
+      "客家卤水（南乳/酱油/八角）",
+      "姜"
+    ],
+    "method": "卤",
+    "caution": "高脂高嘌呤，高血脂/痛风少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "B",
+    "timeMinutes": 90,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0287",
+    "name": "客家猪肠胀糯米",
+    "cuisine": "客家",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "猪大肠",
+      "糯米",
+      "腊味",
+      "香菇",
+      "花生"
+    ],
+    "method": "煮",
+    "caution": "高脂高嘌呤，高血脂/痛风少；糯米升糖",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 60,
+    "timeEstimated": false
+  },
+  {
+    "id": "TS0288",
+    "name": "客家腊味合蒸",
+    "cuisine": "客家",
+    "terms": [
+      "大寒"
+    ],
+    "mainIngredients": [
+      "客家腊肉",
+      "腊肠",
+      "腊鸭",
+      "姜",
+      "米酒"
+    ],
+    "method": "蒸",
+    "caution": "高盐高脂，三高少",
+    "allergen": [],
+    "ageSuitable": [
+      "成人",
+      "长者"
+    ],
+    "costLevel": 2,
+    "difficulty": 2,
+    "evidence": "A",
+    "timeMinutes": 20,
+    "timeEstimated": false
+  }
+]

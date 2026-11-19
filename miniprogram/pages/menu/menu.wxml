@@ -131,7 +131,12 @@
                 <view class="trace-wait">
                   <view class="trace-spin"></view>
                   <view class="trace-wait-texts">
-                    <text class="trace-wait-title">{{genWait ? copy.genMixing : copy.genThinking}}</text>
+                    <text wx:if="{{!genWait}}" class="trace-wait-title">{{copy.genThinking}}</text>
+                    <text
+                      wx:for="{{genWait ? waitWords : []}}"
+                      wx:key="*this"
+                      class="trace-wait-title trace-wait-flash"
+                    >{{item}}</text>
                     <text wx:if="{{!genWait}}" class="trace-wait-sub">{{progressText}}</text>
                   </view>
                 </view>
@@ -191,6 +196,15 @@
             <text wx:if="{{item.id}}" class="rdish-open">{{copy.dishOpen}} ›</text>
             <text wx:else class="rdish-nodetail">{{copy.noDetail}}</text>
           </view>
+        </view>
+
+        <!-- 今天天气 + 怎么吃。拿不到天气就整行不显示，不占位、不编造 -->
+        <view wx:if="{{weatherTip}}" class="rweather">
+          <view class="rweather-row">
+            <text class="rweather-tag">{{copy.weatherTag}}</text>
+            <text wx:if="{{weatherCity}}" class="rweather-city">{{weatherCity}}</text>
+          </view>
+          <text class="rweather-text">{{weatherTip}}</text>
         </view>
 
         <!-- 节气食养小贴士：每节气 3 条，怎么挑 / 怎么配 / 怎么下锅 -->

@@ -1,0 +1,10 @@
+{
+  "name": "aiqa",
+  "version": "1.0.0",
+  "description": "康康食养 AI 问答云函数：检索 + 搜索 + LLM + 输出校验",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
