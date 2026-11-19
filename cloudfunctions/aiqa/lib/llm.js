@@ -146,15 +146,42 @@ async function chat(messages, opt) {
     max_tokens: Number(o.maxTokens || 800),
   };
 
+  // DeepSeek 的 deepseek-flash 默认开思考模式，实测：
+  //   开  → 1543 ms，输出 195 token
+  //   关  →  831 ms，输出  71 token
+  // 快 46%、省 64%，而且 max_tokens 偏小时思考会吃掉全部额度、正文返回空。
+  // 这一页要的是结构化 JSON，不需要推理过程，所以默认关闭。
+  // thinking 是 DeepSeek 特有参数，其他厂商传了会 400，因此下面按两级降级重试。
+  const withExtras = (extras) => Object.assign({}, baseBody, extras);
+  const isUnsupported = (e, pattern) =>
+    e &&
+    e.status === 400 &&
+    pattern.test(
+      String((e.body && e.body.error && e.body.error.message) || e.message)
+    );
+
   let parsed;
   try {
-    parsed = await postJSON(url, Object.assign({}, baseBody, { response_format: { type: 'json_object' } }), o);
+    parsed = await postJSON(
+      url,
+      withExtras({ response_format: { type: 'json_object' }, thinking: { type: 'disabled' } }),
+      o
+    );
   } catch (e) {
-    // 部分厂商不支持 response_format：400 时去掉重试一次
-    const unsupported =
-      e && e.status === 400 && /response_format|json_object|unsupported|invalid/i.test(String((e.body && e.body.error && e.body.error.message) || e.message));
-    if (!unsupported) throw e;
-    parsed = await postJSON(url, baseBody, o);
+    // 第一级：厂商不认 thinking → 去掉它，保留 JSON mode
+    if (isUnsupported(e, /thinking|reasoning|unsupported|invalid|unknown/i)) {
+      try {
+        parsed = await postJSON(url, withExtras({ response_format: { type: 'json_object' } }), o);
+      } catch (e2) {
+        // 第二级：厂商不认 response_format → 两个都去掉，靠 prompt 约束格式
+        if (!isUnsupported(e2, /response_format|json_object|unsupported|invalid/i)) throw e2;
+        parsed = await postJSON(url, baseBody, o);
+      }
+    } else if (isUnsupported(e, /response_format|json_object|unsupported|invalid/i)) {
+      parsed = await postJSON(url, withExtras({ thinking: { type: 'disabled' } }), o);
+    } else {
+      throw e;
+    }
   }
 
   const choice = parsed && parsed.choices && parsed.choices[0];
