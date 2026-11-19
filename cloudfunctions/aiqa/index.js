@@ -140,6 +140,36 @@ exports.main = async (event) => {
     return { status: 'error', code: 'LLM_KEY_MISSING', message: '云函数未配置 LLM_API_KEY' };
   }
 
+  // 环境自检：传 {"debug": true} 时返回配置状态，不跑问答。
+  // 只暴露「有没有配、像不像、长度多少」，绝不回传 key 明文。
+  // 线上出问题最常见的是 key 尾部多一个空格或换行，肉眼看不出来，
+  // 但拼成 Bearer 头就是 401，而日志只会给一个 UPSTREAM_FAILED。
+  if (event && event.debug) {
+    const mask = (v) => {
+      const s = String(v || '');
+      if (!s) return { set: false };
+      return {
+        set: true,
+        length: s.length,
+        head: s.slice(0, 6) + '…',
+        hasWhitespace: /\s/.test(s),
+        trimmedEqual: s.trim() === s,
+        shape: /^sk-[0-9a-z]{20,}$/i.test(s) ? 'looks-ok' : 'unexpected',
+      };
+    };
+    return {
+      status: 'ok',
+      debug: {
+        LLM_API_KEY: mask(key),
+        LLM_MODEL: process.env.LLM_MODEL || '(未配，走默认 deepseek-flash)',
+        LLM_BASE_URL: process.env.LLM_BASE_URL || '(未配，走默认 api.deepseek.com)',
+        QA_DAILY_LIMIT: process.env.QA_DAILY_LIMIT || '(未配，走默认 30)',
+        node: process.version,
+        env: process.env.TCB_ENV || process.env.SCF_NAMESPACE || '(未知)',
+      },
+    };
+  }
+
   const recipes = require('./data/recipes.json');
   const profile = safeProfile(event && event.profile, recipes);
 
@@ -184,6 +214,7 @@ exports.main = async (event) => {
   // 4) 第一次调用（网络类失败重试一次）
   let answer;
   let attempts = 0;
+  let lastError = null;
   while (attempts < 2) {
     attempts += 1;
     try {
@@ -191,17 +222,48 @@ exports.main = async (event) => {
       break;
     } catch (e) {
       const code = e && e.code;
+      // 留下最后一次失败原因。线上排查时 meta 里的 upstreamError 比
+      // 只有一个 UPSTREAM_FAILED 有用得多——否则只能翻 qa_logs，
+      // 而集合没建对时连日志都没有。
+      lastError = {
+        code: code || 'UNKNOWN',
+        message: String((e && e.message) || e).slice(0, 200),
+        status: (e && e.status) || null,
+      };
       if (code === 'BAD_JSON') {
         // 非 JSON：不重试，直接降级
         await logEvent({ type: 'bad_json', openid, question, raw: String(e.raw || '').slice(0, 300) });
         const fb = buildFallback(fallback, profile.currentTerm, rules.degradeNote);
-        return Object.assign({ status: 'ok', meta: { filtered, candidateCount: candidates.length, searchUsed: web.length > 0, degraded: true } }, fb);
+        return Object.assign(
+          {
+            status: 'ok',
+            meta: {
+              filtered,
+              candidateCount: candidates.length,
+              searchUsed: web.length > 0,
+              degraded: true,
+              errorCode: 'BAD_JSON',
+              upstreamError: lastError,
+            },
+          },
+          fb
+        );
       }
       if (attempts >= 2) {
         await logEvent({ type: 'upstream_failed', openid, question, error: String(e && e.message).slice(0, 300) });
         const fb = buildFallback(fallback, profile.currentTerm, rules.degradeNote);
         return Object.assign(
-          { status: 'ok', meta: { filtered, candidateCount: candidates.length, searchUsed: web.length > 0, degraded: true, errorCode: 'UPSTREAM_FAILED' } },
+          {
+            status: 'ok',
+            meta: {
+              filtered,
+              candidateCount: candidates.length,
+              searchUsed: web.length > 0,
+              degraded: true,
+              errorCode: 'UPSTREAM_FAILED',
+              upstreamError: lastError,
+            },
+          },
           fb
         );
       }
