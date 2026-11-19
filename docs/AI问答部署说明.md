@@ -116,13 +116,32 @@ cloudfunctions/
 
 > 选这个，不要选「所有文件」。`package.json` 里只有一个 `wx-server-sdk`，云端会自动装，比本地上传 `node_modules` 快得多。
 
-`config.json` 会自动生效：
+#### ⚠️ `config.json` 管不了超时和内存
+
+`cloudfunctions/aiqa/config.json` 只有这一项：
 
 ```json
-{ "timeout": 60, "memorySize": 512 }
+{ "permissions": { "openapi": ["security.msgSecCheck"] } }
 ```
 
-**60 秒超时别改小**。一次问答要「检索 + 拼 prompt + 调模型 + 二次校验」，模型那一步实测 0.8～1.8 秒，但网络抖动时 30 秒容易不够。
+**微信云函数的 `config.json` 只认 `permissions` 和 `triggers`**。写 `timeout` / `memorySize` 是无效的——它们会被静默忽略，函数照默认值跑。
+
+判断方法：看云函数日志的最后一行。
+
+```
+Report RequestId: xxx Duration: 484ms Memory: 256MB
+                                     ↑ 如果是 256MB，说明 512 的设置没生效
+```
+
+**要改超时和内存，只能去控制台**：
+
+云开发控制台 → 云函数 → `aiqa` → **函数配置** → 编辑
+
+| 项 | 建议值 | 理由 |
+|---|---|---|
+| 超时时间 | **60 秒** | 默认 20 秒；一次问答要「检索 + 拼 prompt + 调模型 + 二次校验」，失败还会重试一次，网络抖动时 20 秒不够 |
+| 内存 | 256 MB | 实测峰值 23 MB，默认够用 |
+
 
 ### 第三步：配环境变量
 
@@ -159,49 +178,144 @@ cloudfunctions/
 
 ### 第五步：验证
 
-云开发控制台 → 云函数 → `aiqa` → **测试** 标签，粘贴：
+分两步，先看配置对不对，再跑问答。
+
+#### 5.1 环境自检
+
+云开发控制台 → 云函数 → `aiqa` → **测试** 标签，传：
 
 ```json
-{
-  "question": "我只有半小时，想做个简单点的菜",
-  "profile": { "ageGroup": "成人", "taboos": [] }
-}
+{"debug": true}
 ```
 
-预期返回：
+返回：
 
 ```json
 {
   "status": "ok",
-  "answer": {
-    "reply": "半小时内能做好的，我挑了三道简单的……",
-    "dishes": [{ "id": "TS0001", "reason": "十二分钟就成……" }]
-  },
-  "meta": {
-    "filtered": {
-      "total": 288,
-      "kept": 170,
-      "droppedTime": 118,
-      "timeLimit": 40
+  "debug": {
+    "LLM_API_KEY": {
+      "set": true,
+      "length": 35,
+      "head": "sk-7cb…",
+      "hasWhitespace": false,
+      "trimmedEqual": true,
+      "shape": "looks-ok"
     },
-    "candidateCount": 10
+    "LLM_MODEL": "deepseek-flash",
+    "LLM_BASE_URL": "(未配，走默认 api.deepseek.com)",
+    "QA_DAILY_LIMIT": "(未配，走默认 30)",
+    "node": "v18.15.0",
+    "env": "cloud1-d8gzn5hsfaa574b2e"
   }
 }
 ```
 
-**三个关键看 Return**：
+逐项看：
 
-| 字段 | 正常值 | 说明 |
+| 字段 | 要求 | 不对会怎样 |
 |---|---|---|
-| `filtered.timeLimit` | `40` | 「半小时」解析成 40 分钟上限 |
-| `filtered.droppedTime` | `> 0` | 说明时间过滤生效了 |
-| `filtered.kept` | 约 `170` | 288 道里筛掉超时的 |
+| `set` | `true` | `false` 就是没配，直接返回 `LLM_KEY_MISSING` |
+| `hasWhitespace` | **`false`** | `true` 说明尾部有空格，拼成 `Bearer sk-xxx ` 就是 401 |
+| `trimmedEqual` | `true` | `false` 同上，key 前后有不可见字符 |
+| `shape` | `looks-ok` | `unexpected` 说明粘贴时被截断或带了引号 |
 
-如果 `droppedTime: 0` 且 `kept: 288`，说明**部署的是旧代码**，重新上传。
+**`hasWhitespace` 是最容易中招的一项**。控制台里粘贴完肉眼完全看不出，但每次调用都会 401。
+
+#### 5.2 跑一次真实问答
+
+```json
+{"question":"半小时能做什么菜","profile":{"ageGroup":"成人","taboos":[]}}
+```
+
+**云上实测返回**（`elapsed: 2033` 毫秒，真实运行结果）：
+
+```json
+{
+  "status": "ok",
+  "reply": "半小时内能做的菜不少。立冬时节，建议选当令、清淡好消化的。先给您三道稳妥的：白灼菜心约12分钟，潮汕牛肉丸汤约30分钟，菜脯炒蛋约20分钟。菜脯偏咸，血压高的长者少放一点。您平时口味偏清淡还是偏咸？",
+  "dishes": [
+    { "id": "TS0073", "name": "白灼菜心",     "cuisine": "广府", "reason": "立冬当令，12分钟快手，清淡爽口" },
+    { "id": "TS0169", "name": "潮汕牛肉丸汤", "cuisine": "潮汕", "reason": "立冬汤品，30分钟一锅，暖身好入口" },
+    { "id": "TS0106", "name": "菜脯炒蛋",     "cuisine": "潮汕", "reason": "20分钟家常，蛋香软嫩，长者易嚼" }
+  ],
+  "followups": ["口味偏清淡还是偏咸？"],
+  "sources": [],
+  "disclaimer": "食养建议不构成医疗建议，长期与用药请遵医嘱。",
+  "meta": {
+    "filtered": {
+      "total": 288,
+      "kept": 170,
+      "droppedEvidence": 0,
+      "droppedAge": 0,
+      "droppedTaboo": 0,
+      "droppedTime": 118,
+      "timeLimit": 40,
+      "tabooCount": 0
+    },
+    "candidateCount": 30,
+    "searchUsed": false,
+    "degraded": false,
+    "droppedInvalid": 0,
+    "elapsed": 2033,
+    "term": "立冬"
+  }
+}
+```
+
+#### 5.3 四个必须核对的字段
+
+| 字段 | 要求 | 不对说明什么 |
+|---|---|---|
+| `degraded` | **`false`** | `true` 表示走了兜底，模型没调通，看 `meta.upstreamError` |
+| `droppedTime` | `> 0`（本次 `118`）| `0` 且 `kept: 288` → 部署的是旧代码 |
+| `timeLimit` | `40` | 「半小时」应解析成 40 分钟上限 |
+| `kept` | 约 `170` | 288 道里筛掉 118 道超时菜 |
+
+#### 5.4 推荐质量的自查
+
+**模型报的分钟数必须和库里一致**。本次核对结果：
+
+```
+ID       菜名            模型说   数据     一致
+──────────────────────────────────────────────
+TS0073   白灼菜心          12分    12分     ✓
+TS0169   潮汕牛肉丸汤        30分    30分     ✓
+TS0106   菜脯炒蛋          20分    20分     ✓
+
+超时混入：0 道（全部 ≤ 40 分钟）
+```
+
+如果模型报的时间和 `timeMinutes` 对不上，说明 `lib/prompt.js` 的 `compactCandidate` 没把 `time` 字段传过去，模型在自行估算。
+
+#### 5.5 三种组合的降级行为
+
+这三组值得单独试，是修「说半小时却推腌制两小时」时加的兜底：
+
+| 试这个 | 预期 |
+|---|---|
+| 「20 分钟内能做什么」 | `timeLimit` 变 `25`，`kept` 约 `90` |
+| 「我海鲜过敏」 | `droppedTaboo > 0` |
+| 「半小时想喝汤」 | **很可能筛空**，此时应答「按你说的半小时左右，加上其它条件，库里没有能在 40 分钟内做完的」，**不能硬推一道老火汤** |
+
+第三种是重点。旧版会静默推出超时菜，现在必须如实说挑不到。
+
 
 ---
 
 ## 四、错误对照表
+
+### 4.1 部署类错误（还没进到函数里）
+
+| 报错 | 什么时候出现 | 怎么修 |
+|---|---|---|
+| `ResourceNotFound.Function` | 控制台点测试但云端没这个函数 | 函数没上传成功，或控制台环境切错了。先看左上角环境 ID 是不是 `cloud1-d8gzn5hsfaa574b2e`，再确认函数列表里有 `aiqa` |
+| `上传并部署` 一直转圈 | 上传中 | 等 10–30 秒，`recipes.json` 有 146 KB |
+| 提示「上传成功」但列表没有 | 控制台没刷新 | 按 F5 刷新 |
+
+> `ResourceNotFound.Function` 几乎只有两种原因：**环境不对**，或者**上传失败把旧函数删了、新的没建成**。
+
+### 4.2 函数返回的错误码
 
 前端 `utils/qa.js` 会把错误码翻成人话，这里是对照根因：
 
@@ -212,14 +326,38 @@ cloudfunctions/
 | `EMPTY_QUESTION` | （不会显示）| 问题为空 | 前端已拦 |
 | `CONTENT_BLOCKED` | 换个说法再试试 | 内容安全拦截 | 换措辞 |
 | `BAD_JSON` | （走兜底）| 模型没按 JSON 输出 | 见下面「坑 2」 |
-| `UPSTREAM_FAILED` | 网络开小差了 | 上游 4xx/5xx | 看云函数日志里的原始报文 |
+| `UPSTREAM_FAILED` | 网络开小差了 | 上游 4xx/5xx | **看 `meta.upstreamError`**，见下 |
+| `NO_CANDIDATE` | （走兜底）| 硬过滤把 288 道全筛没了 | 条件太严，让用户放宽 |
 | `FUNCTION_NOT_DEPLOYED` | 云函数还没上传 | 没部署或部署失败 | 第二步 |
 
-**模型名写错的表现**是 `UPSTREAM_FAILED`，日志里能看到类似：
+### 4.3 `UPSTREAM_FAILED` 怎么定位
 
+降级时 `meta.upstreamError` 会带出真实原因：
+
+```json
+"meta": {
+  "errorCode": "UPSTREAM_FAILED",
+  "upstreamError": {
+    "code": "UPSTREAM_FAILED",
+    "message": "上游 HTTP 401：Authentication Fails",
+    "status": 401
+  }
+}
 ```
-上游 HTTP 400：Model Not Exist
-```
+
+按 `status` 对照：
+
+| status / message | 原因 | 修法 |
+|---|---|---|
+| `401` | key 无效 | 传 `{"debug":true}` 看 `hasWhitespace`，多半是尾部空格 |
+| `400` + `Model Not Exist` | 模型名过期 | `LLM_MODEL` 改成 `deepseek-flash` |
+| `402` | 余额不足 | 去平台充值 |
+| `429` | 触发限流 | 稍等重试 |
+| `0` + `上游请求超时` | 网络慢 | 控制台把超时改到 60 秒 |
+| `0` + `ENOTFOUND` | 域名解析失败 | 检查 `LLM_BASE_URL` 拼写 |
+
+**没有 `upstreamError` 字段** = 部署的是旧代码，重新上传。
+
 
 ---
 
@@ -332,12 +470,96 @@ token: 输入 45 / 输出 100          ← 全用完
 ```
 □ 三个集合建好了：qa_quota / qa_logs / qa_search_cache
 □ aiqa 右键「上传并部署：云端安装依赖」成功
+□ 控制台函数列表里能看到 aiqa（F5 刷新后）
 □ 环境变量 LLM_API_KEY 已配
 □ 环境变量 LLM_MODEL = deepseek-flash 已配
-□ 测试调用返回 status: "ok"
+□ 控制台「函数配置」里超时改成了 60 秒
+□ 传 {"debug":true} 返回 set:true / hasWhitespace:false / shape:looks-ok
+□ 正常提问返回 degraded: false（不是 true）
 □ meta.filtered.droppedTime > 0（说明是新代码）
 □ 小程序里点「AI 问答」能正常提问
-□ 云函数日志里没有 LLM_KEY_MISSING
 ```
 
-**第八条最关键**——前七条都过了但日志有 `LLM_KEY_MISSING`，通常是环境变量保存后没等生效，或者改的是另一个环境的配置（注意 `CLOUD_ENV` 对应的是哪个环境 ID）。
+**最容易漏的是两条**：
+
+- **`hasWhitespace: false`** —— key 尾部一个空格，肉眼看不出来，但每次调用都 401
+- **`degraded: false`** —— 如果是 `true`，页面照样显示回答，但那是兜底的当令菜，不是 AI 说的，很容易误以为部署成功了
+
+---
+
+## 九、实战记录：这次部署踩的坑
+
+留档用，下次照着排查能省时间。
+
+### 坑 A：`ResourceNotFound.Function`
+
+在控制台点测试，报：
+
+```
+TencentCloud API error: ResourceNotFound.Function
+未找到指定的Function，请创建后再试。
+```
+
+**原因**：云端没有这个函数。两种可能——控制台环境切错了，或上传失败导致旧函数删了、新的没建成。
+
+**判断**：先看控制台左上角环境 ID 是不是 `cloud1-d8gzn5hsfaa574b2e`，再看函数列表里有没有 `aiqa`。
+
+### 坑 B：`degraded: true` + `UPSTREAM_FAILED`
+
+第一次部署成功，但返回的是兜底内容：
+
+```json
+{
+  "degraded": true,
+  "errorCode": "UPSTREAM_FAILED",
+  "reply": "网络问答暂不可用，以下是当令菜。"
+}
+```
+
+**注意 `droppedTime: 118` 是正常的**——这说明数据层和检索层都没问题，**只有模型调用这一环断了**。
+
+看日志最后一行是关键：
+
+```
+Report RequestId: xxx Duration: 484ms Memory: 256MB MemUsage: 23MB
+```
+
+`484ms` 是破案点：本地实测调 DeepSeek 要 831～1748 ms，且失败后要重试两次。484 毫秒内完成两次请求不可能，说明**请求根本没发出去**。
+
+而 `Memory: 256MB` 暴露了另一个问题：`config.json` 里写的 `memorySize: 512` 没生效。
+
+**结论**：微信云函数的 `config.json` 只认 `permissions` 和 `triggers`，`timeout` / `memorySize` 是无效字段。要在控制台「函数配置」里改。
+
+### 坑 C：错误原因被吞掉
+
+原来的降级只返回一个 `errorCode: 'UPSTREAM_FAILED'`，看不出是 401 还是 DNS 失败。`logEvent` 会写进 `qa_logs`，但**集合没建对时连日志都没有**。
+
+**改进**：
+
+1. 降级时增加 `meta.upstreamError`，带 `code` / `message` / `status`
+2. 新增 `{"debug": true}` 自检模式，直接看配置状态
+
+### 最终跑通的返回
+
+```json
+{
+  "status": "ok",
+  "degraded": false,
+  "elapsed": 2033,
+  "meta": {
+    "filtered": { "kept": 170, "droppedTime": 118, "timeLimit": 40 },
+    "term": "立冬"
+  }
+}
+```
+
+三道推荐菜的耗时与库里完全一致：
+
+```
+TS0073 白灼菜心      模型说 12 分 / 数据 12 分  ✓
+TS0169 潮汕牛肉丸汤  模型说 30 分 / 数据 30 分  ✓
+TS0106 菜脯炒蛋      模型说 20 分 / 数据 20 分  ✓
+```
+
+**超时混入 0 道**——说明 `timeMinutes` 传给了模型，且它照着说了，没有自行估算。
+
