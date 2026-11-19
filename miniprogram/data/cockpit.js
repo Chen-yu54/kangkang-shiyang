@@ -15,12 +15,18 @@ const termsRaw = require('../data/terms.js');
 const pct = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : 0);
 
 // ——————————————————————————————————————————————
-// 知识图谱的坐标：全部在 640 × 620 的方框里算好，WXSS 只管摆位置。
-// 不上 canvas 的原因：canvas 是原生组件，层级压在普通节点之上，
-// 「点节点看明细」得自己做 hit-test，改一次布局要重算一遍；
-// 这里节点最多 33 个、连线 32 条，用绝对定位的 view 反而更稳，bindtap 直接能用。
+// 知识图谱：640 × 660 的设计坐标系，三层椭圆导轨 + 38 节点 + 85 条边。
+// 与《康康食养_数据驾驶舱_v1.html》的 03 知识图谱同构：
+//   核心 1 → 内圈 3 菜系 → 中圈 5 主料 / 5 偏好 → 外圈 24 节气；
+//   72 条「节气—菜系」弧线持续流动，点任意节点高亮它的邻接关系。
+// 坐标在这里一次算好：小程序用 canvas 2D 画，预览用 SVG 画，共用同一份数据。
 // ——————————————————————————————————————————————
-const MAP = { w: 640, h: 620, cx: 320, cy: 310, r0: 78 };
+const MAP = { w: 640, h: 760, cx: 320, cy: 380, r0: 78 };
+const G_RINGS = [
+  { rx: 120, ry: 148 }, // 内圈：3 菜系
+  { rx: 196, ry: 228 }, // 中圈：5 主料 + 5 偏好
+  { rx: 284, ry: 330 }, // 外圈：24 节气
+];
 
 function pt(r, deg) {
   const a = (deg * Math.PI) / 180;
@@ -155,51 +161,59 @@ function buildTicks(current) {
   return rows;
 }
 
-// —— 图谱布局 ——
-// 三层：内圈 3 个菜系（实算道数）→ 中圈 5 个主料（示例）→ 外圈 24 个节气点。
-// 24 个节气每 15° 一个，每 3 个标一次名，正好避开「每个都标会糊成一片」。
-const CU_DEG = [200, 340, 90];
-const CU_R = 176;
-const TERM_R = 244;
-const TERM_LBL_R = 272;
+// —— 图谱布局：38 个实体、85 条关系 ——
+// 三层椭圆从内到外是「菜系 / 主料·偏好 / 节气」，与参考 HTML 同构。
+// 每个节气连 3 个菜系（72 条），用向心 Q 弧线，避免 72 条直线在中心糊成一团。
+const CU_DEG = [90, 210, 330];
+const round1 = (v) => Math.round(v * 10) / 10;
+
+// [示例] 中圈 10 个节点的说明文案，沿用数据驾驶舱 v1 的口径
+const INNER_DESC = {
+  猪肉: '全库第一高频主料（445 卡口径），价档 2，替代品为鸡肉、牛肉、豆制品。',
+  鸡肉: '清远麻鸡为地理标志；去皮鸡胸高蛋白低脂，长者宜去骨撕丝。',
+  鸡蛋: '最便宜的优质蛋白，常作参考蛋白；长者宜全熟，防沙门氏菌。',
+  排骨: '汤鲜肉嫩；注意「骨汤补钙」是误会，补的主要是脂肪与嘌呤。',
+  豆腐: '加工类主料代表，植物蛋白来源；加工类生态分原料产地与加工地两段。',
+  怕冷: '全库第一适配偏向，但夏季可选少、冬季多，冷热不均。',
+  怕热: '同时是最大「宜」与最大「忌」——辨证的典型矛盾点。',
+  容易出汗: '集中在滋阴润燥类，如响螺、花胶、石斛、麦冬入馔。',
+  经常口干: '宜清热祛湿（苦瓜、薏米、冬瓜），忌温补厚味。',
+  冷热都怕: '不偏不倚的日常菜，是「不知道吃什么」时的默认解。',
+};
 
 function buildGraphMap(cuisineList, termName, total, perTerm) {
+  const { cx, cy } = MAP;
   const nodes = [];
   const labels = [];
   const links = [];
   const detail = {};
+  const pos = {};
+  const add = (n) => { nodes.push(n); pos[n.id] = n; };
 
-  const edge = (id, deg, tx, ty, tone) => {
-    const a = (deg * Math.PI) / 180;
-    return seg(
-      id,
-      Math.round((MAP.cx + MAP.r0 * Math.cos(a)) * 10) / 10,
-      Math.round((MAP.cy + MAP.r0 * Math.sin(a)) * 10) / 10,
-      tx,
-      ty,
-      tone
-    );
-  };
-
-  nodes.push({ id: 'core', type: 'core', name: '岭南食养库', sub: total + ' 道', x: MAP.cx, y: MAP.cy });
+  // 核心
+  add({ id: 'core', kind: 'core', label: '岭南食养库', sub: total + ' 道', x: cx, y: cy, r: 62 });
   detail.core = {
     name: '岭南食养库',
     sub: total + ' 道',
+    desc: total + ' 道 = 3 菜系 × 96 道；24 节气 × 3 菜系 = 72 格，每格 4 道，无空缺。',
     rows: [
       { k: '结构', v: termsRaw.length + ' 节气 × 3 菜系 × 4 道' },
-      { k: '关系边', v: SAMPLE.graphEdges + ' 条（节气—菜系—菜品—主料）' },
+      { k: '关系边', v: '85 条（3 主线 + 72 节气—菜系 + 10 实体）' },
     ],
   };
 
+  // 内圈：3 菜系
   cuisineList.forEach((c, i) => {
-    const deg = CU_DEG[i];
-    const p = pt(CU_R, deg);
+    const a = (CU_DEG[i] * Math.PI) / 180;
+    const x = round1(cx + G_RINGS[0].rx * Math.cos(a));
+    const y = round1(cy + G_RINGS[0].ry * Math.sin(a));
     const id = 'cu-' + i;
-    nodes.push({ id, type: 'cu', name: c.name + '菜', sub: c.n + ' 道', x: p.x, y: p.y });
-    links.push(edge('l-' + id, deg, p.x, p.y, 'cu'));
+    add({ id, kind: 'cuisine', label: c.name, sub: c.n + ' 道', x, y, r: 36 });
+    links.push({ id: 'l-' + id, s: 'core', t: id, dashed: false, tone: 'cu', x1: cx, y1: cy, x2: x, y2: y });
     detail[id] = {
       name: c.name + '菜',
       sub: c.n + ' 道',
+      desc: '三系各 ' + c.n + ' 道。点它可高亮与 24 个节气的全部连线。',
       rows: [
         { k: '成本结构', v: '低 ' + c.low + ' · 中 ' + c.mid + ' · 高 ' + c.high },
         { k: '★★★ 难度', v: c.hard + ' 道' },
@@ -208,39 +222,104 @@ function buildGraphMap(cuisineList, termName, total, perTerm) {
     };
   });
 
+  // 外圈：24 节气（立春起算，正上方顺时针）
   const termTotal = termsRaw.length || 24;
-  // 数组是小寒起排的，星图要从立春（index 2）起算：立春在正上方，顺时针走完一年
   const start = termsRaw.findIndex((x) => x.name === '立春');
   const base = start > 0 ? start : 0;
   termsRaw.forEach((item, i) => {
     const order = (i - base + termTotal) % termTotal;
     const deg = -90 + (360 / termTotal) * order;
-    const p = pt(TERM_R, deg);
-    const now = item.name === termName;
+    const a = (deg * Math.PI) / 180;
+    const x = round1(cx + G_RINGS[2].rx * Math.cos(a));
+    const y = round1(cy + G_RINGS[2].ry * Math.sin(a));
+    const cur = item.name === termName;
     const id = 't-' + i;
-    nodes.push({ id, type: now ? 'now' : 'term', dot: true, x: p.x, y: p.y });
-    links.push(edge('l-' + id, deg, p.x, p.y, now ? 'now' : 'term'));
-    // 每 3 个标一次名，正好落在立春/春分/立夏/夏至/立秋/秋分/立冬/冬至
+    add({ id, kind: 'term', label: item.name, sub: (perTerm[item.name] || 0) + ' 道', x, y, r: cur ? 9 : 5, cur });
     if (order % 3 === 0) {
-      const lp = pt(TERM_LBL_R, deg);
-      labels.push({ id: 'lb-' + i, x: lp.x, y: lp.y, text: item.name, now });
+      // 只标 8 个大节气；左右两端把文字吸到内侧，避免出界
+      let lx = round1(cx + (G_RINGS[2].rx + 26) * Math.cos(a));
+      let ly = round1(cy + (G_RINGS[2].ry + 26) * Math.sin(a));
+      let anchor = 'middle';
+      // 左右两端把文字吸到点的内侧并上抬，避免出界、压住节点
+      if (lx < cx - 230) { lx = round1(x + 14); ly = round1(y - 12); anchor = 'start'; }
+      else if (lx > cx + 230) { lx = round1(x - 14); ly = round1(y - 12); anchor = 'end'; }
+      labels.push({ id: 'lb-' + i, x: lx, y: ly, text: item.name, now: cur, anchor });
     }
     detail[id] = {
       name: item.name,
-      sub: now ? '当前节气' : '第 ' + (order + 1) + ' 个节气',
+      sub: cur ? '当前节气 · 第 ' + (order + 1) + ' / ' + termTotal : '第 ' + (order + 1) + ' 个节气',
+      desc: cur
+        ? '当前节气：' + item.name + '。三菜系各 4 道，共 ' + (perTerm[item.name] || 0) + ' 道可点。'
+        : item.name + '：3 菜系各 4 道，共 ' + (perTerm[item.name] || 0) + ' 道可点。',
       rows: [{ k: '当令菜', v: (perTerm[item.name] || 0) + ' 道（3 菜系 × 4 道）' }],
     };
   });
 
+  // 中圈：5 主料 + 5 偏好（示例）
+  const INNER = SAMPLE.graphIngredients
+    .map((x) => ({ name: x.name, n: x.n, kind: 'ing' }))
+    .concat(SAMPLE.graphFits.map((x) => ({ name: x.name, n: x.n, kind: 'fit' })));
+  INNER.forEach((n, i) => {
+    const a = ((i * 36 + 36) * Math.PI) / 180;
+    const ca = Math.cos(a);
+    const sa = Math.sin(a);
+    const x = round1(cx + G_RINGS[1].rx * ca);
+    const y = round1(cy + G_RINGS[1].ry * sa);
+    const id = 'n-' + i;
+    // 名字挂到圆外侧：沿半径再走 28，左右两侧按方向对齐，不压导轨也不挤在一起
+    let anchor = 'middle';
+    if (ca > 0.45) anchor = 'start';
+    else if (ca < -0.45) anchor = 'end';
+    const lx = round1(x + 28 * ca);
+    const ly = round1(y + 28 * sa);
+    add({ id, kind: n.kind, label: n.name, sub: n.n + ' 道', x, y, r: 15, lx, ly, anchor });
+    links.push({ id: 'l-' + id, s: 'core', t: id, dashed: false, tone: n.kind, x1: cx, y1: cy, x2: x, y2: y });
+    detail[id] = {
+      name: n.name,
+      sub: n.n + ' 道 · ' + (n.kind === 'ing' ? '主料节点' : '偏好节点'),
+      desc: INNER_DESC[n.name] || '点任意节点可高亮它的邻接关系。',
+      rows: [{ k: '出现道数', v: n.n + ' 道（示例口径）' }],
+    };
+  });
+
+  // 72 条节气 → 菜系：向心 Q 弧线
+  termsRaw.forEach((item, i) => {
+    const t = pos['t-' + i];
+    cuisineList.forEach((c, j) => {
+      const cu = pos['cu-' + j];
+      const mx = (t.x + cu.x) / 2;
+      const my = (t.y + cu.y) / 2;
+      links.push({
+        id: 'lt-' + i + '-' + j,
+        s: t.id,
+        t: cu.id,
+        dashed: true,
+        tone: 'term',
+        x1: t.x, y1: t.y,
+        x2: cu.x, y2: cu.y,
+        qx: round1(mx * 0.66 + cx * 0.34),
+        qy: round1(my * 0.66 + cy * 0.34),
+      });
+    });
+  });
+
+  // 邻接表：点一个节点，只留它和它的邻居
+  const near = {};
+  nodes.forEach((n) => { near[n.id] = [n.id]; });
+  links.forEach((l) => {
+    if (near[l.s].indexOf(l.t) < 0) near[l.s].push(l.t);
+    if (near[l.t].indexOf(l.s) < 0) near[l.t].push(l.s);
+  });
+
   return {
-    w: MAP.w,
-    h: MAP.h,
-    nodes,
-    labels,
-    links,
-    detail,
+    w: MAP.w, h: MAP.h, cx, cy,
+    guides: G_RINGS,
+    nodes, labels, links, detail, near,
     legend: [
+      { name: '核心', n: 1 },
       { name: '菜系', n: cuisineList.length },
+      { name: '主料', n: 5 },
+      { name: '偏好', n: 5 },
       { name: '节气', n: termTotal },
     ],
   };
@@ -341,21 +420,20 @@ function build(current) {
     note: '宜为多标签，不可相加；忌与宜同轴对照，同一道菜可能两边都出现。',
   };
 
-  // —— 知识图谱（骨架实算，主料示例）——
+  // —— 知识图谱：38 实体 / 85 边，点节点高亮邻接 ——
   const graph = {
     sample: true,
     core: { name: '岭南食养库', sub: total + ' 道' },
     map: buildGraphMap(cuisineList, termName, total, perTerm),
     ingredients: withW(SAMPLE.graphIngredients, { unit: ' 道' }),
     fits: withW(SAMPLE.graphFits, { unit: ' 道' }),
-    edges: SAMPLE.graphEdges,
+    edges: 0,
     note:
-      '图的骨架全是实算：核心 1 个、菜系 3 个、节气 ' +
-      termsRaw.length +
-      ' 个、关系边 ' +
-      SAMPLE.graphEdges +
-      ' 条。手机上不塞 24 个节气名——只标 8 个大节气，其余留点；点任一节点，下面换成它的明细。',
+      '38 个实体 · 85 条关系，与数据驾驶舱 v1 同构：核心连 3 菜系、10 个主料 / 偏好节点，' +
+      '24 节气各连 3 菜系（72 条弧线持续流动）。点任意节点，只留它的邻接关系并换成该实体档案；' +
+      '节气与菜系是实算，主料与偏好标「示例」。',
   };
+  graph.edges = graph.map.links.length;
 
   // —— 食材深库（示例）——
   const lib = SAMPLE.library;

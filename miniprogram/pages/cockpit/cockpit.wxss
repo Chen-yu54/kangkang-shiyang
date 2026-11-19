@@ -198,7 +198,7 @@
 
 .ck-num {
   font-family: var(--font-serif);
-  font-size: 54rpx;
+  font-size: 56rpx;
   line-height: 1.05;
   color: var(--color-flame);
 }
@@ -328,7 +328,7 @@
 }
 
 .ck-metric-n { display: flex; align-items: baseline; }
-.ck-mv { font-family: var(--font-serif); font-size: 42rpx; line-height: 1.1; color: var(--color-ink); }
+.ck-mv { font-family: var(--font-serif); font-size: 40rpx; line-height: 1.1; color: var(--color-ink); }
 .ck-mu { margin-left: 4rpx; font-size: 22rpx; color: var(--color-ink-3); }
 .ck-ml { display: block; margin-top: 4rpx; font-size: 22rpx; color: var(--color-ink-3); }
 
@@ -405,179 +405,52 @@
   color: var(--color-ink-3);
 }
 
-/* 04 知识图谱：640 × 620 的放射星图
- * 坐标不写在样式里——data/cockpit.js 的 buildGraphMap 算好 left/top/width/deg，
- * WXML 只管把点和线摆上去，改节点数或半径只动数据一处。
- * 虚线用 repeat-x 的 linear-gradient 画，不用 border-style: dashed：
- * 后者在部分 Android WebView 上间距不匀，甚至渲染成实线。
+/* 04 知识图谱：canvas 2D 动态网络
+ * 画布固定 640 × 660（设计坐标），JS 按实际宽高等比映射，节点/边/导轨都在
+ * data/cockpit.js 的 buildGraphMap 里算好；72 条节气—菜系弧线持续流动。
  */
 .ck-gmap {
   position: relative;
   width: 640rpx;
-  height: 620rpx;
-  margin: 6rpx auto 0;
+  height: 760rpx;
+  margin: 4rpx auto 0;
 }
 
-/* 连线：起点在自身左上角，绕原点按 deg 旋转 */
-.ck-gline {
-  position: absolute;
-  height: 2rpx;
-  transform-origin: 0 0;
-  background-repeat: repeat-x;
-  background-size: 12rpx 2rpx;
-  background-image: linear-gradient(
-    to right,
-    rgba(184, 134, 59, 0.34) 0,
-    rgba(184, 134, 59, 0.34) 6rpx,
-    transparent 6rpx,
-    transparent 12rpx
-  );
-  z-index: 1;
+.ck-gcanvas {
+  display: block;
+  width: 640rpx;
+  height: 760rpx;
 }
 
-.ck-gline-cu {
-  background-size: 14rpx 2rpx;
-  background-image: linear-gradient(
-    to right,
-    rgba(181, 72, 42, 0.44) 0,
-    rgba(181, 72, 42, 0.44) 8rpx,
-    transparent 8rpx,
-    transparent 14rpx
-  );
-}
-
-.ck-gline-now {
-  background-image: linear-gradient(
-    to right,
-    rgba(181, 72, 42, 0.62) 0,
-    rgba(181, 72, 42, 0.62) 6rpx,
-    transparent 6rpx,
-    transparent 12rpx
-  );
-}
-
-.ck-gline-ing {
-  background-size: 10rpx 2rpx;
-  background-image: linear-gradient(
-    to right,
-    rgba(139, 90, 43, 0.24) 0,
-    rgba(139, 90, 43, 0.24) 5rpx,
-    transparent 5rpx,
-    transparent 10rpx
-  );
-}
-
-/* 节气名：只标 8 个大节气，其余 16 个只留点，不然一圈字糊成带子 */
-.ck-glbl {
-  position: absolute;
-  transform: translate(-50%, -50%);
+.ck-gfallback {
+  display: block;
+  margin-top: 12rpx;
+  padding: 14rpx 18rpx;
+  border-radius: 14rpx;
+  background-color: rgba(184, 134, 59, 0.08);
   font-size: 22rpx;
-  letter-spacing: 0.04em;
-  color: var(--color-ink-3);
-  white-space: nowrap;
-  z-index: 2;
+  line-height: 1.6;
+  color: var(--color-ink-2);
 }
 
-.ck-glbl.now { color: var(--color-flame); }
-
-/* 节点基座：绝对定位、自身居中 */
-.ck-gnode {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.ck-gdot {
-  width: 10rpx;
-  height: 10rpx;
-  border-radius: 50%;
-  background-color: rgba(184, 134, 59, 0.68);
-}
-
-.ck-gnode-now .ck-gdot {
-  width: 14rpx;
-  height: 14rpx;
-  background-color: var(--color-flame);
-  box-shadow: 0 0 0 6rpx rgba(181, 72, 42, 0.13);
-}
-
-/* 中心：纸色圆盘压住 24 条线的起点，看着才干净 */
-.ck-gnode-core {
-  width: 156rpx;
-  height: 156rpx;
-  border-radius: 50%;
-  border: 2rpx solid rgba(181, 72, 42, 0.38);
-  background-image: radial-gradient(circle at 50% 36%, #fffdf6 0%, #f8eed9 100%);
-  box-shadow: 0 0 0 8rpx rgba(181, 72, 42, 0.05);
-  z-index: 3;
-}
-
-.ck-gnode-core .ck-gn-n {
-  font-family: var(--font-serif);
-  font-size: 28rpx;
-  letter-spacing: 0.02em;
-  color: var(--color-ink);
-}
-
-.ck-gnode-core .ck-gn-s {
-  margin-top: 4rpx;
-  font-size: 21rpx;
-  color: var(--color-flame);
-}
-
-/* 菜系：胶囊，选中反白 */
-.ck-gnode-cu {
-  padding: 9rpx 18rpx 10rpx;
-  border: 1rpx solid rgba(184, 134, 59, 0.48);
-  border-radius: 999rpx;
-  background-color: #fffdf8;
-}
-
-.ck-gnode-cu .ck-gn-n {
-  font-family: var(--font-serif);
-  font-size: 26rpx;
-  color: var(--color-ink);
-}
-
-.ck-gnode-cu .ck-gn-s {
-  margin-top: 1rpx;
-  font-size: 20rpx;
-  color: var(--color-gold);
-}
-
-.ck-gnode-cu.on {
-  border-color: var(--color-flame);
-  background-color: var(--color-flame);
-}
-
-.ck-gnode-cu.on .ck-gn-n { color: #fff8ec; }
-.ck-gnode-cu.on .ck-gn-s { color: rgba(255, 248, 236, 0.82); }
-
-/* 主料不进图：手机宽度里 5 个主料节点会和节气点、菜系胶囊叠在一起，
- * 改放图下方的条形（Top5），既保住了数量，也不糊图。
- */
-
-/* 图例 + 节点明细 */
+/* 图例 */
 .ck-glegend {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-top: 2rpx;
+  margin-top: 8rpx;
   padding-top: 14rpx;
   border-top: 1rpx solid var(--color-border-hair);
 }
 
 .ck-glegend-i {
-  margin: 0 12rpx;
-  font-size: 20rpx;
+  margin: 0 10rpx;
+  font-size: 22rpx;
   color: var(--color-ink-3);
 }
 
+/* 节点档案：点图上任一实体，这里换成它的说明 */
 .ck-gdet {
   margin-top: 16rpx;
   padding: 18rpx 20rpx 16rpx;
@@ -602,6 +475,23 @@
   margin-left: 12rpx;
   font-size: 22rpx;
   color: var(--color-flame);
+}
+
+.ck-greset {
+  margin-left: auto;
+  padding: 4rpx 16rpx;
+  border: 1rpx solid rgba(181, 72, 42, 0.45);
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  color: var(--color-flame);
+}
+
+.ck-gdet-d {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  line-height: 1.65;
+  color: var(--color-ink-2);
 }
 
 .ck-gdet-row {

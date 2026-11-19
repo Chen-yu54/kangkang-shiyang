@@ -44,12 +44,18 @@ Component({
         this.setData({ hole: null, tip: null });
         return;
       }
-      this.measure(true, 0);
+      // 带入场动画的浮层（顶部消息条）等它落定再量，亮圈才贴得准
+      if (step.fixed) {
+        setTimeout(() => this.measure(true, 0), 320);
+      } else {
+        this.measure(true, 0);
+      }
     },
   },
 
   methods: {
     measure(canScroll, tries) {
+      if (!this.data.visible) return;
       const step = this.data.step;
       if (!step || !step.target) return;
 
@@ -76,7 +82,8 @@ Component({
         }
 
         // 目标不在视野里：先滚过去，再量一次
-        const outOfView = rect.top < 96 || rect.bottom > winH - 120;
+        // fixed 浮层（顶部消息条、右下角悬浮球）不跟着页面滚，跳过这一步
+        const outOfView = !step.fixed && (rect.top < 96 || rect.bottom > winH - 120);
         if (outOfView && canScroll) {
           const base = scroll ? scroll.scrollTop || 0 : 0;
           const target = Math.max(0, base + rect.top - 130);

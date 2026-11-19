@@ -26,7 +26,7 @@
     <view class="tip-acts">
       <view class="tip-skip" hover-class="tap-hover" catchtap="onSkip">{{skipText}}</view>
       <view class="tip-next" hover-class="tap-hover" catchtap="onNext">
-        <text class="tip-next-text">{{index + 1 >= total ? doneText : nextText}}</text>
+        <text class="tip-next-text">{{step.nextText || (index + 1 >= total ? doneText : nextText)}}</text>
         <text class="tip-next-arrow">›</text>
       </view>
     </view>

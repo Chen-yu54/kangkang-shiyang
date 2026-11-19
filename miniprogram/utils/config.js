@@ -63,6 +63,17 @@ const WORKFLOW_CONVERSATION_NAME = '';
 // 未提供时分享长图仍可生成，但码位画成占位框，不编造二维码。
 const QR_IMAGE_PATH = '';
 
+// ── AI 问答（pages/qa + cloudfunctions/aiqa）──────────────────────────
+// QA_ENABLED = false 时入口自动隐藏，不会留下点了就报错的死按钮。
+// 云函数未配 LLM_API_KEY 时也可以先置 false。
+const QA_ENABLED = true;
+const QA_FUNCTION = 'aiqa';
+
+// 问答页里「看详情」「去菜单」要跳的页面。路径必须与 app.json 一致，
+// 写错时点按钮会提示「请先在 config 配置菜品详情页路径」。
+const RECIPE_DETAIL_PAGE = '/pages/dish/dish';
+const MENU_PAGE = '/pages/menu/menu';
+
 module.exports = {
   DATA_CHANNEL,
   API_BASE,
@@ -71,4 +82,8 @@ module.exports = {
   WORKFLOW_ALIAS,
   WORKFLOW_CONVERSATION_NAME,
   QR_IMAGE_PATH,
+  QA_ENABLED,
+  QA_FUNCTION,
+  RECIPE_DETAIL_PAGE,
+  MENU_PAGE,
 };

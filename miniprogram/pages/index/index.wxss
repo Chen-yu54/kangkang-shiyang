@@ -709,7 +709,7 @@
 
 .cp-num {
   font-family: var(--font-serif);
-  font-size: 54rpx;
+  font-size: 56rpx;
   line-height: 1.05;
   color: var(--color-flame);
 }
@@ -870,67 +870,195 @@
 .elder .hero-steam {
   display: none;
 }
-/* 问问康康入口：与搜索框并排的对话入口。
-   墨绿圆形头像 + 两行文案，点击区 108rpx。 */
-.ask-entry {
+/* ==================== 8. 康康悬浮球 ====================
+   三个对话入口（问问康康 / AI 问答 / 康康对话）合成一颗球：
+   右下固定、避开 tabBar，logo 走「康康食养 AI」的品牌图，气泡按时段说话。
+   颜色全部取纸底那一套，不引入新色。 */
+/* 首次引导：康康「发来一条消息」的顶部浮层。
+   z-index 要高过引导遮罩(9000)——它是亮圈里的主角，得能看清、能点。 */
+.intro-msg {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  top: 140rpx;
+  z-index: 9200;
   display: flex;
   align-items: center;
-  margin: 20rpx 32rpx 0;
-  padding: 24rpx 26rpx;
-  min-height: 108rpx;
-  background: #fdf8ee;
-  border: 2rpx solid rgba(63, 122, 69, 0.24);
-  border-radius: 16rpx;
+  padding: 22rpx 24rpx;
+  background: #fffdf8;
+  border: 2rpx solid rgba(139, 90, 43, 0.18);
+  border-left: 8rpx solid #3f7a45;
+  border-radius: 18rpx;
+  box-shadow: 0 16rpx 40rpx rgba(24, 16, 10, 0.28);
+  box-sizing: border-box;
+  animation: introDrop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
 }
 
-.ask-ava {
-  width: 76rpx;
-  height: 76rpx;
-  border-radius: 24rpx;
-  background: #3f7a45;
-  color: #ffffff;
-  font-size: 34rpx;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@keyframes introDrop {
+  from { opacity: 0; transform: translateY(-40rpx) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.intro-ava {
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 50%;
   flex: none;
   margin-right: 20rpx;
+  background: #fbf3e2;
+  border: 2rpx solid rgba(139, 90, 43, 0.16);
 }
 
-.ask-body {
+.intro-dot {
+  position: absolute;
+  top: 18rpx;
+  left: 104rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: #b5482a;
+  border: 2rpx solid #fffdf8;
+}
+
+.intro-body {
   flex: 1;
   min-width: 0;
 }
 
-.ask-title {
-  display: block;
-  font-size: 38rpx;
-  font-weight: 700;
+.intro-top {
+  display: flex;
+  align-items: baseline;
+}
+
+.intro-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 30rpx;
+  font-weight: 600;
   color: #2d241a;
 }
 
-.ask-sub {
-  display: block;
-  margin-top: 4rpx;
-  font-size: 32rpx;
-  color: #8b7a5b;
+.intro-time {
+  flex: none;
+  font-size: 22rpx;
+  color: #a89880;
 }
 
-.ask-go {
-  font-size: 40rpx;
-  color: #3f7a45;
+.intro-text {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 26rpx;
+  line-height: 1.5;
+  color: #6b563c;
+}
+
+.intro-go {
   flex: none;
   margin-left: 12rpx;
-}
-/* 第二个入口（康康对话）：用浅底 + 棕色边，与「问问康康」问卷入口区分开，
-   不要让用户觉得是同一个按钮点了两次。 */
-.ask-entry-alt {
-  background: #fdfaf4;
-  border-color: rgba(139, 90, 43, 0.22);
-  margin-top: 14rpx;
+  font-size: 36rpx;
+  color: #b5482a;
 }
 
-.ask-ava-alt {
-  background: #8b5a2b;
+.fab {
+  position: fixed;
+  right: 24rpx;
+  /* tabBar 约 100rpx，再让出安全区，球不压住导航 */
+  bottom: calc(132rpx + env(safe-area-inset-bottom));
+  z-index: 70;
+  display: flex;
+  align-items: center;
 }
+
+.fab-ball {
+  position: relative;
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fbf3e2;
+  border: 5rpx solid #fffdf8;
+  box-shadow: 0 10rpx 26rpx rgba(61, 43, 26, 0.22);
+}
+
+.fab-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 呼吸环：不抢注意力，只是让球「活着」 */
+.fab-ring {
+  position: absolute;
+  left: -5rpx;
+  top: -5rpx;
+  right: -5rpx;
+  bottom: -5rpx;
+  border-radius: 50%;
+  border: 3rpx solid rgba(181, 72, 42, 0.42);
+  animation: fabPulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes fabPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.22); opacity: 0; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+
+/* 气泡：贴在球左边，右侧一个小尖角指向球。
+   父级 .fab 只有球那么宽（108rpx），只写 right 会把文字压成竖排；
+   但给太宽又会拉成一根横条。300rpx 让主文案自然折成两行，宽高才匀称。 */
+.fab-tip {
+  position: absolute;
+  right: 124rpx;
+  bottom: 10rpx;
+  width: 320rpx;
+  box-sizing: border-box;
+  padding: 20rpx 24rpx;
+  background: #fffdf8;
+  border: 2rpx solid rgba(139, 90, 43, 0.2);
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 20rpx rgba(61, 43, 26, 0.12);
+  opacity: 0;
+  transform: translateX(16rpx) scale(0.94);
+  transform-origin: right bottom;
+  transition: opacity 0.24s ease, transform 0.24s ease;
+  pointer-events: none;
+}
+
+.fab-tip.on {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.fab-tip::after {
+  content: '';
+  position: absolute;
+  right: -10rpx;
+  bottom: 38rpx;
+  width: 18rpx;
+  height: 18rpx;
+  background: #fffdf8;
+  border-right: 2rpx solid rgba(139, 90, 43, 0.2);
+  border-top: 2rpx solid rgba(139, 90, 43, 0.2);
+  transform: rotate(45deg);
+}
+
+.fab-tip-t {
+  display: block;
+  font-size: 28rpx;
+  line-height: 1.45;
+  color: #3d2b1a;
+  /* 文案里按标点预置了换行，别让系统再断在词中间 */
+  white-space: pre-line;
+}
+
+.fab-tip-s {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  color: #b5482a;
+}
+
+/* 面板样式已撤：点球直接进 /pages/kangkang 统一对话框 */

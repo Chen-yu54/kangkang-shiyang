@@ -6,6 +6,8 @@
     "pages/consent/consent",
     "pages/agent/agent",
     "pages/aichat/aichat",
+    "pages/qa/qa",
+    "pages/kangkang/kangkang",
     "pages/index/index",
     "pages/menu/menu",
     "pages/mine/mine",
@@ -59,6 +61,12 @@
         "text": "专属推荐",
         "iconPath": "images/tabbar/tab-menu.png",
         "selectedIconPath": "images/tabbar/tab-menu-on.png"
+      },
+      {
+        "pagePath": "pages/foodsafety/foodsafety",
+        "text": "食品安全",
+        "iconPath": "images/tabbar/tab-food.png",
+        "selectedIconPath": "images/tabbar/tab-food-on.png"
       },
       {
         "pagePath": "pages/mine/mine",

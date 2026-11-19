@@ -140,8 +140,14 @@ page {
   --font-emoji-md: 72rpx;
   --font-emoji-lg: 104rpx;
 
-  /* —— 字体：标题走宋体族，Android 无宋体时自动回退，不影响可读 —— */
-  --font-serif: "Songti SC", "STSong", "STZhongsong", "SimSun", "Noto Serif SC", serif;
+  /* —— 字体体系：正文 / 标题各一套，全端只认这两个 token ——
+   * 正文：各机型中文默认字形不一致，显式声明无衬线族，正文才不会一页一个样；
+   * 标题：宋体族保留刊物感，补齐 Android 与 Windows 回退，避免一台有宋体、一台掉回黑体；
+   * 数字与拉丁字母跟随正文字体，不另起一套（混字体正是画面显散的主因）。 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+  --font-serif: "Songti SC", "STSong", "STZhongsong", "Noto Serif CJK SC",
+    "Source Han Serif SC", "SimSun", "Noto Serif SC", serif;
 
   /* —— 形状 —— */
   --radius-card: 32rpx; /* 卡片 16px × 2 */
@@ -167,6 +173,7 @@ page {
 
   background-color: var(--color-bg);
   color: var(--color-ink);
+  font-family: var(--font-sans);
   font-size: var(--font-base);
   line-height: 1.6;
 }

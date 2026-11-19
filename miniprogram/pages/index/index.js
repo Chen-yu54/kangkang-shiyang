@@ -15,6 +15,7 @@ const kbStats = require('../../utils/kbStats');
 const cockpit = require('../../data/cockpit');
 const track = require('../../utils/track');
 const i18n = require('../../utils/i18n');
+const cfg = require('../../utils/config');
 
 const t = i18n.t;
 
@@ -59,6 +60,10 @@ Page({
     tourStep: null,
     tourIndex: 0,
     tourTotal: 0,
+    introMsgOn: false, // 引导到「康康来消息」这一站时，顶上那条消息浮层
+    // 康康悬浮球：三个 AI 入口合成一个对话框，点球直达。tip 按时段换
+    fabTip: '',
+    fabTipOn: false,
   },
 
   onLoad() {
@@ -69,6 +74,8 @@ Page({
         askSub: t('home.askSub'),
         chatTitle: t('home.chatTitle'),
         chatSub: t('home.chatSub'),
+        qaTitle: cfg && cfg.QA_ENABLED ? t('home.qaTitle') : '',
+        qaSub: cfg && cfg.QA_ENABLED ? t('home.qaSub') : '',
         sectionDishes: t('home.sectionDishes'),
         sectionCulture: t('home.sectionCulture'),
         seeAll: t('home.seeAll'),
@@ -102,6 +109,9 @@ Page({
         cultureOpenSub: t('home.cultureOpenSub'),
         cultureOpen: t('home.cultureOpen'),
         noSnapshot: t('home.noSnapshot'),
+        fabTitle: t('home.fabTitle'),
+        fabSub: t('home.fabSub'),
+        fabTipSub: t('home.fabTipSub'),
       },
     });
     this.applyTermTheme();
@@ -154,6 +164,7 @@ Page({
     });
     // 从引导里切回本页（或首次登录落回首页）时，按当前进度决定是否亮起引导
     this.syncTour();
+    this.syncFabTip();
 
     // 节气跨边界（如 11/7 立冬）后回首页要换海报；若当令菜列表也过期就整体重载。
     // 两者都取自 dataSource.getCurrentTerm()，口径一致，不会来回抖动。
@@ -162,6 +173,15 @@ Page({
     if (this.data.termName && info.name && info.name !== this.data.termName) {
       this.loadData();
     }
+  },
+
+  // 切走时把气泡定时器停掉，回来再按新时段重算
+  onHide() {
+    this.clearFabTimer();
+  },
+
+  onUnload() {
+    this.clearFabTimer();
   },
 
   onPullDownRefresh() {
@@ -301,16 +321,6 @@ Page({
   },
 
   // 节气文化卡 → 节气详情页（solarterm 支持 ?term= 直接进详情，省一次列表点击）
-  // 问问康康：对话式问卷页
-  // 康康对话：连扣子 Bot 的自由问答
-  onTapAiChat() {
-    wx.navigateTo({ url: '/pages/aichat/aichat' });
-  },
-
-  onTapAgent() {
-    wx.navigateTo({ url: '/pages/agent/agent' });
-  },
-
   onTapTermDetail() {
     const name = this.data.termName;
     if (!name) return;
@@ -319,6 +329,48 @@ Page({
       fail: () => {
         // 详情页打不开时退到列表页，不要让点击变成死操作
         wx.navigateTo({ url: '/pages/solarterm/solarterm' });
+      },
+    });
+  },
+
+  // ——— 康康悬浮球 ———
+  // 三个 AI 入口已合成一个对话框：点球直接进 /pages/kangkang，不再中间选一次方式。
+  // 气泡按当前时段换一句：早上说早饭，中午说午饭，晚上说晚饭，深夜说明天。
+  // 不打扰：进页面 1.2 秒后浮出，看 6 秒自动收；点过一次就不再弹。
+  syncFabTip() {
+    const h = new Date().getHours();
+    let tip = 'home.fabTipNight';
+    if (h >= 5 && h < 10) tip = 'home.fabTipMorning';
+    else if (h >= 10 && h < 14) tip = 'home.fabTipNoon';
+    else if (h >= 14 && h < 17) tip = 'home.fabTipAfternoon';
+    else if (h >= 17 && h < 22) tip = 'home.fabTipEvening';
+
+    this.setData({ fabTip: t(tip) });
+    this.clearFabTimer();
+    // 已经点开过一次就不再浮气泡，免得每次回首页都弹
+    if (this._fabSeen) return;
+    this._fabTimer = setTimeout(() => {
+      this.setData({ fabTipOn: true });
+      this._fabHide = setTimeout(() => this.setData({ fabTipOn: false }), 6000);
+    }, 1200);
+  },
+
+  clearFabTimer() {
+    if (this._fabTimer) clearTimeout(this._fabTimer);
+    if (this._fabHide) clearTimeout(this._fabHide);
+    this._fabTimer = null;
+    this._fabHide = null;
+  },
+
+  onTapFab() {
+    this._fabSeen = true;
+    this.clearFabTimer();
+    this.setData({ fabTipOn: false });
+    wx.navigateTo({
+      url: '/pages/kangkang/kangkang',
+      // 跳转失败别静默：提示重新编译，问题一眼能看到
+      fail: () => {
+        wx.showToast({ title: '对话页没打开，请重新编译小程序', icon: 'none' });
       },
     });
   },
@@ -355,22 +407,43 @@ Page({
       tourStep: st.step,
       tourIndex: st.index,
       tourTotal: st.total,
+      introMsgOn: !!(st.visible && st.step && st.step.act === 'intro'),
     });
   },
 
+  // 「康康来消息」这一站：点消息条（或说明卡上的「去看看」）先去认识一下康康。
+  // 进度先挪到下一站，等从对话页退回来，onShow 里 syncTour 正好亮起悬浮球。
+  openIntroChat() {
+    const app = getApp();
+    if (app.nextTour) app.nextTour();
+    this.setData({ tourVisible: false, introMsgOn: false });
+    wx.navigateTo({
+      url: '/pages/kangkang/kangkang?intro=1',
+      fail: () => this.syncTour(),
+    });
+  },
+
+  onTapIntroMsg() {
+    this.openIntroChat();
+  },
+
   onTourNext() {
+    // 互动站不翻页：交给 openIntroChat，别让用户没见到康康就跳过去
+    if (this.data.tourStep && this.data.tourStep.act === 'intro') {
+      this.openIntroChat();
+      return;
+    }
     const app = getApp();
     const st = app.nextTour ? app.nextTour() : null;
-    this.setData({ tourVisible: false });
+    this.setData({ tourVisible: false, introMsgOn: false });
     if (!st) {
       require('../../utils/tour').finishConfirm();
       return;
     }
-    // 下一站在别的 tab：切过去，目标页 onShow 时接着亮
+    // 下一站在别的 tab：切过去，目标页 onShow 时接着亮。
+    // 路径统一从 utils/tour 取，四个 tab 都认，不再写死三选一
     if (st.step && st.step.page !== 'index') {
-      wx.switchTab({
-        url: st.step.page === 'menu' ? '/pages/menu/menu' : '/pages/mine/mine',
-      });
+      wx.switchTab({ url: require('../../utils/tour').tabUrlOf(st.step.page) });
       return;
     }
     this.setData({
@@ -378,6 +451,7 @@ Page({
       tourStep: st.step,
       tourIndex: st.index,
       tourTotal: st.total,
+      introMsgOn: !!(st.visible && st.step && st.step.act === 'intro'),
     });
   },
 
@@ -386,7 +460,7 @@ Page({
     const self = this;
     require('../../utils/tour').skipConfirm(() => {
       if (app.endTour) app.endTour();
-      self.setData({ tourVisible: false });
+      self.setData({ tourVisible: false, introMsgOn: false });
     });
   },
 

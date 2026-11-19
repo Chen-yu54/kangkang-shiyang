@@ -83,26 +83,7 @@
       <text class="search-go">›</text>
     </view>
 
-    <!-- 问问康康：对话式问卷入口。
-         不放表单而放对话——问 6 道题容易中途退出，聊几句更容易走完。 -->
-    <view class="ask-entry" hover-class="tap-hover" bindtap="onTapAgent">
-      <view class="ask-ava">康</view>
-      <view class="ask-body">
-        <text class="ask-title">{{copy.askTitle}}</text>
-        <text class="ask-sub">{{copy.askSub}}</text>
-      </view>
-      <text class="ask-go">›</text>
-    </view>
-
-    <!-- 自由对话入口：连扣子 Bot，可以打字追问 -->
-    <view class="ask-entry ask-entry-alt" hover-class="tap-hover" bindtap="onTapAiChat">
-      <view class="ask-ava ask-ava-alt">问</view>
-      <view class="ask-body">
-        <text class="ask-title">{{copy.chatTitle}}</text>
-        <text class="ask-sub">{{copy.chatSub}}</text>
-      </view>
-      <text class="ask-go">›</text>
-    </view>
+    <!-- 三个对话入口已合并成右下角悬浮球，见页面末尾；正文不再占三块位置 -->
 
     <!-- ==================== 4. 当令菜 ====================
          讲完节气、给完入口，紧接着「今天吃什么」；数据仪表盘收在页尾做复盘。
@@ -270,9 +251,38 @@
     </block>
   </view>
 
+  <!-- 康康悬浮球：问问康康 / AI 问答 / 康康对话 三个入口合成一个对话框。
+       点球直接进「康康食养 AI」对话页，不再中间选一次方式；
+       气泡按时段提醒吃饭，只在首页露一次。 -->
+  <view wx:if="{{!elderMode}}" id="tour-fab" class="fab">
+    <view class="fab-tip {{fabTipOn ? 'on' : ''}}" bindtap="onTapFab">
+      <text class="fab-tip-t">{{fabTip}}</text>
+      <text class="fab-tip-s">{{copy.fabTipSub}}</text>
+    </view>
+    <view class="fab-ball" hover-class="tap-hover" bindtap="onTapFab">
+      <image class="fab-logo" src="/images/brand-logo.jpg" mode="aspectFill" />
+      <view class="fab-ring"></view>
+    </view>
+  </view>
+
   <disclaimer />
 
-  <!-- 登录后的功能引导：跨三页走，进度在 app.globalData.tour -->
+  <!-- 首次引导到「康康」这一站：顶上弹出一条康康的消息，亮圈对准它。
+       点进去由康康自我介绍；退出来再讲右下角的悬浮球。 -->
+  <view wx:if="{{introMsgOn}}" id="tour-msg" class="intro-msg" catchtap="onTapIntroMsg">
+    <image class="intro-ava" src="/images/brand-logo.jpg" mode="aspectFill" />
+    <view class="intro-dot"></view>
+    <view class="intro-body">
+      <view class="intro-top">
+        <text class="intro-name">康康食养 AI</text>
+        <text class="intro-time">刚刚</text>
+      </view>
+      <text class="intro-text">给你发来一条消息：嗨，来认识一下？</text>
+    </view>
+    <text class="intro-go">›</text>
+  </view>
+
+  <!-- 登录后的功能引导：跨四个 tab 走，进度在 app.globalData.tour -->
   <guide-tour
     visible="{{tourVisible}}"
     step="{{tourStep}}"

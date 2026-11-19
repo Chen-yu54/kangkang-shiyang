@@ -204,18 +204,18 @@ Page({
     wx.navigateTo({ url: '/pages/agreement/agreement?type=service' });
   },
 
-  // 数据分享设置：从「我的」进入，带 from=mine 以便返回
+  // 康康食养 AI：三个入口已合成一个对话框，这里也走同一个页面
   onTapAgent() {
-    wx.navigateTo({ url: '/pages/agent/agent' });
+    wx.navigateTo({ url: '/pages/kangkang/kangkang' });
   },
 
   onTapConsent() {
     wx.navigateTo({ url: '/pages/consent/consent?from=mine' });
   },
 
-  // 食品安全：省局公开的抽检与处罚数据，独立页面，不占 tab
+  // 食品安全：省局公开的抽检与处罚数据，已进 tabBar，只能 switchTab
   onTapFoodSafety() {
-    wx.navigateTo({ url: '/pages/foodsafety/foodsafety' });
+    wx.switchTab({ url: '/pages/foodsafety/foodsafety' });
   },
 
   onTapMethod() {
@@ -361,9 +361,7 @@ Page({
       return;
     }
     if (st.step && st.step.page !== 'mine') {
-      wx.switchTab({
-        url: st.step.page === 'menu' ? '/pages/menu/menu' : '/pages/index/index',
-      });
+      wx.switchTab({ url: require('../../utils/tour').tabUrlOf(st.step.page) });
       return;
     }
     this.setData({
