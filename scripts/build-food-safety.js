@@ -216,8 +216,13 @@ const latest = Array.from(noticeMap.values())
   });
 
 // —————————————— 处罚 ——————————————
-const penaltyRows = parseCsv(fs.readFileSync(SRC_PENALTY, 'utf8'));
-const domainCount = { food: 0, other: 0, pending: 0 };
+// 「下架」的行保留在 CSV 里留痕，但不进前端：数据缺失的案例宁可少一条，也不给半截信息
+const penaltyAll = parseCsv(fs.readFileSync(SRC_PENALTY, 'utf8'));
+const penaltyRows = penaltyAll.filter((r) => r.status !== '下架');
+const domainCount = { food: 0, other: 0, pending: 0, offline: 0 };
+penaltyAll.forEach((r) => {
+  if (r.status === '下架') domainCount.offline += 1;
+});
 penaltyRows.forEach((r) => {
   if (r.domain === '食品') domainCount.food += 1;
   else if (r.domain === '非食品') domainCount.other += 1;
@@ -242,15 +247,38 @@ const CASE_TEXT = {
     basis: '《食品安全法》第三十四条第（十）项',
     tag: '标签日期',
   },
-  'P-4892836': {
-    cause: '检验检测机构出具不实检验报告',
-    basis: '《检验检测机构监督管理办法》第十四条',
-    tag: '检验机构',
-  },
   'P-4960147': {
     cause: '直播宣称「无添加剂」，与配料表不符',
     basis: '《反不正当竞争法》第九条第一款',
     tag: '虚假宣传',
+  },
+  'P-2026-1207': {
+    cause: '经营不符合食品安全标准的食用农产品，未建进货查验记录',
+    basis: '《食品安全法》第一百二十四条、第一百二十六条',
+    tag: '食用农产品',
+    action: '警告 · 罚款 2,000 元 · 没收 49.4 元',
+    amount: 2049.4,
+  },
+  'P-2026-1213': {
+    cause: '未经许可从事食品经营',
+    basis: '《食品安全法》第一百二十二条第一款',
+    tag: '无证经营',
+    action: '罚款 2,000 元 · 没收经营工具 3 个',
+    amount: 2000,
+  },
+  'P-2026-75': {
+    cause: '采购、使用不符合食品安全标准的食品原料',
+    basis: '《食品安全法》第一百二十五条第一款第四项',
+    tag: '原料不合规',
+    action: '警告 · 罚款 5,000 元 · 没收 371.8 元',
+    amount: 5371.8,
+  },
+  'P-2026-269': {
+    cause: '未履行进货查验，经营中文标签不全、无合法来源的进口特医食品',
+    basis: '《食品安全法》第一百二十四条、第一百二十五条',
+    tag: '进口标签',
+    action: '警告 · 罚没合计 11,590 元',
+    amount: 11590,
   },
 };
 
@@ -258,16 +286,20 @@ const cases = penaltyRows
   .filter((r) => r.domain === '食品')
   .map((r) => {
     const meta = CASE_TEXT[r.penalty_id] || { cause: r.case_name, basis: '', tag: '食品安全' };
-    const amount = amountOf(r.penalty_type);
+    // 人工核定过的用核定值；没有的才回落到原文里抽金额
+    const amount = meta.amount != null ? meta.amount : amountOf(r.penalty_type);
     const date = isoDate(r.penalty_date) || isoDate(r.publish_date);
     return {
       doc: r.doc_no,
+      organ: r.organ,
       date,
       cause: meta.cause,
       basis: meta.basis,
       tag: meta.tag,
       amount,
-      action: amount ? `罚款 ${amount.toLocaleString('en-US')} 元` : '通报（决定书未列罚款金额）',
+      action:
+        meta.action ||
+        (amount ? `罚款 ${amount.toLocaleString('en-US')} 元` : '通报（决定书未列罚款金额）'),
     };
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -276,14 +308,16 @@ const foodAmount = cases.reduce((sum, c) => sum + (c.amount || 0), 0);
 const foodMax = cases.reduce((m, c) => Math.max(m, c.amount || 0), 0);
 
 const out = {
-  version: 'fs-2026-11-18',
+  version: 'fs-2026-11-19',
   scope: {
     region: '广东省',
     from: '2026-01',
     to: '2026-11',
     organ: '广东省市场监督管理局',
     inspectedNote: '只统计通告里的不合格批次，不含合格批次总量，因此不计算「合格率」。',
-    penaltyNote: '处罚数据为决定书机器抽取，原文标注「待核验」。',
+    penaltySource: '广东省市场监督管理局「双公示·行政处罚」',
+    penaltyNote: '来源：广东省市场监督管理局「双公示·行政处罚」',
+    penaltyScope: '下面只列已归档、能逐条对上原文的案例，不是全量。',
   },
   inspections: {
     batches,
@@ -297,7 +331,9 @@ const out = {
     latest,
   },
   penalties: {
-    total: penaltyRows.length,
+    total: penaltyAll.length,
+    listed: penaltyRows.length,
+    offline: domainCount.offline,
     food: domainCount.food,
     other: domainCount.other,
     pending: domainCount.pending,

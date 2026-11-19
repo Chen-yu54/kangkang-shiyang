@@ -1,35 +1,63 @@
 /* pages/foodsafety/foodsafety.wxss —— 食品安全
  *
- * 视觉基线沿用「食材档案」那一页：米黄纸底、宋体标题、细描边卡片，
- * 图标直接用 images/ingredients 那套插画（52/40rpx 两档），不新画一套笔触。
- * 一屏只用一种强调色：朱砂（--color-flame），不复用当令节气的墨绿，
- * 免得「不合格」看起来像「推荐」。
+ * 改版说明：这一页从「报告数据」改成「教人怎么买」，
+ * 首屏加 hero 卡片，食材从条形换成带要点的卡，新增三句话与避雷清单。
+ *
+ * 视觉基线沿用「食材档案」：米黄纸底、宋体标题、细描边卡片，
+ * 图标直接用 images/ingredients 那套插画，不新画一套笔触。
+ *
+ * ── 两条收敛纪律 ──
+ * 1. 字号只用 8 档，全部有来源，不再临时取值：
+ *      64rpx  --font-display   页头主标题
+ *      56rpx  数据大字         概览四格（页面唯一专属档）
+ *      48rpx  --font-title     栏目标题
+ *      40rpx  --font-subtitle  首屏标题、序号大字
+ *      36rpx  --font-base      正文
+ *      32rpx  --font-btn       按钮、二级标题
+ *      28rpx  --font-caption   辅助说明、标签
+ *      24rpx  极小标           序号圆圈、日期、刻度
+ * 2. 颜色只用 app.wxss 的变量，页面内不写任何十六进制或 rgba。
+ *    层级靠「字号 + 字重 + 墨色深浅」区分，不靠加新颜色。
  */
 
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.content {
+  padding: 40rpx 32rpx 120rpx;
+}
+
+/* ─────────── 页头 ─────────── */
 .head {
-  padding: 12rpx 4rpx 0;
+  padding: 8rpx 0 32rpx;
+  border-bottom: 2rpx solid var(--color-border-hair);
 }
 
 .head-kicker {
-  display: block;
-  font-size: 26rpx;
-  letter-spacing: 0.28em;
-  color: var(--color-flame);
+  display: inline-block;
+  font-size: var(--font-caption);
+  letter-spacing: 2rpx;
+  color: var(--color-ink-2);
+  background: var(--color-border-hair);
+  padding: 6rpx 20rpx;
+  border-radius: 8rpx;
 }
 
 .head-title {
   display: block;
-  margin-top: 10rpx;
+  margin-top: 24rpx;
   font-family: var(--font-serif);
   font-size: var(--font-display);
-  letter-spacing: var(--tracking-title);
-  line-height: 1.25;
+  letter-spacing: 6rpx;
+  line-height: 1.2;
   color: var(--color-ink);
 }
 
 .head-lead {
   display: block;
-  margin-top: 14rpx;
+  margin-top: 24rpx;
   font-size: var(--font-base);
   line-height: 1.75;
   color: var(--color-ink-2);
@@ -37,61 +65,248 @@
 
 .head-meta {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  margin-top: 16rpx;
-  padding-bottom: 20rpx;
-  border-bottom: 2rpx solid var(--color-border-hair);
+  margin-top: 24rpx;
 }
 
 .head-meta-item {
   font-size: var(--font-caption);
-  letter-spacing: 0.04em;
   color: var(--color-ink-3);
 }
 
 .head-meta-dot {
-  width: 8rpx;
-  height: 8rpx;
-  margin: 0 12rpx;
+  width: 6rpx;
+  height: 6rpx;
   border-radius: 50%;
-  background-color: var(--color-border);
+  background: var(--color-ink-3);
+  margin: 0 16rpx;
 }
 
-/* ==================== 概览四格 ==================== */
-
-.ov-head {
-  display: flex;
-  align-items: center;
-  margin: 26rpx 4rpx 12rpx;
+/* ─────────── 首屏：一餐安心饭 ─────────── */
+.hero {
+  margin-top: 36rpx;
+  padding: 32rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
-.ov-ico {
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 10rpx;
-}
-
-.ov-kicker {
+.hero-kicker {
+  display: block;
   font-size: var(--font-caption);
-  letter-spacing: 0.2em;
+  letter-spacing: 2rpx;
+  color: var(--color-flame);
+}
+
+.hero-title {
+  display: block;
+  margin-top: 12rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  letter-spacing: 2rpx;
+  color: var(--color-ink);
+}
+
+.hero-text {
+  display: block;
+  margin-top: 12rpx;
+  font-size: var(--font-base);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+.steps {
+  display: flex;
+  margin-top: 28rpx;
+}
+
+.step {
+  flex: 1;
+  padding: 20rpx 12rpx;
+  text-align: center;
+  background: var(--color-border-hair);
+  border-radius: var(--radius-small);
+  margin-right: 16rpx;
+}
+
+.step:last-child {
+  margin-right: 0;
+}
+
+.step-n {
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--color-flame);
+  color: var(--color-on-brand);
+  font-size: 24rpx;
+}
+
+.step-t {
+  display: block;
+  margin-top: 10rpx;
+  font-size: var(--font-btn);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.step-d {
+  display: block;
+  margin-top: 4rpx;
+  font-size: var(--font-caption);
+  line-height: 1.5;
   color: var(--color-ink-3);
 }
 
+/* 主按钮：深底白字，点击区 96rpx */
+.hero-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96rpx;
+  margin-top: 28rpx;
+  background: var(--color-flame);
+  color: var(--color-on-brand);
+  font-size: var(--font-btn);
+  letter-spacing: 1rpx;
+  border-radius: var(--radius-small);
+}
+
+.hero-sub {
+  display: block;
+  margin-top: 16rpx;
+  text-align: center;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* ─────────── 区块通用 ─────────── */
+.sec {
+  margin-top: 64rpx;
+}
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.sec-ico {
+  width: 56rpx;
+  height: 56rpx;
+  margin-right: 18rpx;
+  flex: none;
+}
+
+.sec-main {
+  display: flex;
+  align-items: baseline;
+}
+
+.sec-no {
+  font-family: var(--font-serif);
+  font-size: var(--font-caption);
+  color: var(--color-on-brand);
+  background: var(--color-flame);
+  border-radius: 8rpx;
+  padding: 4rpx 16rpx;
+  margin-right: 16rpx;
+}
+
+.sec-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-title);
+  letter-spacing: 4rpx;
+  color: var(--color-ink);
+}
+
+.sec-intro {
+  display: block;
+  margin-bottom: 28rpx;
+  font-size: var(--font-base);
+  line-height: 1.75;
+  color: var(--color-ink-2);
+}
+
+.sec-foot {
+  display: block;
+  margin-top: 20rpx;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* 二级小标题：靠宋体 + 字重区分，不靠放大 */
+.subhead {
+  display: block;
+  margin: 40rpx 0 20rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-btn);
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  color: var(--color-ink);
+}
+
+.subhead-row {
+  margin: 40rpx 0 20rpx;
+}
+
+.subhead-row .subhead {
+  margin: 0 0 6rpx;
+}
+
+.sub-note {
+  display: block;
+  font-size: var(--font-caption);
+  letter-spacing: 0;
+  color: var(--color-ink-3);
+}
+
+/* 一句话结论：加深边框和字色以示强调，不引新底色 */
+.oneline {
+  margin-bottom: 32rpx;
+  padding: 24rpx 28rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border);
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-small);
+}
+
+.oneline-t {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-flame);
+}
+
+.oneline-b {
+  font-size: var(--font-base);
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+/* ─────────── 概览四格 ─────────── */
 .ov {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .ov-item {
-  width: 48.6%;
-  margin-bottom: 14rpx;
-  padding: 22rpx 22rpx 20rpx;
+  width: calc(50% - 8rpx);
+  padding: 24rpx 28rpx 22rpx;
   box-sizing: border-box;
-  border: 1rpx solid rgba(139, 90, 43, 0.14);
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
   border-radius: var(--radius-small);
-  background-image: linear-gradient(160deg, #fffdf8, #fbf4e3);
+  margin-bottom: 16rpx;
+}
+
+.ov-item:nth-child(odd) {
+  margin-right: 16rpx;
 }
 
 .ov-num-row {
@@ -101,244 +316,183 @@
 
 .ov-num {
   font-family: var(--font-serif);
-  font-size: 60rpx;
+  font-size: 56rpx;
   line-height: 1.1;
   color: var(--color-ink);
 }
 
 .ov-unit {
-  margin-left: 6rpx;
-  font-size: 26rpx;
+  font-size: var(--font-caption);
   color: var(--color-ink-3);
+  margin-left: 6rpx;
 }
 
 .ov-label {
   display: block;
-  margin-top: 6rpx;
-  font-size: 30rpx;
-  color: var(--color-ink-2);
-}
-
-.ov-note {
-  display: block;
-  margin-top: 2rpx;
-  font-size: 24rpx;
-  line-height: 1.5;
-  color: var(--color-ink-3);
-}
-
-/* ==================== 栏目头 ==================== */
-
-.sec {
-  display: flex;
-  align-items: center;
-  margin: 40rpx 0 8rpx;
-  padding-bottom: 12rpx;
-  border-bottom: 2rpx solid var(--color-border-hair);
-}
-
-.sec-ico {
-  flex: none;
-  width: 56rpx;
-  height: 56rpx;
-  margin-right: 14rpx;
-}
-
-.sec-main {
-  display: flex;
-  align-items: baseline;
-  min-width: 0;
-}
-
-.sec-no {
-  flex: none;
-  margin-right: 12rpx;
-  font-family: var(--font-serif);
+  margin-top: 8rpx;
   font-size: var(--font-caption);
-  letter-spacing: var(--tracking-caps);
-  color: var(--color-flame);
-}
-
-.sec-title {
-  font-family: var(--font-serif);
-  font-size: 40rpx;
-  letter-spacing: var(--tracking-title);
-  color: var(--color-ink);
-}
-
-.sec-note {
-  display: block;
-  margin: 10rpx 2rpx 4rpx;
-  font-size: 26rpx;
-  line-height: 1.6;
   color: var(--color-ink-3);
 }
 
-/* ==================== 卡片 ==================== */
-
-.card {
-  margin-top: 18rpx;
-  padding: 26rpx 24rpx 22rpx;
-  border: 1rpx solid rgba(139, 90, 43, 0.14);
-  border-radius: 24rpx;
-  background-image: linear-gradient(168deg, #fffdf8, #fbf4e3);
-  box-shadow: 0 4rpx 12rpx rgba(90, 60, 30, 0.05);
-}
-
-.card-head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 18rpx;
-}
-
-.card-ico {
-  flex: none;
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 10rpx;
-}
-
-.card-title {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: var(--color-ink);
-}
-
-.card-unit {
-  margin-left: auto;
-  padding-left: 12rpx;
-  font-size: 24rpx;
-  color: var(--color-ink-3);
-}
-
-.card-foot {
-  display: block;
-  margin-top: 14rpx;
-  font-size: 24rpx;
-  line-height: 1.65;
-  color: var(--color-ink-3);
-}
-
-/* ==================== 问题类型条形 ==================== */
-
+/* ─────────── 横向条 ─────────── */
 .bar {
-  margin-bottom: 16rpx;
+  margin-bottom: 24rpx;
 }
 
 .bar-top {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  margin-bottom: 10rpx;
 }
 
 .bar-name {
-  padding-right: 12rpx;
-  font-size: 28rpx;
-  line-height: 1.4;
+  flex: 1;
+  font-size: var(--font-base);
   color: var(--color-ink-2);
-}
-
-.bar-name-top {
-  font-weight: 600;
-  color: var(--color-ink);
 }
 
 .bar-val {
   flex: none;
-  font-size: 24rpx;
+  margin-left: 16rpx;
+  font-size: var(--font-caption);
   color: var(--color-ink-3);
 }
 
 .bar-track {
   height: 14rpx;
-  margin-top: 8rpx;
-  border-radius: 7rpx;
-  background-color: rgba(139, 90, 43, 0.1);
+  background: var(--color-border-hair);
+  border-radius: 8rpx;
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
-  border-radius: 7rpx;
-  background-color: rgba(181, 72, 42, 0.42);
+  background: var(--color-gold);
+  border-radius: 8rpx;
 }
 
-.bar-fill-top {
-  background-image: linear-gradient(90deg, #c9603a, #b5482a);
-}
-
-/* ==================== 抽样环节 ==================== */
-
-.stages {
+/* ─────────── 抽检环节 ─────────── */
+.chip-row {
   display: flex;
-}
-
-.stage {
-  flex: 1;
-  padding: 6rpx 0;
-  text-align: center;
-}
-
-.stage + .stage {
-  border-left: 1rpx solid var(--color-border-hair);
-}
-
-.stage-pct {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 52rpx;
-  line-height: 1.2;
-  color: var(--color-ink);
-}
-
-.stage-name {
-  display: block;
-  margin-top: 4rpx;
-  font-size: 28rpx;
-  color: var(--color-ink-2);
-}
-
-.stage-n {
-  display: block;
-  font-size: 24rpx;
-  color: var(--color-ink-3);
-}
-
-/* ==================== 食材签 ==================== */
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 20rpx 24rpx;
+  margin-bottom: 16rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
 }
 
 .chip {
-  display: flex;
-  align-items: baseline;
-  margin: 0 12rpx 12rpx 0;
-  padding: 8rpx 18rpx;
-  border: 1rpx solid var(--color-border-soft);
-  border-radius: var(--radius-pill);
-  background-color: rgba(255, 253, 248, 0.9);
-}
-
-.chip-name {
-  font-size: 28rpx;
+  font-size: var(--font-base);
   color: var(--color-ink-2);
 }
 
 .chip-n {
-  margin-left: 8rpx;
-  font-family: var(--font-serif);
-  font-size: 28rpx;
-  color: var(--color-flame);
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
 }
 
-/* ==================== 月度柱 ==================== */
+/* ─────────── 食材卡（带要点）─────────── */
+.ingrid {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-.cols {
+.ing {
+  width: calc(50% - 8rpx);
+  padding: 24rpx 24rpx 20rpx;
+  margin-bottom: 16rpx;
+  box-sizing: border-box;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+}
+
+.ing:nth-child(odd) {
+  margin-right: 16rpx;
+}
+
+.ing-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ing-name {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.ing-n {
+  font-size: var(--font-caption);
+  color: var(--color-flame);
+  white-space: nowrap;
+}
+
+.ing-tip {
+  display: block;
+  margin-top: 12rpx;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.ing-bar {
+  height: 8rpx;
+  margin-top: 16rpx;
+  background: var(--color-border-hair);
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.ing-fill {
+  height: 100%;
+  background: var(--color-flame);
+  border-radius: 6rpx;
+}
+
+/* ─────────── 月度分布（折叠）─────────── */
+.fold {
+  margin-top: 28rpx;
+  padding: 0 24rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+}
+
+.fold-head {
+  display: flex;
+  align-items: center;
+  min-height: 96rpx;
+}
+
+.fold-sign {
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+  margin-right: 12rpx;
+}
+
+.fold-title {
+  font-size: var(--font-base);
+  color: var(--color-ink-2);
+}
+
+.fold-note {
+  display: block;
+  margin: 4rpx 0 20rpx;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+.chart {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  height: 264rpx;
+  padding: 0 4rpx 24rpx;
 }
 
 .col {
@@ -346,164 +500,226 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 0;
+  height: 100%;
 }
 
-.col-n {
-  margin-bottom: 6rpx;
-  font-size: 20rpx;
-  color: var(--color-ink-3);
-}
-
-.col-track {
+.col-bar-wrap {
+  flex: 1;
+  width: 100%;
   display: flex;
   align-items: flex-end;
-  width: 26rpx;
-  height: 140rpx;
-  border-radius: 6rpx;
-  background-color: rgba(139, 90, 43, 0.08);
-  overflow: hidden;
 }
 
 .col-bar {
   width: 100%;
+  background: var(--color-gold);
   border-radius: 6rpx 6rpx 0 0;
-  background-image: linear-gradient(180deg, #c9603a, #b5482a);
+  min-height: 4rpx;
 }
 
-.col-x {
+.col-n {
   margin-top: 8rpx;
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: var(--color-ink-3);
 }
 
-/* ==================== 最近通告 ==================== */
-
-.notice {
-  padding: 14rpx 0;
-  border-top: 1rpx solid var(--color-border-hair);
+.col-x {
+  margin-top: 2rpx;
+  font-size: 24rpx;
+  color: var(--color-ink-3);
 }
 
-/* 卡片内第一个元素是 .card-head（同为 view），:first-of-type 不会命中 .notice，
-   改用相邻兄弟，保证首条通告不带顶边框 */
-.card-head + .notice {
-  padding-top: 0;
-  border-top: 0;
+/* ─────────── 三句话 ─────────── */
+.take {
+  display: flex;
+  align-items: flex-start;
+  padding: 28rpx 28rpx 24rpx;
+  margin-bottom: 20rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+}
+
+.take-n {
+  flex: none;
+  width: 56rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-subtitle);
+  line-height: 1.1;
+  color: var(--color-flame);
+}
+
+.take-body {
+  flex: 1;
+}
+
+.take-t {
+  display: block;
+  font-size: var(--font-base);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.take-d {
+  display: block;
+  margin-top: 10rpx;
+  font-size: var(--font-caption);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+/* ─────────── 避雷清单 ─────────── */
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx 28rpx;
+  margin-bottom: 16rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-small);
+}
+
+.check-no {
+  flex: none;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  margin-right: 20rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--color-flame);
+  color: var(--color-on-brand);
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.check-body {
+  flex: 1;
+}
+
+.check-t {
+  display: block;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.check-d {
+  display: block;
+  margin-top: 6rpx;
+  font-size: var(--font-caption);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+/* ─────────── 通告 ─────────── */
+.notice {
+  padding: 24rpx 28rpx;
+  margin-bottom: 20rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-left: 6rpx solid var(--color-gold);
+  border-radius: var(--radius-small);
 }
 
 .notice-top {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
+  align-items: baseline;
 }
 
-.notice-no {
-  font-size: 24rpx;
-  letter-spacing: 0.04em;
-  color: var(--color-flame);
-}
-
+.notice-no,
 .notice-date {
-  font-size: 24rpx;
+  font-size: var(--font-caption);
   color: var(--color-ink-3);
 }
 
 .notice-title {
   display: block;
-  margin-top: 6rpx;
-  font-size: 30rpx;
-  line-height: 1.5;
-  color: var(--color-ink-2);
+  margin-top: 12rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
 }
 
 .notice-count {
   display: block;
-  margin-top: 4rpx;
-  font-size: 24rpx;
-  color: var(--color-ink-3);
+  margin-top: 10rpx;
+  font-size: var(--font-caption);
+  color: var(--color-flame);
 }
 
-/* ==================== 处罚数字 ==================== */
-
-.pens {
-  display: flex;
-}
-
-.pen {
-  flex: 1;
-  text-align: center;
-}
-
-.pen + .pen {
-  border-left: 1rpx solid var(--color-border-hair);
-}
-
-.pen-num-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-}
-
-.pen-num {
-  font-family: var(--font-serif);
-  font-size: 56rpx;
-  line-height: 1.2;
-  color: var(--color-ink);
-}
-
-.pen-unit {
-  margin-left: 4rpx;
-  font-size: 24rpx;
-  color: var(--color-ink-3);
-}
-
-.pen-label {
-  display: block;
-  margin-top: 2rpx;
-  font-size: 26rpx;
-  color: var(--color-ink-3);
-}
-
-/* ==================== 案例 ==================== */
-
-.sub-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin: 28rpx 2rpx 6rpx;
-}
-
-.sub-title {
-  font-family: var(--font-serif);
-  font-size: 34rpx;
-  color: var(--color-ink);
-}
-
-.sub-note {
-  font-size: 24rpx;
-  color: var(--color-ink-3);
-}
-
+/* ─────────── 处罚案例 ─────────── */
 .case {
-  margin-top: 14rpx;
-  padding: 22rpx 24rpx;
-  border: 1rpx solid rgba(139, 90, 43, 0.14);
-  border-radius: 22rpx;
-  background-color: #fffdf8;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border-hair);
+  border-left: 6rpx solid var(--color-flame);
+  border-radius: var(--radius-small);
 }
 
 .case-top {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
 }
 
+.case-doc {
+  flex: 1;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.case-amount {
+  flex: none;
+  margin-left: 16rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-btn);
+  color: var(--color-flame);
+}
+
+.case-cause {
+  display: block;
+  margin-top: 16rpx;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.case-row {
+  display: flex;
+  margin-top: 12rpx;
+}
+
+.case-k {
+  flex: none;
+  width: 72rpx;
+  font-size: var(--font-caption);
+  color: var(--color-ink-3);
+}
+
+.case-v {
+  flex: 1;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.case-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
 .case-tag {
-  padding: 4rpx 14rpx;
-  border-radius: var(--radius-pill);
-  background-color: rgba(181, 72, 42, 0.1);
   font-size: 24rpx;
   color: var(--color-flame);
+  border: 2rpx solid var(--color-border);
+  padding: 2rpx 14rpx;
+  border-radius: 8rpx;
 }
 
 .case-date {
@@ -511,95 +727,82 @@
   color: var(--color-ink-3);
 }
 
-.case-cause {
+/* ─────────── 数据说明 ─────────── */
+.notes {
+  margin-top: 56rpx;
+  padding: 32rpx;
+  background: var(--color-card);
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-small);
+}
+
+.notes-title {
   display: block;
-  margin-top: 12rpx;
-  font-size: 32rpx;
-  line-height: 1.5;
-  color: var(--color-ink);
-}
-
-.case-basis {
-  display: block;
-  margin-top: 6rpx;
-  font-size: 26rpx;
-  line-height: 1.6;
-  color: var(--color-ink-3);
-}
-
-.case-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-top: 12rpx;
-  padding-top: 12rpx;
-  border-top: 1rpx solid var(--color-border-hair);
-}
-
-.case-action {
-  margin-right: 16rpx;
-  font-size: 28rpx;
-  color: var(--color-flame);
-}
-
-.case-doc {
-  flex: 1;
-  min-width: 0;
-  text-align: right;
-  font-size: 24rpx;
-  color: var(--color-ink-3);
-}
-
-/* ==================== 口径 ==================== */
-
-.note {
-  margin-top: 30rpx;
-  padding: 24rpx;
-  border-left: 6rpx solid var(--color-flame);
-  border-radius: 8rpx 22rpx 22rpx 8rpx;
-  background-color: rgba(139, 90, 43, 0.05);
-}
-
-.note-head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10rpx;
-}
-
-.note-ico {
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 10rpx;
-}
-
-.note-title {
-  font-size: 28rpx;
+  font-family: var(--font-serif);
+  font-size: var(--font-btn);
   font-weight: 600;
-  color: var(--color-ink-2);
+  color: var(--color-ink);
+  margin-bottom: 16rpx;
 }
 
-.note-line {
+.notes-item {
   display: block;
-  font-size: 24rpx;
+  font-size: var(--font-caption);
   line-height: 1.75;
-  color: var(--color-ink-3);
+  color: var(--color-ink-2);
+  margin-bottom: 12rpx;
 }
 
-/* 长辈模式：标题与数字跟着放大，避免出现「字大了、数字没大」的倒挂 */
+.notes-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ─────────── 长辈模式：整体再提一档，双列改单列 ─────────── */
 .elder .head-title {
   font-size: 76rpx;
 }
 
+.elder .hero-title,
+.elder .take-n {
+  font-size: var(--font-title);
+}
+
+.elder .hero-text,
+.elder .sec-intro,
+.elder .oneline-b,
+.elder .take-t,
+.elder .check-t,
+.elder .case-cause,
+.elder .bar-name,
+.elder .chip,
+.elder .ing-name,
+.elder .notice-title,
+.elder .fold-title {
+  font-size: var(--font-subtitle);
+}
+
+.elder .take-d,
+.elder .check-d,
+.elder .ing-tip,
+.elder .sec-foot,
+.elder .notes-item,
+.elder .case-v,
+.elder .case-k,
+.elder .sub-note {
+  font-size: var(--font-base);
+}
+
 .elder .ov-num {
-  font-size: 68rpx;
+  font-size: var(--font-display);
 }
 
 .elder .sec-title {
-  font-size: 46rpx;
+  font-size: 56rpx;
 }
 
-.elder .stage-pct,
-.elder .pen-num {
-  font-size: 62rpx;
+.elder .ing,
+.elder .ov-item,
+.elder .ov-item:nth-child(odd) {
+  width: 100%;
+  margin-right: 0;
 }

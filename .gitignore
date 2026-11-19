@@ -14,6 +14,9 @@ project.private.config.json
 *.zip
 美食科普_*.zip
 
+# 脚本中间产物（可由 scripts/ 重新生成，避免与源数据不一致）
+docs/foodsafety.data.json
+
 # 系统文件
 .DS_Store
 Thumbs.db
