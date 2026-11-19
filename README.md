@@ -515,6 +515,7 @@ physiqueParts.length > 0 && physiqueParts.every(...)
 | **页面与交互说明** | `docs/页面与交互说明.md` | 20 个页面的入口、交互、四态覆盖、三个真实缺口 |
 | **数据字典** | `docs/数据字典.md` | 三个实体的完整字段表、枚举白名单、净化规则 |
 | 部署架构与调用链路 | `docs/扣子接入说明.md` | 云函数部署、扣子接入 |
+| **AI 问答部署** | `docs/AI问答部署说明.md` | aiqa 云函数、LLM 平台选型、环境变量、错误对照 |
 | 云存储接入 | `docs/云存储接入指南.md` | 图片走 CDN 的方案 |
 | 食材知识库 | `knowledge/ingredients_kb_v0.2.md` | 291 主料 / 222 标准卡原始资料 |
 | 重构过程与缺口分析 | `knowledge/_archive/gap_conclusion.md` | 876 → 32 → 288 的依据 |
