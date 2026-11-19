@@ -1,0 +1,398 @@
+/* 康康食养 AI：统一对话页
+   纸底米黄 + 白气泡 + 墨绿（用户）/ 品牌绿（AI 强调），
+   头像与导航 logo 都走品牌图，不另画图标。 */
+
+page {
+  background: #f7f0e1;
+}
+
+/* 对话页根容器：全屏纵向弹性，自己定高，不复用 app.wxss 的 .page
+   （那个带 24rpx 内边距和 min-height，会把输入区顶出屏幕） */
+.kk {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f0e1;
+}
+
+/* ==================== 导航 ==================== */
+.nav {
+  flex: none;
+  background: rgba(247, 240, 225, 0.98);
+  border-bottom: 1rpx solid rgba(139, 90, 43, 0.12);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 20rpx 14rpx;
+}
+
+.nav-back {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  color: #8b5a2b;
+  flex: none;
+}
+
+.nav-logo {
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 50%;
+  flex: none;
+  margin: 0 16rpx 0 4rpx;
+  background: #fbf3e2;
+  border: 2rpx solid rgba(139, 90, 43, 0.16);
+}
+
+.nav-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-t {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 34rpx;
+  color: #2d241a;
+  letter-spacing: 0.02em;
+}
+
+.nav-s {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 24rpx;
+  color: #8b7a5b;
+}
+
+.nav-clear {
+  flex: none;
+  min-height: 72rpx;
+  padding: 0 12rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #8b5a2b;
+}
+
+/* ==================== 消息区 ==================== */
+.chat {
+  flex: 1;
+  height: 0;
+  box-sizing: border-box;
+  padding: 22rpx 24rpx 0;
+}
+
+.chat-pad {
+  height: 20rpx;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.msg.me {
+  flex-direction: row-reverse;
+}
+
+.ava {
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  flex: none;
+  margin-right: 14rpx;
+  background: #fbf3e2;
+  border: 2rpx solid rgba(139, 90, 43, 0.14);
+}
+
+.msg.me .ava {
+  margin-right: 0;
+  margin-left: 14rpx;
+}
+
+.ava-me {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3f7a45;
+  border-color: #3f7a45;
+  color: #fffdf8;
+  font-size: 26rpx;
+}
+
+.msg-main {
+  max-width: 512rpx;
+  min-width: 0;
+}
+
+.msg.me .msg-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.bubble {
+  padding: 18rpx 22rpx;
+  background: #fffdf8;
+  border: 1rpx solid rgba(139, 90, 43, 0.12);
+  border-radius: 6rpx 22rpx 22rpx 22rpx;
+  box-shadow: 0 4rpx 14rpx rgba(61, 43, 26, 0.05);
+}
+
+.msg.me .bubble {
+  background: #3f7a45;
+  border-color: #3f7a45;
+  border-radius: 22rpx 6rpx 22rpx 22rpx;
+}
+
+.bubble-t {
+  display: block;
+  font-size: 28rpx;
+  line-height: 1.64;
+  color: #3d2b1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.msg.me .bubble-t {
+  color: #fffdf8;
+}
+
+.msg-note {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #a89880;
+}
+
+/* 能力卡：挑菜 / 问答 / 陪想 */
+.caps {
+  display: flex;
+  margin-top: 16rpx;
+  border-top: 1rpx solid rgba(139, 90, 43, 0.1);
+  padding-top: 14rpx;
+}
+
+.cap {
+  flex: 1;
+  min-width: 0;
+  padding-right: 10rpx;
+}
+
+.cap:last-child {
+  padding-right: 0;
+}
+
+.cap-t {
+  display: block;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #3f7a45;
+}
+
+.cap-s {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 22rpx;
+  line-height: 1.4;
+  color: #9c8c74;
+}
+
+/* 菜品卡：一条一条，点进详情 */
+.cards {
+  margin-top: 14rpx;
+}
+
+/* 消息里的动作按钮：补问卷、去补档案这类，只给一个明确出口 */
+.bubble-cta {
+  display: inline-block;
+  margin-top: 16rpx;
+  padding: 12rpx 24rpx;
+  font-size: 28rpx;
+  color: #b5482a;
+  background: #fdf1e2;
+  border: 1rpx solid rgba(181, 72, 42, 0.35);
+  border-radius: 999rpx;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  padding: 12rpx;
+  margin-top: 10rpx;
+  background: #fffaf0;
+  border: 1rpx solid rgba(139, 90, 43, 0.12);
+  border-radius: 14rpx;
+}
+
+.card-img {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 10rpx;
+  flex: none;
+  background: #efe4cf;
+}
+
+.card-img-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 34rpx;
+  color: #8b5a2b;
+}
+
+.card-main {
+  flex: 1;
+  min-width: 0;
+  padding: 0 12rpx;
+}
+
+.card-n {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #2d241a;
+}
+
+.card-m {
+  display: block;
+  margin-top: 3rpx;
+  font-size: 22rpx;
+  color: #8b7a5b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-go {
+  flex: none;
+  font-size: 30rpx;
+  color: #b5482a;
+}
+
+/* 正在回：一句轮换的话 + 三个点 */
+.typing {
+  display: flex;
+  align-items: center;
+  padding: 4rpx 2rpx;
+}
+
+.typing-txt {
+  font-size: 26rpx;
+  line-height: 1.5;
+  color: #8b7a5b;
+  animation: kkFade 0.45s ease both;
+}
+
+.typing-dots {
+  display: flex;
+  align-items: center;
+  flex: none;
+  margin-left: 8rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+  background: #c0ab8c;
+  animation: kcBounce 1s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+  margin-right: 0;
+}
+
+@keyframes kkFade {
+  from { opacity: 0; transform: translateY(6rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kcBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.55; }
+  30% { transform: translateY(-8rpx); opacity: 1; }
+}
+
+/* ==================== 常用问法 ==================== */
+.quick {
+  flex: none;
+  white-space: nowrap;
+  padding: 0 24rpx 12rpx;
+  box-sizing: border-box;
+}
+
+.chip {
+  display: inline-block;
+  padding: 12rpx 22rpx;
+  margin-right: 12rpx;
+  background: #fffdf8;
+  border: 1rpx solid rgba(139, 90, 43, 0.22);
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  color: #5a4630;
+}
+
+/* ==================== 输入 ==================== */
+.composer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  background: rgba(247, 240, 225, 0.98);
+  border-top: 1rpx solid rgba(139, 90, 43, 0.1);
+}
+
+.input {
+  flex: 1;
+  height: 84rpx;
+  padding: 0 24rpx;
+  background: #fffdf8;
+  border: 1rpx solid rgba(139, 90, 43, 0.18);
+  border-radius: 42rpx;
+  font-size: 28rpx;
+  color: #3d2b1a;
+}
+
+.ph {
+  color: #a89880;
+}
+
+.send {
+  flex: none;
+  height: 84rpx;
+  padding: 0 30rpx;
+  margin-left: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e6dcc8;
+  color: #a89880;
+  border-radius: 42rpx;
+  font-size: 28rpx;
+}
+
+.send-on {
+  background: #3f7a45;
+  color: #fffdf8;
+}
+
+.foot {
+  flex: none;
+  padding: 0 0 calc(10rpx + env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 22rpx;
+  color: #b0a08a;
+}

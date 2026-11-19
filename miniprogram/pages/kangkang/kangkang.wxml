@@ -1,0 +1,139 @@
+<!-- 康康食养 AI：一个对话框，把原来三个入口收在一起
+     问问康康（挑菜）/ AI 问答（查节气食材）/ 康康对话（自由聊）。
+     用户不用先选方式，直接问；头像与 logo 统一用品牌图。 -->
+<view class="kk">
+
+  <!-- 自定义导航：品牌图 + 名字 + 一句能力说明 -->
+  <view class="nav" style="padding-top: {{statusTop}}px">
+    <view class="nav-bar">
+      <view class="nav-back" hover-class="tap-hover" bindtap="onBack">‹</view>
+      <image class="nav-logo" src="/images/brand-logo.jpg" mode="aspectFill" />
+      <view class="nav-main">
+        <text class="nav-t">康康食养 AI</text>
+        <text class="nav-s">挑菜 · 问答 · 陪你想菜</text>
+      </view>
+      <view
+        wx:if="{{messages.length > 1}}"
+        class="nav-clear"
+        hover-class="tap-hover"
+        bindtap="onClear"
+      >清空</view>
+    </view>
+  </view>
+
+  <!-- 消息流 -->
+  <scroll-view
+    class="chat"
+    scroll-y
+    scroll-into-view="{{scrollTo}}"
+    scroll-with-animation
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <view wx:for="{{messages}}" wx:key="id" id="m{{index}}" class="msg {{item.role}}">
+      <image
+        wx:if="{{item.role === 'bot'}}"
+        class="ava"
+        src="/images/brand-logo.jpg"
+        mode="aspectFill"
+      />
+      <view wx:else class="ava ava-me">我</view>
+
+      <view class="msg-main">
+        <view class="bubble">
+          <text class="bubble-t" user-select>{{item.text}}</text>
+
+          <!-- 回复里提到菜，就给能点的卡片 -->
+          <view wx:if="{{item.dishes.length}}" class="cards">
+            <view
+              class="card"
+              wx:for="{{item.dishes}}"
+              wx:for-item="d"
+              wx:key="id"
+              data-id="{{d.id}}"
+              hover-class="tap-hover"
+              bindtap="onTapDish"
+            >
+              <image wx:if="{{d.image}}" class="card-img" src="{{d.image}}" mode="aspectFill" />
+              <view wx:else class="card-img card-img-ph">{{d.initial}}</view>
+              <view class="card-main">
+                <text class="card-n">{{d.name}}</text>
+                <text class="card-m">{{d.cuisineName}}{{d.diff ? ' · ' + d.diff : ''}}{{d.time ? ' · ' + d.time : ''}}</text>
+              </view>
+              <text class="card-go">›</text>
+            </view>
+          </view>
+
+          <!-- 需要用户补信息时，给一个动作按钮，点了先问再跳 -->
+          <view
+            wx:if="{{item.cta}}"
+            class="bubble-cta"
+            hover-class="tap-hover"
+            data-act="{{item.cta.act}}"
+            bindtap="onTapCta"
+          >{{item.cta.label}} ›</view>
+        </view>
+
+        <text wx:if="{{item.note}}" class="msg-note">{{item.note}}</text>
+      </view>
+    </view>
+
+    <!-- 正在回：话术轮着换，别让等待像卡住 -->
+    <view wx:if="{{sending}}" class="msg bot">
+      <image class="ava" src="/images/brand-logo.jpg" mode="aspectFill" />
+      <view class="msg-main">
+        <view class="bubble">
+          <view class="typing">
+            <text wx:for="{{typingLine}}" wx:key="*this" class="typing-txt">{{item}}</text>
+            <view class="typing-dots">
+              <view class="dot"></view>
+              <view class="dot"></view>
+              <view class="dot"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view id="bottom" class="chat-pad"></view>
+  </scroll-view>
+
+  <!-- 常用问法：开场是默认四条，之后换成模型给的追问 -->
+  <scroll-view
+    wx:if="{{quickOn && !sending}}"
+    class="quick"
+    scroll-x
+    show-scrollbar="{{false}}"
+  >
+    <view
+      class="chip"
+      wx:for="{{quick}}"
+      wx:key="*this"
+      data-text="{{item}}"
+      hover-class="tap-hover"
+      bindtap="onQuick"
+    >{{item}}</view>
+  </scroll-view>
+
+  <view class="composer">
+    <input
+      class="input"
+      value="{{inputText}}"
+      placeholder="问问康康，比如：今晚吃什么"
+      placeholder-class="ph"
+      confirm-type="send"
+      maxlength="300"
+      adjust-position
+      cursor-spacing="20"
+      bindinput="onInput"
+      bindconfirm="onSend"
+    />
+    <view
+      class="send {{inputText && !sending ? 'send-on' : ''}}"
+      hover-class="{{inputText && !sending ? 'tap-hover' : ''}}"
+      bindtap="onSend"
+    >{{sending ? '…' : '发送'}}</view>
+  </view>
+
+  <view class="foot">食养科普，不构成医疗建议</view>
+</view>

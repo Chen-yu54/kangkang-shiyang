@@ -349,6 +349,159 @@ const TRADITIONAL_ORDER = ['立春','雨水','惊蛰','春分','清明','谷雨'
 
 const DIFFICULTY_MAP = { 1: 'easy', 2: 'mid', 3: 'hard' };
 
+// ——— 真实耗时解析 ———
+//
+// 为什么要这一步：difficulty 只表示「做法复杂度」，不等于总耗时。
+// 「鸭屎香冷泡」做法极简（difficulty=easy），但要冷藏 6 小时；
+// 「老火例汤」也只是把料丢进锅煲 2.5 小时。用户说「半小时」时
+// 只看 difficulty 就会把这些推出去，这正是要修的漏洞。
+//
+// 做法：从 how 文本里把「N 分钟 / N 小时 / N 秒 / 半小时」全部抓出来累加。
+// 解析不出时按烹饪方式给保守上限估计（宁可高估，也不误推），并标记来源。
+
+const RE_TIME_HOUR = /(\d+(?:\.\d+)?)\s*(?:[-–~至]\s*(\d+(?:\.\d+)?))?\s*(?:个)?小时/g;
+const RE_TIME_MIN = /(\d+)\s*(?:[-–~至]\s*(\d+))?\s*分钟/g;
+const RE_TIME_SEC = /(\d+)\s*秒/g;
+const RE_TIME_HALF = /半小时/g;
+
+// 解析不出具体时间时，按烹饪方式给的保守估计（分钟）
+// 取值原则：取该做法常见区间的上沿，宁可判长不判短
+const METHOD_TIME_FALLBACK = {
+  煲: 120,
+  炖: 90,
+  卤: 120,
+  焖: 45,
+  焗: 35,
+  蒸: 25,
+  煮: 30,
+  炒: 20,
+  煎: 25,
+  炸: 30,
+  腌: 120,
+  泡: 120,
+  其他: 35,
+};
+
+// 每种做法的耗时下限（分钟）。
+//
+// 为什么需要：how 只写关键步骤的时长，不是总时长。
+// 「鱿鱼切花刀，焯20秒」解析出 0.3 分钟，但洗切、烧水、调蘸料实际要约 10 分钟；
+// 「太爷鸡：卤水浸熟，茶叶糖熏3分钟」只抓得到 3 分钟，卤制本身要 40 分钟以上。
+// 没有下限时这些菜会被当成「0 分钟快手菜」，用户要 20 分钟却被推一道做不到的。
+const METHOD_TIME_FLOOR = {
+  煲: 60,
+  炖: 60,
+  卤: 45,
+  焖: 30,
+  焗: 30,
+  蒸: 15,
+  煮: 15,
+  炒: 10,
+  煎: 12,
+  炸: 15,
+  腌: 30,
+  泡: 30,
+  其他: 12,
+};
+
+// 菜名命中这些词时，实际耗时远大于步骤文字里写的（汤底／粥底／浸熟都要长时间）
+const NAME_TIME_FLOOR = [
+  { re: /火锅|打边炉/, minutes: 90 },
+  { re: /老火|例汤/, minutes: 90 },
+  { re: /砂锅粥|粥底/, minutes: 60 },
+  { re: /卤水|卤味/, minutes: 60 },
+  { re: /浸熟|白切|熏/, minutes: 50 },
+  { re: /冷泡|冷萃/, minutes: 180 },
+];
+
+/**
+ * 从 how 文本解析总耗时（分钟）。
+ * 多段累加，例如「绿豆浸2小时…煲1.5小时」→ 210 分钟。
+ * 解析不出返回 null，由调用方决定是否回退。
+ */
+function parseTimeMinutes(text) {
+  const s = String(text || '');
+  let total = 0;
+  let hit = false;
+  let m;
+
+  RE_TIME_HOUR.lastIndex = 0;
+  while ((m = RE_TIME_HOUR.exec(s))) {
+    const a = parseFloat(m[1]);
+    const b = m[2] ? parseFloat(m[2]) : a;
+    total += ((a + b) / 2) * 60;
+    hit = true;
+  }
+
+  RE_TIME_HALF.lastIndex = 0;
+  while (RE_TIME_HALF.exec(s)) {
+    total += 30;
+    hit = true;
+  }
+
+  RE_TIME_MIN.lastIndex = 0;
+  while ((m = RE_TIME_MIN.exec(s))) {
+    const a = parseInt(m[1], 10);
+    const b = m[2] ? parseInt(m[2], 10) : a;
+    total += (a + b) / 2;
+    hit = true;
+  }
+
+  RE_TIME_SEC.lastIndex = 0;
+  while ((m = RE_TIME_SEC.exec(s))) {
+    total += parseInt(m[1], 10) / 60;
+    hit = true;
+  }
+
+  return hit ? Math.round(total) : null;
+}
+
+/**
+ * 给出「耗时 + 来源」，供前端区分「真解析出来的」和「按做法估的」。
+ * 界面上前者可以直接写分钟数，后者只说「约」。
+ *
+ * 两道下限不能省：
+ *   · 做法下限——how 写的是关键步骤，不是总时长（焯 20 秒 ≠ 整道 20 秒）
+ *   · 菜名下限——火锅、老火汤、冷泡这类，文字里几乎不会写全总时长
+ * 取三者最大值，宁可判长，也不给一个做不到的承诺。
+ */
+function resolveTime(how, method, name) {
+  const parsed = parseTimeMinutes(how);
+  let minutes;
+  let source;
+
+  if (parsed !== null) {
+    minutes = parsed;
+    source = 'parsed';
+  } else if (METHOD_TIME_FALLBACK[method]) {
+    minutes = METHOD_TIME_FALLBACK[method];
+    source = 'estimated';
+  } else {
+    return { timeMinutes: null, timeSource: 'unknown' };
+  }
+
+  // 做法下限：解析值低于下限说明只抓到了某一步，抬到下限并标记为估计。
+  // 小幅抬升不算估计——「浸10分钟+焯60秒」解析出 11 分、下限 12 分，
+  // 这仍然是有原文依据的，不该让界面说「约」。
+  const floor = METHOD_TIME_FLOOR[method];
+  if (floor && minutes < floor) {
+    if (minutes < floor * 0.7) source = 'estimated';
+    minutes = floor;
+  }
+
+  // 菜名下限：名字本身就说明这菜省不了时间
+  const raw = String(name || '');
+  NAME_TIME_FLOOR.forEach(({ re, minutes: nm }) => {
+    if (re.test(raw) && minutes < nm) {
+      minutes = nm;
+      source = 'estimated';
+    }
+  });
+
+  return { timeMinutes: Math.round(minutes), timeSource: source };
+}
+
+
 function splitList(value, pattern) {
   return String(value || '')
     .split(pattern)
@@ -380,6 +533,9 @@ function toRecipe(row) {
     how: guard(row.how, 'how', id),
     caution: guard(row.avoid_constitution, 'avoid_constitution', id),
     difficulty: DIFFICULTY_MAP[row.difficulty] || '',
+    // 真实耗时：从 how 解析，解析不出按做法估（见 resolveTime）
+    // 这一项是「用户说要半小时」时唯一可靠的筛选依据，difficulty 不能替代
+    ...resolveTime(row.how, row.method, row.name),
     costLevel: parseCostTier(row.cost_tier, row.cost),
     source: guardSource(row.source, id),
     origin: row.origin || '',
@@ -502,6 +658,9 @@ function loadTriSeries(existingNames) {
           // 统一成 'easy'/'mid'/'hard'：前端 format.difficultyLabel 只认这套 key，
           // 直接给数字会导致难度在界面上显示为空（数据里有值、界面没字）。
           difficulty: DIFFICULTY_MAP[pickDifficulty(cols[9])] || '',
+          // 真实耗时：从 how 解析，解析不出按做法估。这是「用户要半小时」时唯一可靠依据，
+          // difficulty 表达的是做法复杂度，不能替代（「冷泡茶」做法极简但要冷藏 6 小时）
+          ...resolveTime(how, method, name),
           costLevel: pickCost(cols[10]),
           source: guardSource(rawSource, id),
           origin: 'tri-series',
