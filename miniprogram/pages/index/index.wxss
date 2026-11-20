@@ -389,6 +389,76 @@
   color: var(--color-ink);
 }
 
+/* ============ 节气文化卡内的三候与食俗 ============ */
+.tculture-block {
+  margin-top: 24rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx dashed var(--color-border-hair);
+}
+
+.tculture-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: var(--font-micro);
+  letter-spacing: 0.04em;
+  color: var(--color-ink-3);
+}
+
+.tculture-pheno {
+  display: flex;
+  flex-direction: column;
+}
+
+.tculture-pheno-item {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8rpx;
+}
+
+.tculture-pheno-no {
+  flex: none;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  margin-right: 12rpx;
+  text-align: center;
+  border-radius: 50%;
+  background-color: var(--color-green-bg);
+  color: var(--color-green);
+  font-size: var(--font-tiny);
+}
+
+.tculture-pheno-text {
+  flex: 1;
+  font-size: var(--font-caption);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.tculture-folk {
+  display: flex;
+  flex-direction: column;
+}
+
+.tculture-folk-item {
+  margin-bottom: 10rpx;
+}
+
+.tculture-folk-title {
+  display: block;
+  font-size: var(--font-caption);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.tculture-folk-desc {
+  display: block;
+  margin-top: 2rpx;
+  font-size: var(--font-micro);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
 .tculture-slogan {
   display: block;
   margin-top: 6rpx;

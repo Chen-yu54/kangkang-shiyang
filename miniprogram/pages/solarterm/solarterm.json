@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "二十四节气 · v1120",
+  "navigationBarTitleText": "节气文化",
   "usingComponents": {
     "term-card": "../../components/termCard/termCard",
     "dish-card": "../../components/dishCard/dishCard",

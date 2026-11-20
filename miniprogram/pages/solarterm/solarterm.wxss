@@ -13,6 +13,18 @@
   box-sizing: border-box;
 }
 
+/* 「节气文化」页额标签：明确告诉用户这是哪一页 */
+.detail-kicker {
+  display: inline-block;
+  margin-bottom: 16rpx;
+  padding: 6rpx 20rpx;
+  border-radius: 999rpx;
+  background-color: var(--color-green-bg);
+  color: var(--color-green);
+  font-size: var(--font-micro);
+  letter-spacing: 0.04em;
+}
+
 .detail-head {
   display: flex;
   flex-wrap: wrap;

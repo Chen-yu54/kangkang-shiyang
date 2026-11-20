@@ -356,7 +356,8 @@
 
 .auth-agree {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   min-height: 88rpx;
   margin-top: 24rpx;
 }
@@ -368,7 +369,7 @@
   flex: none;
   width: 40rpx;
   height: 40rpx;
-  margin-top: 4rpx;
+  margin-top: 0;
   border: 2rpx solid var(--color-border);
   border-radius: 8rpx;
   background-color: var(--color-bg);
@@ -376,8 +377,8 @@
 }
 
 .auth-cb-on {
-  border-color: var(--color-flame);
-  background-color: var(--color-flame);
+  border-color: var(--color-green);
+  background-color: var(--color-green);
 }
 
 .auth-cb-tick {
@@ -387,8 +388,9 @@
 }
 
 .auth-agree-text {
-  flex: 1;
+  flex: 0 1 auto;
   margin-left: 14rpx;
+  text-align: center;
   font-size: var(--font-micro);
   line-height: 1.6;
   color: var(--color-ink-2);

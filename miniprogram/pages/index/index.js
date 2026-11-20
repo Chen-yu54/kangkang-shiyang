@@ -108,6 +108,9 @@ Page({
         cultureTag: t('home.cultureTag'),
         cultureOpenSub: t('home.cultureOpenSub'),
         cultureOpen: t('home.cultureOpen'),
+        // 三候与食俗：沿用节气页的文案键，首页直接展示，不用跳转才看得到
+        phenology: t('solarterm.phenology'),
+        folk: t('solarterm.folk'),
         noSnapshot: t('home.noSnapshot'),
         fabTitle: t('home.fabTitle'),
         fabSub: t('home.fabSub'),

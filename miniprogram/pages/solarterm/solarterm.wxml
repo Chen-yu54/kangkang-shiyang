@@ -64,6 +64,7 @@
           mode="aspectFill"
           lazy-load
         />
+        <view class="detail-kicker">节气文化</view>
         <view class="detail-head">
           <view class="detail-head-main">
             <text class="detail-name">{{detail.name}}</text>
