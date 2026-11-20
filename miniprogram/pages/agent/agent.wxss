@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   font-size: var(--font-title);
-  color: #B5482A;
+  color: #1F4A36;
   margin-right: 8rpx;
 }
 
@@ -33,10 +33,10 @@
   width: 76rpx;
   height: 76rpx;
   border-radius: 24rpx;
-  background: #B5482A;
+  background: #1F4A36;
   color: #ffffff;
   font-size: var(--font-base);
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +51,7 @@
 .head-title {
   display: block;
   font-size: var(--font-subtitle);
-  font-weight: 700;
+  font-weight: 600;
   color: #1E1E1A;
 }
 
@@ -68,7 +68,7 @@
   display: flex;
   align-items: center;
   font-size: var(--font-btn);
-  color: #B5482A;
+  color: #1F4A36;
   border: 2rpx solid rgba(31, 74, 54, 0.3);
   border-radius: 12rpx;
 }
@@ -102,9 +102,9 @@
   align-items: center;
   justify-content: center;
   font-size: var(--font-caption);
-  font-weight: 700;
+  font-weight: 600;
   flex: none;
-  background: #B5482A;
+  background: #1F4A36;
   color: #ffffff;
   margin-right: 16rpx;
 }
@@ -128,15 +128,15 @@
 }
 
 .msg-me .bubble {
-  background: #B5482A;
-  border-color: #B5482A;
+  background: #1F4A36;
+  border-color: #1F4A36;
   border-radius: 20rpx 20rpx 6rpx 20rpx;
 }
 
 .bubble-text {
   display: block;
   font-size: var(--font-base);
-  line-height: 1.7;
+  line-height: 1.6;
   color: #1E1E1A;
 }
 
@@ -168,14 +168,14 @@
   font-size: var(--font-base);
   color: #3f3a30;
   background: #FFFFFF;
-  border: 2rpx solid rgba(181, 72, 42, 0.18);
+  border: 2rpx solid rgba(31, 74, 54, 0.18);
   border-radius: 14rpx;
 }
 
 .opt-on {
-  color: #B5482A;
+  color: #1F4A36;
   background: #F3E4DE;
-  border-color: #B5482A;
+  border-color: #1F4A36;
   font-weight: 600;
 }
 
@@ -188,8 +188,8 @@
   padding: 22rpx 24rpx;
   margin-bottom: 18rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(181, 72, 42, 0.16);
-  border-left: 8rpx solid #B5482A;
+  border: 2rpx solid rgba(31, 74, 54, 0.16);
+  border-left: 8rpx solid #1F4A36;
   border-radius: 14rpx;
 }
 
@@ -201,14 +201,14 @@
 
 .card-name {
   font-size: var(--font-subtitle);
-  font-weight: 700;
+  font-weight: 600;
   color: #1E1E1A;
 }
 
 .card-tag {
   font-size: var(--font-caption);
   color: #6E6A5E;
-  background: rgba(181, 72, 42, 0.08);
+  background: rgba(31, 74, 54, 0.08);
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
 }
@@ -274,7 +274,7 @@
 .foot {
   padding: 16rpx 24rpx 24rpx;
   background: rgba(251, 248, 242, 0.97);
-  border-top: 2rpx solid rgba(181, 72, 42, 0.12);
+  border-top: 2rpx solid rgba(31, 74, 54, 0.12);
 }
 
 .foot-multi {
@@ -298,7 +298,7 @@
   font-size: var(--font-base);
   font-weight: 600;
   color: #ffffff;
-  background: #B5482A;
+  background: #1F4A36;
   border-radius: 14rpx;
 }
 
@@ -402,7 +402,7 @@
   box-shadow: none;
 }
 
-.bubble-text { font-size: var(--font-btn); line-height: 1.7; color: var(--color-ink); }
+.bubble-text { font-size: var(--font-btn); line-height: 1.6; color: var(--color-ink); }
 .msg-me .bubble-text { color: #FFFFFF; }
 
 .opts { margin-top: 12rpx; }

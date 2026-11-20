@@ -56,7 +56,7 @@
   display: block;
   margin-top: 6rpx;
   font-size: var(--font-btn);
-  color: #B5482A;
+  color: #1F4A36;
 }
 
 /* 点击区 88rpx 起 */
@@ -69,7 +69,7 @@
   margin-left: 24rpx;
   font-size: var(--font-base);
   color: #ffffff;
-  background: #B5482A;
+  background: #1F4A36;
   border-radius: 12rpx;
 }
 

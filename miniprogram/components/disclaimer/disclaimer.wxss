@@ -26,7 +26,7 @@
   display: block;
   margin-top: 8rpx;
   font-size: var(--font-caption);
-  line-height: 1.5;
+  line-height: 1.6;
   color: #4A463C;
   letter-spacing: 0.5rpx;
 }

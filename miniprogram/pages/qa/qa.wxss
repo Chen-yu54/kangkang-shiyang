@@ -75,7 +75,7 @@
 .reply {
   display: block;
   font-size: var(--font-btn);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 /* 降级提示 */
@@ -198,7 +198,7 @@
   margin-top: 16rpx;
   font-size: var(--font-tiny);
   color: #a99c8b;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* 输入栏 */
@@ -267,7 +267,7 @@
   display: block;
   font-size: var(--font-caption);
   color: #5b5145;
-  line-height: 1.7;
+  line-height: 1.6;
   margin-bottom: 16rpx;
 }
 .intro-actions {
@@ -358,7 +358,7 @@
   background: var(--color-green);
   color: #FFFFFF;
   font-size: var(--font-btn);
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .bot-bubble {
@@ -367,7 +367,7 @@
   background: #FFFFFF;
   box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.04);
   font-size: var(--font-btn);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .dish-card {

@@ -69,7 +69,7 @@
   justify-content: center;
   width: 200rpx;
   height: 200rpx;
-  border: 2rpx solid rgba(181, 72, 42, 0.22);
+  border: 2rpx solid rgba(31, 74, 54, 0.22);
   border-radius: 50%;
   background-color: var(--color-bg-soft);
   box-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.1);
@@ -96,7 +96,7 @@
 .lg-slogan {
   margin-top: 14rpx;
   font-size: var(--font-btn);
-  letter-spacing: 4rpx;
+  letter-spacing: 0.04em;
   color: var(--color-ink-3);
 }
 
@@ -161,7 +161,7 @@
 .lg-btn-text {
   font-size: var(--font-base);
   font-weight: 600;
-  letter-spacing: 6rpx;
+  letter-spacing: 0.08em;
   color: #F6F2EA;
 }
 
@@ -221,7 +221,7 @@
   border: 2rpx solid var(--color-border-hair);
   border-radius: 999rpx;
   font-size: var(--font-caption);
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
   color: var(--color-ink-2);
   background-color: var(--color-bg-soft);
@@ -239,7 +239,7 @@
   margin-top: 20rpx;
   text-align: center;
   font-size: var(--font-tiny);
-  letter-spacing: 1rpx;
+  letter-spacing: 0.02em;
   color: var(--color-ink-3);
   opacity: 0.85;
 }
@@ -278,7 +278,7 @@
   text-align: center;
   font-family: var(--font-sans);
   font-size: var(--font-subtitle);
-  letter-spacing: 4rpx;
+  letter-spacing: 0.04em;
   color: var(--color-ink);
 }
 
@@ -307,7 +307,7 @@
   margin: 0;
   border: none;
   background-color: transparent;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .auth-avatar::after {
@@ -382,7 +382,7 @@
 
 .auth-cb-tick {
   font-size: var(--font-micro);
-  line-height: 1;
+  line-height: 1.1;
   color: #F6F2EA;
 }
 
@@ -407,7 +407,7 @@
 .auth-submit-text {
   font-size: var(--font-btn);
   font-weight: 600;
-  letter-spacing: 6rpx;
+  letter-spacing: 0.08em;
   color: #F6F2EA;
 }
 
@@ -424,7 +424,7 @@
 .lg-glow {
   background-image: radial-gradient(
     circle,
-    rgba(181, 72, 42, 0.08) 0%,
+    rgba(31, 74, 54, 0.08) 0%,
     rgba(31, 74, 54, 0.02) 45%,
     rgba(31, 74, 54, 0) 70%
   );

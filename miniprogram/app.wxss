@@ -60,11 +60,11 @@ page {
   --color-on-seal: #ffffff;
   --color-danger: #a03b26;
   --color-caption-on-dark: #f6ecd8;
-  --font-seal-lg: 44rpx;
-  --font-seal-md: 34rpx;
+  --font-seal-lg: 48rpx; /* 印章大字 */
+  --font-seal-md: 32rpx; /* 印章中字 */
   --font-seal-base: 30rpx;
-  --font-seal-sm: 26rpx;
-  --font-caption-on-img: 22rpx; /* 深色底上的反白文字 */
+  --font-seal-sm: 28rpx; /* 印章小字 */
+  --font-caption-on-img: 24rpx; /* 深色底反白小字 */
 
   /* —— 四季色：节气分类的季节分组标识（「节气变化」在视觉上的落点） ——
    * 菜单元数据里的 season 字段决定用哪一档，与 utils/… 里的 SEASON_COLOR 保持一致 */
@@ -119,8 +119,8 @@ page {
   /* —— 字号：适老化下限，不随设计稿缩小 —— */
   --font-base: 36rpx; /* 正文，下限 36rpx */
   --font-title: 48rpx; /* 标题，下限 48rpx */
-  --font-btn: 32rpx; /* 按钮文字，下限 32rpx */
-  --font-display: 64rpx; /* 节气主视觉大字（线框稿 32px × 2） */
+  --font-btn: 32rpx; /* 按钮、小标签 */
+  --font-display: 64rpx; /* 数据大字 */
   --font-icon: 28rpx; /* 图形符号内的小字（如声明条感叹号），非正文 */
 
   /* —— 字号阶梯扩展：视觉字与数据字
@@ -128,13 +128,13 @@ page {
    * subtitle / caption 是排版里真在用的两档，跟着 app.js 一起缩放，
    * 否则长字号下一屏会出现「说明比标题还大」的倒挂。 */
   --font-display-xl: 96rpx;
-  --font-subtitle: 40rpx; /* 栏目标题与正文之间的过渡档 */
-  --font-caption: 28rpx;
+  --font-subtitle: 40rpx; /* 二级标题 */
+  --font-caption: 28rpx; /* 辅助说明 */
   /* 极小两档：角标、序号、日期。单独设变量是为了让它们也参与字号缩放——
      长者模式下这些字如果不跟着放大，老人一样看不清。
      值必须与 app.js 的 BASE_FONT_RPX 保持一致。 */
   --font-micro: 24rpx; /* 序号圈、日期、刻度 */
-  --font-tiny: 22rpx; /* 角标、极小注 */
+  --font-tiny: 24rpx; /* 角标、极小注 */
 
   /* —— 字距：中文排版的「刊物感」主要来自字距与行高节奏，而非换字体 —— */
   --tracking-title: 0.04em;
@@ -142,7 +142,7 @@ page {
   --tracking-caps: 0.28em; /* 数字 / 拼音 / 英文出版信息的宽排 */
 
   /* 图形占位字号：emoji 图标，用于无图 / 图失败的占位，不参与正文字号校验 */
-  --font-emoji-sm: 44rpx;
+  --font-emoji-sm: 48rpx; /* 表情小图 */
   --font-emoji-md: 72rpx;
   --font-emoji-lg: 104rpx;
 
@@ -324,7 +324,7 @@ page {
   display: block;
   font-family: var(--font-sans);
   font-size: var(--font-subtitle);
-  line-height: 1.7;
+  line-height: 1.6;
   letter-spacing: var(--tracking-title);
   color: var(--color-ink-2);
 }

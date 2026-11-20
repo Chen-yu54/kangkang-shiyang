@@ -70,7 +70,7 @@
   flex: 1;
   margin-right: 16rpx;
   font-size: var(--font-base);
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--color-ink);
 }
 

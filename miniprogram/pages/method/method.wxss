@@ -13,7 +13,7 @@
   padding-bottom: 24rpx;
   border-bottom: 2rpx solid var(--color-border-hair);
   font-size: var(--font-base);
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--color-ink-3);
 }
 
@@ -91,7 +91,7 @@
 .m-val {
   flex: 1;
   font-size: var(--font-btn);
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--color-ink-2);
 }
 

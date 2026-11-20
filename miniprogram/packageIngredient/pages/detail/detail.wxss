@@ -12,7 +12,7 @@
 
 .head {
   padding: 8rpx 0 24rpx;
-  border-bottom: 2rpx solid rgba(181, 72, 42, 0.16);
+  border-bottom: 2rpx solid rgba(31, 74, 54, 0.16);
 }
 
 /* 「食材档案」小标：字距拉开，像档案袋上的铅字，不抢食材名 */
@@ -32,16 +32,16 @@
 
 .head-name {
   font-size: 52rpx;
-  font-weight: 700;
+  font-weight: 600;
   color: #1E1E1A;
-  letter-spacing: 2rpx;
+  letter-spacing: 0.02em;
 }
 
 .head-tag {
   margin-left: 16rpx;
   padding: 6rpx 18rpx;
   font-size: var(--font-btn);
-  color: #B5482A;
+  color: #1F4A36;
   background: #F3E4DE;
   border-radius: 8rpx;
 }
@@ -64,7 +64,7 @@
 
 /* 质量与安全：墨绿边 + 略深底色，视觉上更重 */
 .sec-strong {
-  border-left-color: #B5482A;
+  border-left-color: #1F4A36;
   background: #f6faf2;
 }
 
@@ -86,17 +86,17 @@
   display: block;
   font-size: var(--font-base);
   font-weight: 600;
-  color: #B5482A;
+  color: #1F4A36;
 }
 
 .sec-strong .sec-label {
-  color: #B5482A;
+  color: #1F4A36;
 }
 
 .sec-text {
   display: block;
   font-size: var(--font-base);
-  line-height: 1.75;
+  line-height: 1.6;
   color: #3f3a30;
 }
 
@@ -140,7 +140,7 @@
 .src-text {
   display: block;
   font-size: var(--font-btn);
-  line-height: 1.7;
+  line-height: 1.6;
   color: #9b8a72;
 }
 
@@ -153,7 +153,7 @@
 
 .empty-text {
   font-size: var(--font-base);
-  line-height: 1.8;
+  line-height: 1.85;
   color: #4A463C;
   text-align: center;
   white-space: pre-wrap;
@@ -169,6 +169,6 @@
   font-size: var(--font-base);
   font-weight: 600;
   color: #ffffff;
-  background: #B5482A;
+  background: #1F4A36;
   border-radius: 16rpx;
 }

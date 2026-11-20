@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "食品安全",
+  "navigationBarTitleText": "康康食养AI",
   "backgroundColor": "#FBF8F2",
   "usingComponents": {
     "disclaimer": "../../components/disclaimer/disclaimer",

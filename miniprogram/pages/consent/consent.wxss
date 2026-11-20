@@ -12,16 +12,16 @@
 .doc-title {
   display: block;
   font-size: var(--font-title);
-  font-weight: 700;
+  font-weight: 600;
   color: #1E1E1A;
-  letter-spacing: 2rpx;
+  letter-spacing: 0.02em;
 }
 
 .doc-lead {
   display: block;
   margin-top: 16rpx;
   font-size: var(--font-base);
-  line-height: 1.7;
+  line-height: 1.6;
   color: #4A463C;
 }
 
@@ -31,15 +31,15 @@
   padding: 24rpx 26rpx;
   background: #FFFFFF;
   border-radius: 16rpx;
-  border-left: 8rpx solid #B5482A;
+  border-left: 8rpx solid #1F4A36;
 }
 
 .ex-card.ex-yes {
-  border-left-color: #B5482A;
+  border-left-color: #1F4A36;
 }
 
 .ex-card.ex-no {
-  border-left-color: #B5482A;
+  border-left-color: #1F4A36;
 }
 
 .ex-label {
@@ -53,7 +53,7 @@
 .ex-body {
   display: block;
   font-size: var(--font-base);
-  line-height: 1.7;
+  line-height: 1.6;
   color: #4A463C;
 }
 
@@ -61,7 +61,7 @@
   margin-top: 40rpx;
   padding: 26rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(181, 72, 42, 0.16);
+  border: 2rpx solid rgba(31, 74, 54, 0.16);
   border-radius: 16rpx;
 }
 
@@ -69,7 +69,7 @@
   display: block;
   font-size: var(--font-base);
   font-weight: 600;
-  color: #B5482A;
+  color: #1F4A36;
   margin-bottom: 16rpx;
 }
 
@@ -94,15 +94,15 @@
   margin: 0 16rpx 16rpx 0;
   font-size: var(--font-base);
   color: #4A463C;
-  background: rgba(181, 72, 42, 0.08);
+  background: rgba(31, 74, 54, 0.08);
   border: 2rpx solid transparent;
   border-radius: 12rpx;
 }
 
 .chip-on {
-  color: #B5482A;
+  color: #1F4A36;
   background: #FAF1ED;
-  border-color: #B5482A;
+  border-color: #1F4A36;
   font-weight: 600;
 }
 
@@ -122,7 +122,7 @@
 
 /* 主按钮：深色底 + 白字（唯一满足 4.5:1 的组合） */
 .btn-primary {
-  background: #B5482A;
+  background: #1F4A36;
   color: #ffffff;
 }
 
@@ -130,7 +130,7 @@
 .btn-quiet {
   margin-top: 20rpx;
   background: #ffffff;
-  color: #B5482A;
+  color: #1F4A36;
   border: 2rpx solid rgba(31, 74, 54, 0.4);
 }
 
@@ -147,13 +147,13 @@
   margin-top: 40rpx;
   padding: 32rpx 26rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(181, 72, 42, 0.16);
+  border: 2rpx solid rgba(31, 74, 54, 0.16);
   border-radius: 16rpx;
 }
 
 .state-text {
   display: block;
   font-size: var(--font-base);
-  line-height: 1.7;
+  line-height: 1.6;
   color: #1E1E1A;
 }

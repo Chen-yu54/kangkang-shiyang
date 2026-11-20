@@ -85,7 +85,7 @@
   padding-top: 16rpx;
   border-top: 2rpx solid var(--color-border-hair);
   font-size: var(--font-btn);
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--color-ink-3);
 }
 
@@ -159,6 +159,6 @@
   display: block;
   margin-top: 4rpx;
   font-size: var(--font-base);
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--color-ink-3);
 }

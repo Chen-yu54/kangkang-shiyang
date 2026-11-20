@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   font-size: var(--font-title);
-  color: #B5482A;
+  color: #1F4A36;
 }
 
 .head-info {
@@ -36,7 +36,7 @@
 .head-title {
   display: block;
   font-size: var(--font-subtitle);
-  font-weight: 700;
+  font-weight: 600;
   color: #1E1E1A;
 }
 
@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   font-size: var(--font-btn);
-  color: #B5482A;
+  color: #1F4A36;
 }
 
 /* 消息区 */
@@ -85,9 +85,9 @@
   align-items: center;
   justify-content: center;
   font-size: var(--font-caption);
-  font-weight: 700;
+  font-weight: 600;
   flex: none;
-  background: #B5482A;
+  background: #1F4A36;
   color: #ffffff;
   margin-right: 16rpx;
 }
@@ -108,8 +108,8 @@
 }
 
 .msg-me .bubble {
-  background: #B5482A;
-  border-color: #B5482A;
+  background: #1F4A36;
+  border-color: #1F4A36;
   border-radius: 20rpx 20rpx 6rpx 20rpx;
 }
 
@@ -122,7 +122,7 @@
 .bubble-text {
   display: block;
   font-size: var(--font-base);
-  line-height: 1.75;
+  line-height: 1.6;
   color: #1E1E1A;
   word-break: break-word;
   white-space: pre-wrap;
@@ -188,7 +188,7 @@
   align-items: center;
   padding: 12rpx 24rpx 16rpx;
   background: rgba(251, 248, 242, 0.97);
-  border-top: 2rpx solid rgba(181, 72, 42, 0.12);
+  border-top: 2rpx solid rgba(31, 74, 54, 0.12);
 }
 
 .input {
@@ -198,7 +198,7 @@
   font-size: var(--font-base);
   color: #1E1E1A;
   background: #ffffff;
-  border: 2rpx solid rgba(181, 72, 42, 0.18);
+  border: 2rpx solid rgba(31, 74, 54, 0.18);
   border-radius: 999rpx;
 }
 
@@ -222,7 +222,7 @@
 }
 
 .send-on {
-  background: #B5482A;
+  background: #1F4A36;
 }
 
 /* ===== C 主题 · 康康对话 ===== */
@@ -269,7 +269,7 @@
   box-shadow: none;
 }
 
-.bubble-text { font-size: var(--font-btn); line-height: 1.7; }
+.bubble-text { font-size: var(--font-btn); line-height: 1.6; }
 .msg-me .bubble-text { color: #FFFFFF; }
 
 .quick { padding: 8rpx 20rpx 12rpx; }

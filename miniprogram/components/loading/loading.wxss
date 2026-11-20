@@ -122,7 +122,7 @@
 .loading-title {
   margin-top: 32rpx;
   font-size: var(--font-title);
-  letter-spacing: 4rpx;
+  letter-spacing: 0.04em;
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
@@ -130,7 +130,7 @@
 .loading-en {
   margin-top: 8rpx;
   font-size: var(--font-base);
-  letter-spacing: 1rpx;
+  letter-spacing: 0.02em;
   color: var(--color-ink-3);
 }
 
