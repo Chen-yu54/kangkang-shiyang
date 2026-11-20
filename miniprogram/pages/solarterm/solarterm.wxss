@@ -85,6 +85,32 @@
 }
 
 /* —— 节气文化简介卡 —— */
+/* 详情页右上角「全部节气」入口：详情现在是默认视图，这里是唯一的切回方式 */
+.detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.detail-head-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.detail-back {
+  flex: none;
+  margin-left: 16rpx;
+  padding: 8rpx 16rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background-color: var(--color-card);
+}
+
+.detail-back-text {
+  font-size: var(--font-micro);
+  color: var(--color-ink-2);
+}
+
 .intro-card {
   position: relative;
   padding: 24rpx;

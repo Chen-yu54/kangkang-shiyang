@@ -98,6 +98,8 @@ Page({
     // 后面必须落到详情，不能退化成列表。用 in 判断而不是取值判断，
     // 是为了区分「没带参数」和「带了但解不出来」两种情况。
     this.hasTermParam = !!(options && 'term' in options);
+    // 只有显式要列表时才停在 list（推荐页「看全部节气」入口带 ?view=list）
+    this.forceList = !!(options && options.view === 'list');
     this.pendingTerm = decodeTermParam(options && options.term);
     this.setData({
       copy: {
@@ -156,18 +158,24 @@ Page({
       });
 
       // 带 term 参数进来：直接展开该节气详情
-      // 只要 URL 上有 term 这个键就一定要落到详情，不能退化成列表——
-      // 用户点的是「立冬的讲究」，看到一排节气卡会以为跳转失败。
-      if (this.pendingTerm || this.hasTermParam) {
-        const name = this.pendingTerm;
-        this.pendingTerm = '';
-        this.hasTermParam = false;
-        if (name && terms.some((x) => x.name === name)) {
-          this.onTapTerm({ detail: { name } });
-        } else if (current) {
-          // 编码坏了或节气名对不上时退到当前节气，至少让用户看到文化内容
-          this.onTapTerm({ detail: { name: current.name } });
-        }
+      // 默认落到详情，不再依赖 term 参数是否传对。
+      //
+      // 这个页面从任何入口进来，用户最想看的就是「这个节气的文化内容」，
+      // 而不是一排节气卡。只有明确要看全部列表时才留在 list——
+      // 那由 ?view=list 指定（推荐页的「看全部节气」入口）。
+      // 之前依赖 term 参数，一旦跳转兜底丢了参数、或编码对不上，
+      // 页面就退化成列表，用户看到的就是「点进去不是我要的内容」。
+      const wantList = this.forceList === true;
+      if (wantList) return;
+
+      const name = this.pendingTerm;
+      this.pendingTerm = '';
+      this.hasTermParam = false;
+      if (name && terms.some((x) => x.name === name)) {
+        this.onTapTerm({ detail: { name } });
+      } else if (current) {
+        // 没带参数、或编码坏了、或节气名对不上，都退到当前节气
+        this.onTapTerm({ detail: { name: current.name } });
       }
     };
 
@@ -208,6 +216,11 @@ Page({
       if (timer) clearTimeout(timer);
       fail((e && e.message) || '初始化失败');
     }
+  },
+
+  // 从详情切回 24 节气列表（详情现在是默认视图）
+  onBackList() {
+    this.setData({ view: 'list', detail: null, bg: null, health: null, dishes: [], allDishes: [] });
   },
 
   onTapTerm(e) {

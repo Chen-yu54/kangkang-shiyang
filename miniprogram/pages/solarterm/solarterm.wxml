@@ -65,8 +65,14 @@
           lazy-load
         />
         <view class="detail-head">
-          <text class="detail-name">{{detail.name}}</text>
-          <text wx:if="{{detail.windowText}}" class="detail-window">{{detail.windowText}}</text>
+          <view class="detail-head-main">
+            <text class="detail-name">{{detail.name}}</text>
+            <text wx:if="{{detail.windowText}}" class="detail-window">{{detail.windowText}}</text>
+          </view>
+          <!-- 详情默认打开，看别的节气从这里切回列表 -->
+          <view class="detail-back" hover-class="tap-hover" bindtap="onBackList">
+            <text class="detail-back-text">{{copy.all}} ›</text>
+          </view>
         </view>
 
         <!-- 节气文化简介：来自知识库节气卡的「节气简介」栏，已剔掉功效性表述 -->

@@ -131,7 +131,7 @@ Page({
   },
 
   onGoTerm() {
-    wx.navigateTo({ url: '/pages/solarterm/solarterm' });
+    wx.navigateTo({ url: '/pages/solarterm/solarterm?view=list' });
   },
 
   onTapDish(e) {
