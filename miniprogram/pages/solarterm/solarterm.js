@@ -8,6 +8,7 @@
 // 属建议而非数据标注，界面必须写明「按做法建议」。等 A 补 meal_time 后改读真值。
 
 const api = require('../../utils/api');
+const config = require('../../utils/config');
 const dataSource = require('../../utils/dataSource');
 const favorite = require('../../utils/favorite');
 const format = require('../../utils/format');
@@ -136,57 +137,69 @@ Page({
   },
 
   loadTerms() {
-    this.setData({ status: 'loading' });
+    // local 通道下节气数据就在包里，dataSource.getTerms() 是同步函数。
+    // 原来绕了一层 Promise.resolve()，一旦微任务没跑起来（真机偶发、低版本基础库、
+    // 或 Promise 被别的库覆盖过），setData 就永远不执行，页面停在骨架屏 ——
+    // 这正是「有标题但内容出不来」的样子。
+    // 这里直接同步取，setData 当场生效，从根上没有异步等待。
+    const apply = (terms) => {
+      const current = dataSource.getCurrentTerm();
+      this.setData({
+        terms,
+        currentName: current ? current.name : '',
+        status: terms.length > 0 ? 'ready' : 'empty',
+        loadError: '',
+      });
 
-    // 观察点：loadTerms 是整个页面唯一的数据入口，它挂了页面就是骨架屏。
-    // 但 api.getTerms() 在 local 通道下是 Promise.resolve(localTerms())，
-    // localTerms() 是同步求值的 —— 它一旦抛异常，异常会从 loadTerms 冒到 onLoad，
-    // .catch 根本接不住，status 永远停在 loading。
-    // 所以整段包 try / catch，并把原因记到 loadError，界面能显示出来。
-    let timer = null;
+      // 带 term 参数进来：直接展开该节气详情
+      // 对不上时退到当前节气，别让用户停在列表以为没跳成功
+      if (this.pendingTerm) {
+        const name = this.pendingTerm;
+        this.pendingTerm = '';
+        if (terms.some((x) => x.name === name)) {
+          this.onTapTerm({ detail: { name } });
+        } else if (current) {
+          this.onTapTerm({ detail: { name: current.name } });
+        }
+      }
+    };
+
     const fail = (reason) => {
-      if (timer) clearTimeout(timer);
       this.setData({ status: 'error', loadError: String(reason || '').slice(0, 80) });
     };
 
+    // ① 本地通道：同步
+    if (config.DATA_CHANNEL === 'local') {
+      let terms = [];
+      try {
+        terms = dataSource.getTerms();
+      } catch (e) {
+        fail((e && e.message) || '读取节气数据失败');
+        return;
+      }
+      if (!Array.isArray(terms)) terms = [];
+      apply(terms);
+      return;
+    }
+
+    // ② 其它通道：仍走接口，保留超时与错误兜底
+    this.setData({ status: 'loading' });
+    let timer = null;
     try {
       const p = api.getTerms();
-
-      // 兜底：3 秒还没到 ready 就主动判超时，别让用户对着骨架屏干等
       timer = setTimeout(() => {
         if (this.data.status === 'loading') fail('加载超时');
-      }, 3000);
-
+      }, 8000);
       p.then((res) => {
         if (timer) clearTimeout(timer);
-        const terms = (res && res.list) || [];
-        // 当前节气由日期窗口确定性推算，不是人工标注
-        const current = dataSource.getCurrentTerm();
-        this.setData({
-          terms,
-          currentName: current ? current.name : '',
-          status: terms.length > 0 ? 'ready' : 'empty',
-        });
-
-        // 首页节气海报带 term 参数进来：直接展开该节气详情，省一次列表点击
-        //
-        // 参数对不上时不能静默什么都不做 —— 用户点的是「看这个节气的讲究」，
-        // 结果停在列表页，看起来就是「跳转没成功」。
-        // 退一步展开当前节气，至少让页面有内容；实在连当前节气都取不到才留在列表。
-        if (this.pendingTerm) {
-          const name = this.pendingTerm;
-          this.pendingTerm = '';
-          if (terms.some((x) => x.name === name)) {
-            this.onTapTerm({ detail: { name } });
-          } else if (current) {
-            this.onTapTerm({ detail: { name: current.name } });
-          }
-        }
+        apply((res && res.list) || []);
       }).catch((e) => {
+        if (timer) clearTimeout(timer);
         fail((e && (e.message || e.code)) || '读取节气失败');
       });
     } catch (e) {
-      fail((e && (e.message || e.code)) || '初始化失败');
+      if (timer) clearTimeout(timer);
+      fail((e && e.message) || '初始化失败');
     }
   },
 
