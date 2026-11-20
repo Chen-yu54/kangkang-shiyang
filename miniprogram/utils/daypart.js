@@ -13,9 +13,9 @@ const PARTS = [
     tipKey: 'daypart.dawn.tip',       // 一盅两件，叹早茶正当时
     icon: 'sunrise',                  // 日出：半轮 + 光芒旋转
     // 问候条渐变（起 → 止），暖橙晨曦
-    fromColor: '#e8934a',
-    toColor: '#c96a2e',
-    textColor: '#fdf3e4',
+    fromColor: '#dd9e77',
+    toColor: '#c07e5c',
+    textColor: '#fbf1e8',
   },
   {
     key: 'morning',
@@ -23,9 +23,9 @@ const PARTS = [
     greetKey: 'daypart.morning.greet', // 上午好
     tipKey: 'daypart.morning.tip',     // 茶歇时分，饮啖茶食件点心
     icon: 'sun',
-    fromColor: '#d9a441',
-    toColor: '#bf8326',
-    textColor: '#fdf6e6',
+    fromColor: '#d3ab6e',
+    toColor: '#b78d52',
+    textColor: '#fbf5ea',
   },
   {
     key: 'noon',
@@ -33,9 +33,9 @@ const PARTS = [
     greetKey: 'daypart.noon.greet',    // 中午好
     tipKey: 'daypart.noon.tip',        // 饭前一碗例汤，是老规矩
     icon: 'sun',
-    fromColor: '#c98a2e',
-    toColor: '#a86a1c',
-    textColor: '#fdf4e0',
+    fromColor: '#c99c5e',
+    toColor: '#a87f47',
+    textColor: '#fbf3e6',
   },
   {
     key: 'afternoon',
@@ -43,9 +43,9 @@ const PARTS = [
     greetKey: 'daypart.afternoon.greet', // 下午好
     tipKey: 'daypart.afternoon.tip',     // 三点三，来碗糖水歇一歇
     icon: 'sunlow',                      // 偏西的太阳：位置下移
-    fromColor: '#cf8348',
-    toColor: '#b05f2e',
-    textColor: '#fdf0e2',
+    fromColor: '#c69079',
+    toColor: '#a2735f',
+    textColor: '#faf0eb',
   },
   {
     key: 'evening',
@@ -53,9 +53,9 @@ const PARTS = [
     greetKey: 'daypart.evening.greet', // 晚上好
     tipKey: 'daypart.evening.tip',     // 今晚煲咩汤？看看当令菜
     icon: 'lantern',                   // 灯笼：暖光呼吸
-    fromColor: '#7a4a52',
-    toColor: '#4a3040',
-    textColor: '#f6e8dc',
+    fromColor: '#6e5560',
+    toColor: '#473c48',
+    textColor: '#f4eaea',
   },
   {
     key: 'night',
@@ -63,8 +63,8 @@ const PARTS = [
     greetKey: 'daypart.night.greet',   // 夜深了
     tipKey: 'daypart.night.tip',       // 早点休息，明早一盅两件
     icon: 'moon',                      // 月亮 + 星星闪烁
-    fromColor: '#2c3550',
-    toColor: '#1a2036',
+    fromColor: '#2e3852',
+    toColor: '#1c2338',
     textColor: '#dfe4f2',
   },
 ];

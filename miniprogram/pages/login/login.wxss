@@ -445,12 +445,29 @@
 
 .lg-btn {
   background-color: var(--color-green);
-  box-shadow: 0 10rpx 24rpx rgba(181, 72, 42, 0.22);
+  box-shadow: 0 10rpx 24rpx rgba(31, 74, 54, 0.2);
 }
 
 .lg-btn-text {
   color: #FFFFFF;
   letter-spacing: 0.02em;
+}
+
+/* 弹层里的确认按钮跟首屏主按钮同色同阴影，两处登录不再两个色 */
+.auth-submit {
+  background-color: var(--color-green);
+  box-shadow: 0 10rpx 24rpx rgba(31, 74, 54, 0.2);
+}
+
+.auth-submit-text {
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.lg-font-on {
+  border-color: var(--color-green);
+  color: var(--color-green);
+  background-color: rgba(31, 74, 54, 0.06);
 }
 
 .lg-link { color: var(--color-green); }

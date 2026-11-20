@@ -317,7 +317,7 @@ const out = {
     inspectedNote: '通告里只有不合格批次，合格批次的总量没有收录，所以算不出「合格率」。',
     penaltySource: '广东省市场监督管理局「双公示·行政处罚」',
     penaltyNote: '来源：广东省市场监督管理局「双公示·行政处罚」',
-    penaltyScope: '下面只列已归档、能逐条对上原文的案例，不是全量。',
+    penaltyScope: '下面只列已归档、能逐条对上原文的案例，不是全部。',
   },
   inspections: {
     batches,

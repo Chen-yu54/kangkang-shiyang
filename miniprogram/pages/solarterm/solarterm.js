@@ -68,6 +68,7 @@ Page({
     pageStyle: '',
     view: 'list',
     status: 'loading', // 列表态：loading | ready | empty | error
+    loadError: '', // 加载失败的具体原因，显示到界面上便于定位
     dishStatus: 'loading', // 详情菜品态：loading | ready | empty | error
     terms: [],
     currentName: '',
@@ -137,10 +138,28 @@ Page({
   loadTerms() {
     this.setData({ status: 'loading' });
 
-    api
-      .getTerms()
-      .then((res) => {
-        const terms = res.list || [];
+    // 观察点：loadTerms 是整个页面唯一的数据入口，它挂了页面就是骨架屏。
+    // 但 api.getTerms() 在 local 通道下是 Promise.resolve(localTerms())，
+    // localTerms() 是同步求值的 —— 它一旦抛异常，异常会从 loadTerms 冒到 onLoad，
+    // .catch 根本接不住，status 永远停在 loading。
+    // 所以整段包 try / catch，并把原因记到 loadError，界面能显示出来。
+    let timer = null;
+    const fail = (reason) => {
+      if (timer) clearTimeout(timer);
+      this.setData({ status: 'error', loadError: String(reason || '').slice(0, 80) });
+    };
+
+    try {
+      const p = api.getTerms();
+
+      // 兜底：3 秒还没到 ready 就主动判超时，别让用户对着骨架屏干等
+      timer = setTimeout(() => {
+        if (this.data.status === 'loading') fail('加载超时');
+      }, 3000);
+
+      p.then((res) => {
+        if (timer) clearTimeout(timer);
+        const terms = (res && res.list) || [];
         // 当前节气由日期窗口确定性推算，不是人工标注
         const current = dataSource.getCurrentTerm();
         this.setData({
@@ -163,10 +182,12 @@ Page({
             this.onTapTerm({ detail: { name: current.name } });
           }
         }
-      })
-      .catch(() => {
-        this.setData({ status: 'error' });
+      }).catch((e) => {
+        fail((e && (e.message || e.code)) || '读取节气失败');
       });
+    } catch (e) {
+      fail((e && (e.message || e.code)) || '初始化失败');
+    }
   },
 
   onTapTerm(e) {
