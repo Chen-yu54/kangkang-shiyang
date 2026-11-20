@@ -324,11 +324,25 @@ Page({
   onTapTermDetail() {
     const name = this.data.termName;
     if (!name) return;
+
+    // 注意：这里跳的是「节气详情」，term 参数必须带到。
+    // 原来 fail 分支退到 /pages/solarterm/solarterm 时把 term 丢了，
+    // 页面没有参数就只能渲染 24 节气列表 —— 用户点「立冬的讲究」
+    // 结果看到一排节气卡，看起来就是「跳转没成功」。
+    // 失败最常见的原因是页面栈已满（navigateTo 上限 10 层），这时先 redirectTo 兜一层。
+    const url = '/pages/solarterm/solarterm?term=' + encodeURIComponent(name);
+
     wx.navigateTo({
-      url: '/pages/solarterm/solarterm?term=' + encodeURIComponent(name),
+      url,
       fail: () => {
-        // 详情页打不开时退到列表页，不要让点击变成死操作
-        wx.navigateTo({ url: '/pages/solarterm/solarterm' });
+        wx.redirectTo({
+          url,
+          fail: () => {
+            // 连 redirect 都失败才退到重启，仍然带 term —— 只要参数在，
+            // 页面就能自己展开该节气，绝不会退化成「一排节气卡」。
+            wx.reLaunch({ url });
+          },
+        });
       },
     });
   },

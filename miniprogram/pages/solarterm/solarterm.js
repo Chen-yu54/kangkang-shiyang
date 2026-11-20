@@ -94,6 +94,10 @@ Page({
     // 被截断、或手写链接带了孤立的 %），它会抛 URIError，onLoad 当场中断，
     // 后面的 setData / loadTerms 全都不执行 —— 页面就停在初始态，看着像「加载不出来」。
     // 这里做两级兜底：先安全解码，解不出来就用原串；再对可能的双重编码补一次。
+    // 只要 URL 上出现了 term 这个键（哪怕值是空的），就说明是「来看某个节气」的，
+    // 后面必须落到详情，不能退化成列表。用 in 判断而不是取值判断，
+    // 是为了区分「没带参数」和「带了但解不出来」两种情况。
+    this.hasTermParam = !!(options && 'term' in options);
     this.pendingTerm = decodeTermParam(options && options.term);
     this.setData({
       copy: {
@@ -152,13 +156,16 @@ Page({
       });
 
       // 带 term 参数进来：直接展开该节气详情
-      // 对不上时退到当前节气，别让用户停在列表以为没跳成功
-      if (this.pendingTerm) {
+      // 只要 URL 上有 term 这个键就一定要落到详情，不能退化成列表——
+      // 用户点的是「立冬的讲究」，看到一排节气卡会以为跳转失败。
+      if (this.pendingTerm || this.hasTermParam) {
         const name = this.pendingTerm;
         this.pendingTerm = '';
-        if (terms.some((x) => x.name === name)) {
+        this.hasTermParam = false;
+        if (name && terms.some((x) => x.name === name)) {
           this.onTapTerm({ detail: { name } });
         } else if (current) {
+          // 编码坏了或节气名对不上时退到当前节气，至少让用户看到文化内容
           this.onTapTerm({ detail: { name: current.name } });
         }
       }
