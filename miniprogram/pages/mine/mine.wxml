@@ -138,7 +138,7 @@
           <text class="row-label">{{copy.elderLabel}}</text>
           <text class="row-value">{{copy.elderDesc}}</text>
         </view>
-        <switch class="row-switch" checked="{{elderMode}}" color="#3f7a45" bindchange="onToggleElder" />
+        <switch class="row-switch" checked="{{elderMode}}" color="#1F4A36" bindchange="onToggleElder" />
       </view>
 
       <view wx:if="{{!elderMode}}" class="row" hover-class="tap-hover" bindtap="onTapAgent">

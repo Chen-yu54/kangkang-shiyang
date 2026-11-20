@@ -415,7 +415,7 @@
   display: block;
   margin-top: 20rpx;
   padding-top: 16rpx;
-  border-top: 2rpx dashed rgba(139, 90, 43, 0.2);
+  border-top: 2rpx dashed rgba(31, 74, 54, 0.2);
   font-size: 28rpx;
   line-height: 1.6;
   color: #6E6A5E;

@@ -69,7 +69,7 @@
   justify-content: center;
   width: 200rpx;
   height: 200rpx;
-  border: 2rpx solid rgba(139, 90, 43, 0.22);
+  border: 2rpx solid rgba(181, 72, 42, 0.22);
   border-radius: 50%;
   background-color: var(--color-bg-soft);
   box-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.1);
@@ -419,3 +419,40 @@
   line-height: 1.6;
   color: var(--color-ink-3);
 }
+
+/* ===== C 主题 · 登录 ===== */
+.lg-glow {
+  background-image: radial-gradient(
+    circle,
+    rgba(181, 72, 42, 0.08) 0%,
+    rgba(31, 74, 54, 0.02) 45%,
+    rgba(31, 74, 54, 0) 70%
+  );
+}
+
+.lg-name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.lg-points {
+  border: none;
+  border-radius: 28rpx;
+  background-color: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+.lg-btn {
+  background-color: var(--color-green);
+  box-shadow: 0 10rpx 24rpx rgba(181, 72, 42, 0.22);
+}
+
+.lg-btn-text {
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.lg-link { color: var(--color-green); }
+.lg-skip-text { color: var(--color-ink-3); }
+

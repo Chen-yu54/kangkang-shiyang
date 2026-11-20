@@ -460,3 +460,203 @@
 .elder .row-switch {
   transform: scale(1.1);
 }
+
+/* ===== C 主题 · 我的 ===== */
+.mast-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.cover {
+  border-radius: 28rpx;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.06);
+}
+
+.cover-pill {
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--color-ink);
+  border: 1rpx solid var(--color-border);
+}
+
+.idcard {
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  box-shadow: 0 10rpx 28rpx rgba(30, 30, 26, 0.06);
+}
+
+/* ============================================================
+   C 主题 · 我的（2026-11-20）
+   深绿封面 + 悬浮档案卡 + 白卡分组；去掉栏目编号与纸片边框
+   ============================================================ */
+.mast { padding: 8rpx 4rpx 20rpx; }
+
+.mast-title {
+  font-family: var(--font-sans);
+  font-size: 44rpx;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* 封面只做淡绿托底：海报本身是浅色雪景，压满深绿会把立冬二字吃掉。
+   蒙层压到 0.28 以内，节气胶囊改用白底深绿字，浅背景上照样读得清 */
+.cover {
+  height: 280rpx;
+  margin: 0 -32rpx;
+  border-radius: 0 0 32rpx 32rpx;
+  background: var(--color-green-bg);
+}
+
+.cover-img { height: 280rpx; width: 100%; }
+
+.cover-shade {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: auto;
+  background-image: linear-gradient(
+    180deg,
+    rgba(31, 74, 54, 0) 0%,
+    rgba(31, 74, 54, 0.05) 52%,
+    rgba(31, 74, 54, 0.26) 100%
+  );
+}
+
+/* bottom 留 96rpx：档案卡向上压 72rpx，胶囊要浮在那条线之上才看得见。
+   靠右放：海报的节气书法在左半幅，胶囊压上去会盖住字 */
+.cover-pill {
+  left: auto;
+  right: 24rpx;
+  bottom: 96rpx;
+  padding: 8rpx 18rpx;
+  border: 1rpx solid rgba(31, 74, 54, 0.14);
+  background-color: rgba(255, 255, 255, 0.94);
+  color: var(--color-green-deep);
+  box-shadow: 0 4rpx 14rpx rgba(20, 40, 30, 0.1);
+}
+
+.idcard {
+  position: relative;
+  z-index: 2;
+  margin: -72rpx 0 0;
+  padding: 26rpx 24rpx 0;
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  box-shadow: 0 14rpx 36rpx rgba(20, 16, 11, 0.14);
+}
+
+.avatar {
+  width: 112rpx;
+  height: 112rpx;
+  border: 4rpx solid #FFFFFF;
+  background-color: #F6F2EA;
+  box-shadow: 0 4rpx 12rpx rgba(30, 30, 26, 0.08);
+}
+
+.avatar-on { border-color: #FFFFFF; }
+
+.idcard-name { font-size: 38rpx; font-weight: 600; letter-spacing: 0.01em; }
+
+.idcard-tag {
+  padding: 3rpx 12rpx;
+  border: none;
+  border-radius: 999rpx;
+  background-color: var(--color-green-bg);
+  color: var(--color-green);
+}
+
+.idcard-sub { margin-top: 6rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.idcard-arrow { width: 24rpx; height: 24rpx; opacity: 0.4; }
+
+.stats {
+  margin-top: 22rpx;
+  padding: 18rpx 0 0;
+  border-top: 1rpx solid var(--color-border);
+}
+
+.stat { min-height: 92rpx; }
+.stat-num { font-size: 44rpx; font-weight: 600; letter-spacing: -0.02em; }
+.stat-num-sm { font-size: 30rpx; }
+.stat-label { margin-top: 4rpx; font-size: 22rpx; }
+.stat-div { width: 1rpx; height: 44rpx; background-color: var(--color-border); }
+
+.sec {
+  margin: 36rpx 0 14rpx;
+  padding: 0;
+  border: none;
+}
+
+.sec-no { display: none; }
+
+.sec-title {
+  font-family: var(--font-sans);
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.sec-more { font-size: 24rpx; color: var(--color-green); }
+
+.fav {
+  width: 300rpx;
+  border: none;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 22rpx rgba(30, 30, 26, 0.07);
+}
+
+.fav-body { padding: 14rpx 16rpx 18rpx; }
+.fav-name { font-size: 30rpx; font-weight: 600; }
+.fav-meta { font-size: 22rpx; }
+
+.fav-empty {
+  border: 1rpx dashed var(--color-border);
+  border-radius: 24rpx;
+  background: #FFFFFF;
+}
+
+.rows {
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+.row {
+  min-height: 104rpx;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.row-label { font-size: 30rpx; color: var(--color-ink); }
+.row-value { margin-top: 4rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.row-arrow { width: 24rpx; height: 24rpx; opacity: 0.4; }
+
+.font-option {
+  min-width: 104rpx;
+  min-height: 88rpx;
+  border: 1rpx solid var(--color-border);
+  background: #FFFFFF;
+}
+
+.font-option-on {
+  border-color: var(--color-green);
+  background: var(--color-green);
+}
+
+.font-option-on .font-option-text { color: #FFFFFF; }
+.font-option-text { font-size: 28rpx; }
+
+.rows-note { margin-top: 12rpx; font-size: 24rpx; }
+
+.tour-again {
+  border: 1rpx solid var(--color-border);
+  background: #FFFFFF;
+}
+
+.tour-again-text { color: var(--color-ink-3); }
+.version { font-size: 22rpx; }
+

@@ -100,7 +100,7 @@
 .ck-card {
   margin-top: 16rpx;
   padding: 26rpx 24rpx 22rpx;
-  border: 1rpx solid rgba(139, 90, 43, 0.14);
+  border: 1rpx solid rgba(31, 74, 54, 0.14);
   border-radius: 24rpx;
   background-image: linear-gradient(160deg, #FFFFFF 0%, #F6F2EA 100%);
   box-shadow: 0 4rpx 12rpx rgba(90, 60, 30, 0.05);
@@ -125,9 +125,9 @@
   height: 264rpx;
   border-radius: 50%;
   background: conic-gradient(from -90deg,
-    #d8ac63 0 86deg, transparent 86deg 90deg,
-    #c07a3a 90deg 176deg, transparent 176deg 180deg,
-    #b5482a 180deg 266deg, transparent 266deg 270deg,
+    #A9C4B2 0 86deg, transparent 86deg 90deg,
+    #6E9581 90deg 176deg, transparent 176deg 180deg,
+    #2F5C45 180deg 266deg, transparent 266deg 270deg,
     #B5482A 270deg 356deg, transparent 356deg 360deg);
 }
 
@@ -139,7 +139,7 @@
   height: 220rpx;
   border-radius: 50%;
   background-color: #FFFFFF;
-  box-shadow: inset 0 0 0 1rpx rgba(139, 90, 43, 0.1);
+  box-shadow: inset 0 0 0 1rpx rgba(31, 74, 54, 0.1);
 }
 
 .ck-tick {
@@ -149,7 +149,7 @@
   margin-left: -2rpx;
   margin-top: -7rpx;
   border-radius: 2rpx;
-  background-color: rgba(139, 90, 43, 0.28);
+  background-color: rgba(31, 74, 54, 0.28);
   opacity: 0;
 }
 
@@ -192,7 +192,7 @@
   margin-left: 18rpx;
 }
 
-.ck-kpi { padding: 8rpx 0; border-bottom: 1rpx solid rgba(139, 90, 43, 0.1); }
+.ck-kpi { padding: 8rpx 0; border-bottom: 1rpx solid rgba(31, 74, 54, 0.1); }
 .ck-kpi:last-child { border-bottom: 0; }
 .ck-kpi-n { display: flex; align-items: baseline; }
 
@@ -211,7 +211,7 @@
   display: flex;
   margin-top: 22rpx;
   padding-top: 20rpx;
-  border-top: 1rpx solid rgba(139, 90, 43, 0.12);
+  border-top: 1rpx solid rgba(181, 72, 42, 0.12);
 }
 
 .ck-ring-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
@@ -238,7 +238,7 @@
   display: block;
   margin-top: 20rpx;
   padding-top: 16rpx;
-  border-top: 1rpx solid rgba(139, 90, 43, 0.12);
+  border-top: 1rpx solid rgba(181, 72, 42, 0.12);
   font-size: 24rpx;
   line-height: 1.7;
   color: var(--color-ink-3);
@@ -350,7 +350,7 @@
 .ck-cu {
   margin-top: 14rpx;
   padding: 20rpx 22rpx;
-  border: 1rpx solid rgba(139, 90, 43, 0.14);
+  border: 1rpx solid rgba(31, 74, 54, 0.14);
   border-radius: 20rpx;
   background-color: #FFFFFF;
 }
@@ -365,7 +365,7 @@
   margin: 14rpx 0 8rpx;
   border-radius: 8rpx;
   overflow: hidden;
-  background-color: rgba(139, 90, 43, 0.08);
+  background-color: rgba(181, 72, 42, 0.08);
 }
 
 .ck-legend { display: flex; justify-content: space-between; font-size: 22rpx; color: var(--color-ink-3); }
@@ -381,7 +381,7 @@
   min-width: 0;
   height: 14rpx;
   border-radius: 7rpx;
-  background-color: rgba(139, 90, 43, 0.11);
+  background-color: rgba(31, 74, 54, 0.11);
   overflow: hidden;
 }
 
@@ -555,7 +555,7 @@
   padding: 22rpx 24rpx;
   border-left: 6rpx solid var(--color-flame);
   border-radius: 8rpx 22rpx 22rpx 8rpx;
-  background-color: rgba(139, 90, 43, 0.05);
+  background-color: rgba(31, 74, 54, 0.05);
 }
 
 .note-title {
@@ -579,3 +579,13 @@
 .elder .ck-num,
 .elder .ck-mv { font-size: 62rpx; }
 .elder .ck-term { font-size: 60rpx; }
+
+/* ===== C 主题 · 数据驾驶舱 ===== */
+.ck-card {
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  background-image: none;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+

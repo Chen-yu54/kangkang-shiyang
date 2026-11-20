@@ -587,7 +587,7 @@
  * 配色跟全站一致：米黄纸底 + 朱砂 / 赭金，不用深墨块，免得和纸底割裂。 */
 .cp {
   padding: 26rpx 26rpx 22rpx;
-  border: 1rpx solid rgba(139, 90, 43, 0.14);
+  border: 1rpx solid rgba(31, 74, 54, 0.14);
   border-radius: var(--radius-card);
   background-image: linear-gradient(160deg, #FFFFFF 0%, #F6F2EA 100%);
   box-shadow: var(--shadow-card);
@@ -651,7 +651,7 @@
   height: 220rpx;
   border-radius: 50%;
   background-color: #FFFFFF;
-  box-shadow: inset 0 0 0 1rpx rgba(139, 90, 43, 0.1);
+  box-shadow: inset 0 0 0 1rpx rgba(31, 74, 54, 0.1);
 }
 
 .cp-tick {
@@ -661,7 +661,7 @@
   margin-left: -2rpx;
   margin-top: -7rpx;
   border-radius: 2rpx;
-  background-color: rgba(139, 90, 43, 0.28);
+  background-color: rgba(31, 74, 54, 0.28);
   opacity: 0;
 }
 
@@ -703,7 +703,7 @@
   margin-left: 18rpx;
 }
 
-.cp-kpi { padding: 8rpx 0; border-bottom: 1rpx solid rgba(139, 90, 43, 0.1); }
+.cp-kpi { padding: 8rpx 0; border-bottom: 1rpx solid rgba(31, 74, 54, 0.1); }
 .cp-kpi:last-child { border-bottom: 0; }
 .cp-kpi-n { display: flex; align-items: baseline; }
 
@@ -722,7 +722,7 @@
   display: flex;
   margin-top: 22rpx;
   padding-top: 20rpx;
-  border-top: 1rpx solid rgba(139, 90, 43, 0.12);
+  border-top: 1rpx solid rgba(181, 72, 42, 0.12);
 }
 
 .cp-ring-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
@@ -886,7 +886,7 @@
   align-items: center;
   padding: 22rpx 24rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.18);
+  border: 2rpx solid rgba(181, 72, 42, 0.18);
   border-left: 8rpx solid #B5482A;
   border-radius: 18rpx;
   box-shadow: 0 16rpx 40rpx rgba(24, 16, 10, 0.28);
@@ -906,7 +906,7 @@
   flex: none;
   margin-right: 20rpx;
   background: #F6F2EA;
-  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border: 2rpx solid rgba(181, 72, 42, 0.16);
 }
 
 .intro-dot {
@@ -1016,7 +1016,7 @@
   box-sizing: border-box;
   padding: 20rpx 24rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.2);
+  border: 2rpx solid rgba(31, 74, 54, 0.2);
   border-radius: 16rpx;
   box-shadow: 0 8rpx 20rpx rgba(61, 43, 26, 0.12);
   opacity: 0;
@@ -1040,8 +1040,8 @@
   width: 18rpx;
   height: 18rpx;
   background: #FFFFFF;
-  border-right: 2rpx solid rgba(139, 90, 43, 0.2);
-  border-top: 2rpx solid rgba(139, 90, 43, 0.2);
+  border-right: 2rpx solid rgba(31, 74, 54, 0.2);
+  border-top: 2rpx solid rgba(31, 74, 54, 0.2);
   transform: rotate(45deg);
 }
 
@@ -1068,12 +1068,12 @@
    ------------------------------------------------------------
    只覆盖视觉，不改结构与信息点。原有规则全部保留，本段在文件末尾，
    同权重后者生效；如需回退，删除本段即可（备份 index.wxss.bak）。
-   色板：暖白 #FBF8F2 / 深绿 #1F4A36 / 墨 #1E1E1A / 灰 #6E6A5E
+   色板：暖白 #FBF8F2 / 深绿 #B5482A / 墨 #1E1E1A / 灰 #6E6A5E
    ============================================================ */
 
 .page {
   background-color: #FBF8F2;
-  --c-green: #1F4A36;
+  --c-green: #B5482A;
   --c-ink: #1E1E1A;
   --c-muted: #6E6A5E;
   --c-line: #E8E3D8;
@@ -1348,12 +1348,12 @@
     #A9C4B2 0 86deg, transparent 86deg 90deg,
     #6E9581 90deg 176deg, transparent 176deg 180deg,
     #2F5C45 180deg 266deg, transparent 266deg 270deg,
-    #1F4A36 270deg 356deg, transparent 356deg 360deg);
+    #B5482A 270deg 356deg, transparent 356deg 360deg);
 }
 
 .cp-disc {
   background-color: #FFFFFF;
-  box-shadow: inset 0 0 0 1rpx rgba(31, 74, 54, 0.12);
+  box-shadow: inset 0 0 0 1rpx rgba(181, 72, 42, 0.12);
 }
 
 .cp-tick { background-color: rgba(31, 74, 54, 0.24); }
@@ -1368,7 +1368,7 @@
 .cp-num {
   font-family: var(--font-sans);
   font-weight: 600;
-  color: #1F4A36;
+  color: #B5482A;
 }
 
 .cp-unit { color: #6E6A5E; }
@@ -1380,40 +1380,40 @@
 
 .cp-go {
   border: none;
-  background-color: #F0F5F1;
+  background-color: #FAF1ED;
 }
-.cp-go-t { color: #1F4A36; }
-.cp-go-a { color: #1F4A36; }
+.cp-go-t { color: #B5482A; }
+.cp-go-a { color: #B5482A; }
 .cp-go-s { color: #6E6A5E; }
 
 /* 悬浮球气泡副文案：朱砂 → 深绿 */
-.fab-tip-s { color: #1F4A36; }
+.fab-tip-s { color: #B5482A; }
 
 /* C 主题：罗盘当前刻度、实时小圆点也归深绿 */
 .cp-tick.now {
-  background-color: #1F4A36;
+  background-color: #B5482A;
   box-shadow: 0 0 0 4rpx rgba(31, 74, 54, 0.14);
 }
 .cp-dot {
-  background-color: #1F4A36;
-  box-shadow: 0 0 0 6rpx rgba(31, 74, 54, 0.08);
+  background-color: #B5482A;
+  box-shadow: 0 0 0 6rpx rgba(181, 72, 42, 0.08);
 }
 
 /* C 主题：首次引导的消息提示框 —— 白卡 + 深绿左边条，和全站一套 */
 .intro-msg {
   border: 1rpx solid #E8E3D8;
-  border-left: 8rpx solid #1F4A36;
+  border-left: 8rpx solid #B5482A;
   border-radius: 20rpx;
   box-shadow: 0 14rpx 34rpx rgba(30, 30, 26, 0.14);
 }
 
 .intro-ava {
-  background: #F0F5F1;
+  background: #FAF1ED;
   border: 1rpx solid rgba(31, 74, 54, 0.14);
 }
 
 .intro-dot {
-  background: #1F4A36;
+  background: #B5482A;
 }
 
 .intro-text {
@@ -1421,6 +1421,6 @@
 }
 
 .intro-go {
-  color: #1F4A36;
+  color: #B5482A;
 }
 

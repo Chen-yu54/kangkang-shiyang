@@ -806,3 +806,62 @@
   width: 100%;
   margin-right: 0;
 }
+
+/* ===== C 主题 · 食品安全（2026-11-20） ===== */
+.head { border-bottom: 1rpx solid var(--color-border); }
+
+.head-kicker {
+  background: var(--color-green-bg);
+  color: var(--color-green);
+  border-radius: 999rpx;
+  padding: 6rpx 18rpx;
+}
+
+.head-title,
+.hero-title,
+.sec-title,
+.oneline-b,
+.ing-name,
+.case-cause,
+.notice-title,
+.notes-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+.hero,
+.ov-item,
+.ing,
+.case,
+.notice,
+.notes,
+.fold {
+  border: none;
+  border-radius: 28rpx;
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.hero { box-shadow: var(--shadow-lift); }
+
+.step {
+  background: var(--color-green-bg);
+  border-radius: 20rpx;
+}
+
+.step-n {
+  background: var(--color-green);
+  color: var(--color-on-brand);
+}
+
+.hero-cta {
+  background: var(--color-green);
+  border-radius: 999rpx;
+  box-shadow: var(--shadow-lift);
+}
+
+.case { border-left: none; }
+.notice { border-left: none; }
+

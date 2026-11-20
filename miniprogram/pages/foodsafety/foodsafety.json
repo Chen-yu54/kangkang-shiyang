@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "食品安全",
-  "backgroundColor": "#f7f0e1",
+  "backgroundColor": "#FBF8F2",
   "usingComponents": {
     "disclaimer": "../../components/disclaimer/disclaimer",
     "guide-tour": "../../components/guideTour/guideTour"

@@ -127,14 +127,24 @@ GRAPHIC_ONLY.forEach((k) => {
   }
 });
 
-// 绿色是否已全部撤出
+// 绿色是否已从配色里撤出
+// 注意：不能只看变量名。——color-green 这个 Token 仍然存在，
+// 但它的值已经被映射成朱砂 #B5482A。判断依据是「值是否偏绿」，不是名字。
 const css = fs.readFileSync(WXSS, 'utf8');
+const hexVals = [...css.matchAll(/#([0-9a-fA-F]{6})\b/g)].map((m) => m[1]);
+const greenish = hexVals.filter((h) => {
+  const r = parseInt(h.substr(0, 2), 16);
+  const g = parseInt(h.substr(2, 2), 16);
+  const b = parseInt(h.substr(4, 2), 16);
+  return g > r + 12 && g > b + 12;
+});
 console.log('');
-if (/--color-green/.test(css)) {
-  console.log('  ✗ 仍有 --color-green，与「暖色为主」的口径不符');
+const realGreen = [...new Set(greenish)];
+if (realGreen.length) {
+  console.log('  ✗ 页面里还有偏绿的色值：' + realGreen.join(', '));
   fail++;
 } else {
-  console.log('  ✓ 已无 --color-green，配色全部落在暖色区间');
+  console.log('  ✓ 配色全部落在暖色区间');
 }
 
 console.log('');

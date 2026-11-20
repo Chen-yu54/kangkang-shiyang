@@ -15,7 +15,7 @@
   align-items: center;
   padding: 20rpx 24rpx;
   background: rgba(251, 248, 242, 0.97);
-  border-bottom: 2rpx solid rgba(139, 90, 43, 0.14);
+  border-bottom: 2rpx solid rgba(31, 74, 54, 0.14);
 }
 
 .head-back {
@@ -103,7 +103,7 @@
   max-width: 78%;
   padding: 22rpx 24rpx;
   background: #ffffff;
-  border: 2rpx solid rgba(139, 90, 43, 0.14);
+  border: 2rpx solid rgba(31, 74, 54, 0.14);
   border-radius: 20rpx 20rpx 20rpx 6rpx;
 }
 
@@ -178,7 +178,7 @@
   font-size: 32rpx;
   color: #4A463C;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.2);
+  border: 2rpx solid rgba(31, 74, 54, 0.2);
   border-radius: 999rpx;
 }
 
@@ -188,7 +188,7 @@
   align-items: center;
   padding: 12rpx 24rpx 16rpx;
   background: rgba(251, 248, 242, 0.97);
-  border-top: 2rpx solid rgba(139, 90, 43, 0.12);
+  border-top: 2rpx solid rgba(181, 72, 42, 0.12);
 }
 
 .input {
@@ -198,7 +198,7 @@
   font-size: 36rpx;
   color: #1E1E1A;
   background: #ffffff;
-  border: 2rpx solid rgba(139, 90, 43, 0.18);
+  border: 2rpx solid rgba(181, 72, 42, 0.18);
   border-radius: 999rpx;
 }
 
@@ -224,3 +224,88 @@
 .send-on {
   background: #B5482A;
 }
+
+/* ===== C 主题 · 康康对话 ===== */
+.bubble {
+  border: 1rpx solid var(--color-border);
+  box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.04);
+}
+.msg-me .bubble { border-color: var(--color-green); box-shadow: none; }
+.input { border: 1rpx solid var(--color-border); }
+.composer { background: #FBF8F2; border-top: 1rpx solid var(--color-border); }
+
+/* ============================================================
+   C 主题 · 问问康康（自由对话）
+   ============================================================ */
+.head {
+  padding: 16rpx 20rpx;
+  background: rgba(251, 248, 242, 0.96);
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.head-back { color: var(--color-green); }
+.head-title { font-size: 34rpx; font-weight: 600; }
+.head-sub { font-size: 24rpx; }
+.head-clear { color: var(--color-green); font-size: 24rpx; }
+
+.chat { padding: 20rpx 20rpx 0; }
+.msg { margin-bottom: 24rpx; }
+
+.msg-ava { width: 64rpx; height: 64rpx; font-size: 24rpx; }
+.msg-me .msg-ava { background: var(--color-green-bg); color: var(--color-green); }
+
+.msg .bubble {
+  padding: 20rpx 22rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 20rpx 20rpx 20rpx 6rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.04);
+}
+
+.msg-me .bubble {
+  border-color: var(--color-green);
+  border-radius: 20rpx 20rpx 6rpx 20rpx;
+  background: var(--color-green);
+  box-shadow: none;
+}
+
+.bubble-text { font-size: 32rpx; line-height: 1.7; }
+.msg-me .bubble-text { color: #FFFFFF; }
+
+.quick { padding: 8rpx 20rpx 12rpx; }
+.quick-item {
+  min-height: 64rpx;
+  padding: 0 18rpx;
+  margin-right: 10rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background: #FFFFFF;
+  font-size: 26rpx;
+  color: var(--color-ink-2);
+}
+
+.composer {
+  padding: 10rpx 20rpx 14rpx;
+  background: #FBF8F2;
+  border-top: 1rpx solid var(--color-border);
+}
+
+.input {
+  min-height: 88rpx;
+  background: #FFFFFF;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  font-size: 32rpx;
+}
+
+.send {
+  min-width: 104rpx;
+  min-height: 80rpx;
+  margin-left: 12rpx;
+  border-radius: 999rpx;
+  background: #C9D6CE;
+  color: #FFFFFF;
+  font-size: 28rpx;
+}
+
+.send-on { background: var(--color-green); }

@@ -15,7 +15,7 @@
   align-items: center;
   padding: 24rpx 28rpx;
   background: rgba(251, 248, 242, 0.97);
-  border-bottom: 2rpx solid rgba(139, 90, 43, 0.14);
+  border-bottom: 2rpx solid rgba(31, 74, 54, 0.14);
 }
 
 .head-back {
@@ -69,7 +69,7 @@
   align-items: center;
   font-size: 32rpx;
   color: #B5482A;
-  border: 2rpx solid rgba(139, 90, 43, 0.3);
+  border: 2rpx solid rgba(31, 74, 54, 0.3);
   border-radius: 12rpx;
 }
 
@@ -123,7 +123,7 @@
 .bubble {
   padding: 22rpx 24rpx;
   background: #ffffff;
-  border: 2rpx solid rgba(139, 90, 43, 0.14);
+  border: 2rpx solid rgba(31, 74, 54, 0.14);
   border-radius: 20rpx 20rpx 20rpx 6rpx;
 }
 
@@ -168,7 +168,7 @@
   font-size: 36rpx;
   color: #3f3a30;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.18);
+  border: 2rpx solid rgba(181, 72, 42, 0.18);
   border-radius: 14rpx;
 }
 
@@ -188,7 +188,7 @@
   padding: 22rpx 24rpx;
   margin-bottom: 18rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border: 2rpx solid rgba(181, 72, 42, 0.16);
   border-left: 8rpx solid #B5482A;
   border-radius: 14rpx;
 }
@@ -208,7 +208,7 @@
 .card-tag {
   font-size: 28rpx;
   color: #6E6A5E;
-  background: rgba(139, 90, 43, 0.08);
+  background: rgba(181, 72, 42, 0.08);
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
 }
@@ -225,7 +225,7 @@
   align-items: flex-start;
   margin-top: 12rpx;
   padding-top: 12rpx;
-  border-top: 2rpx dashed rgba(139, 90, 43, 0.14);
+  border-top: 2rpx dashed rgba(31, 74, 54, 0.14);
 }
 
 .card-label {
@@ -274,7 +274,7 @@
 .foot {
   padding: 16rpx 24rpx 24rpx;
   background: rgba(251, 248, 242, 0.97);
-  border-top: 2rpx solid rgba(139, 90, 43, 0.12);
+  border-top: 2rpx solid rgba(181, 72, 42, 0.12);
 }
 
 .foot-multi {
@@ -319,3 +319,133 @@
   font-size: 30rpx;
   color: #6E6A5E;
 }
+
+/* ===== C 主题 · 智能体卡片 ===== */
+.card {
+  border: 1rpx solid var(--color-border);
+  border-left: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+.card-tag {
+  background: var(--color-green-bg);
+  color: var(--color-green);
+  border-radius: 999rpx;
+}
+
+.card-row { border-top: 1rpx solid var(--color-border); }
+
+/* ============================================================
+   C 主题 · 问问康康（2026-11-20）
+   白身份条 + 白卡 bot 气泡 + 深绿用户气泡 + 胶囊选项
+   ============================================================ */
+.page { background: #FBF8F2; }
+
+.head {
+  padding: calc(16rpx + env(safe-area-inset-top)) 20rpx 16rpx;
+  background: rgba(251, 248, 242, 0.96);
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.head-back { color: var(--color-green); font-size: 40rpx; }
+
+.head-ava {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: var(--color-green);
+  font-size: 28rpx;
+  margin-right: 16rpx;
+}
+
+.head-title { font-size: 34rpx; font-weight: 600; }
+.head-sub { margin-top: 2rpx; font-size: 24rpx; color: var(--color-ink-3); }
+
+.head-restart {
+  min-height: 64rpx;
+  padding: 0 18rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: var(--color-green);
+}
+
+.chat { padding: 20rpx 20rpx 0; }
+.msg { margin-bottom: 24rpx; }
+
+.msg-ava {
+  width: 64rpx;
+  height: 64rpx;
+  font-size: 24rpx;
+  border-radius: 50%;
+}
+
+.msg-me .msg-ava {
+  background: var(--color-green-bg);
+  color: var(--color-green);
+}
+
+.msg .bubble {
+  padding: 20rpx 22rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 20rpx 20rpx 20rpx 6rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.04);
+}
+
+.msg-me .bubble {
+  border-color: var(--color-green);
+  border-radius: 20rpx 20rpx 6rpx 20rpx;
+  background: var(--color-green);
+  box-shadow: none;
+}
+
+.bubble-text { font-size: 32rpx; line-height: 1.7; color: var(--color-ink); }
+.msg-me .bubble-text { color: #FFFFFF; }
+
+.opts { margin-top: 12rpx; }
+
+.opt {
+  display: flex;
+  align-items: center;
+  min-height: 80rpx;
+  padding: 12rpx 22rpx;
+  margin: 0 0 10rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background: #FFFFFF;
+  font-size: 28rpx;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.opt-on {
+  border-color: var(--color-green);
+  background: var(--color-green-bg);
+  color: var(--color-green);
+  font-weight: 600;
+}
+
+.cards { margin-top: 12rpx; }
+.cards .card { border-radius: 20rpx; box-shadow: 0 6rpx 18rpx rgba(30, 30, 26, 0.05); }
+.card-name { font-size: 30rpx; }
+.card-meta { font-size: 24rpx; }
+.card-row { margin-top: 10rpx; padding-top: 10rpx; }
+.card-label, .card-text { font-size: 24rpx; }
+
+.foot {
+  padding: 14rpx 20rpx 20rpx;
+  background: #FBF8F2;
+  border-top: 1rpx solid var(--color-border);
+}
+
+.foot-btn {
+  min-height: 80rpx;
+  border-radius: 999rpx;
+  background: var(--color-green);
+  font-size: 30rpx;
+}
+
+.foot-hint, .foot-progress-text, .foot-note-text { font-size: 24rpx; color: var(--color-ink-3); }

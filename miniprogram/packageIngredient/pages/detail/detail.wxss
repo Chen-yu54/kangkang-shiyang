@@ -12,7 +12,7 @@
 
 .head {
   padding: 8rpx 0 24rpx;
-  border-bottom: 2rpx solid rgba(139, 90, 43, 0.16);
+  border-bottom: 2rpx solid rgba(181, 72, 42, 0.16);
 }
 
 /* 「食材档案」小标：字距拉开，像档案袋上的铅字，不抢食材名 */
@@ -58,7 +58,7 @@
   margin-top: 24rpx;
   padding: 24rpx 24rpx 24rpx 26rpx;
   background: #FFFFFF;
-  border-left: 8rpx solid rgba(139, 90, 43, 0.35);
+  border-left: 8rpx solid rgba(31, 74, 54, 0.35);
   border-radius: 12rpx;
 }
 
@@ -103,7 +103,7 @@
 .basis {
   margin-top: 32rpx;
   padding-top: 20rpx;
-  border-top: 2rpx dashed rgba(139, 90, 43, 0.2);
+  border-top: 2rpx dashed rgba(31, 74, 54, 0.2);
 }
 
 .basis-head {

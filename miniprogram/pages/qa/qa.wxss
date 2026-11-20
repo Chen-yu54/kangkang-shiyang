@@ -328,3 +328,104 @@
 .elder .bubble {
   max-width: 92%;
 }
+
+/* ===== C 主题 · 问答 ===== */
+.user-bubble { background: var(--color-green); }
+.send-btn { background: var(--color-green); }
+.send-btn[disabled] { background: #C9D6CE; }
+.bot-bubble {
+  border: 1rpx solid var(--color-border);
+  box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.05);
+}
+.input { background: #F6F2EA; }
+
+/* ============================================================
+   C 主题 · AI 问答
+   ============================================================ */
+.topbar {
+  padding: 14rpx 20rpx;
+  background: #FBF8F2;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.topbar-tip { font-size: 24rpx; color: var(--color-ink-3); }
+.topbar-clear { font-size: 24rpx; color: var(--color-green); }
+
+.msg-list { padding: 20rpx 20rpx 0; }
+
+.user-bubble {
+  border-radius: 20rpx 20rpx 6rpx 20rpx;
+  background: var(--color-green);
+  color: #FFFFFF;
+  font-size: 30rpx;
+  line-height: 1.65;
+}
+
+.bot-bubble {
+  border: 1rpx solid var(--color-border);
+  border-radius: 20rpx 20rpx 20rpx 6rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.04);
+  font-size: 30rpx;
+  line-height: 1.7;
+}
+
+.dish-card {
+  padding: 14rpx;
+  border-radius: 16rpx;
+  background: #F6F2EA;
+}
+
+.dish-name { font-size: 28rpx; font-weight: 600; }
+.dish-reason { font-size: 24rpx; color: var(--color-ink-3); }
+.btn-mini { border-radius: 999rpx; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8rpx; padding: 8rpx 20rpx; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 64rpx;
+  padding: 0 18rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background: #FFFFFF;
+  font-size: 24rpx;
+  color: var(--color-ink-2);
+}
+
+.input-bar {
+  padding: 10rpx 20rpx 14rpx;
+  background: #FBF8F2;
+  border-top: 1rpx solid var(--color-border);
+}
+
+.input {
+  height: 88rpx;
+  border: 1rpx solid var(--color-border);
+  background: #FFFFFF;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+}
+
+.send-btn {
+  width: 128rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 999rpx;
+  background: var(--color-green);
+  font-size: 28rpx;
+}
+
+.intro-card {
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  padding: 24rpx;
+}
+
+.intro-title { font-size: 34rpx; font-weight: 600; }
+.intro-ok {
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: var(--color-green);
+  color: #FFFFFF;
+}

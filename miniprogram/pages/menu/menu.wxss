@@ -166,7 +166,7 @@
 .flow {
   padding: 28rpx 26rpx 8rpx;
   margin-bottom: 22rpx;
-  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border: 2rpx solid rgba(181, 72, 42, 0.16);
   border-radius: 28rpx;
   background-image: linear-gradient(168deg, #FFFFFF 0%, #F6F2EA 100%);
   box-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.06);
@@ -335,7 +335,7 @@
   padding: 12rpx 16rpx;
   border-left: 4rpx solid var(--color-flame);
   border-radius: 8rpx;
-  background-color: rgba(139, 90, 43, 0.05);
+  background-color: rgba(31, 74, 54, 0.05);
   box-sizing: border-box;
 }
 
@@ -412,7 +412,7 @@
   min-width: 40rpx;
   padding: 2rpx 12rpx;
   border-radius: var(--radius-pill);
-  background-color: rgba(139, 90, 43, 0.08);
+  background-color: rgba(181, 72, 42, 0.08);
   font-size: var(--font-caption);
   line-height: 1.5;
   text-align: center;
@@ -733,7 +733,7 @@
   padding: 16rpx 20rpx 14rpx;
   border: 2rpx solid var(--color-border-hair);
   border-radius: 20rpx;
-  background-color: rgba(139, 90, 43, 0.04);
+  background-color: rgba(31, 74, 54, 0.04);
   box-sizing: border-box;
 }
 
@@ -866,7 +866,7 @@
 .result {
   padding: 26rpx 26rpx 22rpx;
   margin-bottom: 22rpx;
-  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border: 2rpx solid rgba(181, 72, 42, 0.16);
   border-radius: 28rpx;
   background-image: linear-gradient(168deg, #FFFFFF 0%, #F6F2EA 100%);
   box-shadow: 0 8rpx 24rpx rgba(90, 60, 30, 0.06);
@@ -1034,7 +1034,7 @@
   padding: 18rpx 20rpx;
   border-left: 6rpx solid var(--color-flame);
   border-radius: 14rpx;
-  background-color: rgba(139, 90, 43, 0.05);
+  background-color: rgba(31, 74, 54, 0.05);
 }
 
 /* 标题带一张小插画：整块纯文字排版太硬，一张 64rpx 的小图就够破题 */
@@ -1170,3 +1170,208 @@
   line-height: 1.6;
   color: #1E1E1A;
 }
+
+/* ===== C 主题 · 专属推荐 ===== */
+.flow {
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+.flow-head { border-bottom: 1rpx solid var(--color-border); }
+
+.flow-no {
+  border: none;
+  background-color: var(--color-green-bg);
+  color: var(--color-green);
+}
+
+.flow-quiz {
+  border: 1rpx solid var(--color-green);
+  border-radius: 24rpx;
+  background-color: var(--color-green-bg);
+}
+
+.flow-quiz-title { color: var(--color-green); }
+.flow-quiz-arrow { color: var(--color-green); font-family: var(--font-sans); }
+
+.flow-chip {
+  border-left-color: var(--color-green);
+  border-radius: 12rpx;
+  background-color: var(--color-green-bg);
+}
+
+.result {
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+/* ============================================================
+   C 主题 · 专属推荐（2026-11-20）
+   深绿问候头 + 白卡流程 + 白卡食单 + 胶囊按钮
+   ============================================================ */
+.daypart {
+  padding: 26rpx 24rpx;
+  border-radius: 28rpx;
+  background: linear-gradient(135deg, #B5482A 0%, #8A3018 100%) !important;
+  box-shadow: 0 12rpx 30rpx rgba(181, 72, 42, 0.22);
+}
+
+.dp-icon { display: none; }
+
+.dp-greet, .dp-nick {
+  font-family: var(--font-sans);
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.dp-sub-line { color: rgba(255, 255, 255, 0.74); }
+.dp-sub, .dp-sep { color: inherit; }
+.dp-next {
+  color: #FFFFFF;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.flow { border: none; background: #FFFFFF; }
+.flow-head { border-bottom: 1rpx solid var(--color-border); }
+
+.flow-no {
+  width: 48rpx;
+  height: 48rpx;
+  border: none;
+  background: var(--color-green-bg);
+  color: var(--color-green);
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.flow-step-title { font-size: 32rpx; font-weight: 600; }
+.flow-link { color: var(--color-green); border-bottom: 1rpx solid var(--color-green); }
+
+.flow-quiz {
+  border: 1rpx solid var(--color-green);
+  border-radius: 20rpx;
+  background: var(--color-green-bg);
+}
+
+.flow-quiz-title { color: var(--color-green); }
+.flow-quiz-arrow { color: var(--color-green); font-family: var(--font-sans); }
+
+.flow-chip {
+  border-left: none;
+  border-radius: 12rpx;
+  background: #F6F2EA;
+}
+
+.flow-cta {
+  border-radius: 999rpx;
+  background: var(--color-green);
+  box-shadow: 0 8rpx 20rpx rgba(181, 72, 42, 0.18);
+}
+
+.flow-cta-text { color: #FFFFFF; letter-spacing: 0.02em; }
+.flow-cta-arrow { color: #FFFFFF; }
+
+.flow-cta-ghost {
+  background: #FFFFFF;
+  border: 1rpx solid var(--color-border);
+}
+
+.flow-cta-ghost .flow-cta-text,
+.flow-cta-ghost .flow-cta-arrow { color: var(--color-green); }
+
+.result {
+  border: none;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+.result-head { border-bottom: 1rpx solid var(--color-border); }
+
+.result-no {
+  background: var(--color-green);
+  border-radius: 50%;
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+}
+
+.result-title { font-size: 32rpx; font-weight: 600; }
+
+.rdish {
+  border: none;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 6rpx 18rpx rgba(30, 30, 26, 0.05);
+}
+
+.rdish-img { height: 280rpx; }
+.rdish-name { font-size: 34rpx; font-weight: 600; }
+
+.rdish-tag {
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background: #F6F2EA;
+}
+
+.rdish-tag-on {
+  border-color: var(--color-green);
+  background: var(--color-green-bg);
+  color: var(--color-green);
+}
+
+.rdish-why { color: var(--color-green); }
+.rdish-open { color: var(--color-green); border-top: 1rpx solid var(--color-border); }
+
+.rblock {
+  border-left: none;
+  border-radius: 20rpx;
+  background: #F6F2EA;
+  padding: 20rpx;
+}
+
+.rblock-title { font-size: 30rpx; font-weight: 600; }
+.rweather { border-radius: 20rpx; background: #FFFFFF; box-shadow: 0 6rpx 18rpx rgba(30, 30, 26, 0.04); }
+
+.nut-browse {
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background: #FFFFFF;
+}
+
+.nut-browse-text { color: var(--color-green); font-size: 28rpx; }
+
+.browse-back-text { color: var(--color-green); font-size: 28rpx; }
+
+.flavor-card {
+  border: none;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+}
+
+.flavor-name { font-size: 34rpx; font-weight: 600; color: var(--color-ink); }
+.flavor-risk { border-top: 1rpx solid var(--color-border); }
+
+.side {
+  width: 168rpx;
+  border-right: none;
+  margin-right: 12rpx;
+}
+
+.side-item { border-radius: 12rpx; margin-bottom: 4rpx; }
+
+.side-on { background: var(--color-green); }
+.side-on .side-text { color: #FFFFFF; font-weight: 500; }
+.side-bar { display: none; }
+
+.season-label { padding: 14rpx 10rpx 6rpx; }
+.season-text { font-size: 22rpx; }
+.side-text { font-size: 28rpx; }
+
+.count-text { font-size: 24rpx; }

@@ -66,7 +66,7 @@
         <view class="ck-ring-item" wx:for="{{stats.promises}}" wx:key="key">
           <view
             class="ck-ring"
-            style="background: conic-gradient(#b5482a 0 {{item.pct}}%, rgba(139,90,43,0.13) {{item.pct}}% 100%)"
+            style="background: conic-gradient(#1F4A36 0 {{item.pct}}%, rgba(31,74,54,0.12) {{item.pct}}% 100%)"
           >
             <view class="ck-ring-in"><text class="ck-ring-t">{{item.text}}</text></view>
           </view>
@@ -260,7 +260,7 @@
         <view
           wx:for="{{ck.library.sources}}"
           wx:key="name"
-          style="width: {{item.pct}}%; background-color: {{item.dim ? 'rgba(139,90,43,0.18)' : (index === 0 ? '#b8863b' : '#b5482a')}}"
+          style="width: {{item.pct}}%; background-color: {{item.dim ? 'rgba(31, 74, 54,0.18)' : (index === 0 ? '#b8863b' : '#b5482a')}}"
         ></view>
       </view>
       <view class="ck-legend">

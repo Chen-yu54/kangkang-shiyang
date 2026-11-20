@@ -129,3 +129,26 @@
 .tap-hover {
   opacity: 0.82;
 }
+
+/* ===== C 主题 · 搜索 ===== */
+.search-input {
+  background-color: #FFFFFF;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  box-shadow: 0 8rpx 22rpx rgba(30, 30, 26, 0.06);
+}
+
+.voice-btn {
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background-color: #FFFFFF;
+}
+
+.search-btn {
+  border: none;
+  border-radius: 999rpx;
+  background-color: var(--color-green);
+}
+
+.search-btn-text { color: #FFFFFF; }
+

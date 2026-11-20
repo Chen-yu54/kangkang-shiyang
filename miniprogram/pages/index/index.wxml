@@ -232,7 +232,7 @@
           <view class="cp-ring-item" wx:for="{{stats.promises}}" wx:key="key">
             <view
               class="cp-ring"
-              style="background: conic-gradient(#b5482a 0 {{item.pct}}%, rgba(139,90,43,0.13) {{item.pct}}% 100%)"
+              style="background: conic-gradient(#1F4A36 0 {{item.pct}}%, rgba(31,74,54,0.12) {{item.pct}}% 100%)"
             >
               <view class="cp-ring-in"><text class="cp-ring-t">{{item.text}}</text></view>
             </view>

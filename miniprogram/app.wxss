@@ -43,15 +43,15 @@ page {
   --color-ink-3: #6E6A5E; /* 次文字 / 说明，约 7.5:1（设计稿此处偏浅，已加深） */
 
   /* —— 主色：棕褐 —— */
-  --color-brand: #1F4A36;
-  --color-brand-deep: #16382A;
+  --color-brand: #B5482A;
+  --color-brand-deep: #8A3018;
 
   /* —— 强调：深绿（声明条、选中态、加载态） —— */
-  --color-green: #1F4A36;
-  --color-green-deep: #16382A;
-  --color-green-soft: #DCE8E0;
-  --color-green-bg: #F0F5F1;
-  --color-green-ink: #1F4A36; /* 绿底上的文字，对 #F0F5F1 约 9:1 */
+  --color-green: #B5482A;
+  --color-green-deep: #8A3018;
+  --color-green-soft: #F3E4DE;
+  --color-green-bg: #FAF1ED;
+  --color-green-ink: #8A3018; /* 绿底上的文字，对 #FAF1ED 约 9:1 */
   --color-on-brand: #ffffff;
 
   /* 印章与图内标注：只用于图片上的装饰性文字（印章、角标），不是正文。
@@ -81,10 +81,11 @@ page {
   --cuisine-hakka: #7c6a30; /* 客家 · 咸菜绿金 */
   --cuisine-other: #6f6046; /* 其他 · 杂粮褐 */
 
-  /* —— 食欲强调：朱砂锅气 + 焦糖金。只用于点火处（印章、主推标、热区描边），
-   * 不大面积铺，避免从「食养刊物」滑向「快餐促销」 —— */
-  --color-flame: #b5482a;
-  --color-flame-deep: #8a3018;
+  /* —— 强调色：C 主题统一深绿，替代原朱砂锅气。
+   * 只用于点火处（主推标、热区描边、进度），大面积铺仍是白卡。
+   * 图内印章装饰另走 --color-seal，保留朱砂，不受此处影响 —— */
+  --color-flame: #B5482A;
+  --color-flame-deep: #8A3018;
   --color-gold: #b8863b;
 
   /* —— 暗色「食光」层：封面 hero / 主推大卡 / 夜读区的承载色。
@@ -244,7 +245,7 @@ page {
   background-color: var(--color-brand);
   font-size: var(--font-btn);
   color: #FFFFFF;
-  box-shadow: 0 8rpx 20rpx rgba(31, 74, 54, 0.18);
+  box-shadow: 0 8rpx 20rpx rgba(181, 72, 42, 0.18);
   box-sizing: border-box;
 }
 

@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "问问康康",
-  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarBackgroundColor": "#FBF8F2",
   "navigationBarTextStyle": "black",
-  "backgroundColor": "#faf7f2",
+  "backgroundColor": "#FBF8F2",
   "usingComponents": {}
 }

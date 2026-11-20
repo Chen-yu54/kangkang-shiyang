@@ -35,7 +35,7 @@
    一红一黄一绿的等级色会被读成「质检结论」，也超出一个主题的三色 */
 .badge-ev {
   border-color: var(--color-border-soft);
-  background-color: rgba(139, 90, 43, 0.05);
+  background-color: rgba(31, 74, 54, 0.05);
   color: var(--color-ink-2);
 }
 
@@ -330,7 +330,7 @@
   align-items: center;
   padding: 0 26rpx;
   color: #B5482A;
-  background: #F3E4DE;
+  background: #FAF1ED;
   border: 2rpx solid rgba(63, 122, 69, 0.28);
   border-radius: 12rpx;
 }
@@ -346,3 +346,107 @@
   font-size: 30rpx;
   color: #6E6A5E;
 }
+
+/* ===== C 主题 · 菜品详情（2026-11-20） ===== */
+.dish-name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+
+.fav-btn {
+  border: none;
+  border-radius: 999rpx;
+  background-color: var(--color-green);
+  box-shadow: 0 8rpx 20rpx rgba(181, 72, 42, 0.18);
+}
+
+.fav-text { color: #FFFFFF; }
+.fav-btn-on { background-color: var(--color-green-deep); }
+
+.section { margin-top: 36rpx; }
+.section-label { font-family: var(--font-sans); font-weight: 600; color: var(--color-ink); }
+
+.notice-line {
+  border: none;
+  border-radius: 20rpx;
+  background-color: var(--color-green-bg);
+}
+
+.chip {
+  padding: 8rpx 22rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background-color: #FFFFFF;
+}
+
+.why-box {
+  border: none;
+  border-radius: 24rpx;
+  background-color: #FFFFFF;
+  box-shadow: var(--shadow-card);
+}
+
+/* ===== C 主题 · 收藏改为图片右上角小图标（88rpx 热区） ===== */
+.dish-media { position: relative; }
+
+.fav-icon {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 6rpx 16rpx rgba(30, 30, 26, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.fav-ico { width: 40rpx; height: 40rpx; }
+
+.fav-icon.on { background-color: #FFFFFF; }
+
+/* ===== C 主题 · 出处常显 ===== */
+.src-box {
+  margin-top: 10rpx;
+  padding: 20rpx 22rpx;
+  border-radius: 16rpx;
+  background-color: #F6F2EA;
+}
+
+.src-label {
+  display: block;
+  margin-bottom: 6rpx;
+  font-size: 24rpx;
+  color: var(--color-green);
+}
+
+.src-text {
+  display: block;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: var(--color-ink-2);
+  word-break: break-word;
+}
+
+
+/* C 主题：出处折叠入口（保留原有展开/收起交互，只换视觉） */
+.src-toggle-text {
+  color: #B5482A;
+  text-decoration: none;
+  border-bottom: 1rpx solid rgba(31, 74, 54, 0.32);
+  padding-bottom: 2rpx;
+}
+
+.src-body {
+  margin-top: 10rpx;
+  padding: 20rpx 22rpx;
+  border-radius: 16rpx;
+  background-color: #F6F2EA;
+  color: #4A463C;
+}
+

@@ -61,7 +61,7 @@
   margin-top: 40rpx;
   padding: 26rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border: 2rpx solid rgba(181, 72, 42, 0.16);
   border-radius: 16rpx;
 }
 
@@ -94,14 +94,14 @@
   margin: 0 16rpx 16rpx 0;
   font-size: 36rpx;
   color: #4A463C;
-  background: rgba(139, 90, 43, 0.08);
+  background: rgba(181, 72, 42, 0.08);
   border: 2rpx solid transparent;
   border-radius: 12rpx;
 }
 
 .chip-on {
   color: #B5482A;
-  background: #F3E4DE;
+  background: #FAF1ED;
   border-color: #B5482A;
   font-weight: 600;
 }
@@ -131,7 +131,7 @@
   margin-top: 20rpx;
   background: #ffffff;
   color: #B5482A;
-  border: 2rpx solid rgba(139, 90, 43, 0.4);
+  border: 2rpx solid rgba(31, 74, 54, 0.4);
 }
 
 .actions-hint {
@@ -147,7 +147,7 @@
   margin-top: 40rpx;
   padding: 32rpx 26rpx;
   background: #FFFFFF;
-  border: 2rpx solid rgba(139, 90, 43, 0.16);
+  border: 2rpx solid rgba(181, 72, 42, 0.16);
   border-radius: 16rpx;
 }
 

@@ -109,9 +109,9 @@
   flex: none;
   margin-right: 16rpx;
   padding: 6rpx 18rpx;
-  border: 2rpx solid rgba(139, 90, 43, 0.28);
+  border: 2rpx solid rgba(31, 74, 54, 0.28);
   border-radius: 8rpx;
-  background-color: rgba(139, 90, 43, 0.05);
+  background-color: rgba(31, 74, 54, 0.05);
   font-family: var(--font-heading);
   font-size: var(--font-base);
   letter-spacing: 0.04em;
@@ -126,3 +126,13 @@
   line-height: 1.6;
   color: var(--color-ink-3);
 }
+
+/* ===== C 主题 · 偏好结果 ===== */
+.tag-chip {
+  background: var(--color-green-bg);
+  color: var(--color-green);
+  border-radius: 999rpx;
+}
+
+.section-label { color: var(--color-ink); }
+
