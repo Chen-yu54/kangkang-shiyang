@@ -86,6 +86,7 @@
     </scroll-view>
 
     <view wx:else class="fav-empty" hover-class="tap-hover" bindtap="onGoHome">
+      <image class="fav-empty-art" src="/images/ingredients/state-record.png" mode="aspectFit" />
       <text class="fav-empty-title">{{copy.favEmptyTitle}}</text>
       <text class="fav-empty-sub">{{copy.favEmptySub}}</text>
     </view>

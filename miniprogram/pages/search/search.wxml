@@ -76,6 +76,7 @@
       <empty-state wx:elif="{{status === 'empty'}}" text="{{copy.empty}}" />
 
       <view wx:elif="{{status === 'error'}}" class="state-box">
+        <image class="state-icon" src="/images/icons/state-error.png" mode="aspectFit" />
         <text class="state-text">{{copy.failed}}</text>
         <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
       </view>

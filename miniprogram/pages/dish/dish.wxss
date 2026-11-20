@@ -262,7 +262,7 @@
   padding: 2rpx 12rpx;
   border: 2rpx solid var(--color-flame);
   border-radius: 6rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-caption);
   color: var(--color-flame);
 }
@@ -329,8 +329,8 @@
   display: inline-flex;
   align-items: center;
   padding: 0 26rpx;
-  color: #3f7a45;
-  background: #ecf2e6;
+  color: #B5482A;
+  background: #F3E4DE;
   border: 2rpx solid rgba(63, 122, 69, 0.28);
   border-radius: 12rpx;
 }
@@ -344,5 +344,5 @@
 .section-hint {
   margin-left: 16rpx;
   font-size: 30rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }

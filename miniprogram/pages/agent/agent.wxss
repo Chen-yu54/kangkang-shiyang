@@ -1,7 +1,7 @@
 /* 问问康康 —— 对话页。米黄纸感 + 墨绿气泡，正文 36rpx 起，选项点击区 88rpx。 */
 .page {
   min-height: 100vh;
-  background: #f7f0e1;
+  background: #FBF8F2;
   display: flex;
   flex-direction: column;
 }
@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   font-size: 44rpx;
-  color: #8b5a2b;
+  color: #B5482A;
   margin-right: 8rpx;
 }
 
@@ -33,7 +33,7 @@
   width: 76rpx;
   height: 76rpx;
   border-radius: 24rpx;
-  background: #3f7a45;
+  background: #B5482A;
   color: #ffffff;
   font-size: 34rpx;
   font-weight: 700;
@@ -52,14 +52,14 @@
   display: block;
   font-size: 38rpx;
   font-weight: 700;
-  color: #2d241a;
+  color: #1E1E1A;
 }
 
 .head-sub {
   display: block;
   margin-top: 4rpx;
   font-size: 30rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }
 
 .head-restart {
@@ -68,7 +68,7 @@
   display: flex;
   align-items: center;
   font-size: 32rpx;
-  color: #8b5a2b;
+  color: #B5482A;
   border: 2rpx solid rgba(139, 90, 43, 0.3);
   border-radius: 12rpx;
 }
@@ -104,14 +104,14 @@
   font-size: 28rpx;
   font-weight: 700;
   flex: none;
-  background: #3f7a45;
+  background: #B5482A;
   color: #ffffff;
   margin-right: 16rpx;
 }
 
 .msg-me .msg-ava {
-  background: #eadfce;
-  color: #6b5a45;
+  background: #E8E3D8;
+  color: #4A463C;
   margin-right: 0;
   margin-left: 16rpx;
 }
@@ -128,8 +128,8 @@
 }
 
 .msg-me .bubble {
-  background: #3f7a45;
-  border-color: #3f7a45;
+  background: #B5482A;
+  border-color: #B5482A;
   border-radius: 20rpx 20rpx 6rpx 20rpx;
 }
 
@@ -137,7 +137,7 @@
   display: block;
   font-size: 36rpx;
   line-height: 1.7;
-  color: #2d241a;
+  color: #1E1E1A;
 }
 
 .msg-me .bubble-text {
@@ -167,15 +167,15 @@
   margin-bottom: 14rpx;
   font-size: 36rpx;
   color: #3f3a30;
-  background: #fdf8ee;
+  background: #FFFFFF;
   border: 2rpx solid rgba(139, 90, 43, 0.18);
   border-radius: 14rpx;
 }
 
 .opt-on {
-  color: #3f7a45;
-  background: #ecf2e6;
-  border-color: #3f7a45;
+  color: #B5482A;
+  background: #F3E4DE;
+  border-color: #B5482A;
   font-weight: 600;
 }
 
@@ -187,9 +187,9 @@
 .card {
   padding: 22rpx 24rpx;
   margin-bottom: 18rpx;
-  background: #fdf8ee;
+  background: #FFFFFF;
   border: 2rpx solid rgba(139, 90, 43, 0.16);
-  border-left: 8rpx solid #3f7a45;
+  border-left: 8rpx solid #B5482A;
   border-radius: 14rpx;
 }
 
@@ -202,12 +202,12 @@
 .card-name {
   font-size: 38rpx;
   font-weight: 700;
-  color: #2d241a;
+  color: #1E1E1A;
 }
 
 .card-tag {
   font-size: 28rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
   background: rgba(139, 90, 43, 0.08);
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
@@ -217,7 +217,7 @@
   display: block;
   margin-top: 6rpx;
   font-size: 30rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }
 
 .card-row {
@@ -232,7 +232,7 @@
   flex: none;
   width: 84rpx;
   font-size: 30rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
   line-height: 1.6;
 }
 
@@ -267,7 +267,7 @@
 }
 
 .typing-text {
-  color: #6b5a45;
+  color: #4A463C;
 }
 
 /* 底部 */
@@ -285,7 +285,7 @@
 
 .foot-hint {
   font-size: 32rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
   flex: 1;
 }
 
@@ -298,7 +298,7 @@
   font-size: 36rpx;
   font-weight: 600;
   color: #ffffff;
-  background: #3f7a45;
+  background: #B5482A;
   border-radius: 14rpx;
 }
 
@@ -308,7 +308,7 @@
 
 .foot-progress-text {
   font-size: 30rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }
 
 .foot-note {
@@ -317,5 +317,5 @@
 
 .foot-note-text {
   font-size: 30rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }

@@ -18,18 +18,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f7f0e1;
+  background: #FBF8F2;
 }
 
 .fallback-text {
   font-size: 36rpx;
-  color: #6b5a45;
+  color: #4A463C;
 }
 
 .fallback-hint {
   margin-top: 12rpx;
   font-size: 32rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }
 
 .bar {
@@ -49,14 +49,14 @@
   display: block;
   font-size: 36rpx;
   font-weight: 600;
-  color: #2d241a;
+  color: #1E1E1A;
 }
 
 .bar-cuisine {
   display: block;
   margin-top: 6rpx;
   font-size: 32rpx;
-  color: #8b5a2b;
+  color: #B5482A;
 }
 
 /* 点击区 88rpx 起 */
@@ -69,7 +69,7 @@
   margin-left: 24rpx;
   font-size: 36rpx;
   color: #ffffff;
-  background: #3f7a45;
+  background: #B5482A;
   border-radius: 12rpx;
 }
 

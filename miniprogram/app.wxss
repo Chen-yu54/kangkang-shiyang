@@ -32,26 +32,26 @@
 
 page {
   /* —— 底色：米黄纸感，禁用纯白刺眼背景 —— */
-  --color-bg: #f7f0e1;
-  --color-bg-soft: #fbf7ea;
-  --color-card: #fbf7ea;
+  --color-bg: #FBF8F2;
+  --color-bg-soft: #F6F2EA;
+  --color-card: #FFFFFF;
   --color-skeleton: rgba(139, 90, 43, 0.1);
 
   /* —— 文字三档，全部满足 ≥4.5:1 —— */
-  --color-ink: #3d2b1a; /* 主文字，约 12:1 */
-  --color-ink-2: #4a3826; /* 正文，约 10:1 */
-  --color-ink-3: #5a4630; /* 次文字 / 说明，约 7.5:1（设计稿此处偏浅，已加深） */
+  --color-ink: #1E1E1A; /* 主文字，约 12:1 */
+  --color-ink-2: #4A463C; /* 正文，约 10:1 */
+  --color-ink-3: #6E6A5E; /* 次文字 / 说明，约 7.5:1（设计稿此处偏浅，已加深） */
 
   /* —— 主色：棕褐 —— */
-  --color-brand: #8b5a2b;
-  --color-brand-deep: #5a3a1e;
+  --color-brand: #B5482A;
+  --color-brand-deep: #8A3018;
 
   /* —— 强调：墨绿（声明条、选中态、加载态） —— */
-  --color-green: #3f7a45;
-  --color-green-deep: #2f5f36;
-  --color-green-soft: #d7e7d1;
-  --color-green-bg: #e8f1e4;
-  --color-green-ink: #3a4f38; /* 绿底上的文字，对 #e8f1e4 约 7.3:1 */
+  --color-green: #B5482A;
+  --color-green-deep: #8A3018;
+  --color-green-soft: #F3E4DE;
+  --color-green-bg: #FAF1ED;
+  --color-green-ink: #8A3018; /* 绿底上的文字，对 #FAF1ED 约 7.3:1 */
   --color-on-brand: #ffffff;
 
   /* 印章与图内标注：只用于图片上的装饰性文字（印章、角标），不是正文。
@@ -111,9 +111,9 @@ page {
   --tone-other-deep: #e1d7bf;
 
   /* —— 边框：三档纸感描边 —— */
-  --color-border: #d9c39c;
-  --color-border-soft: #e6d7b8;
-  --color-border-hair: #ecdfc2;
+  --color-border: #E8E3D8;
+  --color-border-soft: #EFEAE0;
+  --color-border-hair: #F3EFE7;
 
   /* —— 字号：适老化下限，不随设计稿缩小 —— */
   --font-base: 36rpx; /* 正文，下限 36rpx */
@@ -148,14 +148,18 @@ page {
     "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
   --font-serif: "Songti SC", "STSong", "STZhongsong", "Noto Serif CJK SC",
     "Source Han Serif SC", "SimSun", "Noto Serif SC", serif;
+  /* 标题字：C 版改成无衬线。中文排版靠字距与字重拉层次，不靠换字体 */
+  --font-heading: -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    "Source Han Sans SC", sans-serif;
 
   /* —— 形状 —— */
-  --radius-card: 32rpx; /* 卡片 16px × 2 */
+  --radius-card: 28rpx; /* 卡片 16px × 2 */
   --radius-pill: 44rpx; /* 胶囊 22px × 2 */
-  --radius-small: 20rpx; /* 小圆角 10px × 2 */
-  --shadow-card: 0 4rpx 16rpx rgba(90, 60, 30, 0.08);
+  --radius-small: 16rpx; /* 小圆角 10px × 2 */
+  --shadow-card: 0 6rpx 18rpx rgba(30, 30, 26, 0.05);
   /* 抬升阴影：主推大卡 / 封面浮层，给「从纸面抬起」的纵深 */
-  --shadow-lift: 0 10rpx 28rpx rgba(60, 38, 20, 0.16);
+  --shadow-lift: 0 12rpx 30rpx rgba(30, 30, 26, 0.10);
   /* 深阴影：暗底封面的下坠感，让亮卡像摆在暗桌上 */
   --shadow-deep: 0 18rpx 44rpx rgba(24, 16, 10, 0.38);
 
@@ -184,7 +188,7 @@ page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
 }
 
@@ -207,6 +211,23 @@ page {
   font-size: var(--font-base);
   color: var(--color-ink-3);
   text-align: center;
+}
+
+/* 空态/错误态配图：给纯文字状态一个视觉锚点，不额外加装饰 */
+.state-icon {
+  width: 96rpx;
+  height: 96rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.72;
+}
+
+/* 卡片内的小配图：节气介绍、问卷引导这类 */
+.sec-figure {
+  width: 120rpx;
+  height: 120rpx;
+  flex: none;
+  margin-right: 20rpx;
+  opacity: 0.9;
 }
 
 /* 通用按钮：胶囊形 */
@@ -258,14 +279,14 @@ page {
 }
 
 .masthead-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-title);
   letter-spacing: var(--tracking-title);
   color: var(--color-ink);
 }
 
 .masthead-no {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-caption);
   letter-spacing: var(--tracking-caps);
   color: var(--color-ink-3);
@@ -301,7 +322,7 @@ page {
 
 .pullquote-text {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-subtitle);
   line-height: 1.7;
   letter-spacing: var(--tracking-title);

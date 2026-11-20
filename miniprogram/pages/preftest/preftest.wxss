@@ -97,9 +97,18 @@
   padding: 8rpx 0 32rpx;
 }
 
+/* 问卷引导配图：放在标题上方，尺寸收着，别抢标题 */
+.intro-art {
+  display: block;
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.9;
+}
+
 .intro-title {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-title);
   color: var(--color-ink);
 }

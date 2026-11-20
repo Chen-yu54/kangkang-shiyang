@@ -48,7 +48,7 @@
 .head-title {
   display: block;
   margin-top: 24rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-display);
   letter-spacing: 6rpx;
   line-height: 1.2;
@@ -102,7 +102,7 @@
 .hero-title {
   display: block;
   margin-top: 12rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-subtitle);
   letter-spacing: 2rpx;
   color: var(--color-ink);
@@ -209,7 +209,7 @@
 }
 
 .sec-no {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-caption);
   color: var(--color-on-brand);
   background: var(--color-flame);
@@ -219,7 +219,7 @@
 }
 
 .sec-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-title);
   letter-spacing: 4rpx;
   color: var(--color-ink);
@@ -245,7 +245,7 @@
 .subhead {
   display: block;
   margin: 40rpx 0 20rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-btn);
   font-weight: 600;
   letter-spacing: 2rpx;
@@ -315,7 +315,7 @@
 }
 
 .ov-num {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 56rpx;
   line-height: 1.1;
   color: var(--color-ink);
@@ -543,7 +543,7 @@
 .take-n {
   flex: none;
   width: 56rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-subtitle);
   line-height: 1.1;
   color: var(--color-flame);
@@ -675,7 +675,7 @@
 .case-amount {
   flex: none;
   margin-left: 16rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-btn);
   color: var(--color-flame);
 }
@@ -738,7 +738,7 @@
 
 .notes-title {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-btn);
   font-weight: 600;
   color: var(--color-ink);

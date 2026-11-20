@@ -10,6 +10,7 @@
       <empty-state wx:elif="{{status === 'empty'}}" text="{{copy.empty}}" />
 
       <view wx:elif="{{status === 'error'}}" class="state-box">
+        <image class="state-icon" src="/images/icons/state-error.png" mode="aspectFit" />
         <text class="state-text">{{copy.error}}</text>
         <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
       </view>
@@ -68,6 +69,7 @@
 
         <!-- 节气文化简介：来自知识库节气卡的「节气简介」栏，已剔掉功效性表述 -->
         <view wx:if="{{detail.intro}}" class="intro-card">
+          <image class="intro-figure" src="/images/ingredients/term-poetry.png" mode="aspectFit" />
           <text class="intro-label">{{copy.intro}}</text>
           <text class="intro-text">{{detail.intro}}</text>
         </view>

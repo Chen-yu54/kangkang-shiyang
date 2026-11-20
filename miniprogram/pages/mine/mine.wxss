@@ -8,7 +8,7 @@
 }
 
 .mast-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-title);
   font-weight: 600;
   letter-spacing: var(--tracking-title);
@@ -164,7 +164,7 @@
 }
 
 .stat-num {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-title);
   line-height: 1.1;
   color: var(--color-ink);
@@ -198,7 +198,7 @@
 
 .sec-no {
   margin-right: 12rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-btn);
   color: var(--color-flame);
 }
@@ -206,7 +206,7 @@
 .sec-title {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-subtitle);
   font-weight: 600;
   letter-spacing: var(--tracking-title);
@@ -258,9 +258,20 @@
 }
 
 .fav-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 32rpx 24rpx;
   border: 2rpx dashed var(--color-border);
   border-radius: var(--radius-card);
+}
+
+/* 空收藏的配图：只做视觉锚点，不放大也不加装饰 */
+.fav-empty-art {
+  width: 112rpx;
+  height: 112rpx;
+  margin-bottom: 16rpx;
+  opacity: 0.72;
 }
 
 .fav-empty-title {

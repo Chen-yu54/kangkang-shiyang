@@ -7,6 +7,7 @@
     <!-- ① 前置同意页：三个开关默认全关 -->
     <block wx:if="{{showIntro}}">
       <view class="intro-head">
+        <image class="intro-art" src="/images/ingredients/ques-intro.png" mode="aspectFit" />
         <text class="intro-title">{{copy.introTitle}}</text>
         <text class="intro-desc">{{copy.introDesc}}</text>
       </view>

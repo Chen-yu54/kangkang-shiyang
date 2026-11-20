@@ -3,7 +3,7 @@
 .doc-title {
   display: block;
   padding: 8rpx 0 12rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-title);
   color: var(--color-ink);
 }
@@ -24,7 +24,7 @@
 .doc-h {
   display: block;
   margin-bottom: 12rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-base);
   font-weight: 600;
   color: var(--color-ink);

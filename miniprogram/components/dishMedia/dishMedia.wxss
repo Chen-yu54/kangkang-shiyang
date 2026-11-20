@@ -260,7 +260,7 @@
 }
 
 .dm-seal-text {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--font-seal-md);
   line-height: 1;
   color: var(--color-on-seal);

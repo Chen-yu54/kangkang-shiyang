@@ -3,7 +3,7 @@
    头像与导航 logo 都走品牌图，不另画图标。 */
 
 page {
-  background: #f7f0e1;
+  background: #FBF8F2;
 }
 
 /* 对话页根容器：全屏纵向弹性，自己定高，不复用 app.wxss 的 .page
@@ -12,7 +12,7 @@ page {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f7f0e1;
+  background: #FBF8F2;
 }
 
 /* ==================== 导航 ==================== */
@@ -35,7 +35,7 @@ page {
   align-items: center;
   justify-content: center;
   font-size: 48rpx;
-  color: #8b5a2b;
+  color: #B5482A;
   flex: none;
 }
 
@@ -45,7 +45,7 @@ page {
   border-radius: 50%;
   flex: none;
   margin: 0 16rpx 0 4rpx;
-  background: #fbf3e2;
+  background: #F6F2EA;
   border: 2rpx solid rgba(139, 90, 43, 0.16);
 }
 
@@ -56,9 +56,9 @@ page {
 
 .nav-t {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 34rpx;
-  color: #2d241a;
+  color: #1E1E1A;
   letter-spacing: 0.02em;
 }
 
@@ -66,7 +66,7 @@ page {
   display: block;
   margin-top: 2rpx;
   font-size: 24rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
 }
 
 .nav-clear {
@@ -76,7 +76,7 @@ page {
   display: flex;
   align-items: center;
   font-size: 28rpx;
-  color: #8b5a2b;
+  color: #B5482A;
 }
 
 /* ==================== 消息区 ==================== */
@@ -107,7 +107,7 @@ page {
   border-radius: 50%;
   flex: none;
   margin-right: 14rpx;
-  background: #fbf3e2;
+  background: #F6F2EA;
   border: 2rpx solid rgba(139, 90, 43, 0.14);
 }
 
@@ -120,9 +120,9 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #3f7a45;
-  border-color: #3f7a45;
-  color: #fffdf8;
+  background: #B5482A;
+  border-color: #B5482A;
+  color: #FFFFFF;
   font-size: 26rpx;
 }
 
@@ -139,15 +139,15 @@ page {
 
 .bubble {
   padding: 18rpx 22rpx;
-  background: #fffdf8;
+  background: #FFFFFF;
   border: 1rpx solid rgba(139, 90, 43, 0.12);
   border-radius: 6rpx 22rpx 22rpx 22rpx;
   box-shadow: 0 4rpx 14rpx rgba(61, 43, 26, 0.05);
 }
 
 .msg.me .bubble {
-  background: #3f7a45;
-  border-color: #3f7a45;
+  background: #B5482A;
+  border-color: #B5482A;
   border-radius: 22rpx 6rpx 22rpx 22rpx;
 }
 
@@ -155,20 +155,20 @@ page {
   display: block;
   font-size: 28rpx;
   line-height: 1.64;
-  color: #3d2b1a;
+  color: #1E1E1A;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .msg.me .bubble-t {
-  color: #fffdf8;
+  color: #FFFFFF;
 }
 
 .msg-note {
   display: block;
   margin-top: 8rpx;
   font-size: 22rpx;
-  color: #a89880;
+  color: #6E6A5E;
 }
 
 /* 能力卡：挑菜 / 问答 / 陪想 */
@@ -193,7 +193,7 @@ page {
   display: block;
   font-size: 24rpx;
   font-weight: 600;
-  color: #3f7a45;
+  color: #B5482A;
 }
 
 .cap-s {
@@ -226,7 +226,7 @@ page {
   align-items: center;
   padding: 12rpx;
   margin-top: 10rpx;
-  background: #fffaf0;
+  background: #FFFFFF;
   border: 1rpx solid rgba(139, 90, 43, 0.12);
   border-radius: 14rpx;
 }
@@ -243,9 +243,9 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 34rpx;
-  color: #8b5a2b;
+  color: #B5482A;
 }
 
 .card-main {
@@ -258,14 +258,14 @@ page {
   display: block;
   font-size: 28rpx;
   font-weight: 600;
-  color: #2d241a;
+  color: #1E1E1A;
 }
 
 .card-m {
   display: block;
   margin-top: 3rpx;
   font-size: 22rpx;
-  color: #8b7a5b;
+  color: #6E6A5E;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -287,7 +287,7 @@ page {
 .typing-txt {
   font-size: 26rpx;
   line-height: 1.5;
-  color: #8b7a5b;
+  color: #6E6A5E;
   animation: kkFade 0.45s ease both;
 }
 
@@ -338,11 +338,11 @@ page {
   display: inline-block;
   padding: 12rpx 22rpx;
   margin-right: 12rpx;
-  background: #fffdf8;
+  background: #FFFFFF;
   border: 1rpx solid rgba(139, 90, 43, 0.22);
   border-radius: 40rpx;
   font-size: 24rpx;
-  color: #5a4630;
+  color: #6E6A5E;
 }
 
 /* ==================== 输入 ==================== */
@@ -359,15 +359,15 @@ page {
   flex: 1;
   height: 84rpx;
   padding: 0 24rpx;
-  background: #fffdf8;
+  background: #FFFFFF;
   border: 1rpx solid rgba(139, 90, 43, 0.18);
   border-radius: 42rpx;
   font-size: 28rpx;
-  color: #3d2b1a;
+  color: #1E1E1A;
 }
 
 .ph {
-  color: #a89880;
+  color: #6E6A5E;
 }
 
 .send {
@@ -379,14 +379,14 @@ page {
   align-items: center;
   justify-content: center;
   background: #e6dcc8;
-  color: #a89880;
+  color: #6E6A5E;
   border-radius: 42rpx;
   font-size: 28rpx;
 }
 
 .send-on {
-  background: #3f7a45;
-  color: #fffdf8;
+  background: #B5482A;
+  color: #FFFFFF;
 }
 
 .foot {

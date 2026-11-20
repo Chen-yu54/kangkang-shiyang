@@ -45,7 +45,7 @@
 }
 
 .lg-back-text {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 48rpx;
   color: var(--color-ink-2);
 }
@@ -86,7 +86,7 @@
 .lg-name {
   margin-top: 28rpx;
   padding-left: 10rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 64rpx;
   font-weight: 600;
   letter-spacing: 10rpx;
@@ -118,7 +118,7 @@
 .lg-point-no {
   flex: none;
   width: 44rpx;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 24rpx;
   line-height: 1.6;
   color: var(--color-flame);
@@ -162,7 +162,7 @@
   font-size: 34rpx;
   font-weight: 600;
   letter-spacing: 6rpx;
-  color: #fdf3e0;
+  color: #F6F2EA;
 }
 
 .lg-agree {
@@ -276,7 +276,7 @@
 .auth-title {
   display: block;
   text-align: center;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 40rpx;
   letter-spacing: 4rpx;
   color: var(--color-ink);
@@ -383,7 +383,7 @@
 .auth-cb-tick {
   font-size: 24rpx;
   line-height: 1;
-  color: #fdf3e0;
+  color: #F6F2EA;
 }
 
 .auth-agree-text {
@@ -408,7 +408,7 @@
   font-size: 32rpx;
   font-weight: 600;
   letter-spacing: 6rpx;
-  color: #fdf3e0;
+  color: #F6F2EA;
 }
 
 .auth-note {
