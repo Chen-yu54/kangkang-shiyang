@@ -67,29 +67,7 @@
         <text class="tculture-poem-by">{{termCulture.poem.author}}</text>
       </view>
 
-      <!-- 三候：节气文化最核心的内容，直接在首页展示，不用点进去才看得到 -->
-      <view wx:if="{{termCulture.phenology.length}}" class="tculture-block">
-        <text class="tculture-label">{{copy.phenology}}</text>
-        <view class="tculture-pheno">
-          <view class="tculture-pheno-item" wx:for="{{termCulture.phenology}}" wx:key="index">
-            <text class="tculture-pheno-no">{{index + 1}}</text>
-            <text class="tculture-pheno-text">{{item}}</text>
-          </view>
-        </view>
-      </view>
-
-      <!-- 食俗：民间习俗，同样直接展示 -->
-      <view wx:if="{{termCulture.folk.length}}" class="tculture-block">
-        <text class="tculture-label">{{copy.folk}}</text>
-        <view class="tculture-folk">
-          <view class="tculture-folk-item" wx:for="{{termCulture.folk}}" wx:key="title">
-            <text class="tculture-folk-title">{{item.title}}</text>
-            <text class="tculture-folk-desc">{{item.desc}}</text>
-          </view>
-        </view>
-      </view>
-
-      <!-- 可点的框：整框就是入口，去节气详情页看当令食材与菜品 -->
+      <!-- 三候与食俗不在这里展开，点下面的入口去详情页看 -->
       <view class="tmore" hover-class="tap-hover" bindtap="onTapTermDetail">
         <view class="tmore-main">
           <text class="tmore-title">{{cultureTitle}}</text>
