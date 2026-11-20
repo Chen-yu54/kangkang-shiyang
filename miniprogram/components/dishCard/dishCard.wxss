@@ -59,7 +59,7 @@
 
 .card-name {
   flex: 1;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   letter-spacing: var(--tracking-title);
   font-size: var(--font-title);
   color: var(--color-ink);

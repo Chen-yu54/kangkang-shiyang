@@ -45,8 +45,8 @@
 }
 
 .lg-back-text {
-  font-family: var(--font-heading);
-  font-size: 48rpx;
+  font-family: var(--font-sans);
+  font-size: var(--font-title);
   color: var(--color-ink-2);
 }
 
@@ -86,7 +86,7 @@
 .lg-name {
   margin-top: 28rpx;
   padding-left: 10rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: 64rpx;
   font-weight: 600;
   letter-spacing: 10rpx;
@@ -95,7 +95,7 @@
 
 .lg-slogan {
   margin-top: 14rpx;
-  font-size: 30rpx;
+  font-size: var(--font-btn);
   letter-spacing: 4rpx;
   color: var(--color-ink-3);
 }
@@ -118,8 +118,8 @@
 .lg-point-no {
   flex: none;
   width: 44rpx;
-  font-family: var(--font-heading);
-  font-size: 24rpx;
+  font-family: var(--font-sans);
+  font-size: var(--font-micro);
   line-height: 1.6;
   color: var(--color-flame);
 }
@@ -127,7 +127,7 @@
 .lg-point-text {
   flex: 1;
   min-width: 0;
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   line-height: 1.6;
   color: var(--color-ink-2);
 }
@@ -159,7 +159,7 @@
 }
 
 .lg-btn-text {
-  font-size: 34rpx;
+  font-size: var(--font-base);
   font-weight: 600;
   letter-spacing: 6rpx;
   color: #F6F2EA;
@@ -174,12 +174,12 @@
 }
 
 .lg-agree-text {
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: var(--color-ink-3);
 }
 
 .lg-link {
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: var(--color-flame);
 }
 
@@ -191,7 +191,7 @@
 }
 
 .lg-skip-text {
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: var(--color-ink-3);
 }
 
@@ -205,7 +205,7 @@
 
 .lg-font-label {
   margin-right: 14rpx;
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: var(--color-ink-3);
 }
 
@@ -238,7 +238,7 @@
   display: block;
   margin-top: 20rpx;
   text-align: center;
-  font-size: 22rpx;
+  font-size: var(--font-tiny);
   letter-spacing: 1rpx;
   color: var(--color-ink-3);
   opacity: 0.85;
@@ -276,8 +276,8 @@
 .auth-title {
   display: block;
   text-align: center;
-  font-family: var(--font-heading);
-  font-size: 40rpx;
+  font-family: var(--font-sans);
+  font-size: var(--font-subtitle);
   letter-spacing: 4rpx;
   color: var(--color-ink);
 }
@@ -286,7 +286,7 @@
   display: block;
   margin-top: 10rpx;
   text-align: center;
-  font-size: 26rpx;
+  font-size: var(--font-caption);
   color: var(--color-ink-3);
 }
 
@@ -325,7 +325,7 @@
 
 .auth-avatar-hint {
   margin-top: 10rpx;
-  font-size: 22rpx;
+  font-size: var(--font-tiny);
   color: var(--color-ink-3);
 }
 
@@ -337,7 +337,7 @@
 
 .auth-nick-label {
   display: block;
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: var(--color-ink-3);
 }
 
@@ -345,7 +345,7 @@
   height: 76rpx;
   margin-top: 6rpx;
   border-bottom: 2rpx solid var(--color-border-soft);
-  font-size: 34rpx;
+  font-size: var(--font-base);
   color: var(--color-ink);
 }
 
@@ -381,7 +381,7 @@
 }
 
 .auth-cb-tick {
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   line-height: 1;
   color: #F6F2EA;
 }
@@ -389,7 +389,7 @@
 .auth-agree-text {
   flex: 1;
   margin-left: 14rpx;
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   line-height: 1.6;
   color: var(--color-ink-2);
 }
@@ -405,7 +405,7 @@
 }
 
 .auth-submit-text {
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   font-weight: 600;
   letter-spacing: 6rpx;
   color: #F6F2EA;
@@ -415,7 +415,7 @@
   display: block;
   margin-top: 20rpx;
   text-align: center;
-  font-size: 22rpx;
+  font-size: var(--font-tiny);
   line-height: 1.6;
   color: var(--color-ink-3);
 }

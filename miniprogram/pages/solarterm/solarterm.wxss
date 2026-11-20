@@ -265,7 +265,7 @@
 
 .culture-slogan {
   display: block;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   line-height: 1.4;
   letter-spacing: 4rpx;
@@ -281,7 +281,7 @@
 /* 诗词原文本身带换行，用 pre-line 保留，不靠 <br> 拼 */
 .poem-text {
   display: block;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-base);
   line-height: 1.9;
   color: var(--color-ink-2);
@@ -416,7 +416,7 @@
   margin-top: 20rpx;
   padding-top: 16rpx;
   border-top: 2rpx dashed rgba(31, 74, 54, 0.2);
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   line-height: 1.6;
   color: #6E6A5E;
 }

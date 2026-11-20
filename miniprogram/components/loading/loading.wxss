@@ -124,7 +124,7 @@
   font-size: var(--font-title);
   letter-spacing: 4rpx;
   color: var(--color-ink);
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
 }
 
 .loading-en {

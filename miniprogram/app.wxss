@@ -42,16 +42,16 @@ page {
   --color-ink-2: #4A463C; /* 正文，约 10:1 */
   --color-ink-3: #6E6A5E; /* 次文字 / 说明，约 7.5:1（设计稿此处偏浅，已加深） */
 
-  /* —— 主色：棕褐 —— */
-  --color-brand: #B5482A;
-  --color-brand-deep: #8A3018;
+  /* —— 主色：深绿（C 主题） —— */
+  --color-brand: #1F4A36;
+  --color-brand-deep: #16382A;
 
   /* —— 强调：深绿（声明条、选中态、加载态） —— */
-  --color-green: #B5482A;
-  --color-green-deep: #8A3018;
-  --color-green-soft: #F3E4DE;
-  --color-green-bg: #FAF1ED;
-  --color-green-ink: #8A3018; /* 绿底上的文字，对 #FAF1ED 约 9:1 */
+  --color-green: #1F4A36;
+  --color-green-deep: #16382A;
+  --color-green-soft: #DCE8E0;
+  --color-green-bg: #F0F5F1;
+  --color-green-ink: #1F4A36; /* 绿底上的文字，对 #F0F5F1 约 9:1 */
   --color-on-brand: #ffffff;
 
   /* 印章与图内标注：只用于图片上的装饰性文字（印章、角标），不是正文。
@@ -84,8 +84,8 @@ page {
   /* —— 强调色：C 主题统一深绿，替代原朱砂锅气。
    * 只用于点火处（主推标、热区描边、进度），大面积铺仍是白卡。
    * 图内印章装饰另走 --color-seal，保留朱砂，不受此处影响 —— */
-  --color-flame: #B5482A;
-  --color-flame-deep: #8A3018;
+  --color-flame: #1F4A36;
+  --color-flame-deep: #16382A;
   --color-gold: #b8863b;
 
   /* —— 暗色「食光」层：封面 hero / 主推大卡 / 夜读区的承载色。
@@ -130,6 +130,11 @@ page {
   --font-display-xl: 96rpx;
   --font-subtitle: 40rpx; /* 栏目标题与正文之间的过渡档 */
   --font-caption: 28rpx;
+  /* 极小两档：角标、序号、日期。单独设变量是为了让它们也参与字号缩放——
+     长者模式下这些字如果不跟着放大，老人一样看不清。
+     值必须与 app.js 的 BASE_FONT_RPX 保持一致。 */
+  --font-micro: 24rpx; /* 序号圈、日期、刻度 */
+  --font-tiny: 22rpx; /* 角标、极小注 */
 
   /* —— 字距：中文排版的「刊物感」主要来自字距与行高节奏，而非换字体 —— */
   --tracking-title: 0.04em;
@@ -149,10 +154,6 @@ page {
     "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
   --font-serif: "Songti SC", "STSong", "STZhongsong", "Noto Serif CJK SC",
     "Source Han Serif SC", "SimSun", "Noto Serif SC", serif;
-  /* 标题字：C 版改成无衬线。中文排版靠字距与字重拉层次，不靠换字体 */
-  --font-heading: -apple-system, BlinkMacSystemFont, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
-    "Source Han Sans SC", sans-serif;
 
   /* —— 形状 —— */
   --radius-card: 28rpx; /* 卡片 16px × 2 */
@@ -245,7 +246,7 @@ page {
   background-color: var(--color-brand);
   font-size: var(--font-btn);
   color: #FFFFFF;
-  box-shadow: 0 8rpx 20rpx rgba(181, 72, 42, 0.18);
+  box-shadow: 0 8rpx 20rpx rgba(31, 74, 54, 0.18);
   box-sizing: border-box;
 }
 
@@ -285,7 +286,7 @@ page {
 }
 
 .masthead-no {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-caption);
   letter-spacing: var(--tracking-caps);
   color: var(--color-ink-3);
@@ -321,7 +322,7 @@ page {
 
 .pullquote-text {
   display: block;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-subtitle);
   line-height: 1.7;
   letter-spacing: var(--tracking-title);

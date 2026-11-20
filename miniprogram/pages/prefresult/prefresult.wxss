@@ -112,7 +112,7 @@
   border: 2rpx solid rgba(31, 74, 54, 0.28);
   border-radius: 8rpx;
   background-color: rgba(31, 74, 54, 0.05);
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-base);
   letter-spacing: 0.04em;
   color: var(--color-brand-deep);

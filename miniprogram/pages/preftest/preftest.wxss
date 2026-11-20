@@ -108,7 +108,7 @@
 
 .intro-title {
   display: block;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   color: var(--color-ink);
 }
@@ -256,7 +256,7 @@
 
 .intro-title {
   font-family: var(--font-sans);
-  font-size: 44rpx;
+  font-size: var(--font-title);
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: 0.01em;
@@ -264,7 +264,7 @@
 
 .intro-desc {
   margin-top: 12rpx;
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   line-height: 1.65;
   color: var(--color-ink-2);
 }
@@ -285,16 +285,16 @@
 
 .switch-row:last-child { border-bottom: none; }
 
-.switch-title { font-size: 30rpx; font-weight: 500; color: var(--color-ink); }
-.switch-desc { margin-top: 6rpx; font-size: 24rpx; line-height: 1.5; color: var(--color-ink-3); }
-.switch-hint { margin-top: 18rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.switch-title { font-size: var(--font-btn); font-weight: 500; color: var(--color-ink); }
+.switch-desc { margin-top: 6rpx; font-size: var(--font-micro); line-height: 1.5; color: var(--color-ink-3); }
+.switch-hint { margin-top: 18rpx; font-size: var(--font-micro); color: var(--color-ink-3); }
 
 .btn-primary {
   min-height: 96rpx;
   margin-top: 28rpx;
   border-radius: 999rpx;
   background-color: var(--color-green);
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   font-weight: 500;
   box-shadow: 0 10rpx 24rpx rgba(31, 74, 54, 0.20);
 }
@@ -304,7 +304,7 @@
 .progress-text {
   margin-bottom: 10rpx;
   font-family: var(--font-sans);
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--color-green);
@@ -320,13 +320,13 @@
 
 .question-title {
   margin-bottom: 24rpx;
-  font-size: 44rpx;
+  font-size: var(--font-title);
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: 0.01em;
 }
 
-.question-hint { margin: -12rpx 0 20rpx; font-size: 24rpx; }
+.question-hint { margin: -12rpx 0 20rpx; font-size: var(--font-micro); }
 
 .option {
   position: relative;
@@ -364,7 +364,7 @@
   box-shadow: inset 0 0 0 8rpx #FFFFFF;
 }
 
-.option-text { font-size: 32rpx; line-height: 1.5; }
+.option-text { font-size: var(--font-btn); line-height: 1.5; }
 .option-active .option-text { font-weight: 600; color: var(--color-green); }
 
 .option-check {
@@ -382,7 +382,7 @@
   min-height: 88rpx;
 }
 
-.prev-text { font-size: 28rpx; color: var(--color-ink); }
+.prev-text { font-size: var(--font-caption); color: var(--color-ink); }
 
 .next-btn {
   border-radius: 999rpx;
@@ -390,6 +390,6 @@
   min-height: 88rpx;
 }
 
-.next-text { font-size: 30rpx; }
+.next-text { font-size: var(--font-btn); }
 .next-btn-off { background-color: #C9D6CE; }
 

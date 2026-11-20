@@ -3,7 +3,7 @@
 .doc-title {
   display: block;
   padding: 8rpx 0 12rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   color: var(--color-ink);
 }

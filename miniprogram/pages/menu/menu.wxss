@@ -119,7 +119,7 @@
 }
 
 .flavor-name {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   color: var(--color-brand-deep);
 }
@@ -182,7 +182,7 @@
 }
 
 .flow-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-subtitle);
   letter-spacing: var(--tracking-title);
   color: var(--color-ink);
@@ -219,7 +219,7 @@
   border: 2rpx solid var(--color-border);
   border-radius: 50%;
   background-color: var(--color-bg-soft);
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-caption);
   text-align: center;
   color: var(--color-ink-3);
@@ -317,7 +317,7 @@
 .flow-quiz-arrow {
   flex: none;
   margin-left: 12rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-base);
   color: var(--color-flame);
 }
@@ -353,7 +353,7 @@
 .flow-chip-value {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-btn);
   color: var(--color-ink);
   overflow: hidden;
@@ -381,7 +381,7 @@
 
 .flow-cta-arrow {
   margin-left: 10rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-base);
   color: rgba(226, 195, 140, 0.9);
 }
@@ -598,13 +598,13 @@
 }
 
 .dp-greet {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   line-height: 1.35;
 }
 
 .dp-nick {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   line-height: 1.35;
   max-width: 300rpx;
@@ -887,7 +887,7 @@
   margin-right: 16rpx;
   border-radius: 10rpx;
   background-color: var(--color-flame);
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-caption);
   line-height: 44rpx;
   text-align: center;
@@ -903,7 +903,7 @@
 }
 
 .result-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-subtitle);
   letter-spacing: var(--tracking-title);
   color: var(--color-ink);
@@ -941,7 +941,7 @@
 }
 
 .rdish-seal {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-display);
   color: rgba(156, 74, 52, 0.5);
 }
@@ -959,13 +959,13 @@
 .rdish-no {
   flex: none;
   margin-right: 10rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-caption);
   color: var(--color-flame);
 }
 
 .rdish-name {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-subtitle);
   letter-spacing: 0.02em;
   color: var(--color-ink);
@@ -1153,20 +1153,20 @@
 }
 
 .rweather-tag {
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   font-weight: 600;
   color: #B5482A;
 }
 
 .rweather-city {
   margin-left: 12rpx;
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: #6E6A5E;
 }
 
 .rweather-text {
   display: block;
-  font-size: 36rpx;
+  font-size: var(--font-base);
   line-height: 1.6;
   color: #1E1E1A;
 }
@@ -1224,7 +1224,7 @@
 
 .dp-greet, .dp-nick {
   font-family: var(--font-sans);
-  font-size: 36rpx;
+  font-size: var(--font-base);
   font-weight: 600;
   color: #FFFFFF;
 }
@@ -1246,11 +1246,11 @@
   background: var(--color-green-bg);
   color: var(--color-green);
   font-family: var(--font-sans);
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   font-weight: 600;
 }
 
-.flow-step-title { font-size: 32rpx; font-weight: 600; }
+.flow-step-title { font-size: var(--font-btn); font-weight: 600; }
 .flow-link { color: var(--color-green); border-bottom: 1rpx solid var(--color-green); }
 
 .flow-quiz {
@@ -1298,10 +1298,10 @@
   background: var(--color-green);
   border-radius: 50%;
   font-family: var(--font-sans);
-  font-size: 24rpx;
+  font-size: var(--font-micro);
 }
 
-.result-title { font-size: 32rpx; font-weight: 600; }
+.result-title { font-size: var(--font-btn); font-weight: 600; }
 
 .rdish {
   border: none;
@@ -1311,7 +1311,7 @@
 }
 
 .rdish-img { height: 280rpx; }
-.rdish-name { font-size: 34rpx; font-weight: 600; }
+.rdish-name { font-size: var(--font-base); font-weight: 600; }
 
 .rdish-tag {
   border: 1rpx solid var(--color-border);
@@ -1335,7 +1335,7 @@
   padding: 20rpx;
 }
 
-.rblock-title { font-size: 30rpx; font-weight: 600; }
+.rblock-title { font-size: var(--font-btn); font-weight: 600; }
 .rweather { border-radius: 20rpx; background: #FFFFFF; box-shadow: 0 6rpx 18rpx rgba(30, 30, 26, 0.04); }
 
 .nut-browse {
@@ -1344,9 +1344,9 @@
   background: #FFFFFF;
 }
 
-.nut-browse-text { color: var(--color-green); font-size: 28rpx; }
+.nut-browse-text { color: var(--color-green); font-size: var(--font-caption); }
 
-.browse-back-text { color: var(--color-green); font-size: 28rpx; }
+.browse-back-text { color: var(--color-green); font-size: var(--font-caption); }
 
 .flavor-card {
   border: none;
@@ -1355,7 +1355,7 @@
   box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
 }
 
-.flavor-name { font-size: 34rpx; font-weight: 600; color: var(--color-ink); }
+.flavor-name { font-size: var(--font-base); font-weight: 600; color: var(--color-ink); }
 .flavor-risk { border-top: 1rpx solid var(--color-border); }
 
 .side {
@@ -1371,7 +1371,7 @@
 .side-bar { display: none; }
 
 .season-label { padding: 14rpx 10rpx 6rpx; }
-.season-text { font-size: 22rpx; }
-.side-text { font-size: 28rpx; }
+.season-text { font-size: var(--font-tiny); }
+.side-text { font-size: var(--font-caption); }
 
-.count-text { font-size: 24rpx; }
+.count-text { font-size: var(--font-micro); }

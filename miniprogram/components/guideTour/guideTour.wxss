@@ -48,7 +48,7 @@
 
 .tip-no {
   flex: none;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   line-height: 1;
   color: var(--color-flame);
@@ -65,7 +65,7 @@
   flex: 1;
   min-width: 0;
   margin-left: 16rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-subtitle);
   font-weight: 600;
   letter-spacing: var(--tracking-title);
@@ -112,7 +112,7 @@
 
 .tip-next-arrow {
   margin-left: 8rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-btn);
   color: rgba(255, 255, 255, 0.85);
 }

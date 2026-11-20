@@ -8,7 +8,7 @@
 }
 
 .mast-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   font-weight: 600;
   letter-spacing: var(--tracking-title);
@@ -164,7 +164,7 @@
 }
 
 .stat-num {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-title);
   line-height: 1.1;
   color: var(--color-ink);
@@ -198,7 +198,7 @@
 
 .sec-no {
   margin-right: 12rpx;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-btn);
   color: var(--color-flame);
 }
@@ -206,7 +206,7 @@
 .sec-title {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--font-subtitle);
   font-weight: 600;
   letter-spacing: var(--tracking-title);
@@ -494,7 +494,7 @@
 
 .mast-title {
   font-family: var(--font-sans);
-  font-size: 44rpx;
+  font-size: var(--font-title);
   font-weight: 600;
   letter-spacing: 0.01em;
 }
@@ -558,7 +558,7 @@
 
 .avatar-on { border-color: #FFFFFF; }
 
-.idcard-name { font-size: 38rpx; font-weight: 600; letter-spacing: 0.01em; }
+.idcard-name { font-size: var(--font-subtitle); font-weight: 600; letter-spacing: 0.01em; }
 
 .idcard-tag {
   padding: 3rpx 12rpx;
@@ -568,7 +568,7 @@
   color: var(--color-green);
 }
 
-.idcard-sub { margin-top: 6rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.idcard-sub { margin-top: 6rpx; font-size: var(--font-micro); color: var(--color-ink-3); }
 .idcard-arrow { width: 24rpx; height: 24rpx; opacity: 0.4; }
 
 .stats {
@@ -578,9 +578,9 @@
 }
 
 .stat { min-height: 92rpx; }
-.stat-num { font-size: 44rpx; font-weight: 600; letter-spacing: -0.02em; }
-.stat-num-sm { font-size: 30rpx; }
-.stat-label { margin-top: 4rpx; font-size: 22rpx; }
+.stat-num { font-size: var(--font-title); font-weight: 600; letter-spacing: -0.02em; }
+.stat-num-sm { font-size: var(--font-btn); }
+.stat-label { margin-top: 4rpx; font-size: var(--font-tiny); }
 .stat-div { width: 1rpx; height: 44rpx; background-color: var(--color-border); }
 
 .sec {
@@ -593,12 +593,12 @@
 
 .sec-title {
   font-family: var(--font-sans);
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
-.sec-more { font-size: 24rpx; color: var(--color-green); }
+.sec-more { font-size: var(--font-micro); color: var(--color-green); }
 
 .fav {
   width: 300rpx;
@@ -609,8 +609,8 @@
 }
 
 .fav-body { padding: 14rpx 16rpx 18rpx; }
-.fav-name { font-size: 30rpx; font-weight: 600; }
-.fav-meta { font-size: 22rpx; }
+.fav-name { font-size: var(--font-btn); font-weight: 600; }
+.fav-meta { font-size: var(--font-tiny); }
 
 .fav-empty {
   border: 1rpx dashed var(--color-border);
@@ -631,8 +631,8 @@
   border-bottom: 1rpx solid var(--color-border);
 }
 
-.row-label { font-size: 30rpx; color: var(--color-ink); }
-.row-value { margin-top: 4rpx; font-size: 24rpx; color: var(--color-ink-3); }
+.row-label { font-size: var(--font-btn); color: var(--color-ink); }
+.row-value { margin-top: 4rpx; font-size: var(--font-micro); color: var(--color-ink-3); }
 .row-arrow { width: 24rpx; height: 24rpx; opacity: 0.4; }
 
 .font-option {
@@ -648,9 +648,9 @@
 }
 
 .font-option-on .font-option-text { color: #FFFFFF; }
-.font-option-text { font-size: 28rpx; }
+.font-option-text { font-size: var(--font-caption); }
 
-.rows-note { margin-top: 12rpx; font-size: 24rpx; }
+.rows-note { margin-top: 12rpx; font-size: var(--font-micro); }
 
 .tour-again {
   border: 1rpx solid var(--color-border);
@@ -658,5 +658,5 @@
 }
 
 .tour-again-text { color: var(--color-ink-3); }
-.version { font-size: 22rpx; }
+.version { font-size: var(--font-tiny); }
 

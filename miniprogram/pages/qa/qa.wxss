@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100vh;
   background: #faf7f2;
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   color: #2f2a24;
   box-sizing: border-box;
 }
@@ -20,11 +20,11 @@
   border-bottom: 1rpx solid #efe7dc;
 }
 .topbar-tip {
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: #9a8f80;
 }
 .topbar-clear {
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: #c8912f;
   padding: 8rpx 16rpx;
 }
@@ -61,7 +61,7 @@
   background: #e07b39;
   color: #fff;
   border-top-right-radius: 8rpx;
-  font-size: 32rpx;
+  font-size: var(--font-btn);
 }
 .bot-bubble {
   background: #fff;
@@ -74,7 +74,7 @@
 }
 .reply {
   display: block;
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   line-height: 1.7;
 }
 
@@ -85,7 +85,7 @@
   background: #fdf3e3;
   border-radius: 12rpx;
   color: #b07b24;
-  font-size: 24rpx;
+  font-size: var(--font-micro);
 }
 
 /* 菜品卡 */
@@ -105,12 +105,12 @@
   justify-content: space-between;
 }
 .dish-name {
-  font-size: 34rpx;
+  font-size: var(--font-base);
   font-weight: 600;
   color: #2f2a24;
 }
 .dish-cuisine {
-  font-size: 22rpx;
+  font-size: var(--font-tiny);
   color: #8b7c68;
   background: #f2e9dc;
   padding: 4rpx 12rpx;
@@ -119,7 +119,7 @@
 .dish-reason {
   display: block;
   margin-top: 10rpx;
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: #6b5f50;
   line-height: 1.6;
 }
@@ -132,7 +132,7 @@
   height: 64rpx;
   line-height: 64rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: #c8912f;
   background: #fff;
   border: 1rpx solid #e6d6bd;
@@ -158,7 +158,7 @@
   padding: 0 24rpx 8rpx;
 }
 .chip {
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: #7a6a55;
   background: #fff;
   border: 1rpx solid #ecdfcc;
@@ -168,7 +168,7 @@
   line-height: 1.4;
 }
 .chip-sm {
-  font-size: 26rpx;
+  font-size: var(--font-caption);
   padding: 8rpx 20rpx;
   margin-right: 12rpx;
 }
@@ -178,7 +178,7 @@
   margin-top: 16rpx;
 }
 .source-toggle {
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: #8b7c68;
   text-decoration: underline;
 }
@@ -189,14 +189,14 @@
   margin-bottom: 10rpx;
 }
 .source-title {
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: #4a7ab5;
   word-break: break-all;
 }
 .disclaimer {
   display: block;
   margin-top: 16rpx;
-  font-size: 22rpx;
+  font-size: var(--font-tiny);
   color: #a99c8b;
   line-height: 1.5;
 }
@@ -215,7 +215,7 @@
   padding: 0 24rpx;
   background: #f7f3ec;
   border-radius: 44rpx;
-  font-size: 32rpx;
+  font-size: var(--font-btn);
 }
 .ph {
   color: #b3a794;
@@ -226,7 +226,7 @@
   line-height: 88rpx;
   margin-left: 16rpx;
   padding: 0;
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   color: #fff;
   background: #e07b39;
   border-radius: 44rpx;
@@ -258,14 +258,14 @@
 }
 .intro-title {
   display: block;
-  font-size: 36rpx;
+  font-size: var(--font-base);
   font-weight: 600;
   margin-bottom: 24rpx;
   text-align: center;
 }
 .intro-text {
   display: block;
-  font-size: 28rpx;
+  font-size: var(--font-caption);
   color: #5b5145;
   line-height: 1.7;
   margin-bottom: 16rpx;
@@ -279,7 +279,7 @@
   height: 88rpx;
   line-height: 88rpx;
   text-align: center;
-  font-size: 30rpx;
+  font-size: var(--font-btn);
   color: #8b7c68;
 }
 .intro-ok {
@@ -287,7 +287,7 @@
   height: 88rpx;
   line-height: 88rpx;
   text-align: center;
-  font-size: 30rpx;
+  font-size: var(--font-btn);
   color: #fff;
   background: #e07b39;
   border-radius: 44rpx;
@@ -296,33 +296,33 @@
 /* ===== 长者模式：字号放大、按钮加大 ===== */
 .elder .reply,
 .elder .user-bubble {
-  font-size: 38rpx;
+  font-size: var(--font-subtitle);
   line-height: 1.85;
 }
 .elder .dish-name {
-  font-size: 38rpx;
+  font-size: var(--font-subtitle);
 }
 .elder .dish-reason {
-  font-size: 32rpx;
+  font-size: var(--font-btn);
 }
 .elder .btn-mini {
   height: 80rpx;
   line-height: 80rpx;
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   min-width: 170rpx;
 }
 .elder .input {
   height: 96rpx;
-  font-size: 36rpx;
+  font-size: var(--font-base);
 }
 .elder .send-btn {
   height: 96rpx;
   line-height: 96rpx;
-  font-size: 34rpx;
+  font-size: var(--font-base);
   width: 176rpx;
 }
 .elder .chip {
-  font-size: 32rpx;
+  font-size: var(--font-btn);
   padding: 16rpx 28rpx;
 }
 .elder .bubble {
@@ -348,8 +348,8 @@
   border-bottom: 1rpx solid var(--color-border);
 }
 
-.topbar-tip { font-size: 24rpx; color: var(--color-ink-3); }
-.topbar-clear { font-size: 24rpx; color: var(--color-green); }
+.topbar-tip { font-size: var(--font-micro); color: var(--color-ink-3); }
+.topbar-clear { font-size: var(--font-micro); color: var(--color-green); }
 
 .msg-list { padding: 20rpx 20rpx 0; }
 
@@ -357,7 +357,7 @@
   border-radius: 20rpx 20rpx 6rpx 20rpx;
   background: var(--color-green);
   color: #FFFFFF;
-  font-size: 30rpx;
+  font-size: var(--font-btn);
   line-height: 1.65;
 }
 
@@ -366,7 +366,7 @@
   border-radius: 20rpx 20rpx 20rpx 6rpx;
   background: #FFFFFF;
   box-shadow: 0 4rpx 14rpx rgba(30, 30, 26, 0.04);
-  font-size: 30rpx;
+  font-size: var(--font-btn);
   line-height: 1.7;
 }
 
@@ -376,8 +376,8 @@
   background: #F6F2EA;
 }
 
-.dish-name { font-size: 28rpx; font-weight: 600; }
-.dish-reason { font-size: 24rpx; color: var(--color-ink-3); }
+.dish-name { font-size: var(--font-caption); font-weight: 600; }
+.dish-reason { font-size: var(--font-micro); color: var(--color-ink-3); }
 .btn-mini { border-radius: 999rpx; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 8rpx; padding: 8rpx 20rpx; }
@@ -389,7 +389,7 @@
   border: 1rpx solid var(--color-border);
   border-radius: 999rpx;
   background: #FFFFFF;
-  font-size: 24rpx;
+  font-size: var(--font-micro);
   color: var(--color-ink-2);
 }
 
@@ -404,7 +404,7 @@
   border: 1rpx solid var(--color-border);
   background: #FFFFFF;
   border-radius: 999rpx;
-  font-size: 30rpx;
+  font-size: var(--font-btn);
 }
 
 .send-btn {
@@ -413,7 +413,7 @@
   line-height: 80rpx;
   border-radius: 999rpx;
   background: var(--color-green);
-  font-size: 28rpx;
+  font-size: var(--font-caption);
 }
 
 .intro-card {
@@ -422,7 +422,7 @@
   padding: 24rpx;
 }
 
-.intro-title { font-size: 34rpx; font-weight: 600; }
+.intro-title { font-size: var(--font-base); font-weight: 600; }
 .intro-ok {
   padding: 12rpx 24rpx;
   border-radius: 999rpx;

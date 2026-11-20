@@ -35,6 +35,9 @@ const BASE_FONT_RPX = {
   btn: 32,
   subtitle: 40,
   caption: 28,
+  // 极小两档：角标、序号、日期，也纳入缩放
+  micro: 24,
+  tiny: 22,
 };
 
 App({
@@ -215,7 +218,9 @@ App({
         `--font-title:${toRpx(BASE_FONT_RPX.title)}`,
         `--font-btn:${toRpx(BASE_FONT_RPX.btn)}`,
         `--font-subtitle:${toRpx(BASE_FONT_RPX.subtitle)}`,
-        `--font-caption:${toRpx(BASE_FONT_RPX.caption)}`
+        `--font-caption:${toRpx(BASE_FONT_RPX.caption)}`,
+        `--font-micro:${toRpx(BASE_FONT_RPX.micro)}`,
+        `--font-tiny:${toRpx(BASE_FONT_RPX.tiny)}`
       );
     }
     parts.push(solarTheme.styleVarsOf(this.getTermInfo().theme));
