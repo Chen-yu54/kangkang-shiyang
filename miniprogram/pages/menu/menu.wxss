@@ -1211,30 +1211,9 @@
 
 /* ============================================================
    C 主题 · 专属推荐（2026-11-20）
-   深绿问候头 + 白卡流程 + 白卡食单 + 胶囊按钮
+   白卡流程 + 白卡食单 + 胶囊按钮
+   问候头（.daypart）不覆盖：沿用 daypart.js 注入的六时段渐变与图标
    ============================================================ */
-.daypart {
-  padding: 26rpx 24rpx;
-  border-radius: 28rpx;
-  background: linear-gradient(135deg, #1F4A36 0%, #16382A 100%) !important;
-  box-shadow: 0 12rpx 30rpx rgba(31, 74, 54, 0.22);
-}
-
-.dp-icon { display: none; }
-
-.dp-greet, .dp-nick {
-  font-family: var(--font-sans);
-  font-size: var(--font-base);
-  font-weight: 600;
-  color: #FFFFFF;
-}
-
-.dp-sub-line { color: rgba(255, 255, 255, 0.74); }
-.dp-sub, .dp-sep { color: inherit; }
-.dp-next {
-  color: #FFFFFF;
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
 
 .flow { border: none; background: #FFFFFF; }
 .flow-head { border-bottom: 1rpx solid var(--color-border); }

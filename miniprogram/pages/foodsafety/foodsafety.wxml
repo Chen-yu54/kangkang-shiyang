@@ -23,7 +23,7 @@
     <view class="hero">
       <text class="hero-kicker">今日起手</text>
       <text class="hero-title">一餐安心饭，三步</text>
-      <text class="hero-text">选对、洗净、做熟。其余见下方食材选购要点。</text>
+      <text class="hero-text">选对、洗净、做熟。剩下的都写在下面的食材选购要点里。</text>
 
       <view class="steps">
         <view class="step" wx:for="{{steps}}" wx:key="no">
@@ -36,7 +36,7 @@
       <view class="hero-cta" hover-class="tap-hover" bindtap="onGoMenu">
         按口味与节气生成今日食单 ›
       </view>
-      <text class="hero-sub">长者、成人、全家适用；不确定吃什么时，从这里开始。</text>
+      <text class="hero-sub">长者、成人、全家适用；不确定吃什么时，可以先从这里看起。</text>
     </view>
 
     <!-- ============ 壹 · 买前多看一眼 ============ -->
@@ -48,7 +48,7 @@
           <text class="sec-title">买前多看一眼</text>
         </view>
       </view>
-      <text class="sec-intro">{{scope.from}}—{{scope.to}} 广东抽检通告里出现较多的 {{ingredients.length}} 样食材。数字为不合格批次，非推荐量，不代表不可食用，仅作选购提示。</text>
+      <text class="sec-intro">{{scope.from}}—{{scope.to}} 广东抽检通告里出现较多的 {{ingredients.length}} 样食材。这里记的是不合格批次，不是推荐量，也不表示这些食材不能吃，只用来提醒选购时多留意。</text>
 
       <view class="ingrid">
         <view class="ing" wx:for="{{ingredients}}" wx:key="name">
@@ -61,7 +61,7 @@
         </view>
       </view>
 
-      <text class="sec-foot">数字来自 {{insp.notices}} 份通告中的不合格批次；同一食材可能涉及多批次、多环节。完整明细见文末「关于这些数字」。</text>
+      <text class="sec-foot">数字来自 {{insp.notices}} 份通告中的不合格批次；同一食材可能涉及多批次、多环节。完整的明细整理在文末「关于这些数字」。</text>
     </view>
 
     <!-- ============ 贰 · 为什么会被点名 ============ -->
@@ -105,7 +105,7 @@
         <text class="chip">{{item.name}}</text>
         <text class="chip-n">{{item.n}} 批 · {{item.pct}}%</text>
       </view>
-      <text class="sec-foot">已归类 {{insp.tagged}} 批，未能对上食材的 {{insp.unmatched}} 批未纳入上方食材统计。</text>
+      <text class="sec-foot">已归类 {{insp.tagged}} 批，另有 {{insp.unmatched}} 批未能对上具体食材，没有计入上方的食材统计。</text>
 
       <!-- 月度分布折在下面：想看细节的人点开，不想看的不占屏 -->
       <view class="fold">
@@ -114,7 +114,7 @@
           <text class="fold-title">各月分布（{{scope.from}}—{{scope.to}}）</text>
         </view>
         <block wx:if="{{monthsOpen}}">
-          <text class="fold-note">口径：全省抽检通告中的不合格批次，共 {{insp.batches}} 批；非本小程序菜品的不合格数量。</text>
+          <text class="fold-note">这里统计的是全省抽检通告中的不合格批次，共 {{insp.batches}} 批，不是本小程序菜品的不合格数量。</text>
           <view class="chart">
             <view class="col" wx:for="{{months}}" wx:key="label">
               <view class="col-bar-wrap">
@@ -177,7 +177,7 @@
           <text class="sec-title">真实的处理结果</text>
         </view>
       </view>
-      <text class="sec-intro">买到问题食品时，监管如何处理？以下为公开通告与处罚记录中可逐条核对原文的案例。看处理结果，比看数字更直观。</text>
+      <text class="sec-intro">买到问题食品，监管部门会怎么处理，下面这些公开通告和处罚记录都能逐条查到原文。处理结果摆在一起看，比单看汇总数字更容易弄明白。</text>
 
       <text class="subhead">最新通告</text>
       <view class="notice" wx:for="{{latest}}" wx:key="no">
@@ -222,11 +222,11 @@
     <!-- ============ 关于这些数字 ============ -->
     <view class="notes">
       <text class="notes-title">关于这些数字</text>
-      <text class="notes-item">{{insp.batches}} 是 {{scope.from}}—{{scope.to}} 全省抽检中不合格的批次总数，来自 {{insp.notices}} 份通告；不是本小程序菜品的不合格数量，也不是「合格率」的分母。</text>
+      <text class="notes-item">{{insp.batches}} 是 {{scope.from}}—{{scope.to}} 全省抽检中不合格的批次总数，来自 {{insp.notices}} 份通告。这个数字统计的不是本小程序菜品的不合格数量，也不能作为「合格率」的分母。</text>
       <text class="notes-item">{{scope.inspectedNote}}</text>
-      <text class="notes-item">食材归类：已对上 {{insp.tagged}} 批，另有 {{insp.unmatched}} 批未能对上具体食材，未纳入上方食材排序。</text>
-      <text class="notes-item">处罚案例只列能逐条核对原文的 {{cases.length}} 条，不是全量；{{pen.total}} 条记录罚款合计 {{pen.amountWan}} 万元。</text>
-      <text class="notes-item">数据范围：{{scope.region}} · {{scope.from}} — {{scope.to}}；来源：{{scope.penaltySource}}。</text>
+      <text class="notes-item">食材归类时已对上 {{insp.tagged}} 批，另有 {{insp.unmatched}} 批未能对上具体食材，没有计入上方的食材排序。</text>
+      <text class="notes-item">处罚案例只列了能逐条核对原文的 {{cases.length}} 条，并不是全部记录；{{pen.total}} 条记录罚款合计 {{pen.amountWan}} 万元。</text>
+      <text class="notes-item">数据范围是 {{scope.region}} {{scope.from}} 至 {{scope.to}}，来源是 {{scope.penaltySource}}。</text>
     </view>
 
     <disclaimer />

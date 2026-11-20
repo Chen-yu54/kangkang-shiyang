@@ -21,6 +21,32 @@ const i18n = require('../../utils/i18n');
 const t = i18n.t;
 const ALL_MEAL = '';
 
+/**
+ * 安全解码页面参数里的节气名。
+ *
+ * decodeURIComponent 遇到不合法的 % 序列会抛 URIError，
+ * 放在 onLoad 里裸调，一旦参数不干净整页就初始化失败：
+ * setData 不执行、loadTerms 不跑，页面停在骨架屏，看着就是「加载不出来」。
+ *
+ * 顺序：先按常规解一次；解不出就用原串；如果结果里还带 %，说明是双重编码，再解一次。
+ */
+function decodeTermParam(raw) {
+  if (!raw) return '';
+  let s = String(raw);
+  for (let i = 0; i < 2; i++) {
+    if (s.indexOf('%') < 0) break;
+    try {
+      const next = decodeURIComponent(s);
+      if (next === s) break;
+      s = next;
+    } catch (e) {
+      // 非法 % 序列：保留上一次能读的结果，不抛
+      break;
+    }
+  }
+  return s.trim();
+}
+
 function toCard(dish) {
   return {
     id: dish.id,
@@ -61,7 +87,12 @@ Page({
 
   onLoad(options) {
     // 首页的节气海报带 term 进来：直接进详情，省掉一次列表点击
-    this.pendingTerm = (options && options.term) ? decodeURIComponent(options.term) : '';
+    //
+    // decodeURIComponent 不能裸调：参数里只要有一个不合法的 % 序列（比如 %E7
+    // 被截断、或手写链接带了孤立的 %），它会抛 URIError，onLoad 当场中断，
+    // 后面的 setData / loadTerms 全都不执行 —— 页面就停在初始态，看着像「加载不出来」。
+    // 这里做两级兜底：先安全解码，解不出来就用原串；再对可能的双重编码补一次。
+    this.pendingTerm = decodeTermParam(options && options.term);
     this.setData({
       copy: {
         empty: t('solarterm.empty'),
@@ -119,11 +150,17 @@ Page({
         });
 
         // 首页节气海报带 term 参数进来：直接展开该节气详情，省一次列表点击
+        //
+        // 参数对不上时不能静默什么都不做 —— 用户点的是「看这个节气的讲究」，
+        // 结果停在列表页，看起来就是「跳转没成功」。
+        // 退一步展开当前节气，至少让页面有内容；实在连当前节气都取不到才留在列表。
         if (this.pendingTerm) {
           const name = this.pendingTerm;
           this.pendingTerm = '';
           if (terms.some((x) => x.name === name)) {
             this.onTapTerm({ detail: { name } });
+          } else if (current) {
+            this.onTapTerm({ detail: { name: current.name } });
           }
         }
       })
@@ -137,8 +174,16 @@ Page({
     if (!name) return;
 
     const detail = this.decorateTerm(dataSource.getTerm(name));
+    // 数据没命中时不要把 view 切到 detail：
+    // 那样 wxml 会走 <view wx:if="{{detail}}"> 的 else 分支显示空态，
+    // 用户看到的是「这个节气没有内容」而不是「页面坏了」，很难判断是谁的问题。
+    // 留一个明确的错误态，带重试。
+    if (!detail) {
+      this.setData({ status: 'error', view: 'list' });
+      return;
+    }
     // 节气海报：AI 生成的水墨横板图，24 节气各一张（utils/solarTheme.js）
-    const themeInfo = solarTheme.getThemeByName(detail ? detail.name : name);
+    const themeInfo = solarTheme.getThemeByName(detail.name);
     this.setData({
       view: 'detail',
       detail,
@@ -148,14 +193,13 @@ Page({
       mealFilter: ALL_MEAL,
       dishStatus: 'loading',
       // 动态背景：每个节气一套天空渐变 + 纹理 + 光晕 + 漂浮元素 + 粒子
-      bg: buildScene(detail ? detail.name : name),
+      bg: buildScene(detail.name),
       // 养生提醒：气候特征 + 今天怎么喝 + 当令吃什么 + 起居（已剔功效性表述）
-      health: detail ? termHealth.buildToday(detail.name, {}) : null,
+      health: termHealth.buildToday(detail.name, {}),
     });
 
     track.solarTermView(name);
-    if (detail) this.loadDishes(name);
-    else this.setData({ dishStatus: 'empty' });
+    this.loadDishes(name);
   },
 
   // 食材价格档位：视图层按 priceLevel 渲染 1–3 颗星形图（压印五角星），
