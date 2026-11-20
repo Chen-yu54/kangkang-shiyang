@@ -35,7 +35,7 @@ page {
   --color-bg: #FBF8F2;
   --color-bg-soft: #F6F2EA;
   --color-card: #FFFFFF;
-  --color-skeleton: rgba(139, 90, 43, 0.1);
+  --color-skeleton: rgba(30, 30, 26, 0.06);
 
   /* —— 文字三档，全部满足 ≥4.5:1 —— */
   --color-ink: #1E1E1A; /* 主文字，约 12:1 */
@@ -43,15 +43,15 @@ page {
   --color-ink-3: #6E6A5E; /* 次文字 / 说明，约 7.5:1（设计稿此处偏浅，已加深） */
 
   /* —— 主色：棕褐 —— */
-  --color-brand: #B5482A;
-  --color-brand-deep: #8A3018;
+  --color-brand: #1F4A36;
+  --color-brand-deep: #16382A;
 
-  /* —— 强调：墨绿（声明条、选中态、加载态） —— */
-  --color-green: #B5482A;
-  --color-green-deep: #8A3018;
-  --color-green-soft: #F3E4DE;
-  --color-green-bg: #FAF1ED;
-  --color-green-ink: #8A3018; /* 绿底上的文字，对 #FAF1ED 约 7.3:1 */
+  /* —— 强调：深绿（声明条、选中态、加载态） —— */
+  --color-green: #1F4A36;
+  --color-green-deep: #16382A;
+  --color-green-soft: #DCE8E0;
+  --color-green-bg: #F0F5F1;
+  --color-green-ink: #1F4A36; /* 绿底上的文字，对 #F0F5F1 约 9:1 */
   --color-on-brand: #ffffff;
 
   /* 印章与图内标注：只用于图片上的装饰性文字（印章、角标），不是正文。
@@ -230,7 +230,7 @@ page {
   opacity: 0.9;
 }
 
-/* 通用按钮：胶囊形 */
+/* 通用按钮：深绿实底胶囊（C 主题） */
 .btn {
   display: flex;
   align-items: center;
@@ -239,11 +239,12 @@ page {
   min-height: var(--tap-min);
   padding: 0 32rpx;
   margin-top: 24rpx;
-  border: 2rpx solid var(--color-brand);
+  border: none;
   border-radius: var(--radius-pill);
-  background-color: var(--color-bg-soft);
+  background-color: var(--color-brand);
   font-size: var(--font-btn);
-  color: var(--color-brand-deep);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 20rpx rgba(31, 74, 54, 0.18);
   box-sizing: border-box;
 }
 
@@ -265,23 +266,20 @@ page {
   justify-content: space-between;
   padding-bottom: 16rpx;
   margin-bottom: 24rpx;
-  border-bottom: 4rpx solid var(--color-ink);
+  border-bottom: 1rpx solid var(--color-border);
   position: relative;
 }
 
+/* C 主题：去掉双书口线，只留 1rpx 单线 */
 .masthead::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6rpx;
-  border-bottom: 2rpx solid var(--color-ink);
+  display: none;
 }
 
 .masthead-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
+  font-weight: 600;
   font-size: var(--font-title);
-  letter-spacing: var(--tracking-title);
+  letter-spacing: 0.02em;
   color: var(--color-ink);
 }
 

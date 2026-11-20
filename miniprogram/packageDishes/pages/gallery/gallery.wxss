@@ -37,7 +37,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 24rpx 32rpx;
-  background: rgba(247, 240, 225, 0.96);
+  background: rgba(251, 248, 242, 0.96);
 }
 
 .bar-info {

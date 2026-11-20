@@ -39,15 +39,15 @@
   ],
   "window": {
     "navigationBarTitleText": "康康食养AI",
-    "navigationBarBackgroundColor": "#f7f0e1",
+    "navigationBarBackgroundColor": "#FBF8F2",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f7f0e1",
+    "backgroundColor": "#FBF8F2",
     "backgroundTextStyle": "dark"
   },
   "tabBar": {
-    "color": "#5a4630",
-    "selectedColor": "#3d2b1a",
-    "backgroundColor": "#fbf7ea",
+    "color": "#8A8578",
+    "selectedColor": "#1F4A36",
+    "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "list": [
       {

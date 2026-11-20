@@ -18,7 +18,7 @@ page {
 /* ==================== 导航 ==================== */
 .nav {
   flex: none;
-  background: rgba(247, 240, 225, 0.98);
+  background: rgba(251, 248, 242, 0.98);
   border-bottom: 1rpx solid rgba(139, 90, 43, 0.12);
 }
 
@@ -351,7 +351,7 @@ page {
   display: flex;
   align-items: center;
   padding: 12rpx 24rpx;
-  background: rgba(247, 240, 225, 0.98);
+  background: rgba(251, 248, 242, 0.98);
   border-top: 1rpx solid rgba(139, 90, 43, 0.1);
 }
 

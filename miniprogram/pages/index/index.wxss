@@ -1062,3 +1062,365 @@
 }
 
 /* 面板样式已撤：点球直接进 /pages/kangkang 统一对话框 */
+
+/* ============================================================
+   C 主题 ·「当代岭南·清鲜」首页皮肤（2026-11-20）
+   ------------------------------------------------------------
+   只覆盖视觉，不改结构与信息点。原有规则全部保留，本段在文件末尾，
+   同权重后者生效；如需回退，删除本段即可（备份 index.wxss.bak）。
+   色板：暖白 #FBF8F2 / 深绿 #1F4A36 / 墨 #1E1E1A / 灰 #6E6A5E
+   ============================================================ */
+
+.page {
+  background-color: #FBF8F2;
+  --c-green: #1F4A36;
+  --c-ink: #1E1E1A;
+  --c-muted: #6E6A5E;
+  --c-line: #E8E3D8;
+}
+
+/* 封面：出血大图 + 底部渐变，标题改无衬线 */
+.hero {
+  height: 560rpx;
+  margin: 0 -32rpx 28rpx;
+  border-radius: 0 0 32rpx 32rpx;
+  box-shadow: none;
+}
+
+.hero-shade {
+  background-image: linear-gradient(
+    180deg,
+    rgba(24, 19, 15, 0.40) 0%,
+    rgba(24, 19, 15, 0.05) 28%,
+    rgba(24, 19, 15, 0.36) 58%,
+    rgba(24, 19, 15, 0.88) 100%
+  );
+}
+
+.hero-top { padding: 28rpx 32rpx 0; }
+
+.hero-kicker {
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-seal {
+  min-width: 112rpx;
+  height: 56rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  background-color: var(--c-green);
+  box-shadow: none;
+}
+
+.hero-seal-text {
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+  letter-spacing: 0.04em;
+}
+
+.hero-foot { left: 32rpx; right: 32rpx; bottom: 32rpx; }
+
+.hero-headline {
+  font-family: var(--font-sans);
+  font-size: 52rpx;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  text-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.32);
+}
+
+.hero-hint {
+  margin-top: 10rpx;
+  font-family: var(--font-sans);
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.hero-ainote {
+  margin-top: 16rpx;
+  padding: 6rpx 16rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 999rpx;
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* 节气文化卡：白卡 + 大圆角 + 轻阴影，去掉纸边框 */
+.tculture {
+  padding: 30rpx 30rpx 26rpx;
+  margin-bottom: 24rpx;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 28rpx;
+  box-shadow: 0 10rpx 28rpx rgba(30, 30, 26, 0.06);
+}
+
+.tculture-tag {
+  padding: 4rpx 14rpx;
+  border: 1rpx solid var(--c-green);
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  letter-spacing: 0.06em;
+  color: var(--c-green);
+}
+
+.tculture-term {
+  font-family: var(--font-sans);
+  font-size: 44rpx;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--c-ink);
+}
+
+.tculture-slogan {
+  margin-top: 8rpx;
+  font-family: var(--font-sans);
+  font-size: 34rpx;
+  letter-spacing: 0.01em;
+  color: var(--c-ink);
+}
+
+.tculture-poem {
+  margin-top: 18rpx;
+  padding-left: 20rpx;
+  border-left: 2rpx solid #DCD6C8;
+}
+
+.tculture-poem-text {
+  font-family: var(--font-serif);
+  font-size: 30rpx;
+  line-height: 1.75;
+  color: #4A463C;
+}
+
+.tculture-poem-by {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: #6e6a5e;
+}
+
+/* 文化入口：从“朱砂描边框”改成白卡底部的绿色文字链 */
+.tmore {
+  margin-top: 22rpx;
+  padding: 20rpx 0 2rpx;
+  border: none;
+  border-top: 1rpx solid var(--c-line);
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.tmore-title {
+  font-family: var(--font-sans);
+  font-size: 30rpx;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--c-green);
+}
+
+.tmore-sub { margin-top: 4rpx; font-size: 24rpx; color: #6e6a5e; }
+.tmore-act { font-size: 24rpx; color: var(--c-green); }
+
+/* 搜索：白底胶囊 + 轻阴影 */
+.search-entry {
+  height: 88rpx;
+  margin: 26rpx 0 0;
+  padding: 0 30rpx;
+  border: none;
+  border-radius: 999rpx;
+  background-color: #FFFFFF;
+  box-shadow: 0 8rpx 22rpx rgba(30, 30, 26, 0.06);
+}
+
+.search-text { font-family: var(--font-sans); font-size: 30rpx; color: #6e6a5e; }
+.search-go { font-family: var(--font-sans); color: #B9B2A4; }
+
+/* 主区栏目头：去掉双线书口，改单细线 + 无衬线标题 */
+.lead { margin: 40rpx 0 24rpx; }
+.lead-kicker { font-family: var(--font-sans); font-size: 24rpx; letter-spacing: 0.16em; color: var(--c-green); }
+
+.lead-row {
+  margin-top: 10rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid var(--c-line);
+}
+
+.lead-row::after { display: none; }
+
+.lead-no {
+  margin-right: 14rpx;
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+  letter-spacing: 0.12em;
+  color: var(--c-green);
+}
+
+.lead-title {
+  font-family: var(--font-sans);
+  font-size: 44rpx;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  color: var(--c-ink);
+}
+
+.lead-term {
+  padding: 4rpx 16rpx;
+  border: none;
+  border-radius: 999rpx;
+  background-color: #EAF1EC;
+  font-family: var(--font-sans);
+  font-size: 24rpx;
+  letter-spacing: 0.02em;
+  color: var(--c-green);
+}
+
+/* 次区栏目头 */
+.sec {
+  margin: 40rpx 0 20rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid var(--c-line);
+}
+
+.sec-no { font-family: var(--font-sans); font-size: 24rpx; letter-spacing: 0.1em; color: var(--c-green); }
+.sec-title { font-family: var(--font-sans); font-size: 36rpx; font-weight: 600; letter-spacing: 0.01em; color: var(--c-ink); }
+
+/* 展示牌：无边框大圆角卡，展签改无衬线 */
+.sc-swiper {
+  height: 620rpx;
+  border: none;
+  border-radius: 28rpx;
+  box-shadow: 0 14rpx 34rpx rgba(30, 30, 26, 0.10);
+  background-color: #FFFFFF;
+}
+
+.sc-caption { padding: 24rpx 28rpx 18rpx; }
+.sc-no { font-family: var(--font-sans); font-size: 34rpx; font-weight: 600; color: var(--c-green); }
+.sc-name { font-family: var(--font-sans); font-size: 40rpx; font-weight: 600; letter-spacing: 0; color: var(--c-ink); }
+.sc-cuisine { font-size: 24rpx; color: #6e6a5e; }
+.sc-how { font-size: 26rpx; line-height: 1.55; color: #4A463C; }
+.sc-dot { background-color: #E3DED2; }
+.sc-dot-on { background-color: var(--c-green); }
+
+/* 数据预览卡：白卡化，去掉暖色渐变与纸边框 */
+.cp {
+  padding: 30rpx 28rpx 26rpx;
+  border: none;
+  border-radius: 28rpx;
+  background-image: none;
+  background-color: #FFFFFF;
+  box-shadow: 0 10rpx 28rpx rgba(30, 30, 26, 0.06);
+}
+
+.cp-live-t { font-size: 24rpx; color: #6E6A5E; }
+.cp-asof { font-size: 24rpx; color: #9A9486; }
+.cp-term { font-family: var(--font-sans); font-weight: 600; letter-spacing: 0.01em; color: var(--c-ink); }
+.cp-pos { color: #6e6a5e; }
+.cp-kpi .cp-k { color: #6E6A5E; }
+.cp-kpi .cp-s { color: #9A9486; }
+.cp-go { border-top-color: var(--c-line); }
+.cp-go-t { font-family: var(--font-sans); font-weight: 600; color: var(--c-green); }
+.cp-go-s { color: #6e6a5e; }
+.cp-go-a { color: var(--c-green); }
+
+/* C 主题：去掉封面蒸汽，保持画面干净 */
+.hero-steam { display: none; }
+
+/* ============================================================
+   C 主题 · 首页数据卡（深绿罗盘）
+   保留现有「罗盘 + 三 KPI」结构，只把暖金/朱砂换深绿，
+   卡片白化、数字无衬线，跟全站一套色。
+   ============================================================ */
+.cp {
+  background-image: none;
+  background-color: #FFFFFF;
+  border: none;
+  box-shadow: 0 10rpx 28rpx rgba(30, 30, 26, 0.06);
+}
+
+.cp-arcs {
+  background: conic-gradient(from -90deg,
+    #A9C4B2 0 86deg, transparent 86deg 90deg,
+    #6E9581 90deg 176deg, transparent 176deg 180deg,
+    #2F5C45 180deg 266deg, transparent 266deg 270deg,
+    #1F4A36 270deg 356deg, transparent 356deg 360deg);
+}
+
+.cp-disc {
+  background-color: #FFFFFF;
+  box-shadow: inset 0 0 0 1rpx rgba(31, 74, 54, 0.12);
+}
+
+.cp-tick { background-color: rgba(31, 74, 54, 0.24); }
+.cp-tick.on { background-color: #2F5C45; }
+
+.cp-term {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cp-num {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: #1F4A36;
+}
+
+.cp-unit { color: #6E6A5E; }
+.cp-k { color: #4A463C; }
+.cp-s { color: #6E6A5E; }
+.cp-kpi { border-bottom-color: #F3EFE7; }
+.cp-rings { border-top-color: #F3EFE7; }
+.cp-live-t { color: #6E6A5E; }
+
+.cp-go {
+  border: none;
+  background-color: #F0F5F1;
+}
+.cp-go-t { color: #1F4A36; }
+.cp-go-a { color: #1F4A36; }
+.cp-go-s { color: #6E6A5E; }
+
+/* 悬浮球气泡副文案：朱砂 → 深绿 */
+.fab-tip-s { color: #1F4A36; }
+
+/* C 主题：罗盘当前刻度、实时小圆点也归深绿 */
+.cp-tick.now {
+  background-color: #1F4A36;
+  box-shadow: 0 0 0 4rpx rgba(31, 74, 54, 0.14);
+}
+.cp-dot {
+  background-color: #1F4A36;
+  box-shadow: 0 0 0 6rpx rgba(31, 74, 54, 0.08);
+}
+
+/* C 主题：首次引导的消息提示框 —— 白卡 + 深绿左边条，和全站一套 */
+.intro-msg {
+  border: 1rpx solid #E8E3D8;
+  border-left: 8rpx solid #1F4A36;
+  border-radius: 20rpx;
+  box-shadow: 0 14rpx 34rpx rgba(30, 30, 26, 0.14);
+}
+
+.intro-ava {
+  background: #F0F5F1;
+  border: 1rpx solid rgba(31, 74, 54, 0.14);
+}
+
+.intro-dot {
+  background: #1F4A36;
+}
+
+.intro-text {
+  color: #4A463C;
+}
+
+.intro-go {
+  color: #1F4A36;
+}
+
