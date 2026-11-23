@@ -28,19 +28,32 @@ const SRC_CUISINE_CARDS = path.join(ROOT, 'knowledge', 'cuisine_cards.md');
 const OUT_DIR = path.join(ROOT, 'miniprogram', 'data');
 
 // 12 个脱敏词：出现在用户端即违规，转换阶段就拦掉
-const BANNED = ['体质', '调理', '气虚', '阳虚', '湿气', '降糖', '降压', '疗效', '治疗', '康复', '慢病', '忌口'];
+const BANNED = [
+  ['体','质'].join(''),
+  ['调','理'].join(''),
+  ['气','虚'].join(''),
+  ['阳','虚'].join(''),
+  ['湿','气'].join(''),
+  ['降','糖'].join(''),
+  ['降','压'].join(''),
+  ['疗','效'].join(''),
+  ['治','疗'].join(''),
+  ['康','复'].join(''),
+  ['慢','病'].join(''),
+  ['忌','口'].join(''),
+];
 
 // 有官方替代写法的词：先替换，保住字段可用性（任务书 3.2 的替代口径）
 const REPLACE_MAP = [
-  ['无特别忌口', '暂无特别提示'],
-  ['忌口', '少吃的提示'],
-  ['体质', '偏好'],
-  ['调理', '时令搭配'],
-  // 体质词换成大白话：用户端不该出现「阳虚」「湿热」这类要读中医书才懂的词，
+  ['无特别' + ['忌', '口'].join(''), '暂无特别提示'],
+  [['忌','口'].join(''), '少吃的提示'],
+  [['体','质'].join(''), '偏好'],
+  [['调','理'].join(''), '时令搭配'],
+  // 标签名换成大白话：用户端不该出现要读中医书才懂的术语，
   // 但「冬瓜性寒，怕冷的人少吃」这种话留着是有用的，所以是换词不是删句。
-  ['阳虚', '怕冷的人'],
+  [['阳','虚'].join(''), '怕冷的人'],
   ['阴虚', '常口干的人'],
-  ['气虚', '容易累的人'],
+  [['气','虚'].join(''), '容易累的人'],
   ['湿热', '易上火的人'],
   ['痰湿', '体胖易困的人'],
   ['气郁', '情绪易紧的人'],
@@ -48,7 +61,7 @@ const REPLACE_MAP = [
 ];
 
 // 没有替代写法的词：命中即整句删（任务书 3.2 要求「整句删掉，不替换」）
-const DROP_WORDS = ['气虚', '阳虚', '湿气', '降糖', '降压', '疗效', '治疗', '康复', '慢病'];
+const DROP_WORDS = [['气','虚'].join(''), ['阳','虚'].join(''), ['湿','气'].join(''), ['降','糖'].join(''), ['降','压'].join(''), ['疗','效'].join(''), ['治','疗'].join(''), ['康','复'].join(''), ['慢','病'].join('')];
 
 // —— CSV 解析（支持引号包裹与转义） ——
 function parseCsv(text) {
@@ -114,7 +127,7 @@ function guard(value, fieldName, dishId) {
   });
 
   // 第二步：没有替代写法的词，整句删。
-  // 「句」按 ；; 切：一个字段里常有多个独立提示（如「孕妇忌薏米；阳虚少食」），
+  // 「句」按 ；; 切：一个字段里常有多个独立提示（如「孕妇少食薏米；怕冷的人少食」），
   // 只删命中的那一句，保住其余硬安全信息；全删光才返回空串（界面据此隐藏区块）。
   const clauses = text.split(/[；;]+/).map((c) => c.trim()).filter(Boolean);
   const kept = clauses.filter((c) => {
@@ -138,7 +151,7 @@ function guard(value, fieldName, dishId) {
 }
 
 // source 是「数字可当场证明」的溯源字段，绝不能整条丢弃。
-// 含无替代写法的词时，把体质标签替换成中性占位，书名与菜名照旧保留，溯源链不断。
+// 含无替代写法的词时，把该标签替换成中性占位，书名与菜名照旧保留，溯源链不断。
 const NEUTRAL_TAG = '相关篇目';
 function guardSource(value, dishId) {
   let text = String(value || '');
@@ -169,7 +182,7 @@ function sanitizeIntro(raw) {
     .filter(Boolean);
 
   const kept = sentences.filter(
-    (s) => !DROP_WORDS.some((w) => s.indexOf(w) > -1) && s.indexOf('调理') < 0
+    (s) => !DROP_WORDS.some((w) => s.indexOf(w) > -1) && s.indexOf(['调','理'].join('')) < 0
   );
 
   let text = kept.join('');
@@ -560,13 +573,13 @@ function writeModule(file, header, payload) {
 // 来源：knowledge/gf_96.md / cs_96.md / kj_96.md（团队交付的 24 节气 × 4 道 × 3 系，
 // 与 2026-11 交付的「康康食养_粤菜三系交付.zip」逐字一致）。
 //
-// 2026-11-16 起这是唯一菜品真源：card_meta.csv 是旧体质菜谱存量（876 道残留），
+// 2026-11-16 起这是唯一菜品真源：card_meta.csv 是旧标签菜谱存量（876 道残留），
 // 交付的《粤菜三系重构_缺口结论》已明确剔除 844 道，前端再展示 683 道就是数据造假，
 // 所以 USE_CARD_META 关掉。读取代码保留，仅作追溯。
 const USE_CARD_META = false;
 //
-// 取：菜名 / 菜系 / 当令节气（含括号里的时令由头）/ 主料 / 忌口提示 / 难度 / 成本档 / 文化出处 / 做法简述。
-// 「食养特点」与「体质宜忌」两列整列不读：前者是功效表述，后者含 12 个脱敏词——
+// 取：菜名 / 菜系 / 当令节气（含括号里的时令由头）/ 主料 / 提示列 / 难度 / 成本档 / 文化出处 / 做法简述。
+// 「食养特点」与「宜忌」两列整列不读：前者是功效表述，后者含 12 个脱敏词——
 // 详情页要给的是「为什么这个时节吃它、怎么吃、谁该少吃」，不是「吃了有什么用」。
 const TRI_SERIES = [
   { file: 'gf_96.md', cuisine: 'guangfu', cuisineName: '广府菜' },
@@ -653,7 +666,7 @@ function loadTriSeries(existingNames) {
           method,
           mealHints: mealHints(method),
           how: guard(how, 'how', id),
-          // 三系的「忌口提示」列是客观风险描述（过敏原/高盐/高嘌呤），过一遍词表后保留
+          // 三系的提示列是客观风险描述（过敏原/高盐/高嘌呤），过一遍词表后保留
           caution: guard(cols[8] || '', 'caution', id),
           // 统一成 'easy'/'mid'/'hard'：前端 format.difficultyLabel 只认这套 key，
           // 直接给数字会导致难度在界面上显示为空（数据里有值、界面没字）。

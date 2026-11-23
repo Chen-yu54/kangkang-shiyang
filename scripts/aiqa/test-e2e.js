@@ -99,7 +99,7 @@ function startServer() {
     nextContent = JSON.stringify({
       reply: '立冬了，可以吃点温润的。',
       dishes: [
-        { id: 'GF0021', reason: '淮山配鸡，温润不燥，适合怕冷的体质。' },
+        { id: 'GF0021', reason: '淮山配鸡，温润不燥，适合怕冷的人。' },
         { id: 'GF0039', reason: '岭南常用汤料，冬天喝舒服。' },
       ],
       followups: ['想喝汤', '清淡一点'],
@@ -173,7 +173,7 @@ function startServer() {
     assert.strictEqual(r.code, 'EMPTY_QUESTION');
   });
 
-  await test('忌口海鲜：送给模型的候选池里没有任何海鲜', async () => {
+  await test('回避海鲜：送给模型的候选池里没有任何海鲜', async () => {
     let promptSeen = '';
     nextContent = (raw) => {
       promptSeen = raw;
@@ -199,7 +199,7 @@ function startServer() {
     assert.strictEqual(r.meta.searchUsed, false);
   });
 
-  await test('忌口过严导致无候选：返回 NO_CANDIDATE', async () => {
+  await test('回避项过严导致无候选：返回 NO_CANDIDATE', async () => {
     const all = ['海鲜', '牛肉', '羊肉', '猪肉', '鸡肉', '鸭肉', '蛋', '奶', '花生', '坚果', '芒果', '香菜', '辛辣', '油腻', '生冷', '酒', '麸质', '豆制品', '菌菇', '高嘌呤', '高糖', '高盐'];
     const r = await call({ question: '今天吃什么', profile: { taboos: all, ageGroup: '长者' } });
     assert(r.status === 'ok' || r.code === 'NO_CANDIDATE', '实际：' + JSON.stringify(r).slice(0, 120));

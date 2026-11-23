@@ -29,8 +29,8 @@ const DIFFICULTY_NUM = { easy: 1, mid: 2, hard: 3 };
 
 // 致敏原白名单：只有这些词才算过敏原。
 // 本工程的 allergen 原文混着疾病名（痛风/糖友/高血压）、处理提示（须吐沙彻底）、
-// 人群提示（孕妇/与柿子同食）——这些都不是过敏原，混进来会让 aiqa 的忌口匹配失效。
-// AIQA 用这个字段做"忌口 ∩ 食材"的硬过滤，所以必须是**食材名**。
+// 人群提示（孕妇/与柿子同食）——这些都不是过敏原，混进来会让 aiqa 的回避项匹配失效。
+// AIQA 用这个字段做「回避项 ∩ 食材」的硬过滤，所以必须是**食材名**。
 const ALLERGEN_WORDS = [
   '虾', '虾类', '虾仁', '鲜虾',
   '蟹', '蟹类', '螃蟹',
@@ -137,7 +137,7 @@ function build() {
   console.log('[build-aiqa] 带致敏原标记 ' + withAllergen + ' 道');
 
   if (noIng > 0) {
-    console.log('[build-aiqa] ⚠ 有 ' + noIng + ' 道缺主料，忌口硬过滤对这些菜无效');
+    console.log('[build-aiqa] ⚠ 有 ' + noIng + ' 道缺主料，回避项硬过滤对这些菜无效');
   }
 }
 

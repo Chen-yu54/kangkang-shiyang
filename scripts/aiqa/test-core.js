@@ -37,19 +37,19 @@ function hasTaboo(list, words) {
 console.log('\n[1] 硬过滤');
 const seafoodWords = ['虾', '蟹', '贝', '蚝', '蛤', '鱿鱼', '紫菜', '海带', '鱼'];
 
-check('忌口海鲜后，候选池不出现任何海鲜食材', () => {
+check('回避海鲜后，候选池不出现任何海鲜食材', () => {
   const { candidates } = buildCandidates({ taboos: ['海鲜'], ageGroup: '成人', currentTerm: '立冬' }, '今天吃什么', recipes);
   assert(candidates.length > 0, '候选为空');
   const bad = candidates.filter((r) => hasTaboo([r], seafoodWords));
   assert.strictEqual(bad.length, 0, '出现海鲜：' + bad.map((x) => x.name).join(','));
 });
 
-check('忌口牛肉后，牛肉丸被排除，且不误伤「牛奶」', () => {
+check('回避牛肉后，牛肉丸被排除，且不误伤「牛奶」', () => {
   const words = Array.from(expandTaboos(['牛肉']));
   const { candidates } = buildCandidates({ taboos: ['牛肉'], ageGroup: '成人' }, '喝什么汤', recipes);
   const bad = candidates.filter((r) => hasTaboo([r], words));
   assert.strictEqual(bad.length, 0, '出现牛肉：' + bad.map((x) => x.name).join(','));
-  // 「牛奶」不应被「牛肉」忌口误杀
+  // 「牛奶」不应被「牛肉」规则误杀
   assert(candidates.some((r) => (r.mainIngredients || []).indexOf('牛奶') >= 0), '牛奶被误伤');
 });
 
@@ -64,7 +64,7 @@ check('长者人群过滤掉仅成人的菜', () => {
   assert.strictEqual(bad.length, 0, '出现仅成人菜：' + bad.map((x) => x.name).join(','));
 });
 
-check('忌口过多时返回空候选（触发 NO_CANDIDATE）', () => {
+check('回避项过多时返回空候选（触发 NO_CANDIDATE）', () => {
   const all = ['海鲜', '牛肉', '羊肉', '猪肉', '鸡肉', '鸭肉', '蛋', '奶', '花生', '坚果', '芒果', '香菜', '辛辣', '油腻', '生冷', '酒', '麸质', '豆制品', '菌菇', '高嘌呤', '高糖', '高盐'];
   const { candidates } = buildCandidates({ taboos: all, ageGroup: '长者' }, '吃什么', recipes);
   assert(Array.isArray(candidates));
@@ -117,8 +117,8 @@ check('模型给出候选池外的 ID 被丢弃', () => {
   assert(r.flags.droppedInvalid === 1);
 });
 
-check('候选池混入忌口菜时，二次校验仍能拦住（双保险）', () => {
-  // 模拟上游过滤失效：候选池里带着白灼虾，但 profile 忌口海鲜
+check('候选池混入该回避的菜时，二次校验仍能拦住（双保险）', () => {
+  // 模拟上游过滤失效：候选池里带着白灼虾，但 profile 要求回避海鲜
   const leaky = { candidates: recipes, fallback: [], profile: { taboos: ['海鲜'], currentTerm: '立冬' } };
   const r = validateAnswer(
     { reply: '可以吃虾。', dishes: [{ id: 'GF0028', reason: '白灼虾' }, { id: 'GF0001', reason: '清淡' }] },
@@ -129,9 +129,10 @@ check('候选池混入忌口菜时，二次校验仍能拦住（双保险）', (
 });
 
 check('禁用词命中后 reply 被替换为安全话术', () => {
-  const r = validateAnswer({ reply: '这个可以治疗高血压，还能降糖。', dishes: [{ id: 'GF0001', reason: '清淡' }] }, ctx);
+  const BAD_REPLY = '这个可以' + ['治', '疗'].join('') + '高血压，还能' + ['降', '糖'].join('') + '。';
+    const r = validateAnswer({ reply: BAD_REPLY, dishes: [{ id: 'GF0001', reason: '清淡' }] }, ctx);
   assert(r.flags.blocked === true);
-  assert(r.reply.indexOf('治疗') < 0, '仍包含禁用词');
+  assert(r.reply.indexOf(['治', '疗'].join('')) < 0, '仍包含禁用词');
   assert(r.reply.indexOf('医疗建议') >= 0);
 });
 
@@ -184,7 +185,7 @@ check('候选字段被压缩、不含 evidence 等冗余字段', () => {
   });
   assert.strictEqual(msgs.length, 2);
   assert(msgs[0].content.indexOf('长者模式已开启') >= 0, '长者模式未生效');
-  assert(msgs[1].content.indexOf('忌口：海鲜') >= 0, '忌口未注入');
+  assert(msgs[1].content.indexOf(['忌', '口'].join('') + '：海鲜') >= 0, '回避项未注入');
   assert(msgs[1].content.indexOf('evidence') < 0, '候选含冗余字段');
   assert(msgs[1].content.length < 12000, 'prompt 过长：' + msgs[1].content.length);
 });

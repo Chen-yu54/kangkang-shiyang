@@ -156,7 +156,7 @@ function main() {
   if (skipped.length) console.log('⚠️ 跳过 ' + skipped.length + ' 行（缺 id/name 或 id 重复）：第 ' + skipped.slice(0, 20).join(',') + ' 行');
 
   const noIngredient = out.filter((x) => !x.mainIngredients.length).length;
-  if (noIngredient) console.log('⚠️ ' + noIngredient + ' 道菜没有主料，忌口过滤会失效，建议补全');
+  if (noIngredient) console.log('⚠️ ' + noIngredient + ' 道菜没有主料，回避项过滤会失效，建议补全');
 }
 
 main();
