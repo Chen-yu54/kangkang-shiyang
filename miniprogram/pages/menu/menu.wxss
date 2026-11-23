@@ -1012,11 +1012,14 @@
 
 .rdish-open {
   display: block;
-  margin-top: 12rpx;
-  padding-top: 12rpx;
-  border-top: 2rpx solid var(--color-border-hair);
+  margin-top: 20rpx;
+  padding: 18rpx 0;
+  text-align: center;
   font-size: var(--font-btn);
-  color: var(--color-flame);
+  line-height: 1.2;
+  color: var(--color-green);
+  background-color: var(--color-green-bg);
+  border-radius: 999rpx;
 }
 
 .rdish-nodetail {
@@ -1305,7 +1308,10 @@
 }
 
 .rdish-why { color: var(--color-green); }
-.rdish-open { color: var(--color-green); border-top: 1rpx solid var(--color-border); }
+.rdish-open {
+  color: var(--color-green);
+  background-color: var(--color-green-bg);
+}
 
 .rblock {
   border-left: none;
@@ -1354,3 +1360,223 @@
 .side-text { font-size: var(--font-caption); }
 
 .count-text { font-size: var(--font-micro); }
+
+/* ============================================================
+   C 主题 · 菜系浏览（2026-11-20 照设计稿重排）
+   ‹ 回到今日食单 → 菜系风味 → 胶囊 tab → 风味卡 → 左节气栏 + 右紧凑行
+   字号仍走全站那套 token（32/28/24rpx），设计稿的 px 换算后向上取一档，
+   为了和别的页面同一套字阶；间距、圆角、层级照设计稿。
+   ============================================================ */
+
+.browse-back {
+  padding: 20rpx 0 8rpx;
+}
+
+.browse-back-text {
+  color: var(--color-green);
+  font-size: 28rpx;
+}
+
+/* 页头：菜系风味 / 岭南 · 三系，一条细线收口 */
+.mast {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 6rpx 0 20rpx;
+  margin-bottom: 22rpx;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.mast-title {
+  font-family: var(--font-sans);
+  font-size: var(--font-title);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.mast-note {
+  font-size: 24rpx;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-3);
+}
+
+/* 风味卡：菜名 + 地域一行，下面一句风格、一句搭配提示 */
+.flavor {
+  padding: 22rpx 24rpx;
+  margin-bottom: 20rpx;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(30, 30, 26, 0.05);
+  box-sizing: border-box;
+}
+
+.flavor-head {
+  display: flex;
+  align-items: baseline;
+}
+
+.flavor-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.flavor-region {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: var(--color-ink-3);
+}
+
+.flavor-style {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+.flavor-risk {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1.55;
+  color: var(--color-ink-3);
+}
+
+.flavor-risk-label {
+  display: inline;
+  margin-right: 8rpx;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+/* 左栏：节气。季节只作小字分隔，不加圆点和色条，视线落在节气本身 */
+.side {
+  width: 148rpx;
+  margin-right: 16rpx;
+  border-right: none;
+}
+
+.side .side-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72rpx;
+  padding: 6rpx 8rpx;
+  margin-bottom: 4rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  line-height: 1.3;
+  color: var(--color-ink-3);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.side .side-on {
+  background-color: var(--color-green);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.side .season-text {
+  display: block;
+  padding: 16rpx 0 6rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--color-ink-3);
+}
+
+/* 右栏：计数 + 紧凑行 */
+.count-text {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: 24rpx;
+  color: var(--color-ink-3);
+}
+
+.mini {
+  display: flex;
+  align-items: center;
+  padding: 14rpx;
+  margin-bottom: 12rpx;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 12rpx rgba(30, 30, 26, 0.04);
+  box-sizing: border-box;
+}
+
+.mini-thumb {
+  flex: none;
+  width: 128rpx;
+  margin-right: 16rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.mini-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mini-top {
+  display: flex;
+  align-items: center;
+}
+
+.mini-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 收藏：小圆钮，未收藏淡一点，收藏后上浅绿底 */
+.mini-fav {
+  flex: none;
+  width: 72rpx;
+  height: 72rpx;
+  margin-left: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.mini-fav-ico {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.3;
+}
+
+.mini-fav-on {
+  background-color: var(--color-green-bg);
+}
+
+.mini-fav-on .mini-fav-ico {
+  opacity: 1;
+}
+
+.mini-meta {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  color: var(--color-ink-3);
+}
+
+.mini-tip {
+  display: -webkit-box;
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  color: var(--color-green);
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

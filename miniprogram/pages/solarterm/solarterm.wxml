@@ -18,6 +18,23 @@
       </view>
 
       <block wx:else>
+        <!-- 列表只用于「换节气」。标清这是节气总表，并给一条回当前节气的捷径，
+             万一从别的路径落到这里，也不用一排卡里找自己那个。 -->
+        <view class="term-list-head">
+          <view class="tlh-main">
+            <text class="tlh-title">{{copy.listTitle}}</text>
+            <text class="tlh-sub">{{copy.listSub}}</text>
+          </view>
+          <view
+            wx:if="{{backCurrentText}}"
+            class="tlh-back"
+            hover-class="tap-hover"
+            bindtap="onBackCurrent"
+          >
+            <text class="tlh-back-text">{{backCurrentText}} ›</text>
+          </view>
+        </view>
+
         <term-card
           wx:for="{{terms}}"
           wx:key="name"
@@ -72,7 +89,7 @@
           </view>
           <!-- 详情默认打开，看别的节气从这里切回列表 -->
           <view class="detail-back" hover-class="tap-hover" bindtap="onBackList">
-            <text class="detail-back-text">{{copy.all}} ›</text>
+            <text class="detail-back-text">{{copy.switchTerm}} ›</text>
           </view>
         </view>
 
@@ -212,7 +229,22 @@
         </view>
       </view>
 
-      <empty-state wx:else text="{{copy.detailEmpty}}" />
+      <!-- detail 为空的兜底：区分「还在加载」和「真的失败」。
+           原来只有一句「这个节气的菜还在补」，内容取到了但没送到视图层时，
+           用户看到的也是这句，误导成「数据没有」。失败时把原因和出口都给出来。 -->
+      <view wx:elif="{{status === 'loading'}}" class="state-box">
+        <text class="state-text">{{copy.empty}}</text>
+      </view>
+
+      <view wx:else class="state-box">
+        <image class="state-icon" src="/images/icons/state-error.png" mode="aspectFit" />
+        <text class="state-text">{{copy.error}}</text>
+        <text wx:if="{{loadError}}" class="state-detail">{{loadError}}</text>
+        <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+        <view wx:if="{{terms.length}}" class="state-link" hover-class="tap-hover" bindtap="onBackList">
+          <text class="state-link-text">{{copy.switchTerm}} ›</text>
+        </view>
+      </view>
     </block>
   </view>
 

@@ -67,12 +67,13 @@ function toCard(dish) {
 Page({
   data: {
     pageStyle: '',
-    view: 'list',
+    view: 'detail', // 进来先看节气内容；列表只在点「换节气」之后才出现
     status: 'loading', // 列表态：loading | ready | empty | error
     loadError: '', // 加载失败的具体原因，显示到界面上便于定位
     dishStatus: 'loading', // 详情菜品态：loading | ready | empty | error
     terms: [],
     currentName: '',
+    backCurrentText: '',
     detail: null,
     detailPoster: '',
     dishes: [], // 当前餐次筛选后的列表
@@ -98,8 +99,12 @@ Page({
     // 后面必须落到详情，不能退化成列表。用 in 判断而不是取值判断，
     // 是为了区分「没带参数」和「带了但解不出来」两种情况。
     this.hasTermParam = !!(options && 'term' in options);
-    // 只有显式要列表时才停在 list（推荐页「看全部节气」入口带 ?view=list）
-    this.forceList = !!(options && options.view === 'list');
+    // 入口参数只用来决定「先展开哪个节气」，不再决定「能不能进详情」。
+    // 之前留了 ?view=list 的口子，结果只要 URL 上出现这个键，页面就整屏变成
+    // 一排节气卡 —— 用户点「节气文化」看到的是列表，看着就像跳错了。
+    // 现在列表只能由用户点详情页的「换节气」进入，参数一律不理会。
+    this._userList = false;
+    this._retried = false;
     this.pendingTerm = decodeTermParam(options && options.term);
     this.setData({
       copy: {
@@ -118,6 +123,9 @@ Page({
         mealHint: t('solarterm.mealHint'),
         mealEmpty: t('solarterm.mealEmpty'),
         all: t('common.all'),
+        switchTerm: t('solarterm.switchTerm'),
+        listTitle: t('solarterm.title'),
+        listSub: t('solarterm.listSub'),
         error: t('home.error'),
         retry: t('common.retry'),
         shareLongImage: t('solarterm.shareLongImage'),
@@ -140,6 +148,31 @@ Page({
 
   onShow() {
     this.setData({ pageStyle: getApp().getFontStyle() });
+    this.ensureDetailView();
+  },
+
+  // 兜底：从首页「节气文化」/ 海报 / 我的页进来，本该看到文化详情。
+  // 只要用户没有主动点「换节气」，进页面时视图还停在列表、或内容没落地，
+  // 就自动展开节气内容，绝不让用户看到一排节气卡还以为点错了。
+  ensureDetailView() {
+    if (this._userList) return; // 用户主动点了「换节气」，尊重这个选择
+    if (this.data.view === 'detail' && this.data.detail) return; // 已经在详情
+    if (!this.data.terms || !this.data.terms.length) return; // 数据没到，保留骨架/错误态
+    const name = this.data.currentName || (this.data.terms[0] && this.data.terms[0].name);
+    if (!name) return;
+    this.openTerm(name);
+
+    // 一次延迟补偿：首帧 setData 偶发丢失时（切页动画、低版本基础库），
+    // 300ms 后内容还没落地就再补一次。只补一次，不跟用户的操作抢。
+    if (this._retried) return;
+    this._retried = true;
+    setTimeout(() => {
+      if (this._userList) return;
+      if (this.data.view === 'detail' && this.data.detail) return;
+      if (!this.data.terms || !this.data.terms.length) return;
+      const again = this.data.currentName || (this.data.terms[0] && this.data.terms[0].name);
+      if (again) this.openTerm(again);
+    }, 300);
   },
 
   loadTerms() {
@@ -150,32 +183,28 @@ Page({
     // 这里直接同步取，setData 当场生效，从根上没有异步等待。
     const apply = (terms) => {
       const current = dataSource.getCurrentTerm();
+      const curName = current ? current.name : '';
       this.setData({
         terms,
-        currentName: current ? current.name : '',
+        currentName: curName,
+        // 列表视图右上角「回立冬」用：落列表时一键回当前节气的文化详情
+        backCurrentText: curName ? i18n.tpl('solarterm.backCurrent', { name: curName }) : '',
         status: terms.length > 0 ? 'ready' : 'empty',
         loadError: '',
       });
 
-      // 带 term 参数进来：直接展开该节气详情
-      // 默认落到详情，不再依赖 term 参数是否传对。
-      //
+      // 进来一律先展开节气详情，不再看任何 URL 参数。
       // 这个页面从任何入口进来，用户最想看的就是「这个节气的文化内容」，
-      // 而不是一排节气卡。只有明确要看全部列表时才留在 list——
-      // 那由 ?view=list 指定（推荐页的「看全部节气」入口）。
-      // 之前依赖 term 参数，一旦跳转兜底丢了参数、或编码对不上，
-      // 页面就退化成列表，用户看到的就是「点进去不是我要的内容」。
-      const wantList = this.forceList === true;
-      if (wantList) return;
-
+      // 而不是一排节气卡；列表只留给「换节气」这个动作。
       const name = this.pendingTerm;
       this.pendingTerm = '';
       this.hasTermParam = false;
       if (name && terms.some((x) => x.name === name)) {
-        this.onTapTerm({ detail: { name } });
-      } else if (current) {
+        this.openTerm(name);
+      } else if (terms.length) {
         // 没带参数、或编码坏了、或节气名对不上，都退到当前节气
-        this.onTapTerm({ detail: { name: current.name } });
+        const fallback = (current && current.name) || (terms[0] && terms[0].name) || '';
+        if (fallback) this.openTerm(fallback);
       }
     };
 
@@ -218,42 +247,120 @@ Page({
     }
   },
 
-  // 从详情切回 24 节气列表（详情现在是默认视图）
+  // 从详情切回 24 节气列表（只有用户点「换节气」才会到这里）
   onBackList() {
+    this._userList = true;
     this.setData({ view: 'list', detail: null, bg: null, health: null, dishes: [], allDishes: [] });
+  },
+
+  // 列表视图里「回当前节气」：一键回到这个节气的文化详情
+  onBackCurrent() {
+    const name = this.data.currentName;
+    if (!name) return;
+    this.onTapTerm({ detail: { name } });
   },
 
   onTapTerm(e) {
     const name = e.detail && e.detail.name;
     if (!name) return;
+    this.openTerm(name);
+  },
 
-    const detail = this.decorateTerm(dataSource.getTerm(name));
-    // 数据没命中时不要把 view 切到 detail：
-    // 那样 wxml 会走 <view wx:if="{{detail}}"> 的 else 分支显示空态，
-    // 用户看到的是「这个节气没有内容」而不是「页面坏了」，很难判断是谁的问题。
-    // 留一个明确的错误态，带重试。
-    if (!detail) {
-      this.setData({ status: 'error', view: 'list' });
+  // 打开某个节气的文化详情。
+  //
+  // setData 分两段：先落「必须看到的内容」，再补背景和养生这类装饰。
+  // 原来全部塞在一次 setData 的参数里，参数对象求值阶段任何一处抛错
+  // （背景纹理、养生提醒构造），整个 setData 都不执行，detail 一直是 null，
+  // 页面就只剩「这个节气的菜还在补」——内容其实取到了，只是没送到视图层。
+  openTerm(name) {
+    let detail = null;
+    try {
+      detail = this.decorateTerm(dataSource.getTerm(name));
+    } catch (err) {
+      this.setData({
+        status: 'error',
+        loadError: '读取「' + name + '」出错：' + ((err && err.message) || '未知原因'),
+      });
       return;
     }
-    // 节气海报：AI 生成的水墨横板图，24 节气各一张（utils/solarTheme.js）
-    const themeInfo = solarTheme.getThemeByName(detail.name);
-    this.setData({
-      view: 'detail',
-      detail,
-      detailPoster: themeInfo ? themeInfo.poster : '',
-      dishes: [],
-      allDishes: [],
-      mealFilter: ALL_MEAL,
-      dishStatus: 'loading',
-      // 动态背景：每个节气一套天空渐变 + 纹理 + 光晕 + 漂浮元素 + 粒子
-      bg: buildScene(detail.name),
-      // 养生提醒：气候特征 + 今天怎么喝 + 当令吃什么 + 起居（已剔功效性表述）
-      health: termHealth.buildToday(detail.name, {}),
-    });
 
-    track.solarTermView(name);
-    this.loadDishes(name);
+    if (!detail) {
+      // 不切回 list：切了就成了「点节气文化，结果看到一排节气卡」。
+      // 已经有内容时留在详情，只把原因提示出来；本来就在列表时再显示错误态。
+      this.setData({
+        status: 'error',
+        loadError: '没找到「' + name + '」的节气内容',
+        view: this.data.detail ? 'detail' : 'list',
+      });
+      return;
+    }
+
+    // 节气海报：AI 生成的水墨横板图，24 节气各一张（utils/solarTheme.js）
+    let poster = '';
+    try {
+      const themeInfo = solarTheme.getThemeByName(detail.name);
+      poster = themeInfo ? themeInfo.poster : '';
+    } catch (err) {
+      poster = '';
+    }
+
+    // 内容这一段落必须成功落地。真机上若因数据异常导致 setData 失败，
+    // 把原因写出来，而不是让页面停在「内容还在补」的空态上。
+    try {
+      this.setData({
+        view: 'detail',
+        detail,
+        detailPoster: poster,
+        dishes: [],
+        allDishes: [],
+        mealFilter: ALL_MEAL,
+        dishStatus: 'loading',
+        status: 'ready',
+        loadError: '',
+        bg: null,
+        health: null,
+      });
+    } catch (err) {
+      this.setData({
+        status: 'error',
+        loadError: '「' + name + '」内容写入失败：' + ((err && err.message) || '未知原因'),
+      });
+      return;
+    }
+
+    // 已经从列表里挑了一个节气，退出「用户想看列表」的状态
+    this._userList = false;
+
+    // —— 以下都是可缺省的装饰层，失败就退回素纸底，不能拖累内容 ——
+
+    // 动态背景：每个节气一套天空渐变 + 纹理 + 光晕 + 漂浮元素 + 粒子
+    try {
+      const scene = buildScene(detail.name);
+      if (scene) this.setData({ bg: scene });
+    } catch (err) {
+      console.warn('[solarterm] 背景构建失败', err);
+    }
+
+    // 养生提醒：气候特征 + 今天怎么喝 + 当令吃什么 + 起居（已剔功效性表述）
+    try {
+      const health = termHealth.buildToday(detail.name, {});
+      if (health) this.setData({ health });
+    } catch (err) {
+      console.warn('[solarterm] 养生提醒构建失败', err);
+    }
+
+    try {
+      track.solarTermView(name);
+    } catch (err) {
+      // 埋点失败不影响页面
+    }
+
+    // 菜品列表：接口异常时落到 dishStatus='error'，顶部内容照旧显示
+    try {
+      this.loadDishes(name);
+    } catch (err) {
+      this.setData({ dishStatus: 'error' });
+    }
   },
 
   // 食材价格档位：视图层按 priceLevel 渲染 1–3 颗星形图（压印五角星），
@@ -272,7 +379,15 @@ Page({
       text,
       no: i + 1,
     }));
-    return Object.assign({}, term, { ingredientDetails: details, phenologyList: phenology });
+    // 视图层直接读 xxx.length，字段必须一定是数组：
+    // 少一个就会让 WXML 表达式取到 undefined.length，整块渲染不出来
+    return Object.assign({}, term, {
+      ingredients: Array.isArray(term.ingredients) ? term.ingredients : [],
+      ingredientDetails: details,
+      phenologyList: phenology,
+      folk: Array.isArray(term.folk) ? term.folk : [],
+      poem: term.poem || null,
+    });
   },
 
   loadDishes(termName) {

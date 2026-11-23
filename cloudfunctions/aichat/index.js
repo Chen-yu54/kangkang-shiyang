@@ -83,14 +83,26 @@ function sleep(ms) {
 }
 
 /** ① 发起一轮对话 */
-function startChat(userId, question) {
-  return request('POST', '/v3/chat', {
+function startChat(userId, question, conversationId, context) {
+  // 首轮把已知背景（节气事实、口味档案、说话口径）随问题一起给 Bot。
+  // 之后靠 conversation_id 续接，不再重复注入，免得每轮都把背景复述一遍。
+  // 拼在同一条 user 消息里，而不是塞两条 —— 扣子对 additional_messages 的
+  // 连续同角色消息容忍度不一，单条最稳。
+  const content =
+    !conversationId && context
+      ? '【背景，供你参考，不要复述】' + context + '\n【用户说】' + question
+      : question;
+  const payload = {
     bot_id: BOT_ID,
     user_id: userId,
     stream: false,
     auto_save_history: true,
-    additional_messages: [{ role: 'user', content: question, content_type: 'text' }],
-  }).then((r) => (r && r.data) || r);
+    additional_messages: [{ role: 'user', content: content, content_type: 'text' }],
+  };
+  // 带上会话 ID 才算同一轮对话的延续；不带就是全新会话——
+  // 模型会忘记上一句问过什么，用户答完「没有」它还再问一遍。
+  if (conversationId) payload.conversation_id = conversationId;
+  return request('POST', '/v3/chat', payload).then((r) => (r && r.data) || r);
 }
 
 /** ② 轮询到终态 */
@@ -130,15 +142,20 @@ function fetchAnswer(chat) {
 
 /**
  * 入口。
- * 入参：{ question: string, userId: string, conversationId?: string }
+ * 入参：{ question: string, userId: string, conversationId?: string, context?: string }
  * 返回：{ status, reply, conversationId, chatId, usage? } 或 { status:'error', code, message }
  *
+ * context 是首轮的背景说明（节气、口味档案、回答口径），只在没有
+ * conversationId 时注入；之后 Bot 自己记得，前端不用每轮重发。
  * userId 由前端生成的匿名 id（不是 openid），只用于扣子侧区分会话，不携带身份信息。
  */
 exports.main = async (event) => {
   const e = event || {};
   const question = String(e.question || '').trim();
   const userId = String(e.userId || '').trim() || 'anonymous';
+  // 上一轮返回的会话 ID。传进来才接得上上下文，否则每次都是新会话。
+  const conversationId = String(e.conversationId || '').trim();
+  const context = String(e.context || '').trim().slice(0, 400);
 
   if (!question) {
     return { status: 'error', code: 'EMPTY_QUESTION', message: '问题不能为空' };
@@ -162,7 +179,7 @@ exports.main = async (event) => {
   }
 
   try {
-    const chat = await startChat(userId, question);
+    const chat = await startChat(userId, question, conversationId, context);
     const done = await waitFinished(chat, 0);
 
     if (done.status === 'failed') {

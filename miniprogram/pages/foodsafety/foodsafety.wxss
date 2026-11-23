@@ -289,24 +289,23 @@
   color: var(--color-ink);
 }
 
-/* ─────────── 概览四格 ─────────── */
+/* ─────────── 概览四格：两列 ─────────── */
+/* 与食材卡同一个坑：宽度顶满 100% 再叠加右边距会被挤成一行一个，
+   改用 space-between 分配间距，宽度留一点余量 */
 .ov {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .ov-item {
-  width: calc(50% - 8rpx);
+  width: calc(50% - 12rpx);
   padding: 24rpx 28rpx 22rpx;
   box-sizing: border-box;
   background: var(--color-card);
   border: 2rpx solid var(--color-border-hair);
   border-radius: var(--radius-small);
   margin-bottom: 16rpx;
-}
-
-.ov-item:nth-child(odd) {
-  margin-right: 16rpx;
 }
 
 .ov-num-row {
@@ -394,24 +393,23 @@
   color: var(--color-ink-3);
 }
 
-/* ─────────── 食材卡（带要点）─────────── */
+/* ─────────── 食材卡（带要点）：固定两列 ─────────── */
+/* 用 space-between + 略小于 50% 的宽度，避免 rpx→px 取整后两列超出 100%
+   而被挤成一行一个（旧写法 calc(50% - 8rpx) 加 16rpx 右边距正好顶满） */
 .ingrid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .ing {
-  width: calc(50% - 8rpx);
+  width: calc(50% - 12rpx);
   padding: 24rpx 24rpx 20rpx;
   margin-bottom: 16rpx;
   box-sizing: border-box;
   background: var(--color-card);
   border: 2rpx solid var(--color-border-hair);
   border-radius: var(--radius-small);
-}
-
-.ing:nth-child(odd) {
-  margin-right: 16rpx;
 }
 
 .ing-top {

@@ -141,6 +141,14 @@
         <switch class="row-switch" checked="{{elderMode}}" color="#1F4A36" bindchange="onToggleElder" />
       </view>
 
+      <view class="row">
+        <view class="row-main">
+          <text class="row-label">{{copy.tipPushLabel}}</text>
+          <text class="row-value">{{copy.tipPushDesc}}</text>
+        </view>
+        <switch class="row-switch" checked="{{tipPushOn}}" color="#1F4A36" bindchange="onToggleTipPush" />
+      </view>
+
       <view wx:if="{{!elderMode}}" class="row" hover-class="tap-hover" bindtap="onTapAgent">
         <view class="row-main">
           <text class="row-label">{{copy.agentEntry}}</text>

@@ -743,3 +743,72 @@
   color: var(--color-ink-2);
 }
 
+
+/* —— 列表视图头部（2026-11-20）：标清这是节气总表，并给一条回当前节气的捷径 —— */
+.term-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 24rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid var(--color-border-hair);
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+}
+
+.tlh-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tlh-title {
+  font-family: var(--font-sans);
+  font-size: var(--font-subtitle);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.tlh-sub {
+  margin-top: 6rpx;
+  font-size: var(--font-micro);
+  color: var(--color-ink-3);
+}
+
+.tlh-back {
+  flex: none;
+  margin-left: 16rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background-color: var(--color-green-bg);
+}
+
+.tlh-back-text {
+  font-size: var(--font-micro);
+  color: var(--color-green);
+}
+
+/* —— 详情取不到时的兜底态（2026-11-20）：给出原因和出口，不用「菜还在补」遮住问题 —— */
+.state-detail {
+  margin-top: 12rpx;
+  padding: 0 32rpx;
+  font-size: var(--font-micro);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+  text-align: center;
+  word-break: break-all;
+}
+
+.state-link {
+  margin-top: 24rpx;
+  padding: 10rpx 26rpx;
+  border-radius: 999rpx;
+  background-color: var(--color-green-bg);
+}
+
+.state-link-text {
+  font-family: var(--font-sans);
+  font-size: var(--font-caption);
+  color: var(--color-green);
+}

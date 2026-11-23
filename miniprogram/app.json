@@ -13,6 +13,7 @@
     "pages/mine/mine",
     "pages/dish/dish",
     "pages/solarterm/solarterm",
+    "pages/termDetail/termDetail",
     "pages/search/search",
     "pages/favorite/favorite",
     "pages/preftest/preftest",

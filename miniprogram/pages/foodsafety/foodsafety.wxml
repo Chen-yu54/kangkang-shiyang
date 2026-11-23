@@ -128,13 +128,13 @@
       </view>
     </view>
 
-    <!-- ============ 叁 · 能带走的三句话 ============ -->
+    <!-- ============ 叁 · 温馨提示 ============ -->
     <view class="sec">
       <view class="sec-head">
         <image class="sec-ico" src="{{icons.overview}}" mode="aspectFit" />
         <view class="sec-main">
           <text class="sec-no">叁</text>
-          <text class="sec-title">能带走的三句话</text>
+          <text class="sec-title">温馨提示</text>
         </view>
       </view>
 

@@ -25,11 +25,9 @@ const DISTRICTS = [
 
 const MAX_COMMUNITIES = 40;
 
-/** 街道列表（无社区的不展示，避免选了街道却选不了社区） */
+/** 街道列表。社区名单还没补齐时也照常可选，只按街道记录，不挡用户。 */
 function listDistricts() {
-  return DISTRICTS.filter((d) => d && d.id && d.name && (d.communities || []).length > 0).map(
-    (d) => ({ id: d.id, name: d.name })
-  );
+  return DISTRICTS.filter((d) => d && d.id && d.name).map((d) => ({ id: d.id, name: d.name }));
 }
 
 function listCommunities(districtId) {

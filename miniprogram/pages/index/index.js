@@ -320,17 +320,15 @@ Page({
     wx.navigateTo({ url: '/pages/dish/dish?id=' + encodeURIComponent(id) });
   },
 
-  // 节气文化卡 → 节气详情页（solarterm 支持 ?term= 直接进详情，省一次列表点击）
+  // 节气文化卡 → 节气详情二级页（专放诗文以下：三候、食俗、养生、食材、菜品）
+  // 首页文化卡已经亮了节气名、标语和诗，这一页不重复，点开直接看具体内容。
   onTapTermDetail() {
     const name = this.data.termName;
     if (!name) return;
 
-    // 注意：这里跳的是「节气详情」，term 参数必须带到。
-    // 原来 fail 分支退到 /pages/solarterm/solarterm 时把 term 丢了，
-    // 页面没有参数就只能渲染 24 节气列表 —— 用户点「立冬的讲究」
-    // 结果看到一排节气卡，看起来就是「跳转没成功」。
-    // 失败最常见的原因是页面栈已满（navigateTo 上限 10 层），这时先 redirectTo 兜一层。
-    const url = '/pages/solarterm/solarterm?term=' + encodeURIComponent(name);
+    // term 参数必须带到，页面才能展开对应节气；三级兜底也都带同一个 url。
+    // 页面栈满时 navigateTo 会失败，先 redirectTo 兜一层，最后才 reLaunch。
+    const url = '/pages/termDetail/termDetail?term=' + encodeURIComponent(name);
 
     wx.navigateTo({
       url,
@@ -338,8 +336,6 @@ Page({
         wx.redirectTo({
           url,
           fail: () => {
-            // 连 redirect 都失败才退到重启，仍然带 term —— 只要参数在，
-            // 页面就能自己展开该节气，绝不会退化成「一排节气卡」。
             wx.reLaunch({ url });
           },
         });

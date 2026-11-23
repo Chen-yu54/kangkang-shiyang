@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "节气详情",
+  "navigationBarBackgroundColor": "#FBF8F2",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#FBF8F2",
+  "usingComponents": {
+    "dish-card": "../../components/dishCard/dishCard",
+    "empty-state": "../../components/emptyState/emptyState",
+    "loading": "../../components/loading/loading",
+    "disclaimer": "../../components/disclaimer/disclaimer"
+  }
+}

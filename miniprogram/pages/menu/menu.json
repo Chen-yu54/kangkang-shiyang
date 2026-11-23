@@ -2,7 +2,7 @@
   "navigationBarTitleText": "专属推荐",
   "usingComponents": {
     "cuisine-tab": "../../components/cuisineTab/cuisineTab",
-    "dish-card": "../../components/dishCard/dishCard",
+    "dish-media": "../../components/dishMedia/dishMedia",
     "empty-state": "../../components/emptyState/emptyState",
     "loading": "../../components/loading/loading",
     "disclaimer": "../../components/disclaimer/disclaimer",

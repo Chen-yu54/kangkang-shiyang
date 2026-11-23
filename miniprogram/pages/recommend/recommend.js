@@ -131,11 +131,16 @@ Page({
   },
 
   onGoTerm() {
-    wx.navigateTo({ url: '/pages/solarterm/solarterm?view=list' });
+    // 不再带 ?view=list：节气页只认「先看当前节气的文化内容」，
+    // 列表只能由详情页的「换节气」进入，避免任何入口把用户甩到节气总表。
+    wx.navigateTo({ url: '/pages/solarterm/solarterm' });
   },
 
+  // 两种入口：组件抛 detail.id，普通列表行只带 dataset.id
   onTapDish(e) {
-    const id = e.detail && e.detail.id;
+    const id =
+      (e.detail && e.detail.id) ||
+      (e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.id);
     if (!id) return;
     track.dishClick(id, 'recommend');
     wx.navigateTo({ url: '/pages/dish/dish?id=' + encodeURIComponent(id) });

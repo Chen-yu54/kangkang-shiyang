@@ -193,7 +193,7 @@
             <text wx:if="{{item.metaText}}" class="rdish-meta">{{item.metaText}}</text>
             <text wx:if="{{item.howText}}" class="rdish-how">{{item.howText}}</text>
             <text wx:if="{{item.whyText}}" class="rdish-why">{{copy.whyLabel}} · {{item.whyText}}</text>
-            <text wx:if="{{item.id}}" class="rdish-open">{{copy.dishOpen}} ›</text>
+            <view wx:if="{{item.id}}" class="rdish-open">{{copy.dishOpen}} ›</view>
             <text wx:else class="rdish-nodetail">{{copy.noDetail}}</text>
           </view>
         </view>
@@ -241,94 +241,113 @@
       </view>
     </block>
 
-    <!-- ===== 菜系浏览视图（原菜单内容） ===== -->
+    <!-- ===== 菜系浏览视图 =====
+         版面照 C 主题设计稿：‹ 回到今日食单 → 菜系风味 → 胶囊 tab → 风味卡 → 左节气栏 + 右紧凑行
+         图组沿用 dish-media（有图用图，没图出风味签），不另换一套图片 -->
     <block wx:else>
       <view class="browse-back" hover-class="tap-hover" bindtap="onSwitchNutrition">
         <text class="browse-back-text">{{copy.browseBack}}</text>
       </view>
 
-    <view class="masthead">
-      <text class="masthead-title">{{copy.masthead}}</text>
-      <text class="masthead-no">{{copy.mastheadNo}}</text>
-    </view>
-
-    <cuisine-tab list="{{cuisines}}" current="{{current}}" bind:change="onCuisineChange" />
-
-    <!-- 风味卡：技法与搭配提示（来自知识库品类总览卡） -->
-    <view wx:if="{{currentCard}}" class="flavor-card">
-      <view class="flavor-head">
-        <text class="flavor-name">{{currentCard.name}}</text>
-        <text class="flavor-region">{{currentCard.region}}</text>
+      <view class="mast">
+        <text class="mast-title">{{copy.masthead}}</text>
+        <text class="mast-note">{{copy.mastheadNote}}</text>
       </view>
-      <text wx:if="{{currentCard.style}}" class="flavor-style">{{currentCard.style}}</text>
-      <view wx:if="{{currentCard.risk}}" class="flavor-risk">
-        <text class="flavor-risk-label">{{copy.riskLabel}}</text>
-        <text class="flavor-risk-text">{{currentCard.risk}}</text>
-      </view>
-    </view>
-    <!-- 左：节气分类（按四季分组，竖向滑动）｜右：菜品列表 -->
-    <view class="layout">
 
-      <scroll-view class="side" scroll-y enhanced show-scrollbar="{{false}}">
-        <view
-          class="side-item {{currentTerm === '' ? 'side-on' : ''}}"
-          data-name=""
-          hover-class="side-hover"
-          bindtap="onTapTerm"
-        >
-          <text class="side-text">{{copy.all}}</text>
+      <cuisine-tab list="{{cuisines}}" current="{{current}}" bind:change="onCuisineChange" />
+
+      <!-- 风味卡：菜系一句话 + 搭配提示 -->
+      <view wx:if="{{currentCard}}" class="flavor">
+        <view class="flavor-head">
+          <text class="flavor-name">{{currentCard.name}}</text>
+          <text class="flavor-region">{{currentCard.region}}</text>
         </view>
+        <text wx:if="{{currentCard.style}}" class="flavor-style">{{currentCard.style}}</text>
+        <text wx:if="{{currentCard.risk}}" class="flavor-risk">
+          <text class="flavor-risk-label">{{copy.riskLabel}}</text>{{currentCard.risk}}
+        </text>
+      </view>
 
-        <block wx:for="{{seasons}}" wx:key="key" wx:for-item="season">
-          <view class="season-label">
-            <view class="season-dot" style="background-color: {{season.color}}"></view>
-            <text class="season-text" style="color: {{season.color}}">{{season.label}}</text>
-          </view>
-
+      <!-- 左：按四季分组的节气（可滑）｜右：紧凑菜品行 -->
+      <view class="layout">
+        <scroll-view class="side" scroll-y enhanced show-scrollbar="{{false}}">
           <view
-            class="side-item {{currentTerm === term.name ? 'side-on' : ''}}"
-            wx:for="{{season.terms}}"
-            wx:key="name"
-            wx:for-item="term"
-            data-name="{{term.name}}"
+            class="side-item {{currentTerm === '' ? 'side-on' : ''}}"
+            data-name=""
             hover-class="side-hover"
             bindtap="onTapTerm"
-          >
-            <view class="side-bar" wx:if="{{currentTerm === term.name}}" style="background-color: {{season.color}}"></view>
-            <text class="side-text">{{term.name}}</text>
-          </view>
-        </block>
-      </scroll-view>
+          >{{copy.all}}</view>
 
-      <scroll-view class="main" scroll-y enhanced show-scrollbar="{{false}}">
-        <loading wx:if="{{status === 'loading'}}" type="skeleton" />
+          <block wx:for="{{seasons}}" wx:key="key" wx:for-item="season">
+            <text class="season-text">{{season.key}}</text>
 
-        <empty-state
-          wx:elif="{{status === 'empty'}}"
-          text="{{copy.empty}}"
-          actionText="{{emptyAction}}"
-          bind:action="onEmptyAction"
-        />
+            <view
+              class="side-item {{currentTerm === term.name ? 'side-on' : ''}}"
+              wx:for="{{season.terms}}"
+              wx:key="name"
+              wx:for-item="term"
+              data-name="{{term.name}}"
+              hover-class="side-hover"
+              bindtap="onTapTerm"
+            >{{term.name}}</view>
+          </block>
+        </scroll-view>
 
-        <view wx:elif="{{status === 'error'}}" class="state-box">
-          <text class="state-text">{{copy.error}}</text>
-          <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
-        </view>
+        <scroll-view class="main" scroll-y enhanced show-scrollbar="{{false}}">
+          <loading wx:if="{{status === 'loading'}}" type="skeleton" />
 
-        <block wx:else>
-          <text class="count-text">{{countText}}</text>
-          <dish-card
-            wx:for="{{list}}"
-            wx:key="id"
-            dish="{{item}}"
-            showTerm="{{false}}"
-            faved="{{item.faved}}"
-            bind:cardtap="onTapDish"
-            bind:favoritetap="onFavoriteTap"
+          <empty-state
+            wx:elif="{{status === 'empty'}}"
+            text="{{copy.empty}}"
+            actionText="{{emptyAction}}"
+            bind:action="onEmptyAction"
           />
-        </block>
-      </scroll-view>
-    </view>
+
+          <view wx:elif="{{status === 'error'}}" class="state-box">
+            <text class="state-text">{{copy.error}}</text>
+            <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+          </view>
+
+          <block wx:else>
+            <text class="count-text">{{countText}}</text>
+
+            <view
+              class="mini"
+              wx:for="{{list}}"
+              wx:key="id"
+              data-id="{{item.id}}"
+              hover-class="tap-hover"
+              bindtap="onTapDish"
+            >
+              <view class="mini-thumb">
+                <dish-media
+                  image="{{item.image}}"
+                  name="{{item.name}}"
+                  cuisine="{{item.cuisine}}"
+                  height="96"
+                  mode="thumb"
+                />
+              </view>
+
+              <view class="mini-body">
+                <view class="mini-top">
+                  <text class="mini-name">{{item.name}}</text>
+                  <view
+                    class="mini-fav {{item.faved ? 'mini-fav-on' : ''}}"
+                    data-id="{{item.id}}"
+                    catchtap="onFavoriteTap"
+                    hover-class="tap-hover"
+                  >
+                    <image class="mini-fav-ico" src="/images/icons/yayin-wujiaoxing.png" mode="aspectFit" />
+                  </view>
+                </view>
+                <text class="mini-meta">{{item.cuisineName}} · {{item.difficultyText}}</text>
+                <text wx:if="{{item.how}}" class="mini-tip">{{item.how}}</text>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
     </block>
   </view>
 

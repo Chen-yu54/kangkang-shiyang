@@ -1,0 +1,141 @@
+<!-- page-meta 必须是页面第一个节点，页面上只能有一个 -->
+<page-meta page-style="{{pageStyle}}" />
+
+<view class="page">
+  <view class="content">
+
+    <block wx:if="{{detail}}">
+      <!-- 本页从诗文以下开始，顶部只留节气名和这一页讲什么 -->
+      <view class="td-head">
+        <text class="td-kicker">节气详情</text>
+        <view class="td-title-row">
+          <text class="td-name">{{detail.name}}</text>
+          <text wx:if="{{detail.windowText}}" class="td-window">{{detail.windowText}}</text>
+        </view>
+        <text class="td-sub">{{copy.headSub}}</text>
+      </view>
+
+      <!-- 三候 -->
+      <view wx:if="{{detail.phenologyList.length}}" class="culture-card">
+        <view class="culture-block">
+          <text class="culture-label">{{copy.phenology}}</text>
+          <text class="culture-hint">{{copy.phenologyHint}}</text>
+          <view class="pheno-row">
+            <view class="pheno-item" wx:for="{{detail.phenologyList}}" wx:key="no">
+              <text class="pheno-idx">{{item.label}}</text>
+              <text class="pheno-text">{{item.text}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 民间习俗 -->
+      <view wx:if="{{detail.folk.length}}" class="culture-card">
+        <view class="culture-block">
+          <view class="culture-label-row">
+            <text class="culture-label">{{copy.folk}}</text>
+            <text class="confidence-tag">{{copy.folkConfidence}}</text>
+          </view>
+          <view class="folk-item" wx:for="{{detail.folk}}" wx:key="title">
+            <text class="folk-icon">{{item.icon}}</text>
+            <view class="folk-body">
+              <text class="folk-title">{{item.title}}</text>
+              <text class="folk-desc">{{item.desc}}</text>
+              <text wx:if="{{item.detail}}" class="folk-detail">{{item.detail}}</text>
+            </view>
+          </view>
+          <text class="culture-note">{{copy.cultureNote}}</text>
+        </view>
+      </view>
+
+      <!-- 养生建议 -->
+      <view wx:if="{{health}}" class="health-card">
+        <text class="health-label">{{copy.healthTitle}}</text>
+        <text wx:if="{{health.climate}}" class="health-text">{{health.climate}}</text>
+        <view class="health-row" wx:for="{{health.items}}" wx:key="k">
+          <text class="health-row-k">{{item.k}}</text>
+          <text class="health-row-v">{{item.v}}</text>
+        </view>
+        <text class="health-note">{{copy.healthNote}}</text>
+      </view>
+
+      <!-- 当令食材 -->
+      <view wx:if="{{detail.ingredientDetails.length || detail.ingredients.length}}" class="section">
+        <text class="section-label">{{copy.ingredients}}</text>
+        <text class="ingredient-hint">{{copy.ingredientHint}}</text>
+
+        <view wx:if="{{detail.ingredientDetails.length}}" class="ingredient-list">
+          <view class="ingredient-row" wx:for="{{detail.ingredientDetails}}" wx:key="name">
+            <text class="ingredient-name">{{item.name}}</text>
+            <text class="ingredient-nature" wx:if="{{item.nature}}">{{item.nature}}</text>
+            <view class="ingredient-price" wx:if="{{item.priceLevel}}">
+              <block wx:for="{{[1, 2, 3]}}" wx:for-item="n" wx:key="*this">
+                <image wx:if="{{n <= item.priceLevel}}" class="price-star" src="/images/icons/yayin-wujiaoxing.png" mode="aspectFit" />
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <view wx:else class="chip-row">
+          <text class="chip" wx:for="{{detail.ingredients}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 当令菜品 -->
+      <view class="section">
+        <view class="section-head">
+          <text class="section-label">{{copy.dishes}}</text>
+        </view>
+
+        <view class="meal-tabs">
+          <view
+            class="meal-tab {{mealFilter === item.key ? 'meal-tab-on' : ''}}"
+            wx:for="{{mealTabs}}"
+            wx:key="key"
+            data-key="{{item.key}}"
+            hover-class="tap-hover"
+            bindtap="onTapMeal"
+          >
+            <text class="meal-tab-text">{{item.label}}</text>
+          </view>
+        </view>
+        <text class="meal-hint">{{copy.mealHint}}</text>
+
+        <loading wx:if="{{dishStatus === 'loading'}}" type="spinner" />
+
+        <view wx:elif="{{dishStatus === 'error'}}" class="state-box">
+          <text class="state-text">{{copy.error}}</text>
+          <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+        </view>
+
+        <block wx:else>
+          <empty-state wx:if="{{dishes.length === 0}}" compact="{{true}}" text="{{emptyMealText || copy.detailEmpty}}" />
+
+          <dish-card
+            wx:for="{{dishes}}"
+            wx:key="id"
+            dish="{{item}}"
+            showTerm="{{false}}"
+            faved="{{item.faved}}"
+            bind:cardtap="onTapDish"
+            bind:favoritetap="onFavoriteTap"
+          />
+        </block>
+      </view>
+    </block>
+
+    <!-- 内容没到时说清楚原因，不用「菜还在补」遮住问题 -->
+    <view wx:elif="{{status === 'loading'}}" class="state-box">
+      <text class="state-text">{{copy.empty}}</text>
+    </view>
+
+    <view wx:else class="state-box">
+      <image class="state-icon" src="/images/icons/state-error.png" mode="aspectFit" />
+      <text class="state-text">{{copy.error}}</text>
+      <text wx:if="{{loadError}}" class="state-detail">{{loadError}}</text>
+      <view class="btn" hover-class="tap-hover" bindtap="onRetry">{{copy.retry}}</view>
+    </view>
+  </view>
+
+  <disclaimer />
+</view>

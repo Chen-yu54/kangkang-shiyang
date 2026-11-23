@@ -27,6 +27,18 @@ const ALLOWED_FIELDS = [
   'answeredAt', // 问卷作答时间（精确到天）
 ];
 
+// 分享对象：街道 / 食堂。两处各自独立，用户勾了哪个才发哪个。
+const SCOPE_ALL = ['street', 'canteen'];
+
+function normalizeScope(raw) {
+  if (!Array.isArray(raw)) return SCOPE_ALL.slice();
+  const out = [];
+  SCOPE_ALL.forEach((k) => {
+    if (raw.indexOf(k) >= 0) out.push(k);
+  });
+  return out;
+}
+
 function safeRead() {
   let raw = null;
   try {
@@ -35,12 +47,14 @@ function safeRead() {
     raw = null;
   }
   if (!raw || typeof raw !== 'object') {
-    return { granted: false, districtId: '', communityId: '', at: 0, version: '' };
+    return { granted: false, districtId: '', communityId: '', scope: [], at: 0, version: '' };
   }
   return {
     granted: raw.granted === true,
     districtId: String(raw.districtId || ''),
     communityId: String(raw.communityId || ''),
+    // 老版本存的对象里没有 scope，按「两个都共享」兼容
+    scope: normalizeScope(raw.scope),
     at: Number(raw.at) || 0,
     version: String(raw.version || ''),
   };
@@ -57,22 +71,28 @@ function current() {
 }
 
 /**
- * 记录同意。必须同时选好街道与社区——只说「同意」但不知道归哪个社区，
- * 数据发出去也没法用，等于白拿用户授权。
+ * 记录同意。至少要知道归哪个街道——只说「同意」但不知道归哪儿，
+ * 数据发出去也没法用，等于白拿用户授权。社区名单没补齐时允许只记街道。
+ * scope：共享对象，'street' / 'canteen'，至少要留一个；一个不选就当没同意。
  * @returns {{ok:boolean, reason?:string}}
  */
 function grant(options) {
   const o = options || {};
   const districtId = String(o.districtId || '');
   const communityId = String(o.communityId || '');
-  if (!districtId || !communityId) {
+  const scope = normalizeScope(o.scope);
+  if (!districtId) {
     return { ok: false, reason: 'NEED_REGION' };
+  }
+  if (!scope.length) {
+    return { ok: false, reason: 'NEED_SCOPE' };
   }
   try {
     wx.setStorageSync(KEY, {
       granted: true,
       districtId,
       communityId,
+      scope,
       at: Date.now(),
       version: CONSENT_VERSION,
     });
@@ -89,6 +109,7 @@ function revoke() {
       granted: false,
       districtId: '',
       communityId: '',
+      scope: [],
       at: Date.now(),
       version: CONSENT_VERSION,
     });
@@ -141,8 +162,12 @@ function submit(raw) {
     return Promise.resolve({ sent: false, reason: 'NOT_GRANTED' });
   }
   const payload = sanitize(raw);
-  if (!payload.districtId || !payload.communityId) {
+  if (!payload.districtId) {
     return Promise.resolve({ sent: false, reason: 'NO_REGION' });
+  }
+  // 两个共享对象都关掉＝没授权，一条都不发
+  if (!safeRead().scope.length) {
+    return Promise.resolve({ sent: false, reason: 'NO_SCOPE' });
   }
 
   // 延迟 require，避免 consent 与 api 互相依赖
@@ -166,6 +191,8 @@ module.exports = {
   KEY,
   CONSENT_VERSION,
   ALLOWED_FIELDS,
+  SCOPE_ALL,
+  normalizeScope,
   isGranted,
   current,
   grant,

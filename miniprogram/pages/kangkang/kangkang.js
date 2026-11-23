@@ -1,16 +1,18 @@
 // pages/kangkang/kangkang.js —— 康康食养 AI · 统一对话页
 //
-// 三条原则（对应产品要的「主导用户说出需求」）：
-//   ① 有档案就直接用：读过口味问卷（prefAnswers）就按档案挑菜，不再反问一遍；
-//   ② 没档案也不丢开放题：把「请告知身体情况与口味」拆成一问一答的具体选项，
-//      一问只问一件事、每题四个能点的答案，用户不用想怎么描述；
-//   ③ 没档案时顺手给一条问卷入口，点了先问「要不要去填」，不硬跳。
+// 主路径：用户每说一句（含点快捷选项）都交给扣子智能体回答。
+//   前端只做展示层 —— 回复里提到的菜名转成可点进详情的卡片、
+//   追问转成能直接点的选项。首轮把节气事实与口味档案作为背景一起给 Bot，
+//   之后靠 conversation_id 续接上下文，所以「答完没有又被问一遍」由模型
+//   自己解决，不再靠前端关键词截胡、改写或吞掉模型的回复。
 //
-// 另外两种「像聊天」的主动消息：
-//   · 节气文化 / 养生小贴士按空闲时段推，最多 3 条，不打断正在输入；
-//   · 提示以气泡 + 小标注的形式出现，和正常消息同一条流。
+// 只留在本地的三类，都不冒充智能体回话：
+//   ① 开场按档案先挑几道当令菜、底部摆可点的引导选项；
+//   ② 「换一批」重抽卡片、「还有吗」翻一条小贴士这类纯界面动作；
+//   ③ 模型没连上时如实说明，并给几道当令菜（明确标注）。
 
 const aichat = require('../../utils/aichat');
+const tipPush = require('../../utils/tipPush');
 
 // 脱敏词一律不落地：两个关键词用拼接定义，避免词表本身被合规扫描命中。
 // 这与 cloudfunctions/aiqa/lib/banned.js 的做法一致。
@@ -194,6 +196,8 @@ Page({
     quickOn: false,
     // 等待模型时轮播的一句话；用单元素数组 + key，换一句就淡入一次
     typingLine: [],
+    // 空闲时浮在页面上的一条节气提示（不进消息流，点「看看」才落下）
+    tipCard: null,
   },
 
   // 等回话期间轮着换话术，别让气泡空着像卡住
@@ -227,8 +231,13 @@ Page({
     this.profile = readProfile();
     this.slots = { taste: null, people: null, avoid: null, time: null, body: null };
     this.stage = 0; // 0 未开始，1-4 问到第几题，5 已推荐
+    this.pendingSlot = null; // 当前这一问在问哪一项（用来接住「没有」这类短答）
+    this._asked = {}; // 每个槽位问过几次，问两遍还没答上就跳过，避免死循环
     this._tipSeq = 0;
     this._visible = true;
+    // 空闲提醒的时间基准：用户最后一次说话 / 点选项 / 打字
+    this._lastActiveAt = Date.now();
+    this._lastTipAt = 0;
 
     if (this._intro) {
       this.setData(
@@ -250,8 +259,7 @@ Page({
       this.toBottom();
       if (!history.length) this.afterOpening();
     });
-
-    this.scheduleTip(26000);
+    this.startIdleWatch();
   },
 
   // 首次引导专用：三条说完「我是谁、能干什么、怎么更懂你」，不写进历史
@@ -289,6 +297,9 @@ Page({
 
   onShow() {
     this._visible = true;
+    // 回到这一页，算「刚开始用」：收起旧提示、重新计空闲
+    this.touchActivity();
+    if (!this._intro) this.startIdleWatch();
     // 从问卷回来：档案从无到有，立刻按新档案挑一轮，别让用户再答一遍
     const p = readProfile();
     if (p.done && (!this.profile || !this.profile.done)) {
@@ -305,18 +316,19 @@ Page({
       this.slots.avoid = p.avoids.length ? p.avoids : [];
       this.pushBot(line, { dishes: this.pickDishes(3), chips: this.recChips() });
     }
-    if (!this._intro) this.scheduleTip(30000);
   },
 
   onHide() {
     this._visible = false;
     this.clearTips();
+    this.stopIdleWatch();
     this.stopTyping();
   },
 
   onUnload() {
     this._visible = false;
     this.clearTips();
+    this.stopIdleWatch();
     this.stopTyping();
   },
 
@@ -369,6 +381,7 @@ Page({
   setAskChips(step) {
     if (!step) return;
     this.stage = ASK_FLOW.indexOf(step) + 1;
+    this.pendingSlot = step.slot;
     this.setData({ quick: step.chips.slice(), quickOn: true });
   },
 
@@ -378,6 +391,18 @@ Page({
       this.recommend();
       return;
     }
+    const slot = step.slot;
+    this._asked = this._asked || {};
+    // 同一件事问过两遍还没答上，说明用户不想答或答非所问：按「不限」放行，
+    // 不然会卡在这一题上反复问，永远出不了菜。
+    if ((this._asked[slot] || 0) >= 2) {
+      this.slots[slot] = this.fallbackOf(slot);
+      this.pendingSlot = null;
+      this.askNext();
+      return;
+    }
+    this._asked[slot] = (this._asked[slot] || 0) + 1;
+    this.pendingSlot = slot;
     this.stage = ASK_FLOW.indexOf(step) + 1;
     this.pushBot(step.q, { chips: step.chips.map((c) => ({ t: c })) });
   },
@@ -418,6 +443,7 @@ Page({
   },
 
   recommend(more) {
+    this.pendingSlot = null;
     const term = dataSource.getCurrentTerm();
     const cards = this.pickDishes(3);
     if (!cards.length) {
@@ -565,11 +591,61 @@ Page({
 
     this._tipSeq += 1;
     this.pushBot(text, { note, chips: [{ t: '这节气讲究啥' }, { t: '还有吗' }] });
-    if (this._tipSeq < 3) this.scheduleTip(48000);
+    // 不再自动续推：只在用户点「还有吗」时给下一条，别自己往对话里塞内容
+  },
+
+  // ——— 空闲提示：浮在聊天页上，不进消息流 ———
+  // 用户正聊着、正在等回复时一律不出现；对话静止一会儿才浮一条。
+  startIdleWatch() {
+    if (this._idleTimer) clearInterval(this._idleTimer);
+    this._idleTimer = setInterval(() => this.checkIdleTip(), 20000);
+  },
+
+  stopIdleWatch() {
+    if (this._idleTimer) clearInterval(this._idleTimer);
+    this._idleTimer = null;
+  },
+
+  // 用户有任何动作都算「在用」：刷新计时并收起已有提示
+  touchActivity() {
+    this._lastActiveAt = Date.now();
+    if (this.data.tipCard) this.setData({ tipCard: null });
+  },
+
+  checkIdleTip() {
+    if (!this._visible || this.data.sending || this.data.tipCard) return;
+    if (this.pendingSlot) return; // 正在等用户答某一问，别插进来
+    if (tipPush.isOff()) return;
+    const now = Date.now();
+    if (now - (this._lastActiveAt || 0) < 60000) return; // 静止满 1 分钟
+    if (now - (this._lastTipAt || 0) < 300000) return; // 两条之间至少 5 分钟
+    const text = tipPush.pickText();
+    if (!text) return;
+    this._lastTipAt = now;
+    this.setData({ tipCard: { text } });
+  },
+
+  // 「看看」：用户主动点，才把这条落进对话
+  onTapTipCard() {
+    const card = this.data.tipCard;
+    if (!card) return;
+    this.touchActivity();
+    this._tipSeq += 1;
+    this.pushBot(card.text, {
+      note: '节气小贴士',
+      chips: [{ t: '这节气讲究啥' }, { t: '还有吗' }],
+    });
+  },
+
+  // 「不再提示」：永久关闭，可在「我的 — 节气提醒」里重新打开
+  onTapTipOff() {
+    tipPush.setOff(true);
+    this.setData({ tipCard: null });
   },
 
   // ——— 输入 ———
   onInput(e) {
+    this.touchActivity();
     this.setData({ inputText: (e.detail && e.detail.value) || '' });
   },
 
@@ -582,30 +658,12 @@ Page({
   onQuick(e) {
     const text = e.currentTarget.dataset.text || '';
     if (!text) return;
+    this.touchActivity();
 
-    // 有明确含义的选项：直接记成需求，不再丢给模型绕一圈
-    if (CHIP_DEFS[text]) {
-      this.answerSlot(text);
-      return;
-    }
+    // 「换一批」重抽卡片、「还有吗」翻一条小贴士：纯界面动作，本地处理。
+    // 其余一律把这句话交给智能体 —— 点选项不再等于本地状态机自己回话。
     if (text === '换一批') {
       this.recommend(true);
-      return;
-    }
-    if (text === '这节气讲究啥') {
-      this.pushUser(text);
-      this.answerCulture();
-      return;
-    }
-    if (text === '这节气吃啥') {
-      this.pushUser(text);
-      const term = dataSource.getCurrentTerm();
-      const health = (term && termHealth.getHealth(term.name)) || {};
-      const eat = (health.items || []).filter((x) => x.k === '吃什么')[0];
-      this.pushBot(eat ? eat.v + '。' : '这几样正当时。', {
-        dishes: this.pickDishes(2),
-        note: '当令食材',
-      });
       return;
     }
     if (text === '还有吗') {
@@ -618,6 +676,7 @@ Page({
   },
 
   pushUser(text) {
+    this.touchActivity();
     const messages = this.data.messages.concat([
       { id: 'u' + Date.now(), role: 'me', text, dishes: [], note: '', cta: null },
     ]);
@@ -626,56 +685,64 @@ Page({
 
   send(text) {
     this.pushUser(text);
-
-    // 想吃东西 → 走引导式提问，不问开放题
-    if (/今天吃什么|吃什么|随便|不知道|没主意|饿了|晚饭|午饭|早饭|推荐/.test(text)) {
-      this.startGuide();
-      return;
-    }
-    // 问节气文化 → 本地作答，不依赖模型
-    if (/节气.*(讲究|文化|习俗|来历)|三候|为什么吃/.test(text)) {
-      this.answerCulture();
-      return;
-    }
-
     this.setData({ sending: true });
     this.startTyping();
-    this.scheduleTip(40000);
 
     aichat
-      .ask(text, { conversationId: this.conversationId || '' })
+      .ask(text, {
+        conversationId: this.conversationId || '',
+        context: this.contextForBot(),
+      })
       .then((r) => {
         if (r.conversationId) this.conversationId = r.conversationId;
-        const cards = this.cardsFromNames(r.dishes);
-        let reply = r.reply;
         aichat.appendHistory({ role: 'me', text });
+        aichat.appendHistory({ role: 'bot', text: r.reply });
 
-        // 模型把「请告知身体情况、口味、回避项」原样抛回来：这句不给用户看，
-        // 换成能点的一问一答，用户不用想怎么说。
-        if (!cards.length && this.isOpenAsk(reply)) {
-          reply = '这个不用你描述，点一下就行。';
-          aichat.appendHistory({ role: 'bot', text: reply });
-          this.pushBot(reply, {});
-          this.askNext();
-          return;
-        }
-
-        aichat.appendHistory({ role: 'bot', text: reply });
-        this.pushBot(reply, {
-          dishes: cards,
-          chips: this.concreteChips(r.followups, reply),
+        // 模型说的话原样给用户看。前端只做两件展示上的事：
+        //   ① 回复里提到的菜名 → 可点进详情的卡片；
+        //   ② 追问 → 能直接点的具体选项，不让人对着空题打字。
+        // 「这一问在问什么」只用来判断空闲时能不能浮提示，不拿来改写或吞掉回复。
+        const asking = /[？?]|(?:吗|呢|呀|嘛)[。.!！]?$/.test(r.reply);
+        this.pendingSlot = asking ? this.slotOfText(r.reply) : null;
+        this.pushBot(r.reply, {
+          dishes: this.cardsFromNames(r.dishes),
+          chips: this.concreteChips(r.followups, r.reply),
         });
       })
-      .catch(() => {
-        const local = this.localAnswer(text);
+      .catch((err) => {
+        // 没连上就直说，不用本机规则冒充康康回话
         aichat.appendHistory({ role: 'me', text });
-        aichat.appendHistory({ role: 'bot', text: local.text });
-        this.pushBot(local.text, {
+        const local = this.localAnswer(text);
+        const line = aichat.explain(err) + (local.text ? '\n' + local.text : '');
+        aichat.appendHistory({ role: 'bot', text: line });
+        this.pushBot(line, {
           dishes: local.dishes,
-          note: '本机规则先挑的',
-          chips: [{ t: '清淡点' }, { t: '想喝汤' }, { t: '换一批' }],
+          note: '暂时没连上，先给你几道当令菜',
+          chips: [{ t: '今天吃什么' }, { t: '这节气讲究啥' }, { t: '换一批' }],
         });
       });
+  },
+
+  // 首轮给智能体的背景：节气事实 + 已有口味档案 + 说话口径。
+  // 之后靠 conversation_id 续接，不再重复注入，免得每轮都复述一遍。
+  contextForBot() {
+    const parts = [];
+    const term = dataSource.getCurrentTerm();
+    if (term && term.name) {
+      parts.push('当前节气是' + term.name);
+      const ings = (term.ingredients || []).slice(0, 6);
+      if (ings.length) parts.push('当令食材有' + ings.join('、'));
+      const phen = (term.phenology || []).slice(0, 3);
+      if (phen.length) parts.push('三候是' + phen.join('、'));
+    }
+    if (this.profile && this.profile.done) {
+      if (this.profile.tasteText) parts.push('这位用户的口味是' + this.profile.tasteText);
+      if (this.profile.avoidText) parts.push('要避开' + this.profile.avoidText);
+    }
+    parts.push(
+      '回答要短，用日常口语。要确认条件时一次只问一件事，并给出能直接点的具体答案，不要抛「请描述一下」这类开放题。推荐菜只用当令食材，别提数据里没有的功效。'
+    );
+    return parts.join('。').slice(0, 400);
   },
 
   // 想吃东西但还没说清 → 从第一件没问的事问起，档案里的不重复问
@@ -689,13 +756,23 @@ Page({
     this.askNext();
   },
 
-  // 这句是不是把开放题抛回给用户（「麻烦告知身体情况、口味、回避项」）
-  isOpenAsk(text) {
-    const s = String(text || '').trim();
-    if (!s || s.length > 80) return false;
-    const ask = /(告知|告诉|说明|提供|说说|描述)/.test(s);
-    const dim = new RegExp('(?:' + BODY_WORD + '|' + AVOID_WORD + '|口味|偏好|饮食禁忌)').test(s);
-    return ask && dim;
+  // 这句话在问哪一项：只用来判断「现在是不是在等用户答某一问」，
+  // 决定空闲时能不能浮提示，不拿它改写或吞掉模型的回复。
+  slotOfText(text) {
+    const s = String(text || '');
+    if (!s) return null;
+    if (new RegExp('(?:' + AVOID_WORD + '|过敏|不能吃|不吃)').test(s)) return 'avoid';
+    if (new RegExp('(?:' + BODY_WORD + '|怕冷|怕热|口干|上火)').test(s)) return 'body';
+    if (/几个人|人数|几位|份量/.test(s)) return 'people';
+    if (/多久|时间|快手|方便/.test(s)) return 'time';
+    if (/口味|偏好|咸淡|清淡|辣/.test(s)) return 'taste';
+    return null;
+  },
+
+  // 同一项问了两遍还没答上，就按「不限」放行，别卡死在这里
+  fallbackOf(slot) {
+    const map = { taste: '', people: 2, avoid: [], time: '' };
+    return Object.prototype.hasOwnProperty.call(map, slot) ? map[slot] : null;
   },
 
   // 模型给的追问常常是「请问您的身体情况是？」——把空题换成能点的具体答案
@@ -709,7 +786,14 @@ Page({
     ];
     const hit = rules.filter((r) => r[0].test(all))[0];
     if (hit) return hit[1].map((x) => ({ t: x }));
-    return (followups || []).slice(0, 4).map((x) => ({ t: String(x).replace(/[？?]$/, '') }));
+    const picked = (followups || [])
+      .slice(0, 4)
+      .map((x) => ({ t: String(x || '').replace(/[？?]$/, '').trim() }))
+      .filter((x) => x.t);
+    // 模型没给追问也别把底部留空：留几个常用问法，用户始终有得点
+    return picked.length
+      ? picked
+      : [{ t: '今天吃什么' }, { t: '这节气讲究啥' }, { t: '想喝汤' }];
   },
 
   // 弹出一条机器人消息；chips 会同时换掉底部问题条
@@ -843,6 +927,8 @@ Page({
         this.conversationId = '';
         this.slots = { taste: null, people: null, avoid: null, time: null, body: null };
         this.stage = 0;
+        this.pendingSlot = null;
+        this._asked = {};
         this._tipSeq = 0;
         this._intro = false;
         this.setData({ messages: [this.openingMessage()], quickOn: false }, () => {

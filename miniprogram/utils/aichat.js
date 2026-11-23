@@ -148,8 +148,10 @@ function normalize(raw) {
 /**
  * 问一句。
  * @param {string} question 用户输入
- * @param {object} [opts] { conversationId }
- * @returns {Promise<{reply:string, conversationId:string}>}
+ * @param {object} [opts] { conversationId, context }
+ *   context 是首轮背景（节气、口味档案、回答口径）；有 conversationId 之后
+ *   云函数不再注入，靠会话本身续接上下文。
+ * @returns {Promise<{reply:string, conversationId:string, dishes:string[], followups:string[]}>}
  */
 function ask(question, opts) {
   const q = String(question || '').trim();
@@ -166,6 +168,7 @@ function ask(question, opts) {
         question: q,
         userId: userId(),
         conversationId: o.conversationId || '',
+        context: String(o.context || '').slice(0, 400),
       },
       // 云函数内部要轮询 Bot，前端等久一点
       config: { env: cfg.CLOUD_ENV },

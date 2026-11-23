@@ -1,6 +1,9 @@
+/* components/cuisineTab —— 菜系胶囊 tab
+ * 设计稿：三等分胶囊，未选白底细描边，选中深绿底白字（不是只描个绿边）。
+ * 只在「菜系浏览」里使用；字号用 --font-btn，点击区保 ≥88rpx。 */
 .tabs {
   display: flex;
-  margin-bottom: 24rpx;
+  margin-bottom: 20rpx;
 }
 
 .tab {
@@ -9,12 +12,11 @@
   align-items: center;
   justify-content: center;
   min-height: var(--tap-min);
-  margin-right: 16rpx;
-  padding: 12rpx 8rpx;
-  border: 2rpx solid var(--color-border);
-  border-radius: var(--radius-card);
-  background-color: var(--color-card);
-  box-shadow: var(--shadow-card);
+  margin-right: 12rpx;
+  padding: 0 8rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 999rpx;
+  background-color: #FFFFFF;
   box-sizing: border-box;
 }
 
@@ -23,11 +25,8 @@
 }
 
 .tab-active {
-  border-color: var(--color-brand);
-}
-
-.tab-active .tab-text {
-  font-weight: 600;
+  border-color: var(--color-green);
+  background-color: var(--color-green);
 }
 
 .tab-hover {
@@ -35,7 +34,12 @@
 }
 
 .tab-text {
-  font-size: var(--font-base);
-  color: var(--color-ink);
+  font-size: var(--font-btn);
+  color: var(--color-ink-2);
   text-align: center;
+}
+
+.tab-active .tab-text {
+  font-weight: 600;
+  color: #FFFFFF;
 }

@@ -14,6 +14,7 @@ const dishImages = require('../../utils/dishImages');
 const nutrition = require('../../utils/nutrition');
 const i18n = require('../../utils/i18n');
 const consent = require('../../utils/consent');
+const tipPush = require('../../utils/tipPush');
 const track = require('../../utils/track');
 
 const t = i18n.t;
@@ -66,6 +67,8 @@ Page({
     avoidText: '',
     // 长辈模式
     elderMode: false,
+    // 节气提醒（不在聊天时偶尔提一句）
+    tipPushOn: true,
     // 登录后的功能引导
     tourVisible: false,
     tourStep: null,
@@ -106,6 +109,8 @@ Page({
         fontScale: t('mine.fontScale'),
         elderLabel: t('mine.elderLabel'),
         elderDesc: t('mine.elderDesc'),
+        tipPushLabel: t('mine.tipPushLabel'),
+        tipPushDesc: t('mine.tipPushDesc'),
         favEmptyTitle: t('mine.favEmptyTitle'),
         favEmptySub: t('mine.favEmptySub'),
         prefNote: t('mine.prefNote'),
@@ -155,6 +160,7 @@ Page({
       nickName: user ? user.nickName : '',
       avatarUrl: user ? user.avatarUrl : '',
       elderMode: !!(app.getElderMode && app.getElderMode()),
+      tipPushOn: !tipPush.isOff(),
       termName: info.name || '',
       termNo,
       termPoster: info.poster || '',
@@ -268,6 +274,13 @@ Page({
       pageStyle: app.getFontStyle(),
     });
     if (applied) wx.showToast({ title: t('elder.onHint'), icon: 'none' });
+  },
+
+  // 节气提醒：关掉后聊天页不再浮提示，重新打开时从下一次空闲算起
+  onToggleTipPush(e) {
+    const on = !!(e.detail && e.detail.value);
+    tipPush.setOff(!on);
+    this.setData({ tipPushOn: on });
   },
 
   onTapFavorite() {

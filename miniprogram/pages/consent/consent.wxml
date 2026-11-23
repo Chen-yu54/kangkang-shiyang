@@ -29,7 +29,8 @@
     <!-- 已同意状态 -->
     <block wx:if="{{view === 'done'}}">
       <view class="state-box">
-        <text class="state-text">{{copy.grantedAt}}：{{districtName}} · {{communityName}}</text>
+        <text class="state-text">{{copy.grantedAt}}：{{regionText}}</text>
+        <text class="state-sub">{{copy.grantedScope}}：{{scopeText}}</text>
         <view class="btn btn-quiet" hover-class="tap-hover" bindtap="onRevoke">{{copy.revoke}}</view>
       </view>
     </block>
@@ -71,6 +72,45 @@
             >{{item.name}}</view>
           </view>
         </block>
+        <text wx:else class="region-note">{{copy.communityMissing}}</text>
+      </view>
+
+      <!-- 共享给谁：街道 / 食堂各一个开关，关掉的那一边收不到 -->
+      <view class="scope">
+        <text class="scope-title">{{copy.scopeTitle}}</text>
+        <text class="scope-hint">{{copy.scopeHint}}</text>
+
+        <view
+          class="sw {{shareStreet ? 'sw-on' : ''}}"
+          data-key="street"
+          hover-class="tap-hover"
+          bindtap="onToggleScope"
+        >
+          <view class="sw-box">
+            <text wx:if="{{shareStreet}}" class="sw-tick">✓</text>
+          </view>
+          <view class="sw-main">
+            <text class="sw-name">{{copy.streetName}}</text>
+            <text class="sw-sub">{{copy.streetSub}}</text>
+          </view>
+          <text class="sw-state">{{shareStreet ? copy.scopeOn : copy.scopeOff}}</text>
+        </view>
+
+        <view
+          class="sw {{shareCanteen ? 'sw-on' : ''}}"
+          data-key="canteen"
+          hover-class="tap-hover"
+          bindtap="onToggleScope"
+        >
+          <view class="sw-box">
+            <text wx:if="{{shareCanteen}}" class="sw-tick">✓</text>
+          </view>
+          <view class="sw-main">
+            <text class="sw-name">{{copy.canteenName}}</text>
+            <text class="sw-sub">{{copy.canteenSub}}</text>
+          </view>
+          <text class="sw-state">{{shareCanteen ? copy.scopeOn : copy.scopeOff}}</text>
+        </view>
       </view>
 
       <!-- 两个按钮同样大小：不做「同意很大、拒绝很小」的诱导 -->

@@ -98,6 +98,20 @@
     <view id="bottom" class="chat-pad"></view>
   </scroll-view>
 
+  <!-- 空闲提醒：浮在消息区与输入区之间的一条提示，不进消息流。
+       静止一会儿才出现；点「看看」才落一条消息，点「不再提示」从此不再出现。 -->
+  <view wx:if="{{tipCard}}" class="tipcard">
+    <view class="tipcard-head">
+      <image class="tipcard-logo" src="/images/brand-logo.jpg" mode="aspectFill" />
+      <text class="tipcard-title">康康发来一条</text>
+    </view>
+    <text class="tipcard-text">{{tipCard.text}}</text>
+    <view class="tipcard-actions">
+      <view class="tipcard-btn" hover-class="tap-hover" bindtap="onTapTipCard">看看</view>
+      <view class="tipcard-btn tipcard-btn-quiet" hover-class="tap-hover" bindtap="onTapTipOff">不再提示</view>
+    </view>
+  </view>
+
   <!-- 常用问法：开场是默认四条，之后换成模型给的追问 -->
   <scroll-view
     wx:if="{{quickOn && !sending}}"

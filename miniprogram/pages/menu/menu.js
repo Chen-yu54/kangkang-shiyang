@@ -106,6 +106,27 @@ function toCard(dish) {
   };
 }
 
+// 风味卡数据：只取当前菜系那一张
+function cardOf(key) {
+  const hit = (CUISINE_CARDS || []).filter((c) => c.key === key)[0];
+  if (!hit) return null;
+  return {
+    name: hit.name,
+    region: shortRegion(hit.region),
+    style: hit.style,
+    risk: hit.risk,
+  };
+}
+
+// 数据里的 region 是整句「岭南三大风味之一。覆盖地域：广州、珠三角。」，
+// 卡头只要地名，取「覆盖地域：」后面那截；没有就原样留着。
+function shortRegion(text) {
+  const s = String(text || '');
+  const i = s.indexOf('覆盖地域：');
+  const t = i >= 0 ? s.slice(i + 5) : s;
+  return t.replace(/[。\s]+$/, '');
+}
+
 // 把 24 节气按四季分组；season 字段来自 solar_term_map.csv
 function buildSeasons(terms) {
   const buckets = {};
@@ -130,6 +151,7 @@ Page({
     status: 'loading', // loading | ready | empty | error
     cuisines: [],
     current: 'guangfu',
+    currentCard: null,
     seasons: [],
     currentTerm: '',
     list: [],
@@ -192,8 +214,10 @@ Page({
         { key: 'chaoshan', name: t('cuisine.chaoshan') },
         { key: 'hakka', name: t('cuisine.hakka') },
       ],
+      currentCard: cardOf('guangfu'),
       copy: {
         masthead: t('menu.masthead'),
+        mastheadNote: t('menu.mastheadNote'),
         mastheadNo: t('menu.no'),
         all: t('common.all'),
         empty: t('cuisine.empty'),
@@ -380,7 +404,10 @@ Page({
     const ready = stored.length > 0 || genDishes.length > 0;
     const genState = ready ? 'ready' : answered && genStore.read() ? 'stale' : 'none';
 
-    const resultDishes = stored.length ? stored : genDishes.map((dish) => decorate(dish, termName));
+    const kept = stored.length ? ensureLibrary(stored, termName) : null;
+    const resultDishes = kept ? kept.list : genDishes.map((dish) => decorate(dish, termName));
+    // 旧存档里对不上库的菜补过一次就回写，下次进来不用再算
+    if (kept && kept.changed && answers) genStore.save(answers, resultDishes);
 
     const patch = {
       termName,
@@ -536,21 +563,9 @@ Page({
     this.clearGenTimer();
 
     const termName = this.data.termName;
-    const dishes = parsed.dishes.map((d) => {
-      const hit = matchRecipe(d.name);
-      return decorate(
-        {
-          name: d.name,
-          id: hit ? hit.id : '',
-          cuisine: hit ? hit.cuisine : '',
-          cuisineName: hit ? hit.cuisineName || '' : '',
-          how: d.how || (hit ? hit.how : ''),
-          why: d.reason || '',
-          isSeasonal: true,
-        },
-        termName
-      );
-    });
+    // 模型只给菜名，对不上本地库的换成库内同菜系 / 同节气的菜：
+    // 今日食单上每一道都要能点进详情，宁可不完全照模型的原话
+    const dishes = ensureLibrary(parsed.dishes.map((d) => ({ name: d.name })), termName).list;
     this._genDishes = dishes;
 
     const steps = this.data.shownSteps
@@ -723,10 +738,16 @@ Page({
       .then((res) => {
         const list = (res.list || []).map(toCard);
         const isEmpty = list.length === 0;
+        // 计数按「当前筛到什么」说：选了节气就写成「12 道 · 立冬」，没选就是「共 96 道」
+        const term = this.data.currentTerm;
         this.setData({
           status: isEmpty ? 'empty' : 'ready',
           list,
-          countText: isEmpty ? '' : i18n.tpl('cuisine.count', { count: list.length }),
+          countText: isEmpty
+            ? ''
+            : term
+              ? i18n.tpl('cuisine.countTerm', { count: list.length, term })
+              : i18n.tpl('cuisine.count', { count: list.length }),
           // 已选出某个节气却仍为空时，给一个回到「全部」的出口
           emptyAction: isEmpty && this.data.currentTerm ? t('cuisine.emptyAction') : '',
         });
@@ -739,7 +760,7 @@ Page({
   onCuisineChange(e) {
     const key = e.detail && e.detail.key;
     if (!key) return;
-    this.setData({ current: key });
+    this.setData({ current: key, currentCard: cardOf(key) });
     track.cuisineFilter(key, this.data.currentTerm);
     this.loadList();
   },
@@ -761,15 +782,19 @@ Page({
     this.loadList();
   },
 
+  // 两个入口：dish-card 组件抛 detail.id，浏览视图的紧凑行只带 dataset.id
   onTapDish(e) {
-    const id = e.detail && e.detail.id;
+    const id =
+      (e.detail && e.detail.id) ||
+      (e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.id);
     if (!id) return;
     track.dishClick(id, 'menu');
     wx.navigateTo({ url: '/pages/dish/dish?id=' + encodeURIComponent(id) });
   },
 
   onFavoriteTap(e) {
-    const id = e.detail && e.detail.id;
+    // 两个入口：dish-card 组件抛 detail.id，列表行里直接带 dataset.id
+    const id = (e.detail && e.detail.id) || (e.currentTarget && e.currentTarget.dataset.id);
     if (!id) return;
     const added = favorite.has(id);
     favorite.toggle(id);
@@ -804,6 +829,114 @@ function matchRecipe(name) {
     if (hit) return hit;
   }
   return null;
+}
+
+// 模型给的菜名常带菜系前缀：「广府清炒时蔬」→ guangfu
+const CUISINE_PREFIX = [
+  ['广府', 'guangfu'],
+  ['潮汕', 'chaoshan'],
+  ['客家', 'hakka'],
+  ['岭南', 'lingnan_home'],
+];
+
+function cuisineOfName(name) {
+  const s = String(name || '');
+  for (let i = 0; i < CUISINE_PREFIX.length; i += 1) {
+    if (s.indexOf(CUISINE_PREFIX[i][0]) === 0) return CUISINE_PREFIX[i][1];
+  }
+  return '';
+}
+
+// 菜名里的烹饪动词 → 库里的 method，换菜时别把「清炒」换成一锅炖肉
+const METHOD_WORDS = [
+  ['炒', ['爆炒', '小炒', '清炒', '炒']],
+  ['蒸', ['清蒸', '蒸']],
+  ['煲', ['煲']],
+  ['焖', ['炆', '焖']],
+  ['炖', ['炖']],
+  ['煎', ['煎']],
+  ['煮', ['水煮', '白灼', '灼', '焯', '汤', '煮']],
+  ['卤', ['卤']],
+  ['炸', ['炸']],
+  ['烤', ['烤']],
+  ['焗', ['焗']],
+];
+
+function methodOfName(name) {
+  const s = String(name || '');
+  for (let i = 0; i < METHOD_WORDS.length; i += 1) {
+    const words = METHOD_WORDS[i][1];
+    for (let j = 0; j < words.length; j += 1) {
+      if (s.indexOf(words[j]) > -1) return METHOD_WORDS[i][0];
+    }
+  }
+  return '';
+}
+
+// 库里挑一道没用过的菜顶上：同菜系 + 同节气 + 同做法最贴题，逐级放宽
+function pickFromLibrary(termName, cuisine, method, used) {
+  const pool = recipes.filter((r) => r && r.id && !used[r.id]);
+  const byTerm = pool.filter((r) => (r.terms || []).indexOf(termName) > -1);
+  const first = (arr) => (arr.length ? arr[0] : null);
+  return (
+    first(byTerm.filter((r) => r.cuisine === cuisine && r.method === method)) ||
+    first(byTerm.filter((r) => r.cuisine === cuisine)) ||
+    first(byTerm.filter((r) => r.method === method)) ||
+    first(byTerm) ||
+    first(pool.filter((r) => r.cuisine === cuisine)) ||
+    first(pool)
+  );
+}
+
+// 今日食单只铺知识库里的菜：详情页要展主料、过敏原、少食提示，
+// 库外菜点开是空的。名字对不上就按菜系 / 节气 / 做法换一道，全单不重复。
+function ensureLibrary(list, termName) {
+  const items = list || [];
+  const used = {};
+  const out = new Array(items.length);
+
+  const build = (recipe) => decorate(
+    {
+      name: recipe.name,
+      id: recipe.id,
+      cuisine: recipe.cuisine,
+      cuisineName: recipe.cuisineName || '',
+    },
+    termName
+  );
+
+  // 第一轮：本来就能查到库的先把位置占住，补位的菜不能把它们挤走
+  items.forEach((item, i) => {
+    const id = (item && item.id) || '';
+    if (!id || used[id]) return;
+    const recipe = dataSource.getRecipeById(id);
+    if (!recipe) return;
+    used[id] = 1;
+    out[i] = build(recipe);
+  });
+
+  // 第二轮：无 id 或同一单里重复的，先按名字找，再按菜系 / 节气 / 做法补
+  items.forEach((item, i) => {
+    if (out[i]) return;
+    const name = (item && item.name) || '';
+    let recipe = null;
+    const hit = matchRecipe(name);
+    if (hit && !used[hit.id]) recipe = hit;
+    if (!recipe) recipe = pickFromLibrary(termName, cuisineOfName(name), methodOfName(name), used);
+    if (!recipe) {
+      // 库里实在没菜可补（正常不会发生），原样留着，界面仍会标「暂无详情」
+      out[i] = item;
+      return;
+    }
+    used[recipe.id] = 1;
+    out[i] = build(recipe);
+  });
+
+  const changed = out.some((item, i) => {
+    const src = items[i] || {};
+    return item.id !== src.id || item.name !== src.name;
+  });
+  return { list: out, changed };
 }
 
 // 把一道菜补齐成成品卡要的字段：图 / 菜系·难度·价格 / 做法 / 推荐理由。
